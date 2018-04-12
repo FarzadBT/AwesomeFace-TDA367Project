@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package faces.awesome;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -14,7 +14,7 @@ public class Game extends ApplicationAdapter {
 	public void create () {
 		// setup model here.
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		img = new Texture("core/assets/badlogic.jpg");
 	}
 
 	@Override
