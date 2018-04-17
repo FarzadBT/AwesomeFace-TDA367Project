@@ -14,6 +14,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
+import faces.awesome.model.Player;
+import faces.awesome.model.Position;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
 	SpriteBatch batch;
@@ -23,6 +25,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	TiledMapRenderer tiledMapRenderer;
 	Sprite sprite;
 	Texture texture;
+	Player player;
 	
 	@Override
 	public void create () {
@@ -33,6 +36,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
+
+		player = new Player(new Position(w/2, h/2));
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false,w,h);
@@ -58,6 +63,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		tiledMapRenderer.render();
 
 		batch.begin();
+		sprite.setPosition(player.getPos().getX(), player.getPos().getY());
 		sprite.draw(batch);
 		batch.end();
 	}
@@ -76,14 +82,23 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		if(keycode == Input.Keys.LEFT)
-			sprite.translate(-32,0);
-		if(keycode == Input.Keys.RIGHT)
-			sprite.translate(32,0);
-		if(keycode == Input.Keys.UP)
-			sprite.translate(0,32);
-		if(keycode == Input.Keys.DOWN)
-			sprite.translate(0,-32);
+
+		if(keycode == Input.Keys.LEFT) {
+			player.setPos(player.getPos().movePos(-32, 0));
+		}
+
+		if(keycode == Input.Keys.RIGHT) {
+			player.setPos(player.getPos().movePos(32, 0));
+		}
+
+		if(keycode == Input.Keys.UP) {
+			player.setPos(player.getPos().movePos(0, 32));
+		}
+
+		if(keycode == Input.Keys.DOWN) {
+			player.setPos(player.getPos().movePos(0, -32));
+		}
+
 		return false;
 	}
 
@@ -94,10 +109,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-			Vector3 clickCoordinates = new Vector3(screenX,screenY,0);
-			Vector3 position = camera.unproject(clickCoordinates);
-			sprite.setPosition(position.x, position.y);
-			return true;
+			return false;
 	}
 
 	@Override
