@@ -24,10 +24,13 @@ public abstract class Character {
 	//Need to define how the position is stored before we implement this.
 	protected void move(){}
 
+
+	//Get the position on the player
 	public Position getPos () {
 		return pos;
 	}
 
+	//Set the position on the player
 	public void setPos (Position pos) {
 		this.pos = pos;
 	}

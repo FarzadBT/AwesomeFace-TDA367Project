@@ -13,7 +13,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector3;
 import faces.awesome.model.Player;
 import faces.awesome.model.Position;
 
@@ -32,7 +31,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		// setup model here.
 		//batch = new SpriteBatch();
 		//img = new Texture("core/assets/badlogic.jpg");
-
 
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
@@ -74,11 +72,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		img.dispose();
 	}
 
-	@Override
-	public boolean keyDown(int keycode) {
-
-		return false;
-	}
 
 	@Override
 	public boolean keyUp(int keycode) {
@@ -103,13 +96,18 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	}
 
 	@Override
+	public boolean keyDown(int keycode) {
+		return false;
+	}
+
+	@Override
 	public boolean keyTyped(char character) {
 		return false;
 	}
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-			return false;
+		return false;
 	}
 
 	@Override
@@ -131,4 +129,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	public boolean scrolled(int amount) {
 		return false;
 	}
+
+
 }
