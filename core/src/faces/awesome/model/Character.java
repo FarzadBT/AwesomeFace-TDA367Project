@@ -1,15 +1,28 @@
 package faces.awesome.model;
 
 public abstract class Character {
-	// Use a vector to encapsulate player coordinates?	
-	
+	// Use a vector to encapsulate player coordinates?
 	// character position, perhaps this should be represented in a different way.
-	protected float x;
-	protected float y;
-	
+	protected Position pos;
+
+	//Character facing, north, east, west, south. Could potentially be used in the attack method
+	// to always swing in the direction that the character is facing.
+	protected Facing facing;
+
+	//Based damage dealt with no weapon equipped
+	protected int BaseDamage;
+
 	// character velocity
 	protected float vel;
-	public Character() {}
+
+	public Character(Position pos){
+		this.pos = pos;
+	}
+
+	protected void attack(Character other){};
+
+	//Need to define how the position is stored before we implement this.
+	protected void move(){}
 }
 
 

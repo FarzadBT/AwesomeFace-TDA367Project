@@ -4,6 +4,9 @@ import java.lang.*;
 
 public class Player extends Character {
 
-	public Player() {}
+	public Player(Position pos){
+		super(pos);
+	}
+
 
 }
