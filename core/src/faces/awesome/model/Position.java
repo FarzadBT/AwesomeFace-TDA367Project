@@ -13,6 +13,15 @@ public class Position {
         this.y = y;
     }
 
-    
+    public Position movePos (float deltaX, float deltaY) {
+        deltaX += this.x;
+        deltaY += this.y;
+        return new Position(deltaX, deltaY);
+    }
 
+    @Override
+    public String toString() {
+        return "Position{x=" + x + ", y=" + y + '}';
+    }
+    
 }
