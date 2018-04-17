@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import faces.awesome.model.Facing;
 import faces.awesome.model.Player;
 import faces.awesome.model.Position;
 
@@ -25,6 +26,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	Sprite sprite;
 	Texture texture;
 	Player player;
+	Facing direction;
 	
 	@Override
 	public void create () {
@@ -60,6 +62,23 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		tiledMapRenderer.setView(camera);
 		tiledMapRenderer.render();
 
+		if(direction == Facing.WEST) {
+			player.setPos(player.getPos().movePos(-32, 0));
+		}
+
+		if(direction == Facing.EAST) {
+			player.setPos(player.getPos().movePos(32, 0));
+		}
+
+		if(direction == Facing.NORTH) {
+			player.setPos(player.getPos().movePos(0, 32));
+		}
+
+		if(direction == Facing.SOUTH) {
+			player.setPos(player.getPos().movePos(0, -32));
+		}
+
+
 		batch.begin();
 		sprite.setPosition(player.getPos().getX(), player.getPos().getY());
 		sprite.draw(batch);
@@ -76,27 +95,30 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	@Override
 	public boolean keyUp(int keycode) {
 
-		if(keycode == Input.Keys.LEFT) {
-			player.setPos(player.getPos().movePos(-32, 0));
-		}
-
-		if(keycode == Input.Keys.RIGHT) {
-			player.setPos(player.getPos().movePos(32, 0));
-		}
-
-		if(keycode == Input.Keys.UP) {
-			player.setPos(player.getPos().movePos(0, 32));
-		}
-
-		if(keycode == Input.Keys.DOWN) {
-			player.setPos(player.getPos().movePos(0, -32));
-		}
+		direction = null;
 
 		return false;
 	}
 
 	@Override
 	public boolean keyDown(int keycode) {
+
+		if(keycode == Input.Keys.LEFT) {
+			direction = Facing.WEST;
+		}
+
+		if(keycode == Input.Keys.RIGHT) {
+			direction = Facing.EAST;
+		}
+
+		if(keycode == Input.Keys.UP) {
+			direction = Facing.NORTH;
+		}
+
+		if(keycode == Input.Keys.DOWN) {
+			direction = Facing.SOUTH;
+		}
+
 		return false;
 	}
 
