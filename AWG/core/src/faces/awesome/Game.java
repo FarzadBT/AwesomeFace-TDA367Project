@@ -42,12 +42,12 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		camera.setToOrtho(false,w,h);
 		camera.update();
 
-		tiledMap = new TmxMapLoader().load("testMap2.tmx");
+		tiledMap = new TmxMapLoader().load("core/assets/testMap2.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 		Gdx.input.setInputProcessor((InputProcessor) this);
 
 		batch = new SpriteBatch();
-		texture = new Texture(Gdx.files.internal("linkk.png"));
+		texture = new Texture(Gdx.files.internal("core/assets/linkk.png"));
 		sprite = new Sprite(texture);
 	}
 
