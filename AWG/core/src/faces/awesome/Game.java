@@ -15,6 +15,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import faces.awesome.model.Player;
 import faces.awesome.model.Position;
+import java.nio.file.*;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
 	SpriteBatch batch;
@@ -40,12 +41,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false,w,h);
 		camera.update();
-		tiledMap = new TmxMapLoader().load("core/assets/testMap2.tmx");
+
+		tiledMap = new TmxMapLoader().load("testMap2.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 		Gdx.input.setInputProcessor((InputProcessor) this);
 
 		batch = new SpriteBatch();
-		texture = new Texture(Gdx.files.internal("core/assets/linkk.png"));
+		texture = new Texture(Gdx.files.internal("linkk.png"));
 		sprite = new Sprite(texture);
 	}
 
