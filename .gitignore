@@ -7,3 +7,11 @@ out
 *.iml
 
 gradle.properties
+
+.gradle
+
+gradle-app.setting
+
+!gradle-wrapper.jar
+
+
