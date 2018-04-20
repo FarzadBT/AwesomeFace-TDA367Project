@@ -17,6 +17,14 @@ public abstract class BaseConsumable implements ConsumableItem {
 
     }
 
+    public void increment() {
+        quantity++;
+    }
+
+    public void decrement() {
+        quantity--;
+    }
+
     @Override
     public int getQuantity() {
         return quantity;
