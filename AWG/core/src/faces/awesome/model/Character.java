@@ -22,7 +22,7 @@ public abstract class Character {
 	protected void attack(Character other){};
 
 	//Need to define how the position is stored before we implement this.
-	protected void move(){}
+	protected abstract void move();
 
 
 	//Get the position on the player

@@ -13,11 +13,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import faces.awesome.model.Facing;
 import faces.awesome.model.Player;
 import faces.awesome.model.Position;
 import java.nio.file.*;
 
-public class Game extends ApplicationAdapter implements InputProcessor {
+public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
 	//Texture img;
 	TiledMap tiledMap;
@@ -62,6 +63,22 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		tiledMapRenderer.setView(camera);
 		tiledMapRenderer.render();
 
+		if(player.getMoveDirection() == Facing.WEST) {
+			player.setPos(player.getPos().movePos(-2, 0));
+		}
+
+		if(player.getMoveDirection() == Facing.EAST) {
+			player.setPos(player.getPos().movePos(2, 0));
+		}
+
+		if(player.getMoveDirection() == Facing.NORTH) {
+			player.setPos(player.getPos().movePos(0, 2));
+		}
+
+		if(player.getMoveDirection() == Facing.SOUTH) {
+			player.setPos(player.getPos().movePos(0, -2));
+		}
+
 		batch.begin();
 		sprite.setPosition(player.getPos().getX(), player.getPos().getY());
 		sprite.draw(batch);
@@ -73,65 +90,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		batch.dispose();
 		//img.dispose();
 	}
-
-
-	@Override
-	public boolean keyUp(int keycode) {
-
-		if(keycode == Input.Keys.LEFT) {
-			player.setPos(player.getPos().movePos(-32, 0));
-		}
-
-		if(keycode == Input.Keys.RIGHT) {
-			player.setPos(player.getPos().movePos(32, 0));
-		}
-
-		if(keycode == Input.Keys.UP) {
-			player.setPos(player.getPos().movePos(0, 32));
-		}
-
-		if(keycode == Input.Keys.DOWN) {
-			player.setPos(player.getPos().movePos(0, -32));
-		}
-
-		return false;
-	}
-
-	@Override
-	public boolean keyDown(int keycode) {
-
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		return false;
-	}
-
+	
 
 }
