@@ -45,7 +45,7 @@ public class Game extends ApplicationAdapter {
 
 		tiledMap = new TmxMapLoader().load("core/assets/testMap2.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-		Gdx.input.setInputProcessor((InputProcessor) this);
+		//Gdx.input.setInputProcessor((InputProcessor) this);
 
 		batch = new SpriteBatch();
 		texture = new Texture(Gdx.files.internal("core/assets/linkk.png"));
@@ -63,22 +63,6 @@ public class Game extends ApplicationAdapter {
 		tiledMapRenderer.setView(camera);
 		tiledMapRenderer.render();
 
-		if(player.getMoveDirection() == Facing.WEST) {
-			player.setPos(player.getPos().movePos(-2, 0));
-		}
-
-		if(player.getMoveDirection() == Facing.EAST) {
-			player.setPos(player.getPos().movePos(2, 0));
-		}
-
-		if(player.getMoveDirection() == Facing.NORTH) {
-			player.setPos(player.getPos().movePos(0, 2));
-		}
-
-		if(player.getMoveDirection() == Facing.SOUTH) {
-			player.setPos(player.getPos().movePos(0, -2));
-		}
-
 		batch.begin();
 		sprite.setPosition(player.getPos().getX(), player.getPos().getY());
 		sprite.draw(batch);
@@ -90,6 +74,6 @@ public class Game extends ApplicationAdapter {
 		batch.dispose();
 		//img.dispose();
 	}
-	
+
 
 }
