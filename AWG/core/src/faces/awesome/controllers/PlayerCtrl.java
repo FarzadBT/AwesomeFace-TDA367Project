@@ -41,7 +41,7 @@ public class PlayerCtrl implements InputProcessor {
         if(keycode == Input.Keys.DOWN) {
 
             player.move(0, -1);
-            
+
         }
 
         return false;

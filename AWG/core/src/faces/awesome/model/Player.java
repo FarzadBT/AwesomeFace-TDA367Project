@@ -13,6 +13,10 @@ public class Player extends Character {
 
 	public void move(float dx, float dy) {
 
+		//Add collision detection here
+
+
+		//Moves the player
 		setPos(pos.movePos(dx, dy));
 
 
