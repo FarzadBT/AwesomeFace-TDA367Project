@@ -6,7 +6,6 @@ public class Enemy extends Character {
         super(pos);
     }
 
-    @Override
     protected void move() {
 
     }

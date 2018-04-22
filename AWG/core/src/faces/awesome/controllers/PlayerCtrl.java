@@ -3,32 +3,45 @@ package faces.awesome.controllers;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import faces.awesome.model.Facing;
+import faces.awesome.model.Player;
 
-public class playerCtrl implements InputProcessor {
+import java.awt.*;
 
+public class PlayerCtrl implements InputProcessor {
 
+    private Player player;
+    private Facing facing;
+
+    public PlayerCtrl(Player player) {
+        this.player = player;
+    }
 
     @Override
     public boolean keyDown(int keycode) {
 
         if(keycode == Input.Keys.LEFT) {
-            //pos.movePos(-32,0);
-            //player.setPos(player.getPos().movePos(-32, 0));
+
+            player.move(-1, 0);
+
         }
 
         if(keycode == Input.Keys.RIGHT) {
-            //pos.movePos(32,0);
-            //player.setPos(player.getPos().movePos(32, 0));
+
+            player.move(1, 0);
+
         }
 
         if(keycode == Input.Keys.UP) {
-            //pos.movePos(0,32);
-            //player.setPos(player.getPos().movePos(0, 32));
+
+            player.move(0, 1);
+
         }
 
         if(keycode == Input.Keys.DOWN) {
-            //pos.movePos(0,-32);
-            //player.setPos(player.getPos().movePos(0, -32));
+
+            player.move(0, -1);
+            
         }
 
         return false;
