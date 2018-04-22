@@ -11,11 +11,13 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import faces.awesome.controllers.PlayerCtrl;
 import faces.awesome.model.Player;
 import faces.awesome.model.Position;
 import java.nio.file.*;
 
 public class Game extends ApplicationAdapter {
+	public static final int TILE_SIZE = 32;
 	SpriteBatch batch;
 	//Texture img;
 	TiledMap tiledMap;
@@ -24,6 +26,7 @@ public class Game extends ApplicationAdapter {
 	Sprite sprite;
 	Texture texture;
 	Player player;
+	PlayerCtrl playerCtrl;
 	
 	@Override
 	public void create () {
@@ -34,7 +37,8 @@ public class Game extends ApplicationAdapter {
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 
-		player = new Player(new Position(w/2, h/2));
+		player = new Player(new Position(w/ TILE_SIZE /2, h/ TILE_SIZE /2));
+		playerCtrl = new PlayerCtrl(player);
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false,w,h);
@@ -42,7 +46,7 @@ public class Game extends ApplicationAdapter {
 
 		tiledMap = new TmxMapLoader().load("core/assets/testMap2.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-		//Gdx.input.setInputProcessor((InputProcessor) this);
+		Gdx.input.setInputProcessor(playerCtrl);
 
 		batch = new SpriteBatch();
 		texture = new Texture(Gdx.files.internal("core/assets/linkk.png"));
@@ -61,7 +65,7 @@ public class Game extends ApplicationAdapter {
 		tiledMapRenderer.render();
 
 		batch.begin();
-		sprite.setPosition(player.getPos().getX(), player.getPos().getY());
+		sprite.setPosition(player.getPos().getX()* TILE_SIZE, player.getPos().getY()* TILE_SIZE);
 		sprite.draw(batch);
 		batch.end();
 	}
