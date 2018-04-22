@@ -10,6 +10,11 @@ public class Player extends Character {
 		super(pos);
 	}
 
+	@Override
+	protected void attack(Character other) {
+
+	}
+
 
 	public void move(float dx, float dy) {
 
