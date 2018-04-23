@@ -10,7 +10,7 @@ public abstract class Character {
 	protected Facing facing;
 
 	//Based damage dealt with no weapon equipped
-	protected int BaseDamage;
+	protected int baseDamage;
 
 	// character velocity
 	protected float vel;
