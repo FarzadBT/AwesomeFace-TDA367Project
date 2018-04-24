@@ -59,4 +59,12 @@ public class Inventory {
     public boolean isInInventory(Item item) {
         return inventory.containsKey(item.getName());
     }
+
+    /**
+     * Test function
+     * @return the size of the hashmap
+     */
+    public int getSize() {
+        return inventory.size();
+    }
 }

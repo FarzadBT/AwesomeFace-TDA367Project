@@ -11,4 +11,9 @@ public class Bomb extends BaseConsumable {
         this.name = "Bomb";
         this.maxQuantity = maxQuantity;
     }
+
+    @Override
+    public void use() {
+        decrement();
+    }
 }
