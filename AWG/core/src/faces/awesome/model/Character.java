@@ -25,6 +25,7 @@ public abstract class Character {
 	//protected abstract void move();
 
 
+
 	//Get the position on the player
 	public Position getPos () {
 		return pos;
@@ -34,6 +35,9 @@ public abstract class Character {
 	public void setPos (Position pos) {
 		this.pos = pos;
 	}
+
+
+
 
 }
 
