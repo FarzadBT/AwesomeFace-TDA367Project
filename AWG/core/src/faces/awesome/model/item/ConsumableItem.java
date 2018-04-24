@@ -7,4 +7,12 @@ public interface ConsumableItem extends Item {
     int getQuantity();
 
     int getMax();
+
+    void increment();
+
+    void decrement();
+
+    void increaseMax(int n);
+
+    void decreaseMax(int n);
 }

@@ -1,6 +1,7 @@
 package faces.awesome.model;
 
 import faces.awesome.model.item.BaseConsumable;
+import faces.awesome.model.item.BaseInstant;
 import faces.awesome.model.item.Item;
 
 import java.util.ArrayList;
@@ -17,11 +18,20 @@ public class Inventory {
         inventory = new HashMap<>();
     }
 
+    public void addToInventory(Item item) {
+        if(item instanceof BaseInstant)
+            item.use();
+        else if(!isInInventory(item))
+            addNewToInventory(item);
+        else if(item instanceof BaseConsumable)
+            ((BaseConsumable) item).increment();
+    }
+
     /**
      * Add a new item to the inventory
      * @param item
      */
-    public void addNewToInventory(Item item) {
+    private void addNewToInventory(Item item) {
         inventory.put(item.getName(), item);
     }
 

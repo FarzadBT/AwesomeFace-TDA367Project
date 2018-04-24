@@ -1,4 +1,4 @@
-package faces.awesome.model.item.items;
+package faces.awesome.model.item.items.consumables;
 
 import faces.awesome.model.item.BaseConsumable;
 
@@ -8,6 +8,7 @@ import faces.awesome.model.item.BaseConsumable;
 public class Bomb extends BaseConsumable {
 
     public Bomb(int maxQuantity) {
+        this.name = "Bomb";
         this.maxQuantity = maxQuantity;
     }
 }

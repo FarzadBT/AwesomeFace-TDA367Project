@@ -5,24 +5,43 @@ package faces.awesome.model.item;
  */
 public abstract class BaseConsumable implements ConsumableItem {
     protected String name;
-    protected int quantity = 0, maxQuantity;
+    protected int quantity = 1, maxQuantity;
 
+    /**
+     *
+     * @return name of the item
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * Has different effects depending on the item
+     */
     @Override
     public void use() {
 
     }
 
+    @Override
     public void increment() {
         quantity++;
     }
 
+    @Override
     public void decrement() {
         quantity--;
+    }
+
+    @Override
+    public void increaseMax(int n) {
+        maxQuantity += n;
+    }
+
+    @Override
+    public void decreaseMax(int n) {
+        maxQuantity -= n;
     }
 
     @Override

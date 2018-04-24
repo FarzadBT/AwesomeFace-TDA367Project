@@ -63,7 +63,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		tiledMapRenderer.render();
 
 		batch.begin();
-		sprite.setPosition(player.getPos().getX(), player.getPos().getY());
+		//sprite.setPosition(player.getPos().getX(), player.getPos().getY());
 		sprite.draw(batch);
 		batch.end();
 	}
@@ -79,19 +79,19 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	public boolean keyUp(int keycode) {
 
 		if(keycode == Input.Keys.LEFT) {
-			player.setPos(player.getPos().movePos(-32, 0));
+			//player.setPos(player.getPos().movePos(-32, 0));
 		}
 
 		if(keycode == Input.Keys.RIGHT) {
-			player.setPos(player.getPos().movePos(32, 0));
+			//player.setPos(player.getPos().movePos(32, 0));
 		}
 
 		if(keycode == Input.Keys.UP) {
-			player.setPos(player.getPos().movePos(0, 32));
+			//player.setPos(player.getPos().movePos(0, 32));
 		}
 
 		if(keycode == Input.Keys.DOWN) {
-			player.setPos(player.getPos().movePos(0, -32));
+			//player.setPos(player.getPos().movePos(0, -32));
 		}
 
 		return false;

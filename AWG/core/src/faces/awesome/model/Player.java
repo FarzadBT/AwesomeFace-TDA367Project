@@ -2,6 +2,7 @@ package faces.awesome.model;
 
 import faces.awesome.model.characters.PlayerCharacter;
 import faces.awesome.model.item.BaseConsumable;
+import faces.awesome.model.item.BaseInstant;
 import faces.awesome.model.item.Item;
 import faces.awesome.model.Position;
 
@@ -31,10 +32,11 @@ public class Player {
 		slot2 = item;
 	}
 
+	public Inventory getInventory() {
+		return inventory;
+	}
+
 	public void addToInventory(Item item) {
-		if(!inventory.isInInventory(item))
-			inventory.addNewToInventory(item);
-		else if(item instanceof BaseConsumable)
-			inventory.incrementConsumable();
+		inventory.addToInventory(item);
 	}
 }
