@@ -6,5 +6,14 @@ public class Enemy extends Character {
         super(pos);
     }
 
+    @Override
+    protected void attack(Character other) {
+
+    }
+
+    protected void move() {
+
+    }
+
 
 }

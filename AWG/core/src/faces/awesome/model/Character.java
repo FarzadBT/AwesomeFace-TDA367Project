@@ -10,7 +10,7 @@ public abstract class Character {
 	protected Facing facing;
 
 	//Based damage dealt with no weapon equipped
-	protected int BaseDamage;
+	protected int baseDamage;
 
 	// character velocity
 	protected float vel;
@@ -24,12 +24,10 @@ public abstract class Character {
 		this.pos = pos;
 	}
 
-	protected void attack(Character other){
-
-	}
+	protected abstract void attack(Character other);
 
 	//Need to define how the position is stored before we implement this.
-	protected void move(){
+	//protected abstract void move();
 
 	}
 
