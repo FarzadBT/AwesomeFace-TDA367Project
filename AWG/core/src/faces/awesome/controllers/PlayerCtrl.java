@@ -46,6 +46,8 @@ public class PlayerCtrl {
 
         boolean solid = isSolid((int) newPosition.getX(), (int) newPosition.getY());
 
+        //Position newPos = player.getPos();
+
         if ( !solid ) {
 
             //TODO check if the player will collide with an enemy here (if sats)

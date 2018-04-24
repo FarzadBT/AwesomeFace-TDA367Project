@@ -2,20 +2,23 @@ package faces.awesome.controllers;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class InputCtrl implements InputProcessor {
+public class GameCtrl implements InputProcessor {
 
     PlayerCtrl playerCtrl;
+    OrthographicCamera camera;
 
-    public InputCtrl(PlayerCtrl playerCtrl) {
+    public GameCtrl(PlayerCtrl playerCtrl, OrthographicCamera camera) {
         this.playerCtrl = playerCtrl;
+        this.camera = camera;
     }
 
     @Override
     public boolean keyDown(int keycode) {
 
         if(keycode == Input.Keys.LEFT) {
-
             playerCtrl.tryMove(-1, 0);
 
         }
@@ -23,6 +26,8 @@ public class InputCtrl implements InputProcessor {
         if(keycode == Input.Keys.RIGHT) {
 
             playerCtrl.tryMove(1, 0);
+            camera.position.x += 100;
+
 
         }
 
@@ -43,7 +48,7 @@ public class InputCtrl implements InputProcessor {
 
 
 
-    //Methods we have to implements but do not use
+    //Methods we have to implement but do not use
     @Override
     public boolean keyUp(int keycode) {
         return false;

@@ -2,7 +2,7 @@
 <map version="1.0" tiledversion="2018.03.21" orientation="orthogonal" renderorder="right-down" width="128" height="64" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1">
  <tileset firstgid="1" source="forest_tiles.tsx"/>
  <tileset firstgid="257" source="Terrain.tsx"/>
- <tileset firstgid="1281" source="../../../../../Dropbox/Public/LPC_forest/forest_tiles.tsx"/>
+ <tileset firstgid="1281" source="forest_tiles.tsx"/>
  <layer name="Tile Layer 1" width="128" height="64">
   <data encoding="csv">
 753,753,753,753,753,753,753,753,753,753,753,753,753,753,753,753,753,753,726,727,727,728,753,753,753,753,753,694,753,753,753,753,753,753,694,753,753,753,753,753,753,662,753,753,753,753,753,753,753,381,381,381,381,381,381,381,381,182,150,183,381,381,381,24,381,381,381,381,381,381,381,182,150,181,381,381,381,381,381,381,381,381,182,183,13,381,381,381,381,381,381,381,381,381,381,24,567,381,381,381,381,381,381,381,381,381,381,381,381,381,381,381,381,534,535,536,381,381,381,381,381,381,381,381,381,381,502,502,
