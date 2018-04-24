@@ -6,7 +6,7 @@ public class Player extends Character {
 
 	private Facing facing;
 
-	public Player(Position pos, int baseDamage){
+	public Player(Position pos){
 		super(pos);
 	}
 

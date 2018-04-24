@@ -30,6 +30,7 @@ public class PlayerCtrl {
 
                     if ( tileIsSolid ) {
                         return true;
+
                     }
 
                 }
