@@ -1,127 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="beach-desert" tilewidth="32" tileheight="32" tilecount="256" columns="16">
- <image source="beach-desert.png" width="512" height="512"/>
- <tile id="187">
+<tileset name="fence" tilewidth="32" tileheight="32" tilecount="18" columns="3">
+ <image source="fence.png" width="96" height="192"/>
+ <tile id="0">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="188">
+ <tile id="1">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="189">
+ <tile id="2">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="194">
+ <tile id="3">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="195">
+ <tile id="4">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="196">
+ <tile id="5">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="203">
+ <tile id="6">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="204">
+ <tile id="7">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="205">
+ <tile id="8">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="208">
+ <tile id="9">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="209">
+ <tile id="10">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="211">
+ <tile id="11">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="219">
+ <tile id="12">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="220">
+ <tile id="13">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="221">
+ <tile id="14">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="224">
+ <tile id="15">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="225">
+ <tile id="16">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="226">
-  <properties>
-   <property name="solid" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="227">
-  <properties>
-   <property name="solid" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="230">
-  <properties>
-   <property name="solid" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="235">
-  <properties>
-   <property name="solid" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="237">
-  <properties>
-   <property name="solid" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="242">
-  <properties>
-   <property name="solid" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="243">
-  <properties>
-   <property name="solid" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="246">
+ <tile id="17">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>
