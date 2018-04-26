@@ -17,6 +17,9 @@ public class PlayerCtrl {
     }
 
     private boolean isSolid(int x, int y) {
+        boolean isSolid = false;
+        boolean walkIn = false;
+
         for (MapLayer layer :  tiledMap.getLayers()) {
 
             if (layer instanceof TiledMapTileLayer) {
@@ -28,16 +31,18 @@ public class PlayerCtrl {
 
                     boolean tileIsSolid = cell.getTile().getProperties().get("solid", false, null);
 
-                    if ( tileIsSolid ) {
-                        return true;
+                    boolean canWalkIn = cell.getTile().getProperties().get("walkIn", false, null);
+
+                    isSolid = tileIsSolid;
+
+                    if ( canWalkIn ) {
+                        //anropa metoden som byter till en ny karta
 
                     }
-
                 }
-
             }
         }
-        return false;
+        return isSolid;
     }
 
 
