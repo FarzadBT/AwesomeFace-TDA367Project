@@ -5,12 +5,12 @@ http://www.cse.chalmers.se/edu/course/tda367/
 ### Trello link
 https://trello.com/b/iSrQl6Mq/awesomegame
 
-### People
+### Group members 
 
-Tithera  - Therese Sturesson
+Tithera       - Therese Sturesson
 
-t0kenz   - Linus Wallman
+t0kenz/Zeno   - Linus Wallman
 
-Amloudhi - Philip Nilsson
+Amloudhi      - Philip Nilsson
 
-FarzadBT - Farzad Besharati
+FarzadBT      - Farzad Besharati
