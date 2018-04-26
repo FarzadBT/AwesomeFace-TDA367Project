@@ -4,10 +4,6 @@ public class Position {
     private float x;
     private float y;
 
-    /*public Position(float x, float y){
-        this(new Position(x,y));
-    }*/
-
     //The constructor
     public Position(float x, float y){
         this.x = x;
@@ -16,9 +12,9 @@ public class Position {
 
     //Move the position
     public Position movePos (float deltaX, float deltaY) {
-        deltaX += this.x;
-        deltaY += this.y;
-        return new Position(deltaX, deltaY);
+        this.x += deltaX;
+        this.y += deltaY;
+        return this;
     }
 
     //Get the x value
@@ -34,7 +30,7 @@ public class Position {
     //Positions own toString method
     @Override
     public String toString() {
-        return "Position{x=" + x + ", y=" + y + '}';
+        return "Position { x = " + x + ", y = " + y + " }";
     }
 
 }

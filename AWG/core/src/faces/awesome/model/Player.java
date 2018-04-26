@@ -1,5 +1,7 @@
 package faces.awesome.model;
 
+import faces.awesome.AwesomeGame;
+
 import java.lang.*;
 
 public class Player extends Character {
@@ -24,7 +26,16 @@ public class Player extends Character {
 		setPos(pos.movePos(dx, dy));
 
 	}
+/*
+	public boolean isWithinCamView() {
+		float x = getPos().getX();
+		float y = getPos().getY();
 
+		if (x >  && ) {
+
+		}
+	}
+*/
 
 
 }
