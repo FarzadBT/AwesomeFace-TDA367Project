@@ -26,8 +26,8 @@ public class AwesomeGame extends Game {
     public void create() {
         // setup model here.
 
-        float w = Gdx.graphics.getWidth();
-        float h = Gdx.graphics.getHeight();
+        int w = Gdx.graphics.getWidth();
+        int h = Gdx.graphics.getHeight();
 
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
 
