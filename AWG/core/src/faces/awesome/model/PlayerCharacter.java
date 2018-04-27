@@ -4,11 +4,11 @@ import faces.awesome.AwesomeGame;
 
 import java.lang.*;
 
-public class Player extends Character {
+public class PlayerCharacter extends Character {
 
 	private Facing facing;
 
-	public Player(Position pos){
+	public PlayerCharacter(Position pos){
 		super(pos);
 	}
 
@@ -34,7 +34,7 @@ public class Player extends Character {
 
 		if ( !isSolid && !isOccupied ) {
 
-			//Moves the player
+			//Moves the playerCharacter
 			setPos(pos.movePos(dx, dy));
 
 		}

@@ -3,16 +3,16 @@ package faces.awesome.controllers;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import faces.awesome.model.Player;
+import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 
 public class PlayerCtrl {
 
-    private Player player;
+    private PlayerCharacter playerCharacter;
     private Map tiledMap;
 
-    public PlayerCtrl(Player player, Map tiledMap) {
-        this.player = player;
+    public PlayerCtrl(PlayerCharacter playerCharacter, Map tiledMap) {
+        this.playerCharacter = playerCharacter;
         this.tiledMap = tiledMap;
     }
 
@@ -48,15 +48,15 @@ public class PlayerCtrl {
 
     public void tryMove(int dx, int dy) {
 
-        Position newPosition = player.getPos().movePos(dx, dy);
+        Position newPosition = playerCharacter.getPos().movePos(dx, dy);
 
         boolean solid = isSolid((int) newPosition.getX(), (int) newPosition.getY());
 
-        //Position newPos = player.getPos();
+        //Position newPos = playerCharacter.getPos();
 
         if ( !solid ) {
 
-            player.move(dx, dy);
+            playerCharacter.move(dx, dy);
         }
 
     }
