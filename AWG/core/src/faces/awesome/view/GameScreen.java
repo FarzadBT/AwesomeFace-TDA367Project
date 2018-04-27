@@ -75,7 +75,7 @@ public class GameScreen implements Screen {
         mapRenderer.render();
 
         sprBatch.begin();
-        spr.setPosition(game.playerCharacter.getPos().getX() * AwesomeGame.TILE_SIZE, game.playerCharacter.getPos().getY() * AwesomeGame.TILE_SIZE);
+        spr.setPosition(game.player.getPos().getX() * AwesomeGame.TILE_SIZE, game.player.getPos().getY() * AwesomeGame.TILE_SIZE);
         spr.draw(sprBatch);
         sprBatch.end();
     }
