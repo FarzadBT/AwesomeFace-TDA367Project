@@ -2,16 +2,18 @@ package faces.awesome.controllers;
 
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import faces.awesome.model.Player;
 import faces.awesome.model.Position;
+import faces.awesome.model.WorldMap;
 
 public class PlayerCtrl {
 
     private Player player;
-    private Map tiledMap;
+    private TiledMap tiledMap;
 
-    public PlayerCtrl(Player player, Map tiledMap) {
+    public PlayerCtrl(Player player, TiledMap tiledMap) {
         this.player = player;
         this.tiledMap = tiledMap;
     }

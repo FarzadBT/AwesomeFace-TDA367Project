@@ -4,8 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import faces.awesome.controllers.GameCtrl;
 import faces.awesome.controllers.PlayerCtrl;
+import faces.awesome.model.WorldMap;
 import faces.awesome.model.Player;
 import faces.awesome.model.Position;
 import faces.awesome.view.GameScreen;
@@ -21,6 +21,10 @@ public class AwesomeGame extends Game {
     public Player player;
 
     public PlayerCtrl playerCtrl;
+
+    //WorldMap map = new WorldMap("core/assets/theMap.tmx");
+
+
 
     @Override
     public void create() {
