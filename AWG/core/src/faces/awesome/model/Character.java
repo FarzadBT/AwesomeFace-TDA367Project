@@ -19,7 +19,7 @@ public abstract class Character {
 		this.pos = pos;
 	}
 
-	protected abstract void attack(Character other);
+	//protected abstract void attack(Character other);
 
 	//Need to define how the position is stored before we implement this.
 	//protected abstract void move();
