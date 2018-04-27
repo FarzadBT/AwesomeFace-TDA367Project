@@ -1,3 +1,7 @@
+# java stuff
+*.class
+build/*
+
 # mac crap
 .DS_Store
 
@@ -12,7 +16,7 @@ out
 #Gradle stuff
 .gradle
 gradle
-/build/
+
 
 # Ignore Gradle GUI config
 gradle-app.setting

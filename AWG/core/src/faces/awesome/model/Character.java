@@ -15,15 +15,57 @@ public abstract class Character {
 	// character velocity
 	protected float vel;
 
+	// character current health and max health
+	protected int health, maxHealth;
+
+
+
 	public Character(Position pos){
 		this.pos = pos;
 	}
 
-	protected abstract void attack(Character other);
+	//protected abstract void attack(Character other);
 
 	//Need to define how the position is stored before we implement this.
 	//protected abstract void move();
 
+	public Facing getFacing() {
+		return facing;
+	}
+
+	public void setFacing(Facing facing) {
+		this.facing = facing;
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	public void increaseHealth(int n) {
+		if (health + n < maxHealth)
+			health += n;
+		else
+			health = maxHealth;
+	}
+
+	public void decreaseHealth(int n) {
+		if (health -n > 0)
+			health -= n;
+		else
+			health = 0;
+	}
+
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+
+	public void setMaxHealth(int maxHealth) {
+		this.maxHealth = maxHealth;
+	}
 
 
 	//Get the position on the playerCharacter

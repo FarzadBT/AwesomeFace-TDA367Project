@@ -12,9 +12,7 @@ public class Position {
 
     //Move the position
     public Position movePos (float deltaX, float deltaY) {
-        this.x += deltaX;
-        this.y += deltaY;
-        return this;
+        return new Position(this.x + deltaX, this.y + deltaY );
     }
 
     //Get the x value
