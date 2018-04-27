@@ -26,8 +26,6 @@ public class GameCtrl implements InputProcessor {
         if(keycode == Input.Keys.RIGHT) {
 
             playerCtrl.tryMove(1, 0);
-            camera.position.x += 100;
-
 
         }
 

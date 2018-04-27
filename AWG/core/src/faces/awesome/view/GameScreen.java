@@ -66,7 +66,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        System.out.println("x: " + game.player.getPos().getX() + " y: " + game.player.getPos().getY());
+        //System.out.println("x: " + game.playerCharacter.getPos().getX() + " y: " + game.playerCharacter.getPos().getY());
         update(delta);
         // RGB(0, 0, 0, 1) = black
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -75,7 +75,7 @@ public class GameScreen implements Screen {
         mapRenderer.render();
 
         sprBatch.begin();
-        spr.setPosition(game.player.getPos().getX() * AwesomeGame.TILE_SIZE / 2, game.player.getPos().getY() * AwesomeGame.TILE_SIZE / 2);
+        spr.setPosition(game.playerCharacter.getPos().getX() * AwesomeGame.TILE_SIZE, game.playerCharacter.getPos().getY() * AwesomeGame.TILE_SIZE);
         spr.draw(sprBatch);
         sprBatch.end();
     }
