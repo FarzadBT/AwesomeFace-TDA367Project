@@ -1,20 +1,18 @@
 package faces.awesome.controllers;
 
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import faces.awesome.model.Player;
+import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
-import faces.awesome.model.WorldMap;
 
 public class PlayerCtrl {
 
-    private Player player;
+    private PlayerCharacter playerCharacter;
     private TiledMap tiledMap;
 
-    public PlayerCtrl(Player player, TiledMap tiledMap) {
-        this.player = player;
+    public PlayerCtrl(PlayerCharacter playerCharacter, TiledMap tiledMap) {
+        this.playerCharacter = playerCharacter;
         this.tiledMap = tiledMap;
     }
 
@@ -44,22 +42,22 @@ public class PlayerCtrl {
 
     public void tryMove(int dx, int dy) {
 
-        Position newPosition = player.getPos().movePos(dx, dy);
+        Position newPosition = playerCharacter.getPos().movePos(dx, dy);
 
         boolean solid = isSolid((int) newPosition.getX(), (int) newPosition.getY());
 
-        //Position newPos = player.getPos();
+        //Position newPos = playerCharacter.getPos();
 
         if ( !solid ) {
 
-            //TODO check if the player will collide with an enemy here (if sats)
+            //TODO check if the playerCharacter will collide with an enemy here (if sats)
 
 
 
 
 
 
-            player.move(dx, dy);
+            playerCharacter.move(dx, dy);
         }
 
     }
@@ -68,10 +66,10 @@ public class PlayerCtrl {
         //What follows in a very early prototype of collision detection.
 
         //Get characters current position
-        Position current = player.getPos();
+        Position current = playerCharacter.getPos();
 
         //Get characters position after move, do not move character
-        Position next = player.getPos().movePos(1,0);
+        Position next = playerCharacter.getPos().movePos(1,0);
 
         //Get map layer in which character is moving
         TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get(0);

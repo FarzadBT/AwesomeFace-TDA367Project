@@ -5,8 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import faces.awesome.controllers.PlayerCtrl;
-import faces.awesome.model.WorldMap;
-import faces.awesome.model.Player;
+import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.view.GameScreen;
 
@@ -16,9 +15,9 @@ public class AwesomeGame extends Game {
     public static final int VIEW_PORT_HEIGHT = 512;
 
     public TiledMap map;
-    // TO-do: instead of having a a HasA depndency, let's just use dependency inject player where we need it.
+    // TO-do: instead of having a a HasA depndency, let's just use dependency inject playerCharacter where we need it.
 
-    public Player player;
+    public PlayerCharacter playerCharacter;
 
     public PlayerCtrl playerCtrl;
 
@@ -33,11 +32,11 @@ public class AwesomeGame extends Game {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
 
-        player = new Player(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
+        playerCharacter = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
 
         map = new TmxMapLoader().load("core/assets/theMap.tmx");
 
-        playerCtrl = new PlayerCtrl(player, map);
+        playerCtrl = new PlayerCtrl(playerCharacter, map);
 
         //Shouldn't be here, it's just here temporarily.
         //Gdx.input.setInputProcessor(new GameCtrl(playerCtrl));
@@ -58,7 +57,7 @@ public class AwesomeGame extends Game {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
 
-        Position playerPos = player.getPos();
+        Position playerPos = playerCharacter.getPos();
         float playerX = playerPos.getX() * TILE_SIZE;
         float playerY = playerPos.getY() * TILE_SIZE;
 
