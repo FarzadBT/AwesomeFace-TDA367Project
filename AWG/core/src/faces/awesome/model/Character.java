@@ -44,6 +44,20 @@ public abstract class Character {
 		this.health = health;
 	}
 
+	public void increaseHealth(int n) {
+		if (health + n < maxHealth)
+			health += n;
+		else
+			health = maxHealth;
+	}
+
+	public void decreaseHealth(int n) {
+		if (health -n > 0)
+			health -= n;
+		else
+			health = 0;
+	}
+
 	public int getMaxHealth() {
 		return maxHealth;
 	}

@@ -14,7 +14,7 @@ public interface Item {
     String getName();
 
     /**
-     * Different effects depending on the item
+     * different effects depending on the item
      */
     void use(Position pos, Facing facing);
 

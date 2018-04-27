@@ -48,9 +48,17 @@ public class InventoryTests {
     }
 
     @Test
-    public void testAddInstant() {
+    public void testInstant() {
         p.addToInventory(sh);
         assertTrue(!p.getInventory().isInInventory(sh));
         assertTrue(p.getInventory().getSize() == 0);
+        assertTrue(p.getHealth() == 10);
+
+        p.decreaseHealth(5);
+        assertTrue(p.getHealth() == 5);
+        p.addToInventory(sh);
+        assertTrue(p.getHealth() == 6);
     }
+
+
 }

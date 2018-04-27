@@ -13,6 +13,5 @@ public abstract class BaseItem implements Item {
         return name;
     }
 
-    @Override
     public abstract void use(Position pos, Facing facing);
 }

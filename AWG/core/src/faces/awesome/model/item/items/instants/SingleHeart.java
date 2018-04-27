@@ -15,9 +15,10 @@ public class SingleHeart extends BaseInstant {
 
     @Override
     public void use(PlayerCharacter player) {
-
+        player.increaseHealth(1);
     }
 
+    // Is not really used
     @Override
     public void use(Position pos, Facing facing) {
 

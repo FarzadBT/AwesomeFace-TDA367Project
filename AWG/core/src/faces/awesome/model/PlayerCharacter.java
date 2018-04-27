@@ -9,6 +9,8 @@ public class PlayerCharacter extends Character {
 	public PlayerCharacter(Position pos) {
 		super(pos);
 		inventory = new Inventory();
+		health = 10;
+		maxHealth = 10;
 	}
 
 	public Item getSlot1() {
