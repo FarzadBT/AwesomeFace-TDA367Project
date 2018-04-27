@@ -1,4 +1,4 @@
-import faces.awesome.model.Player;
+import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.model.item.items.consumables.Bomb;
 import faces.awesome.model.item.items.instants.SingleHeart;
@@ -11,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Created by Mr Cornholio on 24/04/2018.
  */
 public class InventoryTests {
-    Player p;
+    PlayerCharacter p;
     Bomb b;
     Hammer h;
     SingleHeart sh;
 
     @BeforeEach
     public void init() {
-        p = new Player(new Position(0,0));
+        p = new PlayerCharacter(new Position(0,0));
         b = new Bomb(20);
         h = new Hammer();
         sh = new SingleHeart();
@@ -33,7 +33,7 @@ public class InventoryTests {
         assertTrue(b.getQuantity() == 1);
         p.addToInventory(b);
         assertTrue(b.getQuantity() == 2);
-        b.use();
+        b.use(p.getPos(), p.getFacing());
         assertTrue(b.getQuantity() == 1);
     }
 

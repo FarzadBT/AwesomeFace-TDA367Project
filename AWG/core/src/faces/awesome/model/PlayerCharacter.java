@@ -1,19 +1,14 @@
 package faces.awesome.model;
 
-import faces.awesome.model.characters.PlayerCharacter;
-import faces.awesome.model.item.BaseConsumable;
-import faces.awesome.model.item.BaseInstant;
 import faces.awesome.model.item.Item;
-import faces.awesome.model.Position;
 
-public class Player {
+public class PlayerCharacter extends Character {
 	private Inventory inventory;
 	private Item slot1, slot2;
-	private PlayerCharacter playerCharacter;
 
-	public Player(Position pos) {
+	public PlayerCharacter(Position pos) {
+		super(pos);
 		inventory = new Inventory();
-		playerCharacter = new PlayerCharacter(pos);
 	}
 
 	public Item getSlot1() {
@@ -24,6 +19,10 @@ public class Player {
 		slot1 = item;
 	}
 
+	public void useSlot1() {
+		slot1.use(pos, facing);
+	}
+
 	public Item getSlot2() {
 		return slot2;
 	}
@@ -32,11 +31,20 @@ public class Player {
 		slot2 = item;
 	}
 
+	public void useSlot2() {
+		slot2.use(pos, facing);
+	}
+
 	public Inventory getInventory() {
 		return inventory;
 	}
 
 	public void addToInventory(Item item) {
-		inventory.addToInventory(item);
+		inventory.addToInventory(item, this);
+	}
+
+	@Override
+	public void move(int dx, int dy) {
+
 	}
 }

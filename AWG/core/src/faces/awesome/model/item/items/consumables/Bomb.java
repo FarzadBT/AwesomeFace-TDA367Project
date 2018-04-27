@@ -1,5 +1,7 @@
 package faces.awesome.model.item.items.consumables;
 
+import faces.awesome.model.Facing;
+import faces.awesome.model.Position;
 import faces.awesome.model.item.BaseConsumable;
 
 /**
@@ -12,8 +14,13 @@ public class Bomb extends BaseConsumable {
         this.maxQuantity = maxQuantity;
     }
 
+    /**
+     * place a bomb in front of the player and decrement the current quantity
+     * @param pos
+     * @param facing
+     */
     @Override
-    public void use() {
+    public void use(Position pos, Facing facing) {
         decrement();
     }
 }

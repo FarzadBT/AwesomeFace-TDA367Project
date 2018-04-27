@@ -18,9 +18,9 @@ public class Inventory {
         inventory = new HashMap<>();
     }
 
-    public void addToInventory(Item item) {
+    public void addToInventory(Item item, PlayerCharacter player) {
         if(item instanceof BaseInstant)
-            item.use();
+            ((BaseInstant)item).use(player);
         else if(!isInInventory(item))
             addNewToInventory(item);
         else if(item instanceof BaseConsumable)

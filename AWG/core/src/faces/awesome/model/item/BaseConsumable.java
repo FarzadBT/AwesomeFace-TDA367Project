@@ -1,5 +1,8 @@
 package faces.awesome.model.item;
 
+import faces.awesome.model.Facing;
+import faces.awesome.model.Position;
+
 /**
  * Created by Mr Cornholio on 20/04/2018.
  */
@@ -7,31 +10,43 @@ public abstract class BaseConsumable implements ConsumableItem {
     protected String name;
     protected int quantity = 1, maxQuantity;
 
-    /**
-     *
-     * @return name of the item
-     */
+
     @Override
     public String getName() {
         return name;
     }
 
-    /**
-     * Has different effects depending on the item
-     */
-    @Override
-    public void use() {
-
-    }
 
     @Override
     public void increment() {
-        quantity++;
+        if (quantity < maxQuantity)
+            quantity++;
+        else
+            quantity = maxQuantity;
     }
 
     @Override
     public void decrement() {
-        quantity--;
+        if (quantity > 0)
+            quantity--;
+        else
+            quantity = 0;
+    }
+
+    @Override
+    public void incrementN(int n) {
+        if (quantity+n < maxQuantity)
+            quantity += n;
+        else
+            quantity = maxQuantity;
+    }
+
+    @Override
+    public void decrementN(int n) {
+        if (quantity-n >= 0)
+            quantity -= n;
+        else
+            quantity = 0;
     }
 
     @Override
