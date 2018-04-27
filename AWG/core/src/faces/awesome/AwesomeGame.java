@@ -16,11 +16,15 @@ public class AwesomeGame extends Game {
     public static final int VIEW_PORT_HEIGHT = 512;
 
     public TiledMap map;
-    // TO-do: instead of having a a HasA depndency, let's just use dependency inject playerCharacter where we need it.
+    // TO-do: instead of having a a HasA depndency, let's just use dependency inject player where we need it.
 
     public PlayerCharacter player;
 
     public PlayerCtrl playerCtrl;
+
+    //WorldMap map = new WorldMap("core/assets/theMap.tmx");
+
+
 
     @Override
     public void create() {

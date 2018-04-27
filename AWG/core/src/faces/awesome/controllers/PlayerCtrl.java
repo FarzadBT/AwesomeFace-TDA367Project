@@ -4,7 +4,6 @@ import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import faces.awesome.model.PlayerCharacter;
-import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 
 public class PlayerCtrl {
