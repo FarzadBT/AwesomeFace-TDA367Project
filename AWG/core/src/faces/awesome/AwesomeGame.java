@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import faces.awesome.controllers.GameCtrl;
 import faces.awesome.controllers.PlayerCtrl;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
@@ -17,7 +18,7 @@ public class AwesomeGame extends Game {
     public TiledMap map;
     // TO-do: instead of having a a HasA depndency, let's just use dependency inject playerCharacter where we need it.
 
-    public PlayerCharacter playerCharacter;
+    public PlayerCharacter player;
 
     public PlayerCtrl playerCtrl;
 
@@ -28,11 +29,11 @@ public class AwesomeGame extends Game {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
 
-        playerCharacter = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
+        player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
 
         map = new TmxMapLoader().load("core/assets/theMap.tmx");
 
-        playerCtrl = new PlayerCtrl(playerCharacter, map);
+        playerCtrl = new PlayerCtrl(player, map);
 
         //Shouldn't be here, it's just here temporarily.
         //Gdx.input.setInputProcessor(new GameCtrl(playerCtrl));
@@ -53,7 +54,7 @@ public class AwesomeGame extends Game {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
 
-        Position playerPos = playerCharacter.getPos();
+        Position playerPos = player.getPos();
         float playerX = playerPos.getX() * TILE_SIZE;
         float playerY = playerPos.getY() * TILE_SIZE;
 
