@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import faces.awesome.controllers.GameCtrl;
 import faces.awesome.controllers.PlayerCtrl;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
@@ -15,7 +16,7 @@ public class AwesomeGame extends Game {
     public static final int VIEW_PORT_HEIGHT = 512;
 
     public TiledMap map;
-    // TO-do: instead of having a a HasA depndency, let's just use dependency inject player where we need it.
+    // TO-do: instead of having a a HasA depndency, let's just use dependency inject playerCharacter where we need it.
 
     public PlayerCharacter player;
 

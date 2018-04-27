@@ -24,9 +24,10 @@ public abstract class Character {
 		this.pos = pos;
 	}
 
-	protected void attack(Character other) {
+	//protected abstract void attack(Character other);
 
-	}
+	//Need to define how the position is stored before we implement this.
+	//protected abstract void move();
 
 	public Facing getFacing() {
 		return facing;
@@ -76,9 +77,6 @@ public abstract class Character {
 		this.pos = pos;
 	}
 
-	public void move(int dx, int dy) {
-	    this.pos = new Position(this.pos.getX()+dx, this.pos.getY()+dy);
-    }
 }
 
 
