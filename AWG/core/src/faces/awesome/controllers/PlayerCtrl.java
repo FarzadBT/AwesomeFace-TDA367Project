@@ -56,8 +56,6 @@ public class PlayerCtrl {
 
         if ( !solid ) {
 
-            //TODO check if the player will collide with an enemy here (if sats)
-
             player.move(dx, dy);
         }
 
