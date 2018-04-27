@@ -13,13 +13,6 @@ public class PlayerCharacter extends Character {
 	}
 
 
-
-	@Override
-	protected void attack(Character other) {
-
-	}
-
-
 	public void move(float dx, float dy) {
 		//Moves the playerCharacter
 		setPos(pos.movePos(dx, dy));
