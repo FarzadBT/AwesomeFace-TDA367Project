@@ -16,12 +16,12 @@ public class Position {
     }
 
     //Get the x value
-    public float getX () {
+    public int getX () {
         return x;
     }
 
     //Get the y value
-    public float getY () {
+    public int getY () {
         return y;
     }
 

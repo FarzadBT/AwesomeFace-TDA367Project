@@ -6,16 +6,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
 public class Tiles {
 
-    private PlayerCharacter player;
-    private Map tiledMap;
 
-    public Tiles (PlayerCharacter player, Map tiledMap) {
-        this.player = player;
-        this.tiledMap = tiledMap;
-    }
-
-
-    public boolean isSolid(int x, int y) {
+    public static boolean isSolid(Map tiledMap, int x, int y) {
         boolean isSolid = false;
         boolean walkIn = false;
 
