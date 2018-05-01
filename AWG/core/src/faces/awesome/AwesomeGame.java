@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import faces.awesome.controllers.GameCtrl;
 import faces.awesome.controllers.PlayerCtrl;
+import faces.awesome.model.MapStorage;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.model.WorldMap;
@@ -24,7 +25,7 @@ public class AwesomeGame extends Game {
     public PlayerCtrl playerCtrl;
 
     WorldMap world;
-
+    MapStorage maps;
 
 
     @Override
@@ -41,6 +42,8 @@ public class AwesomeGame extends Game {
 
         //Wraps the TileMap for easier access
         world = new WorldMap(map);
+        maps = new MapStorage();
+        maps.AddMap("Main", map);
 
         playerCtrl = new PlayerCtrl(player, world);
 

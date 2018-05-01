@@ -6,6 +6,8 @@ import java.util.HashMap;
 
 public class MapStorage {
 
+    public MapStorage(){}
+
     //A class used to store TiledMaps, easier to access.
 
     public static HashMap<String, TiledMap> maps = new HashMap<>();
