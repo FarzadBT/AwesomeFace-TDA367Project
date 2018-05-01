@@ -17,9 +17,8 @@ public class WorldMap {
 
     public HashMap<String, TiledMap> maps = new HashMap<>();
 
-    public WorldMap(String path){
-        System.out.println(Paths.get(".").toAbsolutePath().normalize().toString());
-        this.CurrentMap = new TmxMapLoader().load("core/assets/theMap.tmx");
+    public WorldMap(TiledMap map){
+        this.CurrentMap = map;
     }
 
     public void AddMap(String name ,TiledMap map){

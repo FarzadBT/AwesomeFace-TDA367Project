@@ -8,6 +8,7 @@ import faces.awesome.controllers.GameCtrl;
 import faces.awesome.controllers.PlayerCtrl;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
+import faces.awesome.model.WorldMap;
 import faces.awesome.view.GameScreen;
 
 public class AwesomeGame extends Game {
@@ -15,14 +16,14 @@ public class AwesomeGame extends Game {
     public static final int VIEW_PORT_WIDTH = 1024;
     public static final int VIEW_PORT_HEIGHT = 512;
 
-    public TiledMap map;
+    //public TiledMap map;
     // TO-do: instead of having a a HasA depndency, let's just use dependency inject player where we need it.
 
     public PlayerCharacter player;
 
     public PlayerCtrl playerCtrl;
 
-    //WorldMap map = new WorldMap("core/assets/theMap.tmx");
+    WorldMap world;
 
 
 
@@ -35,9 +36,11 @@ public class AwesomeGame extends Game {
 
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
 
-        map = new TmxMapLoader().load("core/assets/theMap.tmx");
+        TiledMap map = new TmxMapLoader().load("core/assets/theMap.tmx");
 
-        playerCtrl = new PlayerCtrl(player, map);
+        world = new WorldMap(map);
+
+        playerCtrl = new PlayerCtrl(player, world);
 
         //Shouldn't be here, it's just here temporarily.
         //Gdx.input.setInputProcessor(new GameCtrl(playerCtrl));
