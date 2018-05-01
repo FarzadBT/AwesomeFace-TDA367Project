@@ -4,15 +4,14 @@ import faces.awesome.model.item.Item;
 import java.lang.*;
 
 public class PlayerCharacter extends Character {
-	private Inventory inventory;
-	private Item slot1, slot2;
 
-	public PlayerCharacter(Position pos) {
-		super(pos);
-		inventory = new Inventory();
-		health = 10;
-		maxHealth = 10;
-	}
+    private Inventory inventory;
+	  private Item slot1, slot2;
+  
+    public PlayerCharacter(Position pos) {
+        super(pos, 5, 15, 15);
+        inventory = new Inventory();
+    }
 
 	public Item getSlot1() {
 		return slot1;
@@ -38,6 +37,7 @@ public class PlayerCharacter extends Character {
 		slot2.use(pos, facing);
 	}
 
+
 	public Inventory getInventory() {
 		return inventory;
 	}
@@ -47,8 +47,9 @@ public class PlayerCharacter extends Character {
 	}
 
 
+
 	//TODO lägga till facing
-	public void move(float dx, float dy) {
+	public void move(float dx, float dy, boolean solid) {
 
 		//Kolla först om den tile man ska till är solid eller inte (här kommer det även kollas
 		//om man tile är t.ex en dörr eller liknande som man kan gå in genom)
@@ -61,6 +62,7 @@ public class PlayerCharacter extends Character {
 
 		//TODO ska anropa metoden isOccupied med dx och dy (ska inte vara =false)
 		boolean isOccupied = false;
+
 
 
 		//Om båda är false (tilen är inte solid och inte occupied) så rör man sig dit

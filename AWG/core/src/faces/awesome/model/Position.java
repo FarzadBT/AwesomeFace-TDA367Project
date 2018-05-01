@@ -1,27 +1,27 @@
 package faces.awesome.model;
 
 public class Position {
-    private float x;
-    private float y;
+    private int x;
+    private int y;
 
     //The constructor
-    public Position(float x, float y){
+    public Position(int x, int y){
         this.x = x;
         this.y = y;
     }
 
     //Move the position
-    public Position movePos (float deltaX, float deltaY) {
+    public Position movePos (int deltaX, int deltaY) {
         return new Position(this.x + deltaX, this.y + deltaY );
     }
 
     //Get the x value
-    public float getX () {
+    public int getX () {
         return x;
     }
 
     //Get the y value
-    public float getY () {
+    public int getY () {
         return y;
     }
 
