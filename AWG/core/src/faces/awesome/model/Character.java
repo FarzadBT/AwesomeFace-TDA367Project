@@ -16,12 +16,16 @@ public abstract class Character {
 	protected float vel;
 
 	// character current health and max health
-	protected int health, maxHealth;
+	protected int health;
+	protected int maxHealth;
 
 
 
-	public Character(Position pos){
+	public Character(Position pos, int baseDamage, int maxHealth, int health){
 		this.pos = pos;
+		this.baseDamage = baseDamage;
+		this.maxHealth = maxHealth;
+		this.health = health;
 	}
 
 	//protected abstract void attack(Character other);
