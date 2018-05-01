@@ -38,6 +38,8 @@ public class AwesomeGame extends Game {
 
         TiledMap map = new TmxMapLoader().load("core/assets/theMap.tmx");
 
+
+        //Wraps the TileMap for easier access
         world = new WorldMap(map);
 
         playerCtrl = new PlayerCtrl(player, world);
