@@ -1,18 +1,17 @@
 package faces.awesome.controllers;
 
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import faces.awesome.model.PlayerCharacter;
-import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
+import faces.awesome.model.WorldMap;
 
 public class PlayerCtrl {
 
     private PlayerCharacter player;
-    private Map tiledMap;
+    private WorldMap tiledMap;
 
-    public PlayerCtrl(PlayerCharacter player, Map tiledMap) {
+    public PlayerCtrl(PlayerCharacter player, WorldMap tiledMap) {
         this.player = player;
         this.tiledMap = tiledMap;
     }
@@ -21,7 +20,7 @@ public class PlayerCtrl {
         boolean isSolid = false;
         boolean walkIn = false;
 
-        for (MapLayer layer :  tiledMap.getLayers()) {
+        for (MapLayer layer :  tiledMap.getCurrent().getLayers()) {
 
             if (layer instanceof TiledMapTileLayer) {
 
