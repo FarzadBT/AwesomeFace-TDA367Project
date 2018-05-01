@@ -39,4 +39,19 @@ public class WorldMap {
         return CurrentMap;
     }
 
+    public TiledMap getCurrentMap() {
+        return CurrentMap;
+    }
+
+    public void setCurrentMap(TiledMap currentMap) {
+        CurrentMap = currentMap;
+    }
+
+    public HashMap<String, TiledMap> getMaps() {
+        return maps;
+    }
+
+    public void setMaps(HashMap<String, TiledMap> maps) {
+        this.maps = maps;
+    }
 }
