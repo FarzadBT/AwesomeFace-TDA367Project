@@ -1,6 +1,9 @@
 # java stuff
 *.class
 build/*
+build
+/build/
+AWG/core/build/*
 
 # mac crap
 .DS_Store
