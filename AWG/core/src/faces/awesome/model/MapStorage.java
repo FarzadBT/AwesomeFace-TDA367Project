@@ -3,6 +3,7 @@ package faces.awesome.model;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MapStorage {
 
@@ -10,7 +11,7 @@ public class MapStorage {
 
     //A class used to store TiledMaps, easier to access.
 
-    public static HashMap<String, TiledMap> maps = new HashMap<>();
+    public static Map<String, TiledMap> maps = new HashMap<>();
 
     //Adds a map to storage
     public static void AddMap(String name, TiledMap map){
@@ -18,7 +19,7 @@ public class MapStorage {
     }
 
     //Returns the HashMap containing all TiledMaps
-    public static HashMap<String, TiledMap> getMaps() {
+    public static Map<String, TiledMap> getMaps() {
         return maps;
     }
 

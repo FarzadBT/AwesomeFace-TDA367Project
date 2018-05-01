@@ -1,20 +1,17 @@
 package faces.awesome.controllers;
 
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import faces.awesome.model.GameWorld;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.model.WorldMap;
 
 public class PlayerCtrl {
 
-    private final GameWorld world;
+    private final WorldMap world;
     private PlayerCharacter player;
     //private WorldMap tiledMap;
 
   
-    public PlayerCtrl(PlayerCharacter player, GameWorld world) {
+    public PlayerCtrl(PlayerCharacter player, WorldMap world) {
         this.player = player;
         this.world = world;
     }
