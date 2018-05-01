@@ -1,7 +1,7 @@
 package faces.awesome.model;
 
 public abstract class Character {
-	// Use a vector to encapsulate player coordinates?
+	// Use a vector to encapsulate playerCharacter coordinates?
 	// character position, perhaps this should be represented in a different way.
 	protected Position pos;
 
@@ -16,12 +16,16 @@ public abstract class Character {
 	protected float vel;
 
 	// character current health and max health
-	protected int health, maxHealth;
+	protected int health;
+	protected int maxHealth;
 
 
 
-	public Character(Position pos){
+	public Character(Position pos, int baseDamage, int maxHealth, int health){
 		this.pos = pos;
+		this.baseDamage = baseDamage;
+		this.maxHealth = maxHealth;
+		this.health = health;
 	}
 
 	//protected abstract void attack(Character other);
@@ -67,15 +71,19 @@ public abstract class Character {
 		this.maxHealth = maxHealth;
 	}
 
-	//Get the position on the player
+
+	//Get the position on the playerCharacter
 	public Position getPos () {
 		return pos;
 	}
 
-	//Set the position on the player
+	//Set the position on the playerCharacter
 	public void setPos (Position pos) {
 		this.pos = pos;
 	}
+
+
+
 
 }
 
