@@ -49,7 +49,7 @@ public class PlayerCharacter extends Character {
 
 
 	//TODO lägga till facing
-	public void move(float dx, float dy, boolean solid) {
+	public void move(int dx, int dy, boolean solid) {
 
 		//Kolla först om den tile man ska till är solid eller inte (här kommer det även kollas
 		//om man tile är t.ex en dörr eller liknande som man kan gå in genom)

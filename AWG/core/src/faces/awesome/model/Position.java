@@ -27,11 +27,11 @@ public class Position {
 
 
     //To set coordinates. Not immutable, For testing purposes only.
-    public void setX(float x){
+    public void setX(int x){
         this.x = x;
     }
 
-    public void setY(float y){
+    public void setY(int y){
         this.y = y;
     }
 

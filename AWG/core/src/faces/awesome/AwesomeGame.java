@@ -30,8 +30,8 @@ public class AwesomeGame extends Game {
 
     public PlayerCtrl playerCtrl;
 
-    WorldMap world;
-    MapStorage maps;
+    //WorldMap worlds;
+    //MapStorage maps;
 
 
     @Override
@@ -44,17 +44,17 @@ public class AwesomeGame extends Game {
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
 
 
-        Map map = new TmxMapLoader().load("core/assets/theMap.tmx");
-
-        world = new GameWorld(map);
+        Map mapp = new TmxMapLoader().load("core/assets/theMap.tmx");
+        world = new GameWorld(mapp);
 
         //TiledMap map = new TmxMapLoader().load("core/assets/theMap.tmx");
 
 
         //Wraps the TileMap for easier access
-        world = new WorldMap(map);
-        maps = new MapStorage();
-        maps.AddMap("Main", map);
+        //worlds = new WorldMap(map);
+
+        //maps = new MapStorage();
+        //maps.AddMap("Main", map);
 
         playerCtrl = new PlayerCtrl(player, world);
 
