@@ -30,4 +30,21 @@ public class WorldMap {
 
     }
 
+
+    public void setNewMap (int x, int y) {
+
+        String walkInId = Tiles.getWalkInId(currentMap, x, y);
+
+        if (walkInId == null) {
+            return;
+        }
+
+        System.out.println(1);
+
+        setCurrentMap(MapStorage.LoadMap(walkInId));
+
+
+    }
+
+
 }

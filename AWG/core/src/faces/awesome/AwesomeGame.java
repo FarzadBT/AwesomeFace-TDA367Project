@@ -53,13 +53,12 @@ public class AwesomeGame extends Game {
 
         //maps = new MapStorage();
         MapStorage.AddMap("Main", (TiledMap) map);
+        MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/smallHouse.tmx"));
 
         playerCtrl = new PlayerCtrl(player, world);
 
-        //Shouldn't be here, it's just here temporarily.
-        //Gdx.input.setInputProcessor(new GameCtrl(playerCtrl));
 
-        this.setScreen(new GameScreen(this));
+        this.setScreen(new GameScreen(this, world));
     }
 
     @Override

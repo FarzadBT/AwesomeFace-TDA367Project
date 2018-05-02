@@ -1426,4 +1426,9 @@
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="772">
+  <properties>
+   <property name="walkInId" value="smallHouse"/>
+  </properties>
+ </tile>
 </tileset>

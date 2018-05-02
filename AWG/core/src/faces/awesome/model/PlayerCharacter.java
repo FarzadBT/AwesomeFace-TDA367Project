@@ -51,7 +51,7 @@ public class PlayerCharacter extends Character {
 	//TODO lägga till facing
 	public void move(int dx, int dy, boolean solid) {
 
-    	
+
 		//Kollar om den tile man ska till är occupied av en annan character (typ enemy)
 		//TODO ska anropa metoden isOccupied med dx och dy (ska inte vara =false)
 		boolean isOccupied = false;

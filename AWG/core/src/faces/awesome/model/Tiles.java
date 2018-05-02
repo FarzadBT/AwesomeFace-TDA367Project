@@ -8,8 +8,7 @@ public class Tiles {
 
 
     public static boolean isSolid(Map tiledMap, int x, int y) {
-        boolean isSolid = false;
-        boolean walkIn = false;
+        boolean tileIsSolid = false;
 
         for (MapLayer layer :  tiledMap.getLayers()) {
 
@@ -20,22 +19,39 @@ public class Tiles {
 
                 if (cell != null && cell.getTile() != null) {
 
-                    boolean tileIsSolid = cell.getTile().getProperties().get("solid", false, null);
+                    tileIsSolid = cell.getTile().getProperties().get("solid", false, null);
 
-                    boolean canWalkIn = cell.getTile().getProperties().get("walkIn", false, null);
+                }
+            }
+        }
+        return tileIsSolid;
+    }
 
-                    isSolid = tileIsSolid;
 
-                    if ( canWalkIn ) {
-                        //anropa metoden som byter till en ny karta
+    public static String getWalkInId (Map tiledMap, int x, int y) {
+
+        for (MapLayer layer :  tiledMap.getLayers()) {
+
+            if (layer instanceof TiledMapTileLayer) {
+
+                TiledMapTileLayer tiledLayer = (TiledMapTileLayer) layer;
+                TiledMapTileLayer.Cell cell = tiledLayer.getCell(x, y);
+
+                if (cell != null && cell.getTile() != null) {
+
+                    String id = cell.getTile().getProperties().get("walkInId", null, null);
+
+                    if ( id != null ) {
+
+                        return id;
 
                     }
                 }
             }
         }
-        return isSolid;
-    }
 
+        return null;
+    }
 
 
 }
