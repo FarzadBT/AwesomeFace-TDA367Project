@@ -45,7 +45,7 @@ public class AwesomeGame extends Game {
         Map map = new TmxMapLoader().load("core/assets/theMap.tmx");
         //world = new GameWorld(map);
 
-        //TiledMap map = new TmxMapLoader().load("core/assets/theMap.tmx");
+        //Map maps = new TmxMapLoader().load("core/assets/theMap.tmx");
 
 
         //Wraps the TileMap for easier access
@@ -54,6 +54,9 @@ public class AwesomeGame extends Game {
         //maps = new MapStorage();
         MapStorage.AddMap("Main", (TiledMap) map);
         MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/smallHouse.tmx"));
+
+        //maps.AddMap("Main", mapp);
+
 
         playerCtrl = new PlayerCtrl(player, world);
 
