@@ -2,6 +2,8 @@ package faces.awesome.model;
 
 import com.badlogic.gdx.Gdx;
 import java.nio.file.Paths;
+
+import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
@@ -12,20 +14,20 @@ public class WorldMap {
 
 
     //Current tilemap
-    public TiledMap CurrentMap;
+    public Map CurrentMap;
 
     //Constructor, takes a TiledMap
-    public WorldMap(TiledMap map){
+    public WorldMap(Map map){
         this.CurrentMap = map;
     }
 
     //Returns the current map
-    public TiledMap getCurrent(){
+    public Map getCurrent(){
         return CurrentMap;
     }
 
     //Sets the current map. For testing purposes only.
-    public void setCurrentMap(TiledMap currentMap) {
+    public void setCurrentMap(Map currentMap) {
         CurrentMap = currentMap;
     }
 

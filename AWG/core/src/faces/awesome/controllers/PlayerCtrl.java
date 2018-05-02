@@ -11,7 +11,7 @@ public class PlayerCtrl {
 
     private final GameWorld world;
     private PlayerCharacter player;
-    //private WorldMap tiledMap;
+    //private WorldMap world;
 
   
     public PlayerCtrl(PlayerCharacter player, GameWorld world) {
