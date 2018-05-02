@@ -9,21 +9,21 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 public class WorldMap {
 
     //Current tilemap
-    private Map currentMap;
+    private TiledMap currentMap;
 
     //Constructor, takes a TiledMap
-    public WorldMap(Map map){
+    public WorldMap(TiledMap map){
         this.currentMap = map;
     }
 
     //Returns the current map
-    public Map getCurrent(){
+    public TiledMap getCurrent(){
         return currentMap;
     }
 
     //Sets the current map. For testing purposes only.
-    public void setCurrentMap(Map currentMap) {
-        currentMap = currentMap;
+    public void setCurrentMap(TiledMap currentMap) {
+        this.currentMap = currentMap;
     }
 
 

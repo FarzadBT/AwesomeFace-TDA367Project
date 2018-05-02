@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.Map;
+import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -27,7 +28,7 @@ public class GameScreen implements Screen {
     private Viewport gamePort;
 
     private WorldMap world;
-    private TiledMapRenderer mapRenderer;
+    private MapRenderer mapRenderer;
 
     private SpriteBatch sprBatch;
     private Sprite spr;
