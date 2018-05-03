@@ -1436,8 +1436,8 @@
  <tile id="773">
   <properties>
    <property name="walkInId" value="mainMap"/>
-   <property name="x" type="int" value="16"/>
-   <property name="y" type="int" value="8"/>
+   <property name="x" type="int" value="35"/>
+   <property name="y" type="int" value="9"/>
   </properties>
  </tile>
  <tile id="804">

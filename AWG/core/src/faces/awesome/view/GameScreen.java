@@ -13,11 +13,14 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import faces.awesome.AwesomeGame;
 import faces.awesome.controllers.GameCtrl;
 import faces.awesome.model.WorldMap;
+
+import static faces.awesome.AwesomeGame.TILE_SIZE;
 
 public class GameScreen implements Screen {
 
@@ -43,7 +46,7 @@ public class GameScreen implements Screen {
         gamePort.apply();
 
         this.world = world;
-        mapRenderer = new OrthogonalTiledMapRenderer(world.getCurrent());
+        refetchMap();
 
         //tmp
         sprBatch = new SpriteBatch();
@@ -63,13 +66,16 @@ public class GameScreen implements Screen {
 
     // render-logic here
     public void update(float delta) {
+        refetchMap();
+        camera.position.x = ((world.getMapPosition().getX() * 32) + 16) * TILE_SIZE;
+        camera.position.y = ((world.getMapPosition().getY() * 16) + 8) * TILE_SIZE;
+
         camera.update();
         mapRenderer.setView(camera);
     }
 
     @Override
     public void render(float delta) {
-        refetchMap();
         //System.out.println("x: " + game.playerCharacter.getPos().getX() + " y: " + game.playerCharacter.getPos().getY());
         update(delta);
         // RGB(0, 0, 0, 1) = black
@@ -79,7 +85,7 @@ public class GameScreen implements Screen {
         mapRenderer.render();
 
         sprBatch.begin();
-        spr.setPosition(game.player.getPos().getX() * AwesomeGame.TILE_SIZE, game.player.getPos().getY() * AwesomeGame.TILE_SIZE);
+        spr.setPosition((game.player.getPos().getX() % 32) * TILE_SIZE, (game.player.getPos().getY() % 16) * TILE_SIZE);
         spr.draw(sprBatch);
         sprBatch.end();
     }
