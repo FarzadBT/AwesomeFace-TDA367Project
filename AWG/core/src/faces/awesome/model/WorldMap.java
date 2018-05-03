@@ -46,7 +46,6 @@ public class WorldMap {
 
         setCurrentMap(MapStorage.LoadMap(walkInId));
 
-
     }
 
 

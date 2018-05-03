@@ -1431,4 +1431,19 @@
    <property name="walkInId" value="smallHouse"/>
   </properties>
  </tile>
+ <tile id="773">
+  <properties>
+   <property name="walkInId" value="mainMap"/>
+  </properties>
+ </tile>
+ <tile id="804">
+  <properties>
+   <property name="walkInId" value="mediumHouse"/>
+  </properties>
+ </tile>
+ <tile id="836">
+  <properties>
+   <property name="walkInId" value="bigHouse"/>
+  </properties>
+ </tile>
 </tileset>

@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
+
 public class Tiles {
 
 
@@ -28,6 +29,7 @@ public class Tiles {
     }
 
 
+
     public static String getWalkInId (Map tiledMap, int x, int y) {
 
         for (MapLayer layer :  tiledMap.getLayers()) {
@@ -49,7 +51,6 @@ public class Tiles {
                 }
             }
         }
-
         return null;
     }
 
