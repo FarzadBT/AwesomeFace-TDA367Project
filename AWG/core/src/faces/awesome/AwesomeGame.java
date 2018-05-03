@@ -52,7 +52,7 @@ public class AwesomeGame extends Game {
         world = new WorldMap((TiledMap) map);
 
         //maps = new MapStorage();
-        MapStorage.AddMap("Main", (TiledMap) map);
+        MapStorage.AddMap("mainMap", (TiledMap) map);
         MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/smallHouse.tmx"));
 
         //maps.AddMap("Main", mapp);

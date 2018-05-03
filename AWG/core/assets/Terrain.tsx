@@ -1429,11 +1429,15 @@
  <tile id="772">
   <properties>
    <property name="walkInId" value="smallHouse"/>
+   <property name="x" type="int" value="17"/>
+   <property name="y" type="int" value="8"/>
   </properties>
  </tile>
  <tile id="773">
   <properties>
    <property name="walkInId" value="mainMap"/>
+   <property name="x" type="int" value="16"/>
+   <property name="y" type="int" value="8"/>
   </properties>
  </tile>
  <tile id="804">

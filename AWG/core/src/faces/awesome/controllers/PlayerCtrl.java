@@ -21,11 +21,21 @@ public class PlayerCtrl {
 
         Position newPosition = player.getPos().movePos(dx, dy);
 
-        world.setNewMap(newPosition.getX(), newPosition.getY());
+        Position worldPos = world.setNewMap(newPosition.getX(), newPosition.getY());
 
         boolean solid = world.isSolid(newPosition.getX(), newPosition.getY());
 
-        player.move(dx, dy, solid);
+        if ( worldPos != null ) {
+
+            player.move(worldPos.getX()-player.getPos().getX(), worldPos.getY()-player.getPos().getY(), false);
+
+        } else {
+
+            player.move(dx, dy, solid);
+
+        }
+
+
     }
 }
 

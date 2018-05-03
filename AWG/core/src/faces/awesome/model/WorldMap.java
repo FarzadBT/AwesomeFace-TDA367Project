@@ -1,8 +1,5 @@
 package faces.awesome.model;
 
-import com.badlogic.gdx.Gdx;
-import java.nio.file.Paths;
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 
@@ -34,17 +31,17 @@ public class WorldMap {
     }
 
 
-    public void setNewMap (int x, int y) {
+    public Position setNewMap (int x, int y) {
 
-        String walkInId = Tiles.getWalkInId(currentMap, x, y);
+        WorldPosition worldPosition = Tiles.getWorldPosition(currentMap, x, y);
 
-        if (walkInId == null) {
-            return;
+        if (worldPosition == null) {
+            return null;
         }
 
-        System.out.println(1);
+        setCurrentMap(MapStorage.LoadMap(worldPosition.getMap()));
 
-        setCurrentMap(MapStorage.LoadMap(walkInId));
+        return new Position(worldPosition.getX(), worldPosition.getY());
 
     }
 

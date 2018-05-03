@@ -30,7 +30,7 @@ public class Tiles {
 
 
 
-    public static String getWalkInId (Map tiledMap, int x, int y) {
+    public static WorldPosition getWorldPosition (Map tiledMap, int x, int y) {
 
         for (MapLayer layer :  tiledMap.getLayers()) {
 
@@ -43,9 +43,15 @@ public class Tiles {
 
                     String id = cell.getTile().getProperties().get("walkInId", null, null);
 
+
                     if ( id != null ) {
 
-                        return id;
+                        int newX = cell.getTile().getProperties().get("x", 0, null);
+
+                        int newY = cell.getTile().getProperties().get("y", 0, null);
+
+
+                        return new WorldPosition(newX, newY, id);
 
                     }
                 }
