@@ -1,5 +1,7 @@
 package faces.awesome.model;
 
+import java.util.ArrayList;
+
 public class Enemy extends Character {
 
     public Enemy(Position pos){
@@ -7,7 +9,7 @@ public class Enemy extends Character {
     }
 
 
-    protected void attack(Character other) {
+    public void attack() {
 
     }
 
@@ -16,6 +18,24 @@ public class Enemy extends Character {
 
 
     }
+
+    /*
+    public ArrayList<Position> getTargetTiles(Character Char){
+
+        ArrayList<Position> targets = new ArrayList<>();
+        Position origin = Char.getPos();
+
+        if(Char.getFacing().equals(Facing.NORTH)){
+            targets.add(new Position(origin.getX()-1,origin.getY()+1));
+            targets.add(new Position(origin.getX(), origin.getY()+1));
+            targets.add(new Position(origin.getX()+1,origin.getY()+1));
+        }
+        else if(Char.getFacing().equals(Facing.EAST)){
+            targets.add(new Position(origin.getX()+1, origin.getY()+1));
+            targets.add()
+        }
+    }
+    */
 
 
 }
