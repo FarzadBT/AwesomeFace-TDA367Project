@@ -25,7 +25,7 @@ public class AwesomeGame extends Game {
 
     //public TiledMap map;
 
-    public PlayerCtrl playerCtrl;
+    //public PlayerCtrl playerCtrl;
 
     //WorldMap worlds;
     //MapStorage maps;
@@ -35,11 +35,11 @@ public class AwesomeGame extends Game {
     public void create() {
         // setup model here.
 
-        int w = Gdx.graphics.getWidth();
-        int h = Gdx.graphics.getHeight();
+       // int w = Gdx.graphics.getWidth();
+        // int h = Gdx.graphics.getHeight();
 
-//        Map mapp = new TmxMapLoader().load("core/assets/theMap.tmx");
-//        world = new GameWorld(mapp);
+        Map mapp = new TmxMapLoader().load("core/assets/theMap.tmx");
+        world = new GameWorld(mapp);
 
         //Map maps = new TmxMapLoader().load("core/assets/theMap.tmx");
 

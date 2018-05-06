@@ -31,7 +31,6 @@ public class GameScreen implements Screen {
 
     private GameCtrl gameController;
     private PlayerCtrl playerCtrl;
-    private GameWorld world;
 
     //tmp fields
 
@@ -75,16 +74,11 @@ public class GameScreen implements Screen {
 
         character = new UICharacter(new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2)));
 
-        gameController = new GameCtrl(game.playerCtrl, camera);
+        playerCtrl = new PlayerCtrl( (PlayerCharacter) character.getCharacter(), game.world);
 
-        Map map = new TmxMapLoader().load("core/assets/theMap.tmx");
-        world = new GameWorld(map);
+        gameController = new GameCtrl(playerCtrl, camera);
 
-        playerCtrl = new PlayerCtrl( (PlayerCharacter) character.getCharacter(), world);
         Gdx.input.setInputProcessor(gameController);
-
-
-
     }
 
 
