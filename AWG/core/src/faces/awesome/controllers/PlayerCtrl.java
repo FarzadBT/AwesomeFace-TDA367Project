@@ -2,10 +2,7 @@ package faces.awesome.controllers;
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import faces.awesome.model.GameWorld;
-import faces.awesome.model.PlayerCharacter;
-import faces.awesome.model.Position;
-import faces.awesome.model.WorldMap;
+import faces.awesome.model.*;
 
 public class PlayerCtrl {
 
@@ -26,6 +23,10 @@ public class PlayerCtrl {
         boolean solid = world.isSolid(newPosition.getX(), newPosition.getY());
 
         player.move(dx, dy, solid);
+    }
+
+    public void setFacing(Facing dir) {
+        player.setFacing(dir);
     }
 }
 

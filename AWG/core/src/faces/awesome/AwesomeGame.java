@@ -25,9 +25,6 @@ public class AwesomeGame extends Game {
 
     //public TiledMap map;
 
-
-    public PlayerCharacter player;
-
     public PlayerCtrl playerCtrl;
 
     //WorldMap worlds;
@@ -41,11 +38,8 @@ public class AwesomeGame extends Game {
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
 
-        player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
-
-
-        Map mapp = new TmxMapLoader().load("core/assets/theMap.tmx");
-        world = new GameWorld(mapp);
+//        Map mapp = new TmxMapLoader().load("core/assets/theMap.tmx");
+//        world = new GameWorld(mapp);
 
         //Map maps = new TmxMapLoader().load("core/assets/theMap.tmx");
 
@@ -56,7 +50,7 @@ public class AwesomeGame extends Game {
         //maps = new MapStorage();
         //maps.AddMap("Main", mapp);
 
-        playerCtrl = new PlayerCtrl(player, world);
+        //playerCtrl = new PlayerCtrl(player, world);
 
         //Shouldn't be here, it's just here temporarily.
         //Gdx.input.setInputProcessor(new GameCtrl(playerCtrl));
