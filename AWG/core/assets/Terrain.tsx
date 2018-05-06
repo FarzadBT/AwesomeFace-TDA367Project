@@ -1437,17 +1437,35 @@
   <properties>
    <property name="walkInId" value="mainMap"/>
    <property name="x" type="int" value="35"/>
-   <property name="y" type="int" value="9"/>
+   <property name="y" type="int" value="8"/>
   </properties>
  </tile>
  <tile id="804">
   <properties>
    <property name="walkInId" value="mediumHouse"/>
+   <property name="x" type="int" value="17"/>
+   <property name="y" type="int" value="8"/>
+  </properties>
+ </tile>
+ <tile id="805">
+  <properties>
+   <property name="walkInId" value="mainMap"/>
+   <property name="x" type="int" value="44"/>
+   <property name="y" type="int" value="7"/>
   </properties>
  </tile>
  <tile id="836">
   <properties>
    <property name="walkInId" value="bigHouse"/>
+   <property name="x" type="int" value="21"/>
+   <property name="y" type="int" value="10"/>
+  </properties>
+ </tile>
+ <tile id="837">
+  <properties>
+   <property name="walkInId" value="mainMap"/>
+   <property name="x" type="int" value="55"/>
+   <property name="y" type="int" value="3"/>
   </properties>
  </tile>
 </tileset>
