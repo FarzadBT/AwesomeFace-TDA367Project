@@ -11,7 +11,7 @@ public class Enemy extends Character {
 
 
     public Enemy(Position pos, PlayerCharacter player){
-        super(pos, 5, 15, 15);
+        super(pos, 5, 15);
         this.player = player;
     }
 
