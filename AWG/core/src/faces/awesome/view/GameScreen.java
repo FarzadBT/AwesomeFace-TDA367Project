@@ -12,6 +12,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import faces.awesome.AwesomeGame;
@@ -49,6 +51,8 @@ public class GameScreen implements Screen {
     private SpriteBatch sprBatch;
     private Sprite spr;
     private Texture texture;
+
+    private float elapsedTime;
 
     public GameScreen(final AwesomeGame game) {
         this.game = game;
@@ -95,7 +99,18 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        System.out.println("x: "+character.getCharacter().getPos().getX() * TILE_SIZE);
+
+        // test stuff
+
+        Vector3 camCopy = camera.position.cpy();
+        Vector3 target = new Vector3(new Vector2( 1504f, 256f), 0);
+        camera.position.set(camCopy.lerp(camCopy.lerp(target.cpy(), 0.1f), 0));
+
+        // test stuff
+
+
+
+        System.out.println("y: "+character.getCharacter().getPos().getY() * TILE_SIZE);
         //System.out.println("y: "+game.player.getPos().getY() * AwesomeGame.TILE_SIZE);
 
         update(delta);
@@ -106,6 +121,7 @@ public class GameScreen implements Screen {
         mapRenderer.render();
 
         sprBatch.begin();
+        sprBatch.setProjectionMatrix(camera.combined);
         sprBatch.draw(animDefs.getCharacterStandingUp(), character.getCharacter().getPos().getX() * TILE_SIZE, character.getCharacter().getPos().getY() * TILE_SIZE);
         //spr.setPosition(game.player.getPos().getX() * AwesomeGame.TILE_SIZE, game.player.getPos().getY() * AwesomeGame.TILE_SIZE);
         //spr.draw(sprBatch);

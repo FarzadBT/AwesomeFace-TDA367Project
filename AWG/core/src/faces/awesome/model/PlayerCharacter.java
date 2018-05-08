@@ -6,7 +6,7 @@ import java.lang.*;
 public class PlayerCharacter extends Character {
 
     private Inventory inventory;
-	  private Item slot1, slot2;
+    private Item slot1, slot2;
   
     public PlayerCharacter(Position pos) {
         super(pos, 5, 15, 15);

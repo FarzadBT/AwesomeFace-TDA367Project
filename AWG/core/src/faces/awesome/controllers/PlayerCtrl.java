@@ -18,7 +18,6 @@ public class PlayerCtrl {
 
   
     public void tryMove(int dx, int dy) {
-
         Position newPosition = player.getPos().movePos(dx, dy);
         boolean solid = world.isSolid(newPosition.getX(), newPosition.getY());
 

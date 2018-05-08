@@ -6,11 +6,13 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import faces.awesome.model.Facing;
+import faces.awesome.view.UICharacter;
 
 public class GameCtrl implements InputProcessor {
 
     PlayerCtrl playerCtrl;
     OrthographicCamera camera;
+
 
     public GameCtrl(PlayerCtrl playerCtrl, OrthographicCamera camera) {
         this.playerCtrl = playerCtrl;
