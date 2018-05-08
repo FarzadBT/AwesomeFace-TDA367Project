@@ -3,21 +3,65 @@ package faces.awesome.model;
 import com.sun.org.apache.bcel.internal.generic.SWITCH;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Enemy extends Character {
 
     PlayerCharacter player;
+
 
     public Enemy(Position pos, PlayerCharacter player){
         super(pos, 5, 15, 15);
         this.player = player;
     }
 
+
     protected void move() {
 
 
 
+        //Position newPosition = player.getPos().movePos(dx, dy);
+
+        //boolean solid = world.isSolid(newPosition.getX(), newPosition.getY());
+
+
+
     }
+
+
+
+    public Position randomPosition () {
+
+        Position randPos = new Position(0,0);
+
+        Random randomGenerator = new Random();
+
+        int randomInt = randomGenerator.nextInt(4) + 1;
+
+
+        if ( randomInt == 1 ) {
+
+            randPos = new Position( 1, 0);
+
+        } else if ( randomInt == 2 ) {
+
+            randPos = new Position( 0, 1);
+
+        } else if (  randomInt == 3 ) {
+
+            randPos = new Position( -1, 0);
+
+        } else if ( randomInt == 4 ) {
+
+            randPos = new Position( 0, -1);
+
+        }
+
+
+        return randPos;
+
+    }
+
 
 
     public ArrayList<Position> getTargets(){
