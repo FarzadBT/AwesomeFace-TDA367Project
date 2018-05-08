@@ -19,23 +19,32 @@ public class Enemy extends Character {
 
     }
 
-    /*
-    public ArrayList<Position> getTargetTiles(Character Char){
 
-        ArrayList<Position> targets = new ArrayList<>();
-        Position origin = Char.getPos();
+    public ArrayList<Position> getTargets(){
 
-        if(Char.getFacing().equals(Facing.NORTH)){
-            targets.add(new Position(origin.getX()-1,origin.getY()+1));
-            targets.add(new Position(origin.getX(), origin.getY()+1));
-            targets.add(new Position(origin.getX()+1,origin.getY()+1));
+        ArrayList<Position> targets = new ArrayList<>(3);
+        Position origin = this.getPos();
+
+        if(getFacing().equals(Facing.NORTH)){
+            for(int i = -1; i < 1; i++){
+                targets.add(new Position(origin.getX()+i, origin.getY()+1));
+            }
+        } else if(getFacing().equals(Facing.EAST)){
+            for(int i = -1; i < 1; i++){
+                targets.add(new Position(origin.getX()+1, origin.getY()+1));
+            }
+        } else if(getFacing().equals(Facing.SOUTH)){
+            for(int i = -1; i < 1; i++){
+                targets.add(new Position(origin.getX()+1, origin.getY()-1));
+            }
+        } else if(getFacing().equals((Facing.WEST))){
+            for(int i = -1; i < 1; i++){
+                targets.add(new Position(origin.getX()-1, origin.getY()+1));
+            }
         }
-        else if(Char.getFacing().equals(Facing.EAST)){
-            targets.add(new Position(origin.getX()+1, origin.getY()+1));
-            targets.add()
-        }
+
+        return targets;
     }
-    */
 
 
 }
