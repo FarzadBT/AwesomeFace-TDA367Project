@@ -22,11 +22,9 @@ public class Segment {
         return enemies;
     }
 
-
-
-    public void checkTargets(){
-        for(Enemy e : enemies){
-            e.getTargets();
+    public void enemyAttack(){
+        for (Enemy e : enemies){
+            e.attack();
         }
     }
 
