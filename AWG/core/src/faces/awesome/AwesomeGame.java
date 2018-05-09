@@ -6,10 +6,7 @@ import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import faces.awesome.controllers.PlayerCtrl;
-import faces.awesome.model.MapStorage;
-import faces.awesome.model.PlayerCharacter;
-import faces.awesome.model.Position;
-import faces.awesome.model.WorldMap;
+import faces.awesome.model.*;
 import faces.awesome.view.GameScreen;
 
 public class AwesomeGame extends Game {
@@ -27,6 +24,8 @@ public class AwesomeGame extends Game {
     public PlayerCharacter player;
 
     public PlayerCtrl playerCtrl;
+
+    public Enemy enemy;
 
     public WorldMap world;
     //MapStorage maps;
@@ -58,6 +57,8 @@ public class AwesomeGame extends Game {
         MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/bigHouse.tmx"));
 
         //maps.AddMap("Main", mapp);
+
+        enemy = new Enemy(new Position(3,2), player, world);
 
 
         playerCtrl = new PlayerCtrl(player, world);

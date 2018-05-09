@@ -8,7 +8,6 @@ public class PlayerCtrl {
 
     private final WorldMap world;
     private PlayerCharacter player;
-    //private WorldMap world;
 
   
     public PlayerCtrl(PlayerCharacter player, WorldMap world) {

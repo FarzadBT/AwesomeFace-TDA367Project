@@ -4,26 +4,50 @@ import com.sun.org.apache.bcel.internal.generic.SWITCH;
 
 import java.util.ArrayList;
 import java.util.Random;
+import faces.awesome.model.WorldMap;
 
 public class Enemy extends Character {
 
     PlayerCharacter player;
+    private final WorldMap world;
 
 
-    public Enemy(Position pos, PlayerCharacter player){
+    public Enemy(Position pos, PlayerCharacter player, WorldMap world){
         super(pos, 5, 15);
         this.player = player;
+        this.world = world;
     }
 
 
     protected void move() {
 
 
+        //Först hämta en random position, som ger en dx och dy
+        Position randPosition = randomPosition();
 
-        //Position newPosition = player.getPos().movePos(dx, dy);
 
-        //boolean solid = world.isSolid(newPosition.getX(), newPosition.getY());
+        //Lägg in den positionen som en newPosition
+        Position newPosition = getPos().movePos(randPosition.getX(), randPosition.getY());
 
+
+        //Kolla om den nya positionen är solid eller inte
+        boolean solid = world.isSolid(newPosition.getX(), newPosition.getY());
+
+
+        //Kolla om den nya positionen är occupide eller inte
+
+
+
+        //Kolla om positionen är inom ramen av var fienden får gå runt?
+
+
+
+        //Om det inte finns något som protesterar så flytta på sig
+        if (!solid) {
+
+            world.tryMovePosition(getPos(), newPosition);
+
+        }
 
 
     }
@@ -56,7 +80,6 @@ public class Enemy extends Character {
             randPos = new Position( 0, -1);
 
         }
-
 
         return randPos;
 

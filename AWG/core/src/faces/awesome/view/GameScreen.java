@@ -37,6 +37,13 @@ public class GameScreen implements Screen {
     private Sprite spr;
     private Texture texture;
 
+    //tmp
+    private SpriteBatch sprBat;
+    private Sprite sprite;
+    private Texture text;
+
+
+
     public GameScreen(final AwesomeGame game, WorldMap world) {
         this.game = game;
 
@@ -52,6 +59,13 @@ public class GameScreen implements Screen {
         sprBatch = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("core/assets/linkk.png"));
         spr = new Sprite(texture);
+
+        //enemie
+        sprBat = new SpriteBatch();
+        text = new Texture(Gdx.files.internal("core/assets/linkk.png"));
+        sprite = new Sprite(text);
+
+
 
         gameController = new GameCtrl(game.playerCtrl, camera);
         Gdx.input.setInputProcessor(gameController);
@@ -85,9 +99,15 @@ public class GameScreen implements Screen {
         mapRenderer.render();
 
         sprBatch.begin();
-        spr.setPosition((game.player.getPos().getX() % 32) * TILE_SIZE, (game.player.getPos().getY() % 16) * TILE_SIZE);
+        spr.setPosition((game.player.getPos().getX() % 32) * TILE_SIZE,(game.player.getPos().getY() % 16) * TILE_SIZE);
         spr.draw(sprBatch);
         sprBatch.end();
+
+        sprBat.begin();
+        sprite.setPosition((game.enemy.getPos().getX() % 32) * TILE_SIZE,(game.enemy.getPos().getY() % 32) * TILE_SIZE);
+        sprite.draw(sprBat);
+        sprBat.end();
+
     }
 
     public void refetchMap () {
