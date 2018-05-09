@@ -90,6 +90,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
+        game.enemy.move();
         //System.out.println("x: " + game.playerCharacter.getPos().getX() + " y: " + game.playerCharacter.getPos().getY());
         update(delta);
         // RGB(0, 0, 0, 1) = black
@@ -107,6 +109,8 @@ public class GameScreen implements Screen {
         sprite.setPosition((game.enemy.getPos().getX() % 32) * TILE_SIZE,(game.enemy.getPos().getY() % 32) * TILE_SIZE);
         sprite.draw(sprBat);
         sprBat.end();
+
+        System.out.println("x: " + game.enemy.getPos().getX() + "  y: " + game.enemy.getPos().getY());
 
     }
 

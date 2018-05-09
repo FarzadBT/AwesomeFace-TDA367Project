@@ -19,7 +19,7 @@ public class Enemy extends Character {
     }
 
 
-    protected void move() {
+    public void move() {
 
 
         //Först hämta en random position, som ger en dx och dy
