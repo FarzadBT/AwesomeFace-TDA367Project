@@ -108,8 +108,6 @@ public class GameScreen implements Screen {
 
         // test stuff
 
-
-
         System.out.println("y: "+character.getCharacter().getPos().getY() * TILE_SIZE);
         //System.out.println("y: "+game.player.getPos().getY() * AwesomeGame.TILE_SIZE);
 

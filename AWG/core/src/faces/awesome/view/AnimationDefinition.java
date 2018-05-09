@@ -41,7 +41,6 @@ public class AnimationDefinition {
     private Array<TextureRegion> setupRunningFrames(AtlasRegion region, int x, int y, int width, int height, int frameCount) {
         Array<TextureRegion> frames = new Array<>();
         for (int i = 1; i < frameCount; i++) {
-            new TextureRegion();
             TextureRegion tr = new TextureRegion(region, i * x, y, width, height);
             frames.add(tr);
         }
