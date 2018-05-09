@@ -110,8 +110,6 @@ public class GameScreen implements Screen {
         sprite.draw(sprBat);
         sprBat.end();
 
-        System.out.println("x: " + game.enemy.getPos().getX() + "  y: " + game.enemy.getPos().getY());
-
     }
 
     public void refetchMap () {

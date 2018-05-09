@@ -1,15 +1,13 @@
 package faces.awesome.model;
 
-import com.sun.org.apache.bcel.internal.generic.SWITCH;
-
 import java.util.ArrayList;
 import java.util.Random;
-import faces.awesome.model.WorldMap;
 
 public class Enemy extends Character {
 
     PlayerCharacter player;
     private final WorldMap world;
+    Random randomGenerator = new Random();
 
 
     public Enemy(Position pos, PlayerCharacter player, WorldMap world){
@@ -20,6 +18,13 @@ public class Enemy extends Character {
 
 
     public void move() {
+
+        //Rör sig 1 gång på 30 gånger
+        int randInt = randomGenerator.nextInt(30);
+
+        if ( randInt > 1 ) {
+            return;
+        }
 
 
         //Först hämta en random position, som ger en dx och dy
@@ -34,18 +39,18 @@ public class Enemy extends Character {
         boolean solid = world.isSolid(newPosition.getX(), newPosition.getY());
 
 
-        //Kolla om den nya positionen är occupide eller inte
-
+        //TODO Kolla om den nya positionen är occupied eller inte
+        boolean occupied = false;
 
 
         //Kolla om positionen är inom ramen av var fienden får gå runt?
-
+        boolean withInBorder = checkWithInBorder(newPosition);
 
 
         //Om det inte finns något som protesterar så flytta på sig
-        if (!solid) {
+        if (!solid && !occupied && withInBorder) {
 
-            world.tryMovePosition(getPos(), newPosition);
+            setPos(newPosition);
 
         }
 
@@ -53,12 +58,25 @@ public class Enemy extends Character {
     }
 
 
+    private boolean checkWithInBorder(Position position ) {
 
-    public Position randomPosition () {
+        int xMin = (this.getPos().getX() / 32) * 32;
+        int yMin = (this.getPos().getY() / 16) * 16;
+
+        int xMax = ((this.getPos().getX() / 32) + 1) * 32;
+        int yMax = ((this.getPos().getY() / 16) + 1) * 16;
+
+        boolean withInX = position.getX() < xMax && position.getX() > xMin;
+        boolean withInY = position.getY() < yMax && position.getY() > yMin;
+
+        return withInX && withInY;
+
+    }
+
+
+    private Position randomPosition() {
 
         Position randPos = new Position(0,0);
-
-        Random randomGenerator = new Random();
 
         int randomInt = randomGenerator.nextInt(4) + 1;
 
@@ -66,18 +84,22 @@ public class Enemy extends Character {
         if ( randomInt == 1 ) {
 
             randPos = new Position( 1, 0);
+            setFacing(Facing.EAST);
 
         } else if ( randomInt == 2 ) {
 
             randPos = new Position( 0, 1);
+            setFacing(Facing.NORTH);
 
         } else if (  randomInt == 3 ) {
 
             randPos = new Position( -1, 0);
+            setFacing(Facing.WEST);
 
         } else if ( randomInt == 4 ) {
 
             randPos = new Position( 0, -1);
+            setFacing(Facing.SOUTH);
 
         }
 
