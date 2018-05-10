@@ -1,5 +1,7 @@
 package faces.awesome.model;
 
+import javafx.geometry.Pos;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,18 @@ public class MapSegment {
             }
         }
     }
+
+    public void getEnemiesInSegment(){
+        for(Position p : PositionsInSegment){
+            for(Enemy e : EnemiesInWorld){
+                if(e.getPos().equals(p)){
+                    EnemiesInSegment.add(e);
+                }
+            }
+        }
+    }
+
+    
 
 
 
