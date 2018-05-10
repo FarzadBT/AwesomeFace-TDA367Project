@@ -11,7 +11,7 @@ public class Enemy extends Character {
 
 
     public Enemy(Position pos, PlayerCharacter player, WorldMap world){
-        super(pos, 5, 15);
+        super(pos, 2, 15);
         this.player = player;
         this.world = world;
     }
@@ -40,6 +40,9 @@ public class Enemy extends Character {
 
 
         //TODO Kolla om den nya positionen är occupied eller inte
+        //TODO Behöver en metod som kollar igenom listan med fiender, kollar deras positioner och om någon
+        //TODO stämmer med positionen man skickar in så är den occupied och därmed returnerar true, annars false
+        //TODO Typ: public boolean isOccupied ( Position position ) {}
         boolean occupied = false;
 
 
@@ -52,6 +55,62 @@ public class Enemy extends Character {
 
             setPos(newPosition);
 
+        }
+
+    }
+
+
+
+    public void attack(){
+
+
+        //TODO Behöver en metod som utifrån position och facing kollar om det står en player inom attackrangen
+        //TODO och ifall det står en player där så returnera true, annars false
+        //TODO Typ: public boolean checkAttackRange (Position position, Facing facing) {}
+        /*boolean shouldAttack = Segment.checkAttackRange(getPos());
+
+
+        if ( !shouldAttack ) {
+
+            return;
+
+        }
+
+
+        for ( int i = 0; i < 3; i++ ) {
+
+
+
+
+
+
+
+
+
+        }*/
+
+
+
+
+
+
+        switch(facing){
+            case NORTH:
+                if(Math.abs(player.getPos().getX() - this.getPos().getX()) == 1 && player.getPos().getY() - this.getPos().getY() == 1){
+                    player.decreaseHealth(baseDamage);
+                }
+            case EAST:
+                if(player.getPos().getX() - this.getPos().getX() == 1 && Math.abs(player.getPos().getY() - this.getPos().getY()) == 1){
+                    player.decreaseHealth(baseDamage);
+                }
+            case SOUTH:
+                if(player.getPos().getY() - this.getPos().getY() == -1 && Math.abs(player.getPos().getX() - this.getPos().getX()) == 1){
+                    player.decreaseHealth(baseDamage);
+                }
+            case WEST:
+                if(player.getPos().getX() - this.getPos().getX() == -1 && Math.abs(player.getPos().getY() - this.getPos().getY()) == 1){
+                    player.decreaseHealth(baseDamage);
+                }
         }
 
 
@@ -133,27 +192,6 @@ public class Enemy extends Character {
         }
 
         return targets;
-    }
-
-    public void attack(){
-        switch(facing){
-            case NORTH:
-                if(Math.abs(player.getPos().getX() - this.getPos().getX()) == 1 && player.getPos().getY() - this.getPos().getY() == 1){
-                    player.decreaseHealth(baseDamage);
-                }
-            case EAST:
-                if(player.getPos().getX() - this.getPos().getX() == 1 && Math.abs(player.getPos().getY() - this.getPos().getY()) == 1){
-                    player.decreaseHealth(baseDamage);
-                }
-            case SOUTH:
-                if(player.getPos().getY() - this.getPos().getY() == -1 && Math.abs(player.getPos().getX() - this.getPos().getX()) == 1){
-                    player.decreaseHealth(baseDamage);
-                }
-            case WEST:
-                if(player.getPos().getX() - this.getPos().getX() == -1 && Math.abs(player.getPos().getY() - this.getPos().getY()) == 1){
-                    player.decreaseHealth(baseDamage);
-                }
-        }
     }
 
 

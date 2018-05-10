@@ -81,6 +81,10 @@ public class GameScreen implements Screen {
     // render-logic here
     public void update(float delta) {
         refetchMap();
+
+        game.enemy.move();
+
+
         camera.position.x = ((world.getMapPosition().getX() * 32) + 16) * TILE_SIZE;
         camera.position.y = ((world.getMapPosition().getY() * 16) + 8) * TILE_SIZE;
 
@@ -91,7 +95,6 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
 
-        game.enemy.move();
         //System.out.println("x: " + game.playerCharacter.getPos().getX() + " y: " + game.playerCharacter.getPos().getY());
         update(delta);
         // RGB(0, 0, 0, 1) = black
@@ -105,8 +108,9 @@ public class GameScreen implements Screen {
         spr.draw(sprBatch);
         sprBatch.end();
 
+        //Funkar inte riktigt med den setPosition som är nu
         sprBat.begin();
-        sprite.setPosition((game.enemy.getPos().getX() % 32) * TILE_SIZE,(game.enemy.getPos().getY() % 32) * TILE_SIZE);
+        sprite.setPosition((game.enemy.getPos().getX() % 32) * TILE_SIZE,(game.enemy.getPos().getY() % 16) * TILE_SIZE);
         sprite.draw(sprBat);
         sprBat.end();
 
