@@ -3,15 +3,18 @@ package faces.awesome.model.item.items.consumables;
 import faces.awesome.model.Facing;
 import faces.awesome.model.Position;
 import faces.awesome.model.item.BaseConsumable;
+import faces.awesome.model.objects.object.BombObject;
 
 /**
  * Created by Mr Cornholio on 20/04/2018.
  */
 public class Bomb extends BaseConsumable {
+    private BombObject bomb;
 
-    public Bomb(int maxQuantity) {
+    public Bomb(int quantity) {
         this.name = "Bomb";
-        this.maxQuantity = maxQuantity;
+        maxQuantity = 10;
+        this.quantity = (quantity <= maxQuantity) ? quantity : maxQuantity;
     }
 
     /**
@@ -21,6 +24,31 @@ public class Bomb extends BaseConsumable {
      */
     @Override
     public void use(Position pos, Facing facing) {
-        decrement();
+        if(quantity > 0) {
+            decrement();
+            createObject(pos, facing);
+        }
+    }
+
+    /**
+     * help method, creates a GameObject when you use a bomb
+     * @param pos
+     * @param facing
+     */
+    private void createObject(Position pos, Facing facing) {
+        switch (facing) {
+            case NORTH:
+                bomb = new BombObject(pos.movePos(0, 1));
+                break;
+            case SOUTH:
+                bomb = new BombObject(pos.movePos(0, -1));
+                break;
+            case EAST:
+                bomb = new BombObject(pos.movePos(1, 0));
+                break;
+            case WEST:
+                bomb = new BombObject(pos.movePos(-1, 0));
+                break;
+        }
     }
 }

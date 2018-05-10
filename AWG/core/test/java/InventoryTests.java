@@ -1,10 +1,9 @@
-package java;
-
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.model.item.items.consumables.Bomb;
 import faces.awesome.model.item.items.instants.SingleHeart;
 import faces.awesome.model.item.items.permanents.Hammer;
+import faces.awesome.model.objects.pickup.BombPickupSmall;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,15 +12,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Created by Mr Cornholio on 24/04/2018.
  */
 public class InventoryTests {
-    PlayerCharacter p;
+    PlayerCharacter pc;
+    BombPickupSmall bs;
     Bomb b;
     Hammer h;
     SingleHeart sh;
 
     @BeforeEach
     public void init() {
-        p = new PlayerCharacter(new Position(0,0));
-        b = new Bomb(20);
+        pc = new PlayerCharacter(new Position(0,0));
+        bs = new BombPickupSmall(new Position(0,0));
+        b = new Bomb(1);
         h = new Hammer();
         sh = new SingleHeart();
     }
@@ -29,37 +30,42 @@ public class InventoryTests {
 
     @Test
     public void testAddConsumable() {
-        p.addToInventory(b);
-        assertTrue(p.getInventory().isInInventory(b));
+        bs.onPickup(pc);
+        assertTrue(pc.getInventory().isInInventory("Bomb"));
+        b = (Bomb) pc.getInventory().getItem(b.getName());
+        assertTrue(b.getQuantity() == 1);
 
-        assertTrue(b.getQuantity() == 1);
-        p.addToInventory(b);
+        bs.onPickup(pc);
         assertTrue(b.getQuantity() == 2);
-        b.use(p.getPos(), p.getFacing());
+        b.use(pc.getPos(), pc.getFacing());
         assertTrue(b.getQuantity() == 1);
+        b.use(pc.getPos(), pc.getFacing());
+        assertTrue(b.getQuantity() == 0);
+        b.use(pc.getPos(), pc.getFacing());
+        assertTrue(b.getQuantity() == 0);
     }
 
     @Test
     public void testAddPermanent() {
-        p.addToInventory(h);
-        assertTrue(p.getInventory().isInInventory(h));
+        pc.addToInventory(h);
+        assertTrue(pc.getInventory().isInInventory(h.getName()));
 
-        assertTrue(p.getInventory().getSize() == 1);
-        p.addToInventory(h);
-        assertTrue(p.getInventory().getSize() == 1);
+        assertTrue(pc.getInventory().getSize() == 1);
+        pc.addToInventory(h);
+        assertTrue(pc.getInventory().getSize() == 1);
     }
 
     @Test
     public void testInstant() {
-        p.addToInventory(sh);
-        assertTrue(!p.getInventory().isInInventory(sh));
-        assertTrue(p.getInventory().getSize() == 0);
-        assertTrue(p.getHealth() == 10);
+        pc.addToInventory(sh);
+        assertTrue(!pc.getInventory().isInInventory(sh.getName()));
+        assertTrue(pc.getInventory().getSize() == 0);
+        assertTrue(pc.getHealth() == 15);
 
-        p.decreaseHealth(5);
-        assertTrue(p.getHealth() == 5);
-        p.addToInventory(sh);
-        assertTrue(p.getHealth() == 6);
+        pc.decreaseHealth(5);
+        assertTrue(pc.getHealth() == 10);
+        pc.addToInventory(sh);
+        assertTrue(pc.getHealth() == 11);
     }
 
 

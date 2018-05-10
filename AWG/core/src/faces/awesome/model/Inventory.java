@@ -21,10 +21,10 @@ public class Inventory {
     public void addToInventory(Item item, PlayerCharacter player) {
         if(item instanceof BaseInstant)
             ((BaseInstant)item).use(player);
-        else if(!isInInventory(item))
+        else if(!isInInventory(item.getName()))
             addNewToInventory(item);
         else if(item instanceof BaseConsumable)
-            ((BaseConsumable) item).increment();
+            ((BaseConsumable)(inventory.get(item.getName()))).incrementN(((BaseConsumable) item).getQuantity());
     }
 
     /**
@@ -53,11 +53,11 @@ public class Inventory {
 
     /**
      * Finds out if an item is currently in the inventory
-     * @param item
+     * @param name
      * @return true if item is in inventory, false if otherwise
      */
-    public boolean isInInventory(Item item) {
-        return inventory.containsKey(item.getName());
+    public boolean isInInventory(String name) {
+        return inventory.containsKey(name);
     }
 
     /**
@@ -66,5 +66,11 @@ public class Inventory {
      */
     public int getSize() {
         return inventory.size();
+    }
+
+    public Item getItem(String name) {
+        if(isInInventory(name))
+            return inventory.get(name);
+        return null;
     }
 }
