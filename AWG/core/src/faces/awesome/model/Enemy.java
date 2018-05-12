@@ -5,15 +5,18 @@ import java.util.Random;
 
 public class Enemy extends Character {
 
-    PlayerCharacter player;
-    private final WorldMap world;
+    PlayerCharacter player;     //Ta bort player
+    private final WorldMap world;       //Varför är den så? Räcker med WorldMap world;?
     Random randomGenerator = new Random();
+
+    //Segment segment;          Ska ha?
 
 
     public Enemy(Position pos, PlayerCharacter player, WorldMap world){
         super(pos, 2, 15);
-        this.player = player;
-        this.world = world;
+        health = maxHealth;
+        this.player = player;           //Helst ta bort
+        this.world = world;             //Behövs det?
     }
 
 
@@ -67,6 +70,7 @@ public class Enemy extends Character {
         //TODO Behöver en metod som utifrån position och facing kollar om det står en player inom attackrangen
         //TODO och ifall det står en player där så returnera true, annars false
         //TODO Typ: public boolean checkAttackRange (Position position, Facing facing) {}
+
         /*boolean shouldAttack = Segment.checkAttackRange(getPos());
 
 
@@ -76,43 +80,17 @@ public class Enemy extends Character {
 
         }
 
-
-        for ( int i = 0; i < 3; i++ ) {
-
+        segment.attackPlayer(baseDamage);
 
 
-
-
-
-
-
-
-        }*/
-
-
-
-
-
-
-        switch(facing){
-            case NORTH:
-                if(Math.abs(player.getPos().getX() - this.getPos().getX()) == 1 && player.getPos().getY() - this.getPos().getY() == 1){
-                    player.decreaseHealth(baseDamage);
-                }
-            case EAST:
-                if(player.getPos().getX() - this.getPos().getX() == 1 && Math.abs(player.getPos().getY() - this.getPos().getY()) == 1){
-                    player.decreaseHealth(baseDamage);
-                }
-            case SOUTH:
-                if(player.getPos().getY() - this.getPos().getY() == -1 && Math.abs(player.getPos().getX() - this.getPos().getX()) == 1){
-                    player.decreaseHealth(baseDamage);
-                }
-            case WEST:
-                if(player.getPos().getX() - this.getPos().getX() == -1 && Math.abs(player.getPos().getY() - this.getPos().getY()) == 1){
-                    player.decreaseHealth(baseDamage);
-                }
+        Inne i Segmentklassen:
+        public void attackPlayer (int damage) {
+            player.decreaseHealth(damage);
         }
 
+
+
+        */
 
     }
 
@@ -167,7 +145,7 @@ public class Enemy extends Character {
     }
 
 
-
+    /*
     public ArrayList<Position> getTargets(){
 
         ArrayList<Position> targets = new ArrayList<>(3);
@@ -193,6 +171,7 @@ public class Enemy extends Character {
 
         return targets;
     }
+    */
 
 
 }
