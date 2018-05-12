@@ -42,4 +42,7 @@ public class Position {
         return "Position { x = " + x + ", y = " + y + " }";
     }
 
+    public boolean equals(Position other){
+        return this.getX() == other.getX() && this.getY() == other.getY();
+    }
 }

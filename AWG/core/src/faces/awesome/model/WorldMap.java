@@ -77,4 +77,6 @@ public class WorldMap {
         this.mapPosition = new Position(playerPos.getX()/32, playerPos.getY()/16);
 
     }
+
+
 }
