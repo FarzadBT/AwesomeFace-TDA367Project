@@ -22,11 +22,11 @@ public class Segment {
         return enemies;
     }
 
-    public void enemyAttack(){
+    /*public void enemyAttack(){
         for (Enemy e : enemies){
             e.attack();
         }
-    }
+    }*/
 
 
 

@@ -7,7 +7,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import faces.awesome.controllers.PlayerCtrl;
 import faces.awesome.model.*;
+import faces.awesome.model.Character;
 import faces.awesome.view.GameScreen;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AwesomeGame extends Game {
     public static final int TILE_SIZE = 32;
@@ -15,20 +19,19 @@ public class AwesomeGame extends Game {
     public static final int VIEW_PORT_HEIGHT = 512;
 
 
-    //public GameWorld world;
     // TO-do: instead of having a a HasA depndency, let's just use dependency inject playerCharacter where we need it.
-
-    //public TiledMap map;
-
 
     public PlayerCharacter player;
 
     public PlayerCtrl playerCtrl;
 
+    public MapSegment segment;
+
     public Enemy enemy;
 
     public WorldMap world;
-    //MapStorage maps;
+
+    public List<Character> characterInWorld = new ArrayList<>();
 
 
     @Override
@@ -42,26 +45,26 @@ public class AwesomeGame extends Game {
 
 
         Map map = new TmxMapLoader().load("core/assets/theMap.tmx");
-        //world = new GameWorld(map);
-
-        //Map maps = new TmxMapLoader().load("core/assets/theMap.tmx");
 
 
         //Wraps the TileMap for easier access
         world = new WorldMap((TiledMap) map);
 
-        //maps = new MapStorage();
+        segment = new MapSegment(world, characterInWorld, player);
+
         MapStorage.AddMap("mainMap", (TiledMap) map);
         MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/smallHouse.tmx"));
         MapStorage.AddMap("mediumHouse", new TmxMapLoader().load("core/assets/mediumHouse.tmx"));
         MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/bigHouse.tmx"));
 
-        //maps.AddMap("Main", mapp);
 
-        enemy = new Enemy(new Position(3,2), player, world);
+        enemy = new Enemy(new Position(3,2), segment);
 
 
-        playerCtrl = new PlayerCtrl(player, world);
+        playerCtrl = new PlayerCtrl(player, world, segment);
+
+        characterInWorld.add(enemy);
+        characterInWorld.add(player);
 
 
         this.setScreen(new GameScreen(this, world));

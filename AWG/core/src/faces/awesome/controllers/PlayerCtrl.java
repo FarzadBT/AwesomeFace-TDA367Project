@@ -1,5 +1,6 @@
 package faces.awesome.controllers;
 
+import faces.awesome.model.MapSegment;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.model.WorldMap;
@@ -8,11 +9,13 @@ public class PlayerCtrl {
 
     private final WorldMap world;
     private PlayerCharacter player;
+    private MapSegment segment;
 
   
-    public PlayerCtrl(PlayerCharacter player, WorldMap world) {
+    public PlayerCtrl(PlayerCharacter player, WorldMap world, MapSegment segment) {
         this.player = player;
         this.world = world;
+        this.segment = segment;
     }
 
   
@@ -22,11 +25,15 @@ public class PlayerCtrl {
 
         boolean solid = world.isSolid(newPosition.getX(), newPosition.getY());
 
-        if (!solid) {
+
+        boolean occupied = segment.isOccupied(newPosition);
+
+        if (!solid && !occupied) {
 
             world.tryMovePosition(player.getPos(), newPosition);
 
         }
+
 
         Position worldPos = world.setNewMap(newPosition.getX(), newPosition.getY());
 
@@ -34,11 +41,11 @@ public class PlayerCtrl {
 
             world.setPosition(worldPos);
 
-            player.move(worldPos.getX()-player.getPos().getX(), worldPos.getY()-player.getPos().getY(), false);
+            player.move(worldPos.getX()-player.getPos().getX(), worldPos.getY()-player.getPos().getY(), false, false);
 
         } else {
 
-            player.move(dx, dy, solid);
+            player.move(dx, dy, solid, occupied);
 
         }
 

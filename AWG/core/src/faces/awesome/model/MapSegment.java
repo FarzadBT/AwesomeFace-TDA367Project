@@ -1,6 +1,8 @@
 package faces.awesome.model;
 
-import javafx.geometry.Pos;
+//import javafx.geometry.Pos;
+
+import faces.awesome.AwesomeGame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,24 +13,28 @@ import java.util.List;
 
 
 public class MapSegment {
-    private WorldMap World;
+    private WorldMap world;
     private List<Enemy> EnemiesInWorld;
     private PlayerCharacter player;
+    private AwesomeGame game;
+
+    public List<Character> characterInWorld = new ArrayList<>();
 
     private List<Enemy> EnemiesInSegment = new ArrayList<>();
     private List<Position> PositionsInSegment = new ArrayList<>();
 
-    MapSegment(WorldMap World, List<Enemy> EnemiesInWorld, PlayerCharacter player){
+    public MapSegment(WorldMap World, List<Character> characterInWorld, PlayerCharacter player){
         this.player = player;
-        this.EnemiesInWorld = EnemiesInWorld;
-        this.World = World;
+        this.characterInWorld = characterInWorld;
+        this.world = World;
+
     }
 
 
     //Gets all positions in the current segment. Think of a segment as a 32x16 matrix.
     public void getPositionsInSegment(){
-        for(int i = World.getMapPosition().getX()*32; i < World.getMapPosition().getX()*32; i++){
-            for(int j = World.getMapPosition().getY()*16; j < World.getMapPosition().getX()*16; j++){
+        for(int i = world.getMapPosition().getX()*32; i < world.getMapPosition().getX()*32; i++){
+            for(int j = world.getMapPosition().getY()*16; j < world.getMapPosition().getX()*16; j++){
                 PositionsInSegment.add(new Position(i, j));
             }
         }
@@ -48,29 +54,33 @@ public class MapSegment {
 
 
     //Gets possible target positions for each enemy. Called when enemies attack.
-    public List<Position> getTargets(Enemy attacker){
+    public boolean getTargets(Position position, Facing facing){
         List<Position> targets = new ArrayList<>();
-        Position origin = attacker.getPos();
+        //Position origin = attacker.getPos();
 
-        switch (attacker.getFacing()){
+        switch (facing){
             case NORTH:
                 for(int i = -1; i < 1; i++){
-                    targets.add(new Position(origin.getX()+i, origin.getY()+1));
+                    targets.add(new Position(position.getX()+i, position.getY()+1));
                 }
             case EAST:
                 for(int i = -1; i < 1; i++){
-                    targets.add(new Position(origin.getX()+1, origin.getY()+i));
+                    targets.add(new Position(position.getX()+1, position.getY()+i));
                 }
             case SOUTH:
                 for(int i = -1; i < 1; i++){
-                    targets.add(new Position(origin.getX()+i, origin.getY()-1));
+                    targets.add(new Position(position.getX()+i, position.getY()-1));
                 }
             case WEST:
                 for(int i = -1; i < 1; i++){
-                    targets.add(new Position(origin.getX()-1, origin.getY()+i));
+                    targets.add(new Position(position.getX()-1, position.getY()+i));
                 }
         }
-        return targets;
+
+        boolean checkTargets = targetIsPlayer(targets);
+
+
+        return checkTargets;
     }
 
 
@@ -95,10 +105,24 @@ public class MapSegment {
     }
 
 
+    public boolean isOccupied ( Position position ) {
+
+        for ( Character c : characterInWorld ) {
+
+            if (c.getPos().equals(position)) {
+
+                return true;
+
+            }
+
+        }
+
+        return false;
+    }
 
 
 
-
-
-
+    public boolean isSolid(int x, int y) {
+        return world.isSolid(x, y);
+    }
 }
