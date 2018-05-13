@@ -15,6 +15,7 @@ public class PlayerCtrl {
         this.segment = segment;
     }
 
+    //TODO använda segment istället för world
   
     public void tryMove(int dx, int dy, Facing facing) {
 

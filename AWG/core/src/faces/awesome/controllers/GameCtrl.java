@@ -10,6 +10,7 @@ public class GameCtrl implements InputProcessor {
 
     PlayerCtrl playerCtrl;
     OrthographicCamera camera;
+    int currentKey = 0;
 
     public GameCtrl(PlayerCtrl playerCtrl, OrthographicCamera camera) {
         this.playerCtrl = playerCtrl;
@@ -20,7 +21,6 @@ public class GameCtrl implements InputProcessor {
     public boolean keyDown(int keycode) {
 
         if(keycode == Input.Keys.LEFT) {
-
             playerCtrl.tryMove(-1, 0, Facing.WEST);
 
         }

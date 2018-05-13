@@ -27,11 +27,9 @@ public class AwesomeGame extends Game {
 
     public MapSegment segment;
 
-    public Enemy enemy;
+    public List<Enemy> enemiesInWorld = new ArrayList<>();
 
     public WorldMap world;
-
-    public List<Character> characterInWorld = new ArrayList<>();
 
 
     @Override
@@ -43,14 +41,11 @@ public class AwesomeGame extends Game {
 
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
 
-
         Map map = new TmxMapLoader().load("core/assets/theMap.tmx");
-
 
         //Wraps the TileMap for easier access
         world = new WorldMap((TiledMap) map);
 
-        segment = new MapSegment(world, characterInWorld, player);
 
         MapStorage.AddMap("mainMap", (TiledMap) map);
         MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/smallHouse.tmx"));
@@ -58,13 +53,18 @@ public class AwesomeGame extends Game {
         MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/bigHouse.tmx"));
 
 
-        enemy = new Enemy(new Position(3,2), segment);
+        Enemy enemy = new Enemy(new Position(3,2), this);
+        Enemy enemy1 = new Enemy(new Position(10,4), this);
+        Enemy enemy2 = new Enemy(new Position(20,13), this);
 
+        enemiesInWorld.add(enemy);
+        enemiesInWorld.add(enemy1);
+        enemiesInWorld.add(enemy2);
+
+
+        segment = new MapSegment(world, enemiesInWorld, player);
 
         playerCtrl = new PlayerCtrl(player, world, segment);
-
-        characterInWorld.add(enemy);
-        characterInWorld.add(player);
 
 
         this.setScreen(new GameScreen(this, world));

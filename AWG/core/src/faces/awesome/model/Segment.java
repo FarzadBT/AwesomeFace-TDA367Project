@@ -23,7 +23,7 @@ public class Segment {
     }
 
     /*public void enemyAttack(){
-        for (Enemy e : enemies){
+        for (Enemy e : enemiesInWorld){
             e.attack();
         }
     }*/

@@ -1,6 +1,7 @@
 package faces.awesome.model;
 
-import java.util.ArrayList;
+import faces.awesome.AwesomeGame;
+
 import java.util.Random;
 
 public class Enemy extends Character {
@@ -9,19 +10,19 @@ public class Enemy extends Character {
 
     private Random randomGenerator = new Random();
 
-    private MapSegment segment ;
+    private AwesomeGame game;
 
 
-    public Enemy(Position pos, MapSegment segment){
+    public Enemy(Position pos, AwesomeGame game){
         super(pos, 2, 15);
         health = maxHealth;
-        this.segment = segment;
+        this.game = game;
     }
 
 
     public void move() {
 
-        //Rör sig 1 gång på 30 gånger
+        //Rör sig 1 gång på 30 gånger, TODO ska egentligen inte vara här, ta bort senare
         int randInt = randomGenerator.nextInt(30);
 
         if ( randInt > 1 ) {
@@ -33,9 +34,9 @@ public class Enemy extends Character {
 
         Position newPosition = getPos().movePos(randPosition.getX(), randPosition.getY());
 
-        boolean solid = segment.isSolid(newPosition.getX(), newPosition.getY());
+        boolean solid = game.segment.isSolid(newPosition.getX(), newPosition.getY());
 
-        boolean occupied = segment.isOccupied(newPosition);
+        boolean occupied = game.segment.isOccupied(newPosition);
 
         boolean withInBorder = checkWithInBorder(newPosition);
 
@@ -49,8 +50,7 @@ public class Enemy extends Character {
 
     public void attack(Character ch) {
 
-        boolean shouldAttack = segment.getTargets(getPos(), getFacing());
-
+        boolean shouldAttack = game.segment.getTargets(this);
 
         if ( !shouldAttack ) {
 
