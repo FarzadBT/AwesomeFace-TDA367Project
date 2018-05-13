@@ -85,7 +85,7 @@ public class GameScreen implements Screen {
         game.enemy.move();
         game.enemy.attack(game.player);
 
-        System.out.println(game.player.getHealth());
+        //System.out.println(game.player.getHealth());
 
 
         camera.position.x = ((world.getMapPosition().getX() * 32) + 16) * TILE_SIZE;

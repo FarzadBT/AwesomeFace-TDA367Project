@@ -1,9 +1,6 @@
 package faces.awesome.controllers;
 
-import faces.awesome.model.MapSegment;
-import faces.awesome.model.PlayerCharacter;
-import faces.awesome.model.Position;
-import faces.awesome.model.WorldMap;
+import faces.awesome.model.*;
 
 public class PlayerCtrl {
 
@@ -19,16 +16,19 @@ public class PlayerCtrl {
     }
 
   
-    public void tryMove(int dx, int dy) {
+    public void tryMove(int dx, int dy, Facing facing) {
 
         Position newPosition = player.getPos().movePos(dx, dy);
 
         boolean solid = world.isSolid(newPosition.getX(), newPosition.getY());
 
-
         boolean occupied = segment.isOccupied(newPosition);
 
         if (!solid && !occupied) {
+
+            player.setFacing(facing);
+
+            //System.out.println("facing" + facing);
 
             world.tryMovePosition(player.getPos(), newPosition);
 

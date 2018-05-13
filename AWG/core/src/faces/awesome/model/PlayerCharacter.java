@@ -48,7 +48,6 @@ public class PlayerCharacter extends Character {
 
 
 
-	//TODO lägga till facing
 	public void move(int dx, int dy, boolean solid, boolean occupied ) {
 
 		if (!solid && !occupied) {

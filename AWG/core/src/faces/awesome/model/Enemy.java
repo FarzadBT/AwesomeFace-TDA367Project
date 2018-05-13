@@ -58,7 +58,7 @@ public class Enemy extends Character {
 
         }
 
-        System.out.println("attack");
+        //System.out.println("attack");
 
         ch.decreaseHealth(baseDamage);
     }
