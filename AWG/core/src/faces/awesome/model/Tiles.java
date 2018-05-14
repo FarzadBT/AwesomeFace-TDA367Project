@@ -2,7 +2,10 @@ package faces.awesome.model;
 
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.utils.Array;
 
 
 public class Tiles {
@@ -12,6 +15,10 @@ public class Tiles {
         boolean tileIsSolid = false;
 
         for (MapLayer layer :  tiledMap.getLayers()) {
+
+            Array<RectangleMapObject> enemyArray = layer.getObjects().getByType(RectangleMapObject.class);
+            System.out.println(enemyArray);
+           
 
             if (layer instanceof TiledMapTileLayer) {
 
