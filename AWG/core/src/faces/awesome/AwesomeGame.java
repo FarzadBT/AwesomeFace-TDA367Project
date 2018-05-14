@@ -2,6 +2,7 @@ package faces.awesome;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -28,9 +29,13 @@ public class AwesomeGame extends Game {
     public MapSegment segment;
 
     public List<Enemy> enemiesInWorld = new ArrayList<>();
+    public BossEnemy boss;
 
     public WorldMap world;
 
+    public int health;
+    public String HP;
+    public BitmapFont HPfont;
 
     @Override
     public void create() {
@@ -40,6 +45,8 @@ public class AwesomeGame extends Game {
         int h = Gdx.graphics.getHeight();
 
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
+
+        boss = new BossEnemy(new Position(7, 12), this);
 
         Map map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
 
@@ -59,15 +66,21 @@ public class AwesomeGame extends Game {
         Enemy enemy1 = new Enemy(new Position(10,4), this);
         Enemy enemy2 = new Enemy(new Position(20,13), this);
 
+
         enemiesInWorld.add(enemy);
         enemiesInWorld.add(enemy1);
         enemiesInWorld.add(enemy2);
+        //enemiesInWorld.add(boss);
 
 
         segment = new MapSegment(world, enemiesInWorld, player);
 
         playerCtrl = new PlayerCtrl(player, world, segment);
 
+
+        health = player.getMaxHealth();
+        HP = "HP: 100";
+        HPfont = new BitmapFont();
 
         this.setScreen(new GameScreen(this, world));
     }
