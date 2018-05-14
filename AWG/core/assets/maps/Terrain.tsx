@@ -1468,4 +1468,11 @@
    <property name="y" type="int" value="3"/>
   </properties>
  </tile>
+ <tile id="868">
+  <properties>
+   <property name="walkInId" value="cathedral"/>
+   <property name="x" type="int" value="14"/>
+   <property name="y" type="int" value="3"/>
+  </properties>
+ </tile>
 </tileset>

@@ -84,9 +84,7 @@ public class MapSegment {
                 }
         }
 
-        boolean checkTargets = targetIsPlayer(targets);
-
-        return checkTargets;
+        return targetIsPlayer(targets);
     }
 
 
@@ -120,8 +118,8 @@ public class MapSegment {
     }
 
 
-
     public boolean isSolid(int x, int y) {
         return world.isSolid(x, y);
     }
+
 }

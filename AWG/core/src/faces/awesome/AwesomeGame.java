@@ -41,16 +41,18 @@ public class AwesomeGame extends Game {
 
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
 
-        Map map = new TmxMapLoader().load("core/assets/theMap.tmx");
+        Map map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
 
         //Wraps the TileMap for easier access
         world = new WorldMap((TiledMap) map);
 
 
         MapStorage.AddMap("mainMap", (TiledMap) map);
-        MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/smallHouse.tmx"));
-        MapStorage.AddMap("mediumHouse", new TmxMapLoader().load("core/assets/mediumHouse.tmx"));
-        MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/bigHouse.tmx"));
+        MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/maps/smallHouse.tmx"));
+        MapStorage.AddMap("mediumHouse", new TmxMapLoader().load("core/assets/maps/mediumHouse.tmx"));
+        MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/maps/bigHouse.tmx"));
+        //MapStorage.AddMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
+
 
 
         Enemy enemy = new Enemy(new Position(3,2), this);
