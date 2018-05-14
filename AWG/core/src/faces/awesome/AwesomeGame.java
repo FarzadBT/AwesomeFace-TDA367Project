@@ -5,9 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import faces.awesome.controllers.GameCtrl;
 import faces.awesome.controllers.PlayerCtrl;
-import faces.awesome.model.GameWorld;
 import faces.awesome.model.MapStorage;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
@@ -20,7 +18,7 @@ public class AwesomeGame extends Game {
     public static final int VIEW_PORT_HEIGHT = 512;
 
 
-    public GameWorld world;
+    //public GameWorld world;
     // TO-do: instead of having a a HasA depndency, let's just use dependency inject playerCharacter where we need it.
 
     //public TiledMap map;
@@ -30,7 +28,7 @@ public class AwesomeGame extends Game {
 
     public PlayerCtrl playerCtrl;
 
-    //WorldMap worlds;
+    public WorldMap world;
     //MapStorage maps;
 
 
@@ -44,24 +42,28 @@ public class AwesomeGame extends Game {
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
 
 
-        Map mapp = new TmxMapLoader().load("core/assets/theMap.tmx");
-        world = new GameWorld(mapp);
+        Map map = new TmxMapLoader().load("core/assets/theMap.tmx");
+        //world = new GameWorld(map);
 
         //Map maps = new TmxMapLoader().load("core/assets/theMap.tmx");
 
 
         //Wraps the TileMap for easier access
-        //worlds = new WorldMap(map);
+        world = new WorldMap((TiledMap) map);
 
         //maps = new MapStorage();
+        MapStorage.AddMap("mainMap", (TiledMap) map);
+        MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/smallHouse.tmx"));
+        MapStorage.AddMap("mediumHouse", new TmxMapLoader().load("core/assets/mediumHouse.tmx"));
+        MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/bigHouse.tmx"));
+
         //maps.AddMap("Main", mapp);
+
 
         playerCtrl = new PlayerCtrl(player, world);
 
-        //Shouldn't be here, it's just here temporarily.
-        //Gdx.input.setInputProcessor(new GameCtrl(playerCtrl));
 
-        this.setScreen(new GameScreen(this));
+        this.setScreen(new GameScreen(this, world));
     }
 
     @Override
