@@ -1,5 +1,9 @@
 package faces.awesome.controllers;
 
+
+import com.badlogic.gdx.utils.viewport.Viewport;
+import faces.awesome.AwesomeGame;
+import faces.awesome.model.WorldMap;
 import faces.awesome.view.GameScreen;
 
 /**
@@ -15,7 +19,13 @@ public class ScreenRepository {
      * define more screens here, define other behavior as well.
      */
 
-    public void setGameScreen() {
+    public void setGameScreen(AwesomeGame g, WorldMap map, Viewport gamePort) {
+        if (gameScreen == null) {
+            gameScreen = new GameScreen(g, map);
+        }
 
+        g.setScreen(gameScreen);
+
+        // Here we initialize the model
     }
 }

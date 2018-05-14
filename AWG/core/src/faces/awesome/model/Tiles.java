@@ -4,12 +4,12 @@ import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
+
 public class Tiles {
 
 
     public static boolean isSolid(Map tiledMap, int x, int y) {
-        boolean isSolid = false;
-        boolean walkIn = false;
+        boolean tileIsSolid = false;
 
         for (MapLayer layer :  tiledMap.getLayers()) {
 
@@ -20,22 +20,45 @@ public class Tiles {
 
                 if (cell != null && cell.getTile() != null) {
 
-                    boolean tileIsSolid = cell.getTile().getProperties().get("solid", false, null);
+                    tileIsSolid = cell.getTile().getProperties().get("solid", false, null);
 
-                    boolean canWalkIn = cell.getTile().getProperties().get("walkIn", false, null);
+                }
+            }
+        }
+        return tileIsSolid;
+    }
 
-                    isSolid = tileIsSolid;
 
-                    if ( canWalkIn ) {
-                        //anropa metoden som byter till en ny karta
+
+    public static WorldPosition getWorldPosition (Map tiledMap, int x, int y) {
+
+        for (MapLayer layer :  tiledMap.getLayers()) {
+
+            if (layer instanceof TiledMapTileLayer) {
+
+                TiledMapTileLayer tiledLayer = (TiledMapTileLayer) layer;
+                TiledMapTileLayer.Cell cell = tiledLayer.getCell(x, y);
+
+                if (cell != null && cell.getTile() != null) {
+
+                    String id = cell.getTile().getProperties().get("walkInId", null, null);
+
+
+                    if ( id != null ) {
+
+                        int newX = cell.getTile().getProperties().get("x", 0, null);
+
+                        int newY = cell.getTile().getProperties().get("y", 0, null);
+
+
+                        return new WorldPosition(newX, newY, id);
 
                     }
                 }
             }
         }
-        return isSolid;
+        return null;
     }
-
 
 
 }

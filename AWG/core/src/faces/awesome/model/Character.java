@@ -1,45 +1,24 @@
 package faces.awesome.model;
 
-public abstract class Character {
-	// Use a vector to encapsulate playerCharacter coordinates?
-	// character position, perhaps this should be represented in a different way.
-	protected Position pos;
-
-	//Character facing, north, east, west, south. Could potentially be used in the attack method
-	// to always swing in the direction that the character is facing.
-	protected Facing facing;
-
+public abstract class Character extends GameObject{
 	//Based damage dealt with no weapon equipped
 	protected int baseDamage;
-
-	// character velocity
-	protected float vel;
 
 	// character current health and max health
 	protected int health;
 	protected int maxHealth;
 
-
-
-	public Character(Position pos, int baseDamage, int maxHealth, int health){
-		this.pos = pos;
+	public Character(Position pos, int baseDamage, int maxHealth){
+		super(pos);
 		this.baseDamage = baseDamage;
 		this.maxHealth = maxHealth;
-		this.health = health;
+		health = maxHealth;
 	}
 
 	//protected abstract void attack(Character other);
 
 	//Need to define how the position is stored before we implement this.
 	//protected abstract void move();
-
-	public Facing getFacing() {
-		return facing;
-	}
-
-	public void setFacing(Facing facing) {
-		this.facing = facing;
-	}
 
 	public int getHealth() {
 		return health;
@@ -70,21 +49,6 @@ public abstract class Character {
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
 	}
-
-
-	//Get the position on the playerCharacter
-	public Position getPos () {
-		return pos;
-	}
-
-	//Set the position on the playerCharacter
-	public void setPos (Position pos) {
-		this.pos = pos;
-	}
-
-
-
-
 }
 
 

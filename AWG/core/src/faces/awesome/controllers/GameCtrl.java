@@ -6,7 +6,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import faces.awesome.model.Facing;
-import faces.awesome.view.UICharacter;
 
 public class GameCtrl implements InputProcessor {
 
@@ -24,18 +23,22 @@ public class GameCtrl implements InputProcessor {
 
         if (keycode == Input.Keys.LEFT) {
             playerCtrl.tryMove(-1, 0);
+            playerCtrl.setFacing(Facing.WEST);
         }
 
         if (keycode == Input.Keys.RIGHT) {
             playerCtrl.tryMove(1, 0);
+            playerCtrl.setFacing(Facing.EAST);
         }
 
         if (keycode == Input.Keys.UP) {
             playerCtrl.tryMove(0, 1);
+            playerCtrl.setFacing(Facing.NORTH);
         }
 
         if (keycode == Input.Keys.DOWN) {
             playerCtrl.tryMove(0, -1);
+            playerCtrl.setFacing(Facing.SOUTH);
         }
 
         boolean isCtrlPressed = false;

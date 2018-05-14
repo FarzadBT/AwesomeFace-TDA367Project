@@ -1,3 +1,5 @@
+package java;
+
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.model.item.items.consumables.Bomb;
