@@ -15,7 +15,6 @@ public class BombPickupSmall extends GameObject {
     }
 
     public void onPickup(PlayerCharacter playerCharacter) {
-        Bomb bomb = new Bomb(1);
-        playerCharacter.addToInventory(bomb);
+        playerCharacter.incrementConsumable("Bomb", 1);
     }
 }

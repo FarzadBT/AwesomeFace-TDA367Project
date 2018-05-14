@@ -18,37 +18,21 @@ public class Inventory {
         inventory = new HashMap<>();
     }
 
-    public void addToInventory(Item item, PlayerCharacter player) {
+    public void addNewToInventory(Item item, PlayerCharacter player) {
         if(item instanceof BaseInstant)
             ((BaseInstant)item).use(player);
         else if(!isInInventory(item.getName()))
-            addNewToInventory(item);
-        else if(item instanceof BaseConsumable)
-            ((BaseConsumable)(inventory.get(item.getName()))).incrementN(((BaseConsumable) item).getQuantity());
+            inventory.put(item.getName(), item);
     }
 
-    /**
-     * Add a new item to the inventory
-     * @param item
-     */
-    private void addNewToInventory(Item item) {
-        inventory.put(item.getName(), item);
+    public void incrementConsumable(String name, int n) {
+        if(isInInventory(name))
+            getConsumable(name).incrementN(n);
     }
 
-    /**
-     * Increment a consumable item in the inventory
-     * @param item
-     */
-    public void incrementConsumable(BaseConsumable item) {
-        item.increment();
-    }
-
-    /**
-     * Decrement a consumable item in the inventory
-     * @param item
-     */
-    public void decrementConsumable(BaseConsumable item) {
-        item.decrement();
+    public void incrementMaxConsumable(String name, int n) {
+        if(isInInventory(name))
+            getConsumable(name).increaseMax(n);
     }
 
     /**
@@ -71,6 +55,12 @@ public class Inventory {
     public Item getItem(String name) {
         if(isInInventory(name))
             return inventory.get(name);
+        return null;
+    }
+
+    public BaseConsumable getConsumable(String name) {
+        if (isInInventory(name))
+            return (BaseConsumable) inventory.get(name);
         return null;
     }
 }

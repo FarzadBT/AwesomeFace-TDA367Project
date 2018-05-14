@@ -11,10 +11,10 @@ import faces.awesome.model.objects.object.BombObject;
 public class Bomb extends BaseConsumable {
     private BombObject bomb;
 
-    public Bomb(int quantity) {
+    public Bomb(int maxQuantity) {
         this.name = "Bomb";
-        maxQuantity = 10;
-        this.quantity = (quantity <= maxQuantity) ? quantity : maxQuantity;
+        this.maxQuantity = maxQuantity;
+        this.quantity = maxQuantity;
     }
 
     /**
