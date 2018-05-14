@@ -6,11 +6,12 @@ import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import faces.awesome.controllers.PlayerCtrl;
-import faces.awesome.model.MapStorage;
-import faces.awesome.model.PlayerCharacter;
-import faces.awesome.model.Position;
-import faces.awesome.model.WorldMap;
+import faces.awesome.model.*;
+import faces.awesome.model.Character;
 import faces.awesome.view.GameScreen;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AwesomeGame extends Game {
     public static final int TILE_SIZE = 32;
@@ -18,18 +19,17 @@ public class AwesomeGame extends Game {
     public static final int VIEW_PORT_HEIGHT = 512;
 
 
-    //public GameWorld world;
     // TO-do: instead of having a a HasA depndency, let's just use dependency inject playerCharacter where we need it.
-
-    //public TiledMap map;
-
 
     public PlayerCharacter player;
 
     public PlayerCtrl playerCtrl;
 
+    public MapSegment segment;
+
+    public List<Enemy> enemiesInWorld = new ArrayList<>();
+
     public WorldMap world;
-    //MapStorage maps;
 
 
     @Override
@@ -41,26 +41,30 @@ public class AwesomeGame extends Game {
 
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
 
-
         Map map = new TmxMapLoader().load("core/assets/theMap.tmx");
-        //world = new GameWorld(map);
-
-        //Map maps = new TmxMapLoader().load("core/assets/theMap.tmx");
-
 
         //Wraps the TileMap for easier access
         world = new WorldMap((TiledMap) map);
 
-        //maps = new MapStorage();
+
         MapStorage.AddMap("mainMap", (TiledMap) map);
         MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/smallHouse.tmx"));
         MapStorage.AddMap("mediumHouse", new TmxMapLoader().load("core/assets/mediumHouse.tmx"));
         MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/bigHouse.tmx"));
 
-        //maps.AddMap("Main", mapp);
+
+        Enemy enemy = new Enemy(new Position(3,2), this);
+        Enemy enemy1 = new Enemy(new Position(10,4), this);
+        Enemy enemy2 = new Enemy(new Position(20,13), this);
+
+        enemiesInWorld.add(enemy);
+        enemiesInWorld.add(enemy1);
+        enemiesInWorld.add(enemy2);
 
 
-        playerCtrl = new PlayerCtrl(player, world);
+        segment = new MapSegment(world, enemiesInWorld, player);
+
+        playerCtrl = new PlayerCtrl(player, world, segment);
 
 
         this.setScreen(new GameScreen(this, world));

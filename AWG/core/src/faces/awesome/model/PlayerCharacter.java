@@ -7,10 +7,10 @@ import java.lang.*;
 public class PlayerCharacter extends Character {
 
     private Inventory inventory;
-	  private Item slot1, slot2;
+    private Item slot1, slot2;
   
     public PlayerCharacter(Position pos) {
-        super(pos, 5, 15);
+        super(pos, 5, 100);
         inventory = new Inventory();
     }
 
@@ -57,21 +57,10 @@ public class PlayerCharacter extends Character {
 
 
 
-	//TODO lägga till facing
-	public void move(int dx, int dy, boolean solid) {
+	public void move(int dx, int dy, boolean solid, boolean occupied ) {
 
+		if (!solid && !occupied) {
 
-		//Kollar om den tile man ska till är occupied av en annan character (typ enemy)
-		//TODO ska anropa metoden isOccupied med dx och dy (ska inte vara =false)
-		boolean isOccupied = false;
-
-
-
-		//Om båda är false (tilen är inte solid och inte occupied) så rör man sig dit
-
-		if (!solid && !isOccupied) {
-
-			//Moves the playerCharacter
 			setPos(pos.movePos(dx, dy));
 
 		}
