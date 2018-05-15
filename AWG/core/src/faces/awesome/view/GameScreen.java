@@ -87,6 +87,7 @@ public class GameScreen implements Screen {
         camera.position.x = ((world.getMapPosition().getX() * 32) + 16) * TILE_SIZE;
         camera.position.y = ((world.getMapPosition().getY() * 16) + 8) * TILE_SIZE;
 
+        game.HP = "HP:" + game.player.getHealth();
         camera.update();
         mapRenderer.setView(camera);
     }
@@ -107,15 +108,15 @@ public class GameScreen implements Screen {
         playerSprite.setPosition((game.player.getPos().getX() % 32) * TILE_SIZE,(game.player.getPos().getY() % 16) * TILE_SIZE);
         playerSprite.draw(sprBatch);
 
-        //Får NullPointerException, vet ej varför.
+
         bossSprite.setPosition((game.boss.getPos().getX() % 32) * TILE_SIZE,(game.boss.getPos().getY() % 16) * TILE_SIZE);
         bossSprite.draw(sprBatch);
+        bossSprite.setScale(2.0f);
 
         //TODO när man går in i nya kartor dyker fienderna upp igen, de fattar inte att det är en ny karta
         game.segment.getEnemiesInSegment().forEach(enemy -> {
             enemySprite.setPosition((enemy.getPos().getX() % 32) * TILE_SIZE,(enemy.getPos().getY() % 16) * TILE_SIZE);
             enemySprite.draw(sprBatch);
-            game.HP = "HP:" + game.player.getHealth();
         });
 
 

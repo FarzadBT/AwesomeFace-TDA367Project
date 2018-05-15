@@ -79,8 +79,8 @@ public class AwesomeGame extends Game {
 
 
         health = player.getMaxHealth();
-        HP = "HP: 100";
         HPfont = new BitmapFont();
+        HPfont.getData().setScale(2.0f);
 
         this.setScreen(new GameScreen(this, world));
     }
