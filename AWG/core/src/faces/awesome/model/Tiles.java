@@ -2,10 +2,14 @@ package faces.awesome.model;
 
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import faces.awesome.AwesomeGame;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Tiles {
@@ -15,10 +19,6 @@ public class Tiles {
         boolean tileIsSolid = false;
 
         for (MapLayer layer :  tiledMap.getLayers()) {
-
-            Array<RectangleMapObject> enemyArray = layer.getObjects().getByType(RectangleMapObject.class);
-            System.out.println(enemyArray);
-           
 
             if (layer instanceof TiledMapTileLayer) {
 
@@ -65,6 +65,34 @@ public class Tiles {
             }
         }
         return null;
+    }
+
+
+    public static List<Enemy> populateWorldWithEnemies (Map currentMap, AwesomeGame game) {
+
+        List<Enemy> enemiesInWorld = new ArrayList<>();
+
+        for (MapLayer layer :  currentMap.getLayers()) {
+
+            Array<RectangleMapObject> enemyArray = layer.getObjects().getByType(RectangleMapObject.class);
+
+            for (RectangleMapObject recObject : enemyArray) {
+
+                Position recPos = getCenterOfRecPos(recObject.getRectangle());
+
+                Enemy enemy = new Enemy(recPos, game);
+
+                enemiesInWorld.add(enemy);
+
+            }
+        }
+
+        return enemiesInWorld;
+
+    }
+
+    private static Position getCenterOfRecPos(Rectangle rectangle) {
+        return new Position((int)((rectangle.x + (rectangle.width/2)) /32), (int)((rectangle.y + (rectangle.height/2)) /32));
     }
 
 

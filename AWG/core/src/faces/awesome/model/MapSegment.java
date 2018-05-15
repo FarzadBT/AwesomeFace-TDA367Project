@@ -16,7 +16,6 @@ public class MapSegment {
 
     private WorldMap world;
     private PlayerCharacter player;
-    private AwesomeGame game;
 
     private List<Character> characterInWorld;
 
@@ -35,6 +34,17 @@ public class MapSegment {
 
     }
 
+
+    public void setEnemiesInWorld (List<Enemy> enemiesInWorld) {
+
+        this.enemiesInWorld = enemiesInWorld;
+
+        characterInWorld.clear();
+
+        characterInWorld.addAll(enemiesInWorld);
+        characterInWorld.add(player);
+
+    }
 
     /* Compares the position of each enemiesInWorld in the world with the positions in the current segment. If they match,
     * the enemiesInWorld is added to EnemiesInSegment */
