@@ -7,17 +7,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import faces.awesome.AwesomeGame;
 import faces.awesome.controllers.GameCtrl;
+import faces.awesome.model.Enemy;
+import faces.awesome.model.MapSegment;
 import faces.awesome.model.WorldMap;
 
 import static faces.awesome.AwesomeGame.TILE_SIZE;
@@ -34,8 +31,10 @@ public class GameScreen implements Screen {
     private MapRenderer mapRenderer;
 
     private SpriteBatch sprBatch;
-    private Sprite spr;
-    private Texture texture;
+
+    private Sprite playerSprite;
+    private Sprite enemySprite;
+
 
     public GameScreen(final AwesomeGame game, WorldMap world) {
         this.game = game;
@@ -50,8 +49,14 @@ public class GameScreen implements Screen {
 
         //tmp
         sprBatch = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("core/assets/linkk.png"));
-        spr = new Sprite(texture);
+
+        Texture texture = new Texture(Gdx.files.internal("core/assets/linkk.png"));
+        playerSprite = new Sprite(texture);
+
+        //enemie
+        Texture enemyTexture = new Texture(Gdx.files.internal("core/assets/enemy.png"));
+        enemySprite = new Sprite(enemyTexture);
+
 
         gameController = new GameCtrl(game.playerCtrl, camera);
         Gdx.input.setInputProcessor(gameController);
@@ -67,6 +72,12 @@ public class GameScreen implements Screen {
     // render-logic here
     public void update(float delta) {
         refetchMap();
+
+        game.segment.getEnemiesInSegment().forEach(Enemy::move);
+        game.segment.getEnemiesInSegment().forEach(enemy -> enemy.attack(game.player));
+
+        //System.out.println(game.player.getHealth());
+
         camera.position.x = ((world.getMapPosition().getX() * 32) + 16) * TILE_SIZE;
         camera.position.y = ((world.getMapPosition().getY() * 16) + 8) * TILE_SIZE;
 
@@ -76,6 +87,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
         //System.out.println("x: " + game.playerCharacter.getPos().getX() + " y: " + game.playerCharacter.getPos().getY());
         update(delta);
         // RGB(0, 0, 0, 1) = black
@@ -85,9 +97,16 @@ public class GameScreen implements Screen {
         mapRenderer.render();
 
         sprBatch.begin();
-        spr.setPosition((game.player.getPos().getX() % 32) * TILE_SIZE, (game.player.getPos().getY() % 16) * TILE_SIZE);
-        spr.draw(sprBatch);
+        playerSprite.setPosition((game.player.getPos().getX() % 32) * TILE_SIZE,(game.player.getPos().getY() % 16) * TILE_SIZE);
+        playerSprite.draw(sprBatch);
+
+        //TODO när man går in i nya kartor dyker fienderna upp igen, de fattar inte att det är en ny karta
+        game.segment.getEnemiesInSegment().forEach(enemy -> {
+            enemySprite.setPosition((enemy.getPos().getX() % 32) * TILE_SIZE,(enemy.getPos().getY() % 16) * TILE_SIZE);
+            enemySprite.draw(sprBatch);
+        });
         sprBatch.end();
+
     }
 
     public void refetchMap () {
@@ -119,6 +138,5 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         sprBatch.dispose();
-        texture.dispose();
     }
 }

@@ -4,11 +4,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import faces.awesome.model.Facing;
 
 public class GameCtrl implements InputProcessor {
 
     PlayerCtrl playerCtrl;
     OrthographicCamera camera;
+    int currentKey = 0;
 
     public GameCtrl(PlayerCtrl playerCtrl, OrthographicCamera camera) {
         this.playerCtrl = playerCtrl;
@@ -19,25 +21,25 @@ public class GameCtrl implements InputProcessor {
     public boolean keyDown(int keycode) {
 
         if(keycode == Input.Keys.LEFT) {
-            playerCtrl.tryMove(-1, 0);
+            playerCtrl.tryMove(-1, 0, Facing.WEST);
 
         }
 
         if(keycode == Input.Keys.RIGHT) {
 
-            playerCtrl.tryMove(1, 0);
+            playerCtrl.tryMove(1, 0, Facing.EAST);
 
         }
 
         if(keycode == Input.Keys.UP) {
 
-            playerCtrl.tryMove(0, 1);
+            playerCtrl.tryMove(0, 1, Facing.NORTH);
 
         }
 
         if(keycode == Input.Keys.DOWN) {
 
-            playerCtrl.tryMove(0, -1);
+            playerCtrl.tryMove(0, -1, Facing.SOUTH);
 
         }
 
