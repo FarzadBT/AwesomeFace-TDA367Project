@@ -19,7 +19,9 @@ import faces.awesome.model.BossEnemy;
 import faces.awesome.model.Enemy;
 import faces.awesome.model.MapSegment;
 import faces.awesome.model.WorldMap;
+import faces.awesome.model.item.Item;
 
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -43,7 +45,10 @@ public class GameScreen implements Screen, Observer {
     private Sprite enemySprite;
     private Sprite bossSprite;
 
+    private Sprite slot1Sprite;
+    private Texture slot1Texture;
 
+    private HashMap<String, Texture> ItemTextures = new HashMap<>();
 
     public GameScreen(final AwesomeGame game, WorldMap world) {
         this.game = game;
@@ -70,6 +75,12 @@ public class GameScreen implements Screen, Observer {
         Texture bossTexture = new Texture(Gdx.files.internal("core/assets/giantenemycrab2.png"));
         bossSprite = new Sprite(bossTexture);
 
+        Texture slot1Texture = new Texture(Gdx.files.internal("core/assets/blank.png"));
+        slot1Sprite = new Sprite(slot1Texture);
+
+        ItemTextures.put("Sword", new Texture("core/assets/sword.png"));
+
+
 
         shapeRenderer = new ShapeRenderer();
 
@@ -93,13 +104,14 @@ public class GameScreen implements Screen, Observer {
         game.segment.boss.move();
         game.segment.boss.attack(game.player);
 
-
         //System.out.println(game.player.getHealth());
 
         camera.position.x = ((world.getMapPosition().getX() * 32) + 16) * TILE_SIZE;
         camera.position.y = ((world.getMapPosition().getY() * 16) + 8) * TILE_SIZE;
 
         game.HP = "HP:" + game.player.getHealth();
+
+        slot1Sprite.setTexture(ItemTextures.get(game.segment.player.getSlot1().getName()));
 
 
         //shapeRenderer.setProjectionMatrix(camera.combined);
@@ -122,10 +134,10 @@ public class GameScreen implements Screen, Observer {
 
         mapRenderer.render();
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(1, 0, 1, 0);
-        shapeRenderer.rect(4, 10, 20, 50);
-        shapeRenderer.rect(24, 10, 20, 50);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(0, 0, 0, 1);
+        shapeRenderer.rect(24, 10, 25, 40);
+        //shapeRenderer.rect(24, 10, 20, 50);
         shapeRenderer.end();
 
         sprBatch.begin();
@@ -145,7 +157,9 @@ public class GameScreen implements Screen, Observer {
             enemySprite.draw(sprBatch);
         });
 
-
+        slot1Sprite.setPosition(26, 20);
+        slot1Sprite.setScale(2.0f);
+        slot1Sprite.draw(sprBatch);
 
         game.HPfont.setColor(1.0f, 1.0f, 1.0f, 10.f);
         game.HPfont.draw(sprBatch, game.HP, 25,500);

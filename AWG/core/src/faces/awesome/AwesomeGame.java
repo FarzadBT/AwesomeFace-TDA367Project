@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import faces.awesome.controllers.PlayerCtrl;
 import faces.awesome.model.*;
 import faces.awesome.model.Character;
+import faces.awesome.model.item.items.permanents.Sword;
 import faces.awesome.view.GameScreen;
 
 import java.util.ArrayList;
@@ -26,12 +27,14 @@ public class AwesomeGame extends Game implements Observer {
 
     public PlayerCharacter player;
 
+    public BossEnemy boss;
+
     public PlayerCtrl playerCtrl;
 
     public MapSegment segment;
 
     public List<Enemy> enemiesInWorld = new ArrayList<>();
-    public BossEnemy boss;
+
 
     public WorldMap world;
 
@@ -47,6 +50,9 @@ public class AwesomeGame extends Game implements Observer {
         int h = Gdx.graphics.getHeight();
 
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
+        player.addNewToInventory(new Sword());
+        player.setSlot1(player.getInventory().getItem("Sword"));
+
 
         boss = new BossEnemy(new Position(8, 10), this);
 
