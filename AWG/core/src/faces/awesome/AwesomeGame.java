@@ -46,7 +46,7 @@ public class AwesomeGame extends Game {
 
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
 
-        boss = new BossEnemy(new Position(7, 12), this);
+        boss = new BossEnemy(new Position(8, 10), this);
 
         Map map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
 
@@ -72,8 +72,7 @@ public class AwesomeGame extends Game {
         enemiesInWorld.add(enemy2);
         //enemiesInWorld.add(boss);
 
-
-        segment = new MapSegment(world, enemiesInWorld, player);
+        segment = new MapSegment(world, enemiesInWorld, player, boss);
 
         playerCtrl = new PlayerCtrl(player, world, segment);
 

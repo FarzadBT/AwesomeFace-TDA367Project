@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -31,6 +32,7 @@ public class GameScreen implements Screen {
 
     private WorldMap world;
     private MapRenderer mapRenderer;
+    private ShapeRenderer shapeRenderer;
 
     private SpriteBatch sprBatch;
 
@@ -64,6 +66,9 @@ public class GameScreen implements Screen {
         Texture bossTexture = new Texture(Gdx.files.internal("core/assets/giantenemycrab2.png"));
         bossSprite = new Sprite(bossTexture);
 
+
+        shapeRenderer = new ShapeRenderer();
+
         gameController = new GameCtrl(game.playerCtrl, camera);
         Gdx.input.setInputProcessor(gameController);
 
@@ -82,14 +87,25 @@ public class GameScreen implements Screen {
         game.segment.getEnemiesInSegment().forEach(Enemy::move);
         game.segment.getEnemiesInSegment().forEach(enemy -> enemy.attack(game.player));
 
+        game.segment.boss.move();
+        game.segment.boss.attack(game.player);
+
+
         //System.out.println(game.player.getHealth());
 
         camera.position.x = ((world.getMapPosition().getX() * 32) + 16) * TILE_SIZE;
         camera.position.y = ((world.getMapPosition().getY() * 16) + 8) * TILE_SIZE;
 
         game.HP = "HP:" + game.player.getHealth();
+
+
+        //shapeRenderer.setProjectionMatrix(camera.combined);
+
         camera.update();
+
         mapRenderer.setView(camera);
+
+
     }
 
     @Override
@@ -103,13 +119,19 @@ public class GameScreen implements Screen {
 
         mapRenderer.render();
 
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(1, 0, 1, 0);
+        shapeRenderer.rect(4, 10, 20, 50);
+        shapeRenderer.rect(24, 10, 20, 50);
+        shapeRenderer.end();
+
         sprBatch.begin();
 
         playerSprite.setPosition((game.player.getPos().getX() % 32) * TILE_SIZE,(game.player.getPos().getY() % 16) * TILE_SIZE);
         playerSprite.draw(sprBatch);
 
 
-        bossSprite.setPosition((game.boss.getPos().getX() % 32) * TILE_SIZE,(game.boss.getPos().getY() % 16) * TILE_SIZE);
+        bossSprite.setPosition((game.segment.boss.getPos().getX() % 32) * TILE_SIZE,(game.segment.boss.getPos().getY() % 16) * TILE_SIZE);
         bossSprite.draw(sprBatch);
         bossSprite.setScale(2.0f);
 

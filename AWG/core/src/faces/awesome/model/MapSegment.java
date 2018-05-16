@@ -18,16 +18,19 @@ public class MapSegment {
     private PlayerCharacter player;
     private AwesomeGame game;
 
+    public BossEnemy boss;
+
     private List<Character> characterInWorld;
 
     private List<Enemy> enemiesInWorld;
 
 
-    public MapSegment(WorldMap World, List<Enemy> enemiesInWorld, PlayerCharacter player){
+    public MapSegment(WorldMap World, List<Enemy> enemiesInWorld, PlayerCharacter player, BossEnemy boss){
 
         this.player = player;
         this.enemiesInWorld = enemiesInWorld;
         this.world = World;
+        this.boss = boss;
 
         this.characterInWorld = new ArrayList<>();
         this.characterInWorld.addAll(enemiesInWorld);
