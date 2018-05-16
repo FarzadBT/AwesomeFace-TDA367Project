@@ -1,5 +1,7 @@
 package faces.awesome.model;
 
+import java.util.Objects;
+
 public class Position {
     private int x;
     private int y;
@@ -55,6 +57,11 @@ public class Position {
 
     }
 
+    @Override
+    public int hashCode() {
+        // From Effective Java
+        return Objects.hash(this.x, this.y);
+    }
 
     //Positions own toString method
     @Override
