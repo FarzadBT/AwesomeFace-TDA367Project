@@ -8,7 +8,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import faces.awesome.controllers.PlayerCtrl;
 import faces.awesome.model.*;
-import faces.awesome.model.Character;
+import faces.awesome.model.MapStorage;
+import faces.awesome.model.PlayerCharacter;
+import faces.awesome.model.Position;
+import faces.awesome.model.WorldMap;
+import faces.awesome.utils.Clock;
 import faces.awesome.view.GameScreen;
 
 import java.util.ArrayList;
@@ -21,6 +25,8 @@ public class AwesomeGame extends Game implements Observer {
     public static final int VIEW_PORT_WIDTH = 1024;
     public static final int VIEW_PORT_HEIGHT = 512;
 
+    // Not final for obvious reasons, represents the time in the game.
+    public static Clock AWG_TIME;
 
     // TO-do: instead of having a a HasA depndency, let's just use dependency inject playerCharacter where we need it.
 
@@ -28,7 +34,11 @@ public class AwesomeGame extends Game implements Observer {
 
     public PlayerCtrl playerCtrl;
 
-    public MapSegment segment;
+    //public TiledMap map;
+
+    //public PlayerCtrl playerCtrl;
+
+    //public MapSegment segment;
 
     public List<Enemy> enemiesInWorld = new ArrayList<>();
     public BossEnemy boss;
@@ -42,6 +52,8 @@ public class AwesomeGame extends Game implements Observer {
     @Override
     public void create() {
         // setup model here.
+
+        AWG_TIME = new Clock();
 
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
@@ -64,11 +76,11 @@ public class AwesomeGame extends Game implements Observer {
         MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/maps/bigHouse.tmx"));
         MapStorage.AddMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
 
-        segment = new MapSegment(world, enemiesInWorld, player, boss);
+        MapSegment segment = new MapSegment(world, enemiesInWorld, player, boss);
 
         update(null, null);
 
-        playerCtrl = new PlayerCtrl(player, world, segment);
+//        playerCtrl = new PlayerCtrl(player, world, segment);
 
         System.out.println(enemiesInWorld);
 
@@ -77,35 +89,16 @@ public class AwesomeGame extends Game implements Observer {
         HPfont = new BitmapFont();
         HPfont.getData().setScale(2.0f);
 
-        this.setScreen(new GameScreen(this, world));
+        this.setScreen(new GameScreen(this, world, segment));
     }
 
     @Override
     public void render() {
-
         super.render();
-        /*// setup rendering logic for controllers
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        camera.update();
-        tiledMapRenderer.setView(camera);
-        tiledMapRenderer.render();
-
-        Position playerPos = player.getPos();
-        float playerX = playerPos.getX() * TILE_SIZE;
-        float playerY = playerPos.getY() * TILE_SIZE;
-
-        batch.begin();
-        sprite.setPosition(playerX, playerY);
-        sprite.draw(batch);
-        batch.end();*/
     }
 
     @Override
     public void dispose() {
-        //img.dispose();
     }
 
 

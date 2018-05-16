@@ -53,7 +53,7 @@ public class WorldMap extends Observable {
         }
     }
 
-
+// is the world solid ????? temp stuff?
     public boolean isSolid(int x, int y) {
 
         return Tiles.isSolid(currentMap, x, y);

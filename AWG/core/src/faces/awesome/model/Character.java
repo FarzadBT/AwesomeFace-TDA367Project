@@ -8,7 +8,6 @@ public abstract class Character extends GameObject{
 	protected int health;
 	protected int maxHealth;
 
-
 	public Character(Position pos, int baseDamage, int maxHealth){
 		super(pos);
 		this.baseDamage = baseDamage;
