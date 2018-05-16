@@ -1,13 +1,15 @@
 package faces.awesome.view;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import faces.awesome.AwesomeGame;
 import faces.awesome.model.Character;
 import faces.awesome.model.Facing;
+import faces.awesome.model.Position;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class CharacterView {
 
@@ -17,23 +19,17 @@ public class CharacterView {
 
     private final Character character;
 
-    private float movementTime;
-
     private State currentState = State.STANDING;
 
-    public float elapsedTimeSinceMovement = 0.f;
+    //private TextureRegion currentTexture;
 
-    private TextureRegion currentTexture;
-
-    private Animation<TextureRegion> currentAnimation;
+    //private Animation<TextureRegion> currentAnimation;
 
     CharacterView(Character c) {
         this.character = c;
     }
 
-
-    public void draw(SpriteBatch sprBatch) {
-
+    public void draw(SpriteBatch sprBatch, Position oldPos, Position destination) {
         switch (currentState) {
             case STANDING: {
                 TextureRegion region;
@@ -54,22 +50,23 @@ public class CharacterView {
             }
 
             case RUNNING: {
-                if (elapsedTimeSinceMovement >= 0.0625f) {
-                    Animation<TextureRegion> region;
-                    if (character.getFacing() == Facing.NORTH) {
-                        region = animDefs.getCharacterRunningUp();
-                    } else if (character.getFacing() == Facing.WEST) {
-                        region = animDefs.getCharacterRunningLeft();
-                    } else if (character.getFacing() == Facing.SOUTH) {
-                        region = animDefs.getCharacterRunningDown();
-                    } else if (character.getFacing() == Facing.EAST) {
-                        region = animDefs.getCharacterRunningRight();
-                    } else {
-                        region = null;
-                    }
-                    // TextureRegion currentFrame = region.getKeyFrame();
-                    // sprBatch.draw(currentFrame, )
+                Animation<TextureRegion> region;
+                if (character.getFacing() == Facing.NORTH) {
+                    region = animDefs.getCharacterRunningUp();
+                } else if (character.getFacing() == Facing.WEST) {
+                    region = animDefs.getCharacterRunningLeft();
+                } else if (character.getFacing() == Facing.SOUTH) {
+                    region = animDefs.getCharacterRunningDown();
+                } else if (character.getFacing() == Facing.EAST) {
+                    region = animDefs.getCharacterRunningRight();
+                } else {
+                    region = null;
                 }
+                // TextureRegion currentFrame = region.getKeyFrame();
+                // sprBatch.draw(currentFrame, )
+
+                drawWalk(region, oldPos, destination, 4);
+
                 break;
             }
 
@@ -78,4 +75,42 @@ public class CharacterView {
         }
 
     }
+
+    private void drawWalk(Animation<TextureRegion> region, Position oldPos, Position destination, int walkOffset) {
+        if (hasReachedDestination(oldPos, destination)) {
+            currentState = State.STANDING;
+            return;
+        }
+
+        if (currentState != State.RUNNING) {
+            currentState = State.RUNNING;
+        }
+
+        if (walkOffset > AwesomeGame.TILE_SIZE) {
+            return;
+        }
+
+
+
+    }
+
+    private boolean hasReachedDestination(Position oldPos, Position destination) {
+        return oldPos.equals(destination);
+    }
+
+    /*
+    private void scheduleWalk(Position from, Position destination) {
+
+        if (from.equals(destination)) {
+            return;
+        }
+
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println();
+            }
+        }, 62); // milliseconds
+    }*/
 }

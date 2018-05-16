@@ -35,6 +35,26 @@ public class Position {
         this.y = y;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Position)) {
+            return false;
+        }
+
+        Position other = (Position) o;
+
+        return this.x == other.x && this.y == other.y;
+
+    }
+
 
     //Positions own toString method
     @Override

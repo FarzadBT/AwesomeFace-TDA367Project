@@ -47,8 +47,6 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     private SpriteBatch sprBatch;
 
-    private float elapsedTime;
-
     public GameScreen(final AwesomeGame game, WorldMap world) {
         this.game = game;
 
@@ -97,7 +95,6 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     @Override
     public void render(float delta) {
-
         // test stuff
 
         Vector3 camCopy = camera.position.cpy();
@@ -118,6 +115,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         sprBatch.begin();
         sprBatch.setProjectionMatrix(camera.combined);
+        //character.draw(sprBatch);
         //sprBatch.draw(animDefs.getCharacterStandingUp(), character.getCharacter().getPos().getX() * TILE_SIZE, character.getCharacter().getPos().getY() * TILE_SIZE);
         //spr.setPosition(game.player.getPos().getX() * AwesomeGame.TILE_SIZE, game.player.getPos().getY() * AwesomeGame.TILE_SIZE);
         //spr.draw(sprBatch);
@@ -160,6 +158,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     @Override
     public void onScreenChange(ScreenType screen) {
         switch (screen) {
+            default:
+                break;
             /* This is where we can go from another screen, none other yet defined. */
         }
     }
