@@ -55,7 +55,7 @@ public class AwesomeGame extends Game implements Observer {
         MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/maps/smallHouse.tmx"));
         MapStorage.AddMap("mediumHouse", new TmxMapLoader().load("core/assets/maps/mediumHouse.tmx"));
         MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/maps/bigHouse.tmx"));
-        //MapStorage.AddMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
+        MapStorage.AddMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
 
 
         segment = new MapSegment(world, enemiesInWorld, player);
