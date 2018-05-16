@@ -134,9 +134,9 @@ public class GameScreen implements Screen, Observer {
         playerSprite.draw(sprBatch);
 
 
-        bossSprite.setPosition((game.segment.boss.getPos().getX() % 32) * TILE_SIZE,(game.segment.boss.getPos().getY() % 16) * TILE_SIZE);
-        bossSprite.draw(sprBatch);
-        bossSprite.setScale(2.0f);
+        //bossSprite.setPosition((game.segment.boss.getPos().getX() % 32) * TILE_SIZE,(game.segment.boss.getPos().getY() % 16) * TILE_SIZE);
+        //bossSprite.draw(sprBatch);
+        //bossSprite.setScale(2.0f);
 
         //TODO när man går in i nya kartor dyker fienderna upp igen, de fattar inte att det är en ny karta
 
