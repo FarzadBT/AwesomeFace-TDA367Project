@@ -13,6 +13,7 @@ public class BombObject extends GameObject {
 
     public BombObject(Position pos) {
         super(pos);
+
         countDown();
     }
 
