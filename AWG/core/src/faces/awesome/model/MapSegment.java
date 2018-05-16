@@ -14,15 +14,14 @@ import java.util.List;
 
 public class MapSegment {
 
-    private WorldMap world;
+    private static WorldMap world;
     private PlayerCharacter player;
-    private AwesomeGame game;
 
     public BossEnemy boss;
 
-    private List<Character> characterInWorld;
+    private static List<Character> characterInWorld;
 
-    private List<Enemy> enemiesInWorld;
+    private static List<Enemy> enemiesInWorld;
 
 
     public MapSegment(WorldMap World, List<Enemy> enemiesInWorld, PlayerCharacter player, BossEnemy boss){
@@ -39,9 +38,20 @@ public class MapSegment {
     }
 
 
+    public void setEnemiesInWorld (List<Enemy> enemiesInWorld) {
+
+        this.enemiesInWorld = enemiesInWorld;
+
+        characterInWorld.clear();
+
+        characterInWorld.addAll(enemiesInWorld);
+        characterInWorld.add(player);
+
+    }
+
     /* Compares the position of each enemiesInWorld in the world with the positions in the current segment. If they match,
     * the enemiesInWorld is added to EnemiesInSegment */
-    public List<Enemy> getEnemiesInSegment(){
+    public static List<Enemy> getEnemiesInSegment(){
 
         int minX = world.getMapPosition().getX() * 32;
         int maxX = (world.getMapPosition().getX() + 1) * 32;
@@ -62,6 +72,17 @@ public class MapSegment {
         return enemiesInSegment;
     }
 
+    public static List<Enemy> getPlayerTargets(int x1, int y1, int x2, int y2) {
+        List <Enemy> enemies = getEnemiesInSegment();
+        List <Enemy> targets = new ArrayList<>();
+        for (Enemy enemy : enemies) {
+            if((enemy.getPos().getX() >= x1 & enemy.getPos().getX() <= x2 &
+                    enemy.getPos().getY() <= y1 & enemy.getPos().getY() >= y2));
+                targets.add(enemy);
+        }
+
+        return targets;
+    }
 
     //Gets possible target positions for each enemiesInWorld. Called when enemiesInWorld attack.
     public boolean getTargets(Enemy attacker){
@@ -123,6 +144,14 @@ public class MapSegment {
 
     public boolean isSolid(int x, int y) {
         return world.isSolid(x, y);
+    }
+
+    public List<Character> getCharacterInWorld() {
+        return characterInWorld;
+    }
+
+    public List<Enemy> getEnemiesInWorld() {
+        return enemiesInWorld;
     }
 
 }

@@ -3,7 +3,7 @@ package faces.awesome.model;
 /**
  * Created by Mr Cornholio on 08/05/2018.
  */
-public abstract class GameObject {
+public class GameObject {
     // Use a vector to encapsulate playerCharacter coordinates?
     // character position, perhaps this should be represented in a different way.
     protected Position pos;

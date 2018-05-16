@@ -6,8 +6,6 @@ import java.util.Random;
 
 public class Enemy extends Character {
 
-    //private WorldMap world;
-
     private Random randomGenerator = new Random();
 
     private MapSegment segment;
@@ -114,5 +112,11 @@ public class Enemy extends Character {
 
     }
 
+
+    @Override
+    public void death() {
+        game.enemiesInWorld.remove(this);
+
+    }
 
 }

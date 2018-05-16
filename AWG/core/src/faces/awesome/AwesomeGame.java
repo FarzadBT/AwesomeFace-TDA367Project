@@ -13,8 +13,10 @@ import faces.awesome.view.GameScreen;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class AwesomeGame extends Game {
+public class AwesomeGame extends Game implements Observer {
     public static final int TILE_SIZE = 32;
     public static final int VIEW_PORT_WIDTH = 1024;
     public static final int VIEW_PORT_HEIGHT = 512;
@@ -28,7 +30,7 @@ public class AwesomeGame extends Game {
 
     public MapSegment segment;
 
-    public List<Enemy> enemiesInWorld = new ArrayList<>();
+    private List<Enemy> enemiesInWorld = new ArrayList<>();
     public BossEnemy boss;
 
     public WorldMap world;
@@ -53,28 +55,22 @@ public class AwesomeGame extends Game {
         //Wraps the TileMap for easier access
         world = new WorldMap((TiledMap) map);
 
+        world.addObserver(this);
+
 
         MapStorage.AddMap("mainMap", (TiledMap) map);
         MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/maps/smallHouse.tmx"));
         MapStorage.AddMap("mediumHouse", new TmxMapLoader().load("core/assets/maps/mediumHouse.tmx"));
         MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/maps/bigHouse.tmx"));
-        //MapStorage.AddMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
-
-
-
-        Enemy enemy = new Enemy(new Position(3,2), this);
-        Enemy enemy1 = new Enemy(new Position(10,4), this);
-        Enemy enemy2 = new Enemy(new Position(20,13), this);
-
-
-        enemiesInWorld.add(enemy);
-        enemiesInWorld.add(enemy1);
-        enemiesInWorld.add(enemy2);
-        //enemiesInWorld.add(boss);
+        MapStorage.AddMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
 
         segment = new MapSegment(world, enemiesInWorld, player, boss);
 
+        update(null, null);
+
         playerCtrl = new PlayerCtrl(player, world, segment);
+
+        System.out.println(enemiesInWorld);
 
 
         health = player.getMaxHealth();
@@ -113,4 +109,14 @@ public class AwesomeGame extends Game {
     }
 
 
+    @Override
+    public void update(Observable observable, Object o) {
+
+        enemiesInWorld.clear();
+
+        enemiesInWorld.addAll(Tiles.populateWorldWithEnemies(world.getCurrent(), this));
+
+        segment.setEnemiesInWorld(enemiesInWorld);
+
+    }
 }

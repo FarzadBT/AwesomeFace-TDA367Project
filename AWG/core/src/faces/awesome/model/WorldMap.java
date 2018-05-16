@@ -1,9 +1,17 @@
 package faces.awesome.model;
 
+import com.badlogic.gdx.maps.Map;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Array;
+
+import java.util.List;
+import java.util.Observable;
 
 
-public class WorldMap {
+public class WorldMap extends Observable {
 
     //Current tilemap
     private TiledMap currentMap;
@@ -26,7 +34,7 @@ public class WorldMap {
         this.mapPosition = new Position(0, 0);
     }
 
-    public void tryMovePosition(Position oldPos, Position newPos) {
+    public void checkSegmentBorder(Position oldPos, Position newPos) {
         int xMin = this.mapPosition.getX() * 32;
         int yMin = this.mapPosition.getY() * 16;
 
@@ -63,9 +71,14 @@ public class WorldMap {
 
         setCurrentMap(MapStorage.LoadMap(worldPosition.getMap()));
 
+        setChanged();
+
+        notifyObservers();
+
         return new Position(worldPosition.getX(), worldPosition.getY());
 
     }
+
 
 
     public Position getMapPosition() {

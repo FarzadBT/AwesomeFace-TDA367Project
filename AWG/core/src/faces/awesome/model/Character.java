@@ -9,7 +9,6 @@ public abstract class Character extends GameObject{
 	protected int maxHealth;
 
 
-
 	public Character(Position pos, int baseDamage, int maxHealth){
 		super(pos);
 		this.baseDamage = baseDamage;
@@ -17,10 +16,6 @@ public abstract class Character extends GameObject{
 		health = maxHealth;
 	}
 
-	//protected abstract void attack(Character other);
-
-	//Need to define how the position is stored before we implement this.
-	//protected abstract void move();
 
 	public int getHealth() {
 		return health;
@@ -42,7 +37,11 @@ public abstract class Character extends GameObject{
 			health -= n;
 		else
 			health = 0;
+			death();
 	}
+
+	public abstract void death ();
+
 
 	public int getMaxHealth() {
 		return maxHealth;
@@ -51,6 +50,7 @@ public abstract class Character extends GameObject{
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
 	}
+
 }
 
 
