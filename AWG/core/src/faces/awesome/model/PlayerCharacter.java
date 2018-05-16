@@ -1,5 +1,6 @@
 package faces.awesome.model;
 import faces.awesome.AwesomeGame;
+import faces.awesome.model.item.BaseConsumable;
 import faces.awesome.model.item.Item;
 import java.lang.*;
 
@@ -42,8 +43,16 @@ public class PlayerCharacter extends Character {
 		return inventory;
 	}
 
-	public void addToInventory(Item item) {
-		inventory.addToInventory(item, this);
+	public void addNewToInventory(Item item) {
+		inventory.addNewToInventory(item, this);
+	}
+
+	public void incrementConsumable(String name, int n) {
+    	inventory.incrementConsumable(name, n);
+	}
+
+	public void incrementMaxConsumable(String name, int n) {
+    	inventory.incrementMaxConsumable(name, n);
 	}
 
 

@@ -29,7 +29,7 @@ public class AwesomeGame extends Game implements Observer {
 
     public MapSegment segment;
 
-    public List<Enemy> enemiesInWorld = new ArrayList<>();
+    private List<Enemy> enemiesInWorld = new ArrayList<>();
 
     public WorldMap world;
 

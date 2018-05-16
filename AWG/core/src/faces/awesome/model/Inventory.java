@@ -18,46 +18,30 @@ public class Inventory {
         inventory = new HashMap<>();
     }
 
-    public void addToInventory(Item item, PlayerCharacter player) {
+    public void addNewToInventory(Item item, PlayerCharacter player) {
         if(item instanceof BaseInstant)
             ((BaseInstant)item).use(player);
-        else if(!isInInventory(item))
-            addNewToInventory(item);
-        else if(item instanceof BaseConsumable)
-            ((BaseConsumable) item).increment();
+        else if(!isInInventory(item.getName()))
+            inventory.put(item.getName(), item);
     }
 
-    /**
-     * Add a new item to the inventory
-     * @param item
-     */
-    private void addNewToInventory(Item item) {
-        inventory.put(item.getName(), item);
+    public void incrementConsumable(String name, int n) {
+        if(isInInventory(name))
+            getConsumable(name).incrementN(n);
     }
 
-    /**
-     * Increment a consumable item in the inventory
-     * @param item
-     */
-    public void incrementConsumable(BaseConsumable item) {
-        item.increment();
-    }
-
-    /**
-     * Decrement a consumable item in the inventory
-     * @param item
-     */
-    public void decrementConsumable(BaseConsumable item) {
-        item.decrement();
+    public void incrementMaxConsumable(String name, int n) {
+        if(isInInventory(name))
+            getConsumable(name).increaseMax(n);
     }
 
     /**
      * Finds out if an item is currently in the inventory
-     * @param item
+     * @param name
      * @return true if item is in inventory, false if otherwise
      */
-    public boolean isInInventory(Item item) {
-        return inventory.containsKey(item.getName());
+    public boolean isInInventory(String name) {
+        return inventory.containsKey(name);
     }
 
     /**
@@ -66,5 +50,17 @@ public class Inventory {
      */
     public int getSize() {
         return inventory.size();
+    }
+
+    public Item getItem(String name) {
+        if(isInInventory(name))
+            return inventory.get(name);
+        return null;
+    }
+
+    public BaseConsumable getConsumable(String name) {
+        if (isInInventory(name))
+            return (BaseConsumable) inventory.get(name);
+        return null;
     }
 }
