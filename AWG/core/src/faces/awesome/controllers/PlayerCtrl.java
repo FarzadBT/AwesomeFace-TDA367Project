@@ -5,8 +5,8 @@ import faces.awesome.model.*;
 public class PlayerCtrl {
 
     private final WorldMap world;
-    private PlayerCharacter player;
-    private MapSegment segment;
+    private final PlayerCharacter player;
+    private final MapSegment segment;
 
   
     public PlayerCtrl(PlayerCharacter player, WorldMap world, MapSegment segment) {
@@ -15,7 +15,7 @@ public class PlayerCtrl {
         this.segment = segment;
     }
 
-    //TODO använda segment istället för world
+    //TODO använda segment istället för world?
   
     public void tryMove(int dx, int dy, Facing facing) {
 
@@ -29,9 +29,7 @@ public class PlayerCtrl {
 
             player.setFacing(facing);
 
-            //System.out.println("facing" + facing);
-
-            world.tryMovePosition(player.getPos(), newPosition);
+            world.checkSegmentBorder(player.getPos(), newPosition);
 
         }
 

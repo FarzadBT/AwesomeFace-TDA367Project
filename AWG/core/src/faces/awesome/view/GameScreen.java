@@ -17,9 +17,12 @@ import faces.awesome.model.Enemy;
 import faces.awesome.model.MapSegment;
 import faces.awesome.model.WorldMap;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import static faces.awesome.AwesomeGame.TILE_SIZE;
 
-public class GameScreen implements Screen {
+public class GameScreen implements Screen, Observer {
 
     private final AwesomeGame game;
     private GameCtrl gameController;
@@ -45,6 +48,7 @@ public class GameScreen implements Screen {
         gamePort.apply();
 
         this.world = world;
+        this.world.addObserver(this);
         refetchMap();
 
         //tmp
@@ -71,7 +75,6 @@ public class GameScreen implements Screen {
 
     // render-logic here
     public void update(float delta) {
-        refetchMap();
 
         game.segment.getEnemiesInSegment().forEach(Enemy::move);
         game.segment.getEnemiesInSegment().forEach(enemy -> enemy.attack(game.player));
@@ -100,7 +103,7 @@ public class GameScreen implements Screen {
         playerSprite.setPosition((game.player.getPos().getX() % 32) * TILE_SIZE,(game.player.getPos().getY() % 16) * TILE_SIZE);
         playerSprite.draw(sprBatch);
 
-        //TODO när man går in i nya kartor dyker fienderna upp igen, de fattar inte att det är en ny karta
+
         game.segment.getEnemiesInSegment().forEach(enemy -> {
             enemySprite.setPosition((enemy.getPos().getX() % 32) * TILE_SIZE,(enemy.getPos().getY() % 16) * TILE_SIZE);
             enemySprite.draw(sprBatch);
@@ -138,5 +141,13 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         sprBatch.dispose();
+    }
+
+
+    @Override
+    public void update(Observable observable, Object o) {
+
+        refetchMap();
+
     }
 }

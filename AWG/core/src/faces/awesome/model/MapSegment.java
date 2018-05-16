@@ -16,7 +16,6 @@ public class MapSegment {
 
     private static WorldMap world;
     private PlayerCharacter player;
-    private AwesomeGame game;
 
     private static List<Character> characterInWorld;
 
@@ -32,6 +31,18 @@ public class MapSegment {
         this.characterInWorld = new ArrayList<>();
         this.characterInWorld.addAll(enemiesInWorld);
         this.characterInWorld.add(player);
+
+    }
+
+
+    public void setEnemiesInWorld (List<Enemy> enemiesInWorld) {
+
+        this.enemiesInWorld = enemiesInWorld;
+
+        characterInWorld.clear();
+
+        characterInWorld.addAll(enemiesInWorld);
+        characterInWorld.add(player);
 
     }
 
@@ -128,7 +139,6 @@ public class MapSegment {
     }
 
 
-
     public boolean isSolid(int x, int y) {
         return world.isSolid(x, y);
     }
@@ -140,4 +150,5 @@ public class MapSegment {
     public List<Enemy> getEnemiesInWorld() {
         return enemiesInWorld;
     }
+
 }
