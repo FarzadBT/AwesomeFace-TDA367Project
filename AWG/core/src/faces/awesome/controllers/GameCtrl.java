@@ -43,6 +43,14 @@ public class GameCtrl implements InputProcessor {
 
         }
 
+        if(keycode == Input.Keys.A){
+            playerCtrl.useItem1();
+        }
+
+        if(keycode == Input.Keys.S){
+            playerCtrl.useItem2();
+        }
+
         return true;
     }
 

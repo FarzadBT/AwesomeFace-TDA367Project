@@ -5,14 +5,17 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import faces.awesome.AwesomeGame;
 import faces.awesome.controllers.GameCtrl;
+import faces.awesome.model.BossEnemy;
 import faces.awesome.model.Enemy;
 import faces.awesome.model.MapSegment;
 import faces.awesome.model.WorldMap;
@@ -32,11 +35,14 @@ public class GameScreen implements Screen, Observer {
 
     private WorldMap world;
     private MapRenderer mapRenderer;
+    private ShapeRenderer shapeRenderer;
 
     private SpriteBatch sprBatch;
 
     private Sprite playerSprite;
     private Sprite enemySprite;
+    private Sprite bossSprite;
+
 
 
     public GameScreen(final AwesomeGame game, WorldMap world) {
@@ -61,6 +67,11 @@ public class GameScreen implements Screen, Observer {
         Texture enemyTexture = new Texture(Gdx.files.internal("core/assets/enemy.png"));
         enemySprite = new Sprite(enemyTexture);
 
+        Texture bossTexture = new Texture(Gdx.files.internal("core/assets/giantenemycrab2.png"));
+        bossSprite = new Sprite(bossTexture);
+
+
+        shapeRenderer = new ShapeRenderer();
 
         gameController = new GameCtrl(game.playerCtrl, camera);
         Gdx.input.setInputProcessor(gameController);
@@ -79,13 +90,25 @@ public class GameScreen implements Screen, Observer {
         game.segment.getEnemiesInSegment().forEach(Enemy::move);
         game.segment.getEnemiesInSegment().forEach(enemy -> enemy.attack(game.player));
 
+        game.segment.boss.move();
+        game.segment.boss.attack(game.player);
+
+
         //System.out.println(game.player.getHealth());
 
         camera.position.x = ((world.getMapPosition().getX() * 32) + 16) * TILE_SIZE;
         camera.position.y = ((world.getMapPosition().getY() * 16) + 8) * TILE_SIZE;
 
+        game.HP = "HP:" + game.player.getHealth();
+
+
+        //shapeRenderer.setProjectionMatrix(camera.combined);
+
         camera.update();
+
         mapRenderer.setView(camera);
+
+
     }
 
     @Override
@@ -99,17 +122,35 @@ public class GameScreen implements Screen, Observer {
 
         mapRenderer.render();
 
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(1, 0, 1, 0);
+        shapeRenderer.rect(4, 10, 20, 50);
+        shapeRenderer.rect(24, 10, 20, 50);
+        shapeRenderer.end();
+
         sprBatch.begin();
+
         playerSprite.setPosition((game.player.getPos().getX() % 32) * TILE_SIZE,(game.player.getPos().getY() % 16) * TILE_SIZE);
         playerSprite.draw(sprBatch);
 
+
+        //bossSprite.setPosition((game.segment.boss.getPos().getX() % 32) * TILE_SIZE,(game.segment.boss.getPos().getY() % 16) * TILE_SIZE);
+        //bossSprite.draw(sprBatch);
+        //bossSprite.setScale(2.0f);
+
+        //TODO när man går in i nya kartor dyker fienderna upp igen, de fattar inte att det är en ny karta
 
         game.segment.getEnemiesInSegment().forEach(enemy -> {
             enemySprite.setPosition((enemy.getPos().getX() % 32) * TILE_SIZE,(enemy.getPos().getY() % 16) * TILE_SIZE);
             enemySprite.draw(sprBatch);
         });
-        sprBatch.end();
 
+
+
+        game.HPfont.setColor(1.0f, 1.0f, 1.0f, 10.f);
+        game.HPfont.draw(sprBatch, game.HP, 25,500);
+
+        sprBatch.end();
     }
 
     public void refetchMap () {

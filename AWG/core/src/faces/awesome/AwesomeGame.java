@@ -2,6 +2,7 @@ package faces.awesome;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -29,10 +30,14 @@ public class AwesomeGame extends Game implements Observer {
 
     public MapSegment segment;
 
-    private List<Enemy> enemiesInWorld = new ArrayList<>();
+    public List<Enemy> enemiesInWorld = new ArrayList<>();
+    public BossEnemy boss;
 
     public WorldMap world;
 
+    public int health;
+    public String HP;
+    public BitmapFont HPfont;
 
     @Override
     public void create() {
@@ -42,6 +47,8 @@ public class AwesomeGame extends Game implements Observer {
         int h = Gdx.graphics.getHeight();
 
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
+
+        boss = new BossEnemy(new Position(8, 10), this);
 
         Map map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
 
@@ -57,8 +64,7 @@ public class AwesomeGame extends Game implements Observer {
         MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/maps/bigHouse.tmx"));
         MapStorage.AddMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
 
-
-        segment = new MapSegment(world, enemiesInWorld, player);
+        segment = new MapSegment(world, enemiesInWorld, player, boss);
 
         update(null, null);
 
@@ -66,6 +72,10 @@ public class AwesomeGame extends Game implements Observer {
 
         System.out.println(enemiesInWorld);
 
+
+        health = player.getMaxHealth();
+        HPfont = new BitmapFont();
+        HPfont.getData().setScale(2.0f);
 
         this.setScreen(new GameScreen(this, world));
     }

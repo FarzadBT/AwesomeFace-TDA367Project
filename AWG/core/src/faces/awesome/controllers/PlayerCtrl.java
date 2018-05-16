@@ -50,6 +50,14 @@ public class PlayerCtrl {
 
 
     }
+
+    public void useItem1(){
+        player.useSlot1();
+    }
+
+    public void useItem2(){
+        player.useSlot2();
+    }
 }
 
 

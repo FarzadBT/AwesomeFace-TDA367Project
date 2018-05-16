@@ -17,16 +17,19 @@ public class MapSegment {
     private static WorldMap world;
     private PlayerCharacter player;
 
+    public BossEnemy boss;
+
     private static List<Character> characterInWorld;
 
     private static List<Enemy> enemiesInWorld;
 
 
-    public MapSegment(WorldMap World, List<Enemy> enemiesInWorld, PlayerCharacter player){
+    public MapSegment(WorldMap World, List<Enemy> enemiesInWorld, PlayerCharacter player, BossEnemy boss){
 
         this.player = player;
         this.enemiesInWorld = enemiesInWorld;
         this.world = World;
+        this.boss = boss;
 
         this.characterInWorld = new ArrayList<>();
         this.characterInWorld.addAll(enemiesInWorld);

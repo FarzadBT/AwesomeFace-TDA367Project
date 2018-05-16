@@ -8,6 +8,7 @@ public class Enemy extends Character {
 
     private Random randomGenerator = new Random();
 
+    private MapSegment segment;
     private AwesomeGame game;
 
 
