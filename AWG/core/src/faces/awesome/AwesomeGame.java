@@ -64,6 +64,8 @@ public class AwesomeGame extends Game implements Observer {
 
         playerCtrl = new PlayerCtrl(player, world, segment);
 
+        System.out.println(enemiesInWorld);
+
 
         this.setScreen(new GameScreen(this, world));
     }

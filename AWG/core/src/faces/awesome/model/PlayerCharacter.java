@@ -57,4 +57,9 @@ public class PlayerCharacter extends Character {
 		}
 
 	}
+
+	@Override
+	public void death() {
+
+	}
 }

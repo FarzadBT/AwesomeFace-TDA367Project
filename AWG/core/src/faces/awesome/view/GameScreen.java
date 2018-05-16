@@ -103,7 +103,7 @@ public class GameScreen implements Screen, Observer {
         playerSprite.setPosition((game.player.getPos().getX() % 32) * TILE_SIZE,(game.player.getPos().getY() % 16) * TILE_SIZE);
         playerSprite.draw(sprBatch);
 
-        //TODO när man går in i nya kartor dyker fienderna upp igen, de fattar inte att det är en ny karta
+
         game.segment.getEnemiesInSegment().forEach(enemy -> {
             enemySprite.setPosition((enemy.getPos().getX() % 32) * TILE_SIZE,(enemy.getPos().getY() % 16) * TILE_SIZE);
             enemySprite.draw(sprBatch);

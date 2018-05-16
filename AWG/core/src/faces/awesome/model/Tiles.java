@@ -84,6 +84,9 @@ public class Tiles {
 
                 enemiesInWorld.add(enemy);
 
+                //if ( recObject.getName().equals("boss") ) { bossEnemy = new BossEnemy(recPos, game);}
+
+
             }
         }
 

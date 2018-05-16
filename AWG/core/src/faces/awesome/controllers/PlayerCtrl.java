@@ -29,8 +29,6 @@ public class PlayerCtrl {
 
             player.setFacing(facing);
 
-            //System.out.println("facing" + facing);
-
             world.checkSegmentBorder(player.getPos(), newPosition);
 
         }
