@@ -34,7 +34,6 @@ public class WorldMap {
         int yMax = (this.mapPosition.getY() + 1) * 16;
 
 
-
         if (oldPos.getX() >= xMin && newPos.getX() < xMin) {
             this.mapPosition = this.mapPosition.movePos(-1, 0);
         } else if (oldPos.getY() >= yMin && newPos.getY() < yMin) {
