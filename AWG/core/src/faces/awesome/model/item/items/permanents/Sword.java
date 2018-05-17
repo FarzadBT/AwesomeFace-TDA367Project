@@ -17,17 +17,23 @@ public class Sword extends BaseItem {
         name = "Sword";
     }
 
+    /**
+     * Swing the sword side to side on the three blocks in front of you
+     * @param pos current player position
+     * @param facing current player facing
+     */
     @Override
     public void use(Position pos, Facing facing) {
         List<Enemy> enemies = new ArrayList<>();
+        int x = pos.getX(), y = pos.getY();
         if (facing == Facing.SOUTH)
-            enemies = MapSegment.getPlayerTargets(pos.getX()-1, pos.getY()-1, pos.getX()+1, pos.getY()-1);
+            enemies = MapSegment.getPlayerTargets(x-1, y-1, x+1, y-1);
         else if(facing == Facing.NORTH)
-            enemies = MapSegment.getPlayerTargets(pos.getX()-1, pos.getY()+1, pos.getX()+1, pos.getY()+1);
+            enemies = MapSegment.getPlayerTargets(x-1, y+1, x+1, y+1);
         else if(facing == Facing.EAST)
-            enemies = MapSegment.getPlayerTargets(pos.getX()+1, pos.getY()+1, pos.getX()+1, pos.getY()-1);
+            enemies = MapSegment.getPlayerTargets(x+1, y+1, x+1, y-1);
         else if(facing == Facing.WEST)
-            enemies = MapSegment.getPlayerTargets(pos.getX()-1, pos.getY()+1, pos.getX()-1, pos.getY()-1);
+            enemies = MapSegment.getPlayerTargets(x-1, y+1, x-1, y-1);
 
         for (Enemy enemy : enemies) {
             enemy.decreaseHealth(5);

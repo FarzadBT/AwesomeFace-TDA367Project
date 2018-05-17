@@ -72,12 +72,20 @@ public class MapSegment {
         return enemiesInSegment;
     }
 
+    /**
+     * By using getEnemiesInSegment() we check which of the enemies in the current segment that are inside of a hitbox
+     * that goes from top-left to bottom-right
+     * @param x1 x-coord of top left corner
+     * @param y1 y-coord of top left corner
+     * @param x2 x-coord of bottom right corner
+     * @param y2 y-coord of bottom right corner
+     * @return A list of the enemies that are inside the hitbox
+     */
     public static List<Enemy> getPlayerTargets(int x1, int y1, int x2, int y2) {
         List <Enemy> enemies = getEnemiesInSegment();
         List <Enemy> targets = new ArrayList<>();
         for (Enemy enemy : enemies) {
-            if((enemy.getPos().getX() >= x1 & enemy.getPos().getX() <= x2 &
-                    enemy.getPos().getY() <= y1 & enemy.getPos().getY() >= y2));
+            if(enemy.getPos().getX() >= x1 && enemy.getPos().getX() <= x2 && enemy.getPos().getY() <= y1 && enemy.getPos().getY() >= y2)
                 targets.add(enemy);
         }
 
