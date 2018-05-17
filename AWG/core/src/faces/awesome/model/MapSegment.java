@@ -15,7 +15,7 @@ import java.util.List;
 public class MapSegment {
 
     private static WorldMap world;
-    private PlayerCharacter player;
+    public PlayerCharacter player;
 
     public BossEnemy boss;
 
