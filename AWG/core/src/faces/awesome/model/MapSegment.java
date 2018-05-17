@@ -76,8 +76,7 @@ public class MapSegment {
         List <Enemy> enemies = getEnemiesInSegment();
         List <Enemy> targets = new ArrayList<>();
         for (Enemy enemy : enemies) {
-            if((enemy.getPos().getX() >= x1 & enemy.getPos().getX() <= x2 &
-                    enemy.getPos().getY() <= y1 & enemy.getPos().getY() >= y2));
+            if(enemy.getPos().getX() >= x1 && enemy.getPos().getX() <= x2 && enemy.getPos().getY() <= y1 && enemy.getPos().getY() >= y2)
                 targets.add(enemy);
         }
 

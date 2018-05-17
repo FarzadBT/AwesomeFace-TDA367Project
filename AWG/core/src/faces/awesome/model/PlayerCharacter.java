@@ -2,12 +2,14 @@ package faces.awesome.model;
 import faces.awesome.AwesomeGame;
 import faces.awesome.model.item.BaseConsumable;
 import faces.awesome.model.item.Item;
+import faces.awesome.model.item.items.permanents.Sword;
+
 import java.lang.*;
 
 public class PlayerCharacter extends Character {
 
     private Inventory inventory;
-    private Item slot1, slot2;
+    private Item slot1 = new Sword(), slot2;
   
     public PlayerCharacter(Position pos) {
         super(pos, 5, 100);
