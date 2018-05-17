@@ -33,11 +33,12 @@ public abstract class Character extends GameObject{
 	}
 
 	public void decreaseHealth(int n) {
-		if (health -n > 0)
+		if (health -n > 0) {
 			health -= n;
-		else
+		} else {
 			health = 0;
 			death();
+		}
 	}
 
 	public abstract void death ();

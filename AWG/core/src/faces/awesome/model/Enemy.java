@@ -8,7 +8,7 @@ public class Enemy extends Character {
 
     private Random randomGenerator = new Random();
 
-    private MapSegment segment;
+    //private MapSegment segment;
     private AwesomeGame game;
 
 
@@ -56,8 +56,6 @@ public class Enemy extends Character {
             return;
 
         }
-
-        //System.out.println("attack");
 
         ch.decreaseHealth(baseDamage);
     }
@@ -115,7 +113,9 @@ public class Enemy extends Character {
 
     @Override
     public void death() {
+
         game.enemiesInWorld.remove(this);
+        game.segment.getCharacterInWorld().remove(this);
 
     }
 
