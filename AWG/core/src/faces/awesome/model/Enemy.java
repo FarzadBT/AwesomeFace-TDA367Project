@@ -116,7 +116,7 @@ public class Enemy extends Character {
     @Override
     public void death() {
         game.enemiesInWorld.remove(this);
-
+        game.segment.getCharacterInWorld().remove(this);
     }
 
 }
