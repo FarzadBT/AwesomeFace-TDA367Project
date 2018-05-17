@@ -143,7 +143,7 @@ public class MapSegment {
 
 
     public boolean isSolid(int x, int y) {
-        return world.isSolid(x, y);
+        return Tiles.isSolid(world.getCurrent(), x, y);
     }
 
     public List<Character> getCharacterInWorld() {
