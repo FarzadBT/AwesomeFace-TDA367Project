@@ -27,8 +27,8 @@ public class MapSegment {
     public MapSegment(WorldMap World, List<Enemy> enemiesInWorld, PlayerCharacter player, BossEnemy boss){
 
         this.player = player;
-        enemiesInWorld = enemiesInWorld;
-        world = World;
+        this.enemiesInWorld = enemiesInWorld;
+        this.world = World;
         this.boss = boss;
 
         characterInWorld = new ArrayList<>();
