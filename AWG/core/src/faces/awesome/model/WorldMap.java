@@ -54,11 +54,9 @@ public class WorldMap extends Observable {
     }
 
 
-    public boolean isSolid(int x, int y) {
-
+    /*public boolean isSolid(int x, int y) {
         return Tiles.isSolid(currentMap, x, y);
-
-    }
+    }*/
 
 
     public Position setNewMap (int x, int y) {

@@ -3,6 +3,7 @@ import faces.awesome.AwesomeGame;
 import faces.awesome.model.item.BaseConsumable;
 import faces.awesome.model.item.Item;
 import java.lang.*;
+import java.util.Observable;
 
 public class PlayerCharacter extends Character {
 
@@ -69,6 +70,8 @@ public class PlayerCharacter extends Character {
 
 	@Override
 	public void death() {
+    	//Notifiera observern i switch screen och skicka med ett id
+
 
 	}
 }
