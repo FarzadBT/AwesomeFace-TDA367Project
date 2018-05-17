@@ -46,13 +46,11 @@ public class GameScreen implements Screen, Observer {
     private Sprite bossSprite;
 
     private Sprite slot1Sprite;
-    private Texture slot1Texture;
     private Sprite slot2Sprite;
-    private Texture slot2Texture;
 
 
 
-    private HashMap<String, Texture> ItemTextures = new HashMap<>();
+    private HashMap<String, Texture> textures = new HashMap<>();
 
     public GameScreen(final AwesomeGame game, WorldMap world) {
         this.game = game;
@@ -69,23 +67,24 @@ public class GameScreen implements Screen, Observer {
         //tmp
         sprBatch = new SpriteBatch();
 
-        Texture texture = new Texture(Gdx.files.internal("core/assets/linkk.png"));
-        playerSprite = new Sprite(texture);
+        textures.put("playerCharacter", new Texture("core/assets/linkk.png"));
+        playerSprite = new Sprite(textures.get("playerCharacter"));
 
-        //enemie
-        Texture enemyTexture = new Texture(Gdx.files.internal("core/assets/enemy.png"));
-        enemySprite = new Sprite(enemyTexture);
+        //enemies
+        textures.put("enemy", new Texture("core/assets/enemy.png"));
+        enemySprite = new Sprite(textures.get("enemy"));
 
-        Texture bossTexture = new Texture(Gdx.files.internal("core/assets/giantenemycrab2.png"));
-        bossSprite = new Sprite(bossTexture);
+        textures.put("bossEnemy", new Texture("core/assets/giantenemycrab2.png"));
+        bossSprite = new Sprite(textures.get("bossEnemy"));
 
-        slot1Texture = new Texture(Gdx.files.internal("core/assets/blank.png"));
-        slot1Sprite = new Sprite(slot1Texture);
-        slot2Texture = new Texture(Gdx.files.internal("core/assets/blank.png"));
-        slot2Sprite = new Sprite(slot2Texture);
 
-        ItemTextures.put("Sword", new Texture("core/assets/sword.png"));
-        ItemTextures.put("Hammer", new Texture("core/assets/sword.png"));
+        textures.put("slot1", new Texture("core/assets/blank.png"));
+        slot1Sprite = new Sprite(textures.get("slot1"));
+        textures.put("slot2", new Texture("core/assets/blank.png"));
+        slot2Sprite = new Sprite(textures.get("slot2"));
+
+        textures.put("Sword", new Texture("core/assets/sword.png"));
+        textures.put("Hammer", new Texture("core/assets/sword.png"));
 
 
         shapeRenderer = new ShapeRenderer();
@@ -104,8 +103,8 @@ public class GameScreen implements Screen, Observer {
     // render-logic here
     public void update(float delta) {
 
-        game.segment.getEnemiesInSegment().forEach(Enemy::move);
-        game.segment.getEnemiesInSegment().forEach(enemy -> enemy.attack(game.player));
+        MapSegment.getEnemiesInSegment().forEach(Enemy::move);
+        MapSegment.getEnemiesInSegment().forEach(enemy -> enemy.attack(game.player));
 
         game.segment.boss.move();
         game.segment.boss.attack(game.player);
@@ -117,8 +116,8 @@ public class GameScreen implements Screen, Observer {
 
         game.HP = "HP:" + game.player.getHealth();
 
-        slot1Sprite.setTexture(ItemTextures.get(game.segment.player.getSlot1().getName()));
-        slot2Sprite.setTexture((ItemTextures.get(game.segment.player.getSlot2().getName())));
+        slot1Sprite.setTexture(textures.get(game.segment.player.getSlot1().getName()));
+        slot2Sprite.setTexture(textures.get(game.segment.player.getSlot2().getName()));
 
 
         //shapeRenderer.setProjectionMatrix(camera.combined);
@@ -166,7 +165,7 @@ public class GameScreen implements Screen, Observer {
 
         //TODO när man går in i nya kartor dyker fienderna upp igen, de fattar inte att det är en ny karta
 
-        game.segment.getEnemiesInSegment().forEach(enemy -> {
+        MapSegment.getEnemiesInSegment().forEach(enemy -> {
             enemySprite.setPosition((enemy.getPos().getX() % 32) * TILE_SIZE,(enemy.getPos().getY() % 16) * TILE_SIZE);
             enemySprite.draw(sprBatch);
         });

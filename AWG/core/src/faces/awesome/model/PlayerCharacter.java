@@ -13,7 +13,7 @@ public class PlayerCharacter extends Character {
     private Item slot1 = new Sword(), slot2;
   
     public PlayerCharacter(Position pos) {
-        super(pos, 5, 100);
+        super(pos, 5, 100, "playerCharacter");
         inventory = new Inventory();
     }
 

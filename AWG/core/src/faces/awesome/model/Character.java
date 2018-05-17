@@ -9,8 +9,8 @@ public abstract class Character extends GameObject{
 	protected int maxHealth;
 
 
-	public Character(Position pos, int baseDamage, int maxHealth){
-		super(pos);
+	public Character(Position pos, int baseDamage, int maxHealth, String name){
+		super(pos, name);
 		this.baseDamage = baseDamage;
 		this.maxHealth = maxHealth;
 		health = maxHealth;

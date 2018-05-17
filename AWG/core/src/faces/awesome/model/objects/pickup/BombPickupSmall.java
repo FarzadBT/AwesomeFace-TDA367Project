@@ -11,7 +11,7 @@ import faces.awesome.model.item.items.consumables.Bomb;
 public class BombPickupSmall extends GameObject {
 
     public BombPickupSmall(Position pos) {
-        super(pos);
+        super(pos, "bombPickupSmall");
     }
 
     public void onPickup(PlayerCharacter playerCharacter) {

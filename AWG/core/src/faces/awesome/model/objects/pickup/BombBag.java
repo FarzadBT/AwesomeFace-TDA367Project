@@ -11,7 +11,7 @@ import faces.awesome.model.item.items.consumables.Bomb;
 public class BombBag extends PickupItem {
 
     public BombBag(Position pos) {
-        super(pos);
+        super(pos, "bombBag");
     }
 
     @Override

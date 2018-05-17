@@ -13,7 +13,7 @@ public class Enemy extends Character {
 
 
     public Enemy(Position pos, AwesomeGame game){
-        super(pos, 2, 15);
+        super(pos, 2, 15, "enemy");
         health = maxHealth;
         this.game = game;
     }
