@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import faces.awesome.controllers.PlayerCtrl;
 import faces.awesome.model.*;
 import faces.awesome.model.Character;
+import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
 import faces.awesome.view.GameScreen;
 
@@ -51,8 +52,9 @@ public class AwesomeGame extends Game implements Observer {
 
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
         player.addNewToInventory(new Sword());
+        player.addNewToInventory(new Hammer());
         player.setSlot1(player.getInventory().getItem("Sword"));
-
+        player.setSlot2(player.getInventory().getItem("Hammer"));
 
         boss = new BossEnemy(new Position(8, 10), this);
 

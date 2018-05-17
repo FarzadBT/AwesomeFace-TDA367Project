@@ -47,6 +47,10 @@ public class GameScreen implements Screen, Observer {
 
     private Sprite slot1Sprite;
     private Texture slot1Texture;
+    private Sprite slot2Sprite;
+    private Texture slot2Texture;
+
+
 
     private HashMap<String, Texture> ItemTextures = new HashMap<>();
 
@@ -75,11 +79,13 @@ public class GameScreen implements Screen, Observer {
         Texture bossTexture = new Texture(Gdx.files.internal("core/assets/giantenemycrab2.png"));
         bossSprite = new Sprite(bossTexture);
 
-        Texture slot1Texture = new Texture(Gdx.files.internal("core/assets/blank.png"));
+        slot1Texture = new Texture(Gdx.files.internal("core/assets/blank.png"));
         slot1Sprite = new Sprite(slot1Texture);
+        slot2Texture = new Texture(Gdx.files.internal("core/assets/blank.png"));
+        slot2Sprite = new Sprite(slot2Texture);
 
         ItemTextures.put("Sword", new Texture("core/assets/sword.png"));
-
+        ItemTextures.put("Hammer", new Texture("core/assets/sword.png"));
 
 
         shapeRenderer = new ShapeRenderer();
@@ -112,6 +118,7 @@ public class GameScreen implements Screen, Observer {
         game.HP = "HP:" + game.player.getHealth();
 
         slot1Sprite.setTexture(ItemTextures.get(game.segment.player.getSlot1().getName()));
+        slot2Sprite.setTexture((ItemTextures.get(game.segment.player.getSlot2().getName())));
 
 
         //shapeRenderer.setProjectionMatrix(camera.combined);
@@ -137,7 +144,7 @@ public class GameScreen implements Screen, Observer {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(0, 0, 0, 1);
         shapeRenderer.rect(24, 10, 25, 40);
-        //shapeRenderer.rect(24, 10, 20, 50);
+        shapeRenderer.rect(50, 10, 25, 40);
         shapeRenderer.end();
 
         sprBatch.begin();
@@ -160,6 +167,10 @@ public class GameScreen implements Screen, Observer {
         slot1Sprite.setPosition(26, 20);
         slot1Sprite.setScale(2.0f);
         slot1Sprite.draw(sprBatch);
+
+        slot2Sprite.setPosition(51, 20);
+        slot2Sprite.setScale(2.0f);
+        slot2Sprite.draw(sprBatch);
 
         game.HPfont.setColor(1.0f, 1.0f, 1.0f, 10.f);
         game.HPfont.draw(sprBatch, game.HP, 25,500);
