@@ -10,6 +10,7 @@ public class BossEnemy extends Enemy {
         super(pos, game);
         baseDamage = 5;
         health = maxHealth*2;
+        name = "bossEnemy";
     }
 
     public boolean checkDeath(){

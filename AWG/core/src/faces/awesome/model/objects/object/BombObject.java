@@ -12,7 +12,7 @@ import java.util.TimerTask;
 public class BombObject extends GameObject {
 
     public BombObject(Position pos) {
-        super(pos);
+        super(pos, "bombObject");
 
         countDown();
     }

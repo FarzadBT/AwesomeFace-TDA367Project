@@ -27,20 +27,20 @@ public class MapSegment {
     public MapSegment(WorldMap World, List<Enemy> enemiesInWorld, PlayerCharacter player, BossEnemy boss){
 
         this.player = player;
-        this.enemiesInWorld = enemiesInWorld;
-        this.world = World;
+        enemiesInWorld = enemiesInWorld;
+        world = World;
         this.boss = boss;
 
-        this.characterInWorld = new ArrayList<>();
-        this.characterInWorld.addAll(enemiesInWorld);
-        this.characterInWorld.add(player);
+        characterInWorld = new ArrayList<>();
+        characterInWorld.addAll(enemiesInWorld);
+        characterInWorld.add(player);
 
     }
 
 
     public void setEnemiesInWorld (List<Enemy> enemiesInWorld) {
 
-        this.enemiesInWorld = enemiesInWorld;
+        enemiesInWorld = enemiesInWorld;
 
         characterInWorld.clear();
 

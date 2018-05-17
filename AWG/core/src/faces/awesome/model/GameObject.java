@@ -12,9 +12,12 @@ public class GameObject {
     // to always swing in the direction that the character is facing.
     protected Facing facing;
 
-    public GameObject(Position pos) {
+    protected String name;
+
+    public GameObject(Position pos, String name) {
         this.pos = pos;
         this.facing = Facing.SOUTH;
+        this.name = name;
     }
 
     public Facing getFacing() {
@@ -33,5 +36,9 @@ public class GameObject {
     //Set the position of the GameObject
     public void setPos (Position pos) {
         this.pos = pos;
+    }
+
+    public String getName() {
+        return name;
     }
 }
