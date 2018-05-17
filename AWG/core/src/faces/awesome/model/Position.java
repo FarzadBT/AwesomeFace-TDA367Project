@@ -1,5 +1,7 @@
 package faces.awesome.model;
 
+import java.util.Objects;
+
 public class Position {
     private int x;
     private int y;
@@ -35,14 +37,35 @@ public class Position {
         this.y = y;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Position)) {
+            return false;
+        }
+
+        Position other = (Position) o;
+
+        return this.x == other.x && this.y == other.y;
+
+    }
+
+    @Override
+    public int hashCode() {
+        // From Effective Java
+        return Objects.hash(this.x, this.y);
+    }
 
     //Positions own toString method
     @Override
     public String toString() {
         return "Position { x = " + x + ", y = " + y + " }";
-    }
-
-    public boolean equals(Position other){
-        return this.getX() == other.getX() && this.getY() == other.getY();
     }
 }

@@ -1,6 +1,12 @@
 package faces.awesome.controllers;
 
 import faces.awesome.model.*;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import faces.awesome.model.*;
+import faces.awesome.model.PlayerCharacter;
+import faces.awesome.model.Position;
+import faces.awesome.model.WorldMap;
 
 public class PlayerCtrl {
 
@@ -18,7 +24,6 @@ public class PlayerCtrl {
     //TODO använda segment istället för world?
   
     public void tryMove(int dx, int dy, Facing facing) {
-
         Position newPosition = player.getPos().movePos(dx, dy);
 
         boolean solid = world.isSolid(newPosition.getX(), newPosition.getY());
@@ -55,8 +60,12 @@ public class PlayerCtrl {
         player.useSlot1();
     }
 
-    public void useItem2(){
+    public void useItem2() {
         player.useSlot2();
+    }
+
+    public void setFacing(Facing dir) {
+        player.setFacing(dir);
     }
 }
 

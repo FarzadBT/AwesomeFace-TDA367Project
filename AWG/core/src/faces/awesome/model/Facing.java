@@ -4,6 +4,7 @@ public enum Facing {
     NORTH,
     EAST,
     WEST,
-    SOUTH
+    SOUTH,
+    INVALIDFACING
 
 }

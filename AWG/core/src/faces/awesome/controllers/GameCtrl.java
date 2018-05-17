@@ -1,5 +1,6 @@
 package faces.awesome.controllers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,6 +13,7 @@ public class GameCtrl implements InputProcessor {
     OrthographicCamera camera;
     int currentKey = 0;
 
+
     public GameCtrl(PlayerCtrl playerCtrl, OrthographicCamera camera) {
         this.playerCtrl = playerCtrl;
         this.camera = camera;
@@ -19,28 +21,38 @@ public class GameCtrl implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-
         if(keycode == Input.Keys.LEFT) {
             playerCtrl.tryMove(-1, 0, Facing.WEST);
 
         }
 
         if(keycode == Input.Keys.RIGHT) {
-
             playerCtrl.tryMove(1, 0, Facing.EAST);
-
         }
 
         if(keycode == Input.Keys.UP) {
 
             playerCtrl.tryMove(0, 1, Facing.NORTH);
-
         }
 
-        if(keycode == Input.Keys.DOWN) {
-
+        if (keycode == Input.Keys.DOWN) {
             playerCtrl.tryMove(0, -1, Facing.SOUTH);
+        }
 
+        boolean isCtrlPressed = false;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
+            isCtrlPressed = true;
+        }
+
+        if (isCtrlPressed && keycode == Input.Keys.LEFT) {
+            playerCtrl.setFacing(Facing.WEST);
+        } else if (isCtrlPressed && keycode == Input.Keys.RIGHT) {
+            playerCtrl.setFacing(Facing.EAST);
+        } else if (isCtrlPressed && keycode == Input.Keys.UP) {
+            playerCtrl.setFacing((Facing.NORTH));
+        } else if (isCtrlPressed && keycode == Input.Keys.DOWN) {
+            playerCtrl.setFacing(Facing.SOUTH);
         }
 
         if(keycode == Input.Keys.A){
@@ -53,8 +65,6 @@ public class GameCtrl implements InputProcessor {
 
         return true;
     }
-
-
 
     //Methods we have to implement but do not use
     @Override
