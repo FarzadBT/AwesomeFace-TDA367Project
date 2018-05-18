@@ -2,6 +2,7 @@ package faces.awesome;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -25,6 +26,7 @@ public class AwesomeGame extends Game implements Observer {
 
 
     // TO-do: instead of having a a HasA depndency, let's just use dependency inject playerCharacter where we need it.
+    public AssetManager assets;
 
     public PlayerCharacter player;
 
@@ -71,6 +73,17 @@ public class AwesomeGame extends Game implements Observer {
         MapStorage.AddMap("mediumHouse", new TmxMapLoader().load("core/assets/maps/mediumHouse.tmx"));
         MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/maps/bigHouse.tmx"));
         MapStorage.AddMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
+
+        //Instantiate asset manager
+        assets = new AssetManager();
+
+        //Creates textures from available files in core/assets/
+        assets.addTexture("enemy", new Texture("core/assets/enemy.png"));
+        assets.addTexture("Sword", new Texture("core/assets/sword.png"));
+        assets.addTexture("Hammer", new Texture("core/assets/sword.png"));
+        assets.addTexture("player", new Texture("core/assets/linkk.png"));
+        assets.addTexture("bossEnemy", new Texture("core/assets/giantenemycrab.png"));
+        assets.addTexture("blank", new Texture("core/assets/blank.png"));
 
         segment = new MapSegment(world, enemiesInWorld, player, boss);
 

@@ -26,24 +26,24 @@ public class AssetManager {
         Textures.put(name, texture);
     }
 
-    public void getTexture(String name){
-        Textures.get(name);
+    public Texture getTexture(String name){
+        return Textures.get(name);
     }
 
     public void addItem(String name, Item item){
         Items.put(name, item);
     }
 
-    public void getItem(String name){
-        Items.get(name);
+    public Item getItem(String name){
+        return Items.get(name);
     }
 
     public void addAnimation(String name, TextureRegion anim){
         Animations.put(name, anim);
     }
 
-    public void getAnimation(String name){
-        Animations.get(name);
+    public TextureRegion getAnimation(String name){
+        return Animations.get(name);
     }
 
 }
