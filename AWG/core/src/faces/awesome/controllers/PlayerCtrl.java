@@ -21,7 +21,7 @@ public class PlayerCtrl {
 
         Position newPosition = player.getPos().movePos(dx, dy);
 
-        boolean solid = Tiles.isSolid(world.getCurrent(), newPosition.getX(), newPosition.getY());
+        boolean solid = Tiles.isSolid(world.getCurrentMap(), newPosition.getX(), newPosition.getY());
 
         boolean occupied = segment.isOccupied(newPosition);
 
@@ -38,7 +38,7 @@ public class PlayerCtrl {
 
         if ( worldPos != null ) {
 
-            world.setPosition(worldPos);
+            world.setPlayerPosOnMap(worldPos);
 
             player.move(worldPos.getX()-player.getPos().getX(), worldPos.getY()-player.getPos().getY(), false, false);
 

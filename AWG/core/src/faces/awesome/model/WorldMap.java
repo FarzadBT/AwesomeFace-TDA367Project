@@ -1,40 +1,44 @@
 package faces.awesome.model;
 
-import com.badlogic.gdx.maps.Map;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
-
-import java.util.List;
 import java.util.Observable;
 
+/*
+ * Author: Philip Nilsson
+ * Updated by: Therese Sturesson
+ *
+ * TODO skriva vad klassen gör
+ */
 
 public class WorldMap extends Observable {
 
-    //Current tilemap
+    //Current tilemap and mapposition
     private TiledMap currentMap;
     private Position mapPosition;
 
+
     //Constructor, takes a TiledMap
-    public WorldMap(TiledMap map){
+    public WorldMap (TiledMap map){
         this.currentMap = map;
         this.mapPosition = new Position(0, 0);
     }
 
+
     //Returns the current map
-    public TiledMap getCurrent(){
+    public TiledMap getCurrentMap (){
         return currentMap;
     }
 
+
     //Sets the current map. For testing purposes only.
-    public void setCurrentMap(TiledMap currentMap) {
+    public void setCurrentMap (TiledMap currentMap) {
         this.currentMap = currentMap;
         this.mapPosition = new Position(0, 0);
     }
 
-    public void checkSegmentBorder(Position oldPos, Position newPos) {
+
+    //Checks the border for the segment
+    public void checkSegmentBorder (Position oldPos, Position newPos) {
         int xMin = this.mapPosition.getX() * 32;
         int yMin = this.mapPosition.getY() * 16;
 
@@ -54,11 +58,7 @@ public class WorldMap extends Observable {
     }
 
 
-    /*public boolean isSolid(int x, int y) {
-        return Tiles.isSolid(currentMap, x, y);
-    }*/
-
-
+    //Sets a new map
     public Position setNewMap (int x, int y) {
 
         WorldPosition worldPosition = Tiles.getWorldPosition(currentMap, x, y);
@@ -78,15 +78,15 @@ public class WorldMap extends Observable {
     }
 
 
-
+    //Gets the map position
     public Position getMapPosition() {
         return mapPosition;
     }
 
-    public void setPosition(Position playerPos) {
 
+    //Sets the players position on the map
+    public void setPlayerPosOnMap (Position playerPos) {
         this.mapPosition = new Position(playerPos.getX()/32, playerPos.getY()/16);
-
     }
 
 

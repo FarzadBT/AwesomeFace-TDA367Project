@@ -8,7 +8,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import faces.awesome.controllers.PlayerCtrl;
 import faces.awesome.model.*;
-import faces.awesome.model.Character;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
 import faces.awesome.view.GameScreen;
@@ -66,11 +65,11 @@ public class AwesomeGame extends Game implements Observer {
         world.addObserver(this);
 
 
-        MapStorage.AddMap("mainMap", (TiledMap) map);
-        MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/maps/smallHouse.tmx"));
-        MapStorage.AddMap("mediumHouse", new TmxMapLoader().load("core/assets/maps/mediumHouse.tmx"));
-        MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/maps/bigHouse.tmx"));
-        MapStorage.AddMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
+        MapStorage.addMap("mainMap", (TiledMap) map);
+        MapStorage.addMap("smallHouse", new TmxMapLoader().load("core/assets/maps/smallHouse.tmx"));
+        MapStorage.addMap("mediumHouse", new TmxMapLoader().load("core/assets/maps/mediumHouse.tmx"));
+        MapStorage.addMap("bigHouse", new TmxMapLoader().load("core/assets/maps/bigHouse.tmx"));
+        MapStorage.addMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
 
         segment = new MapSegment(world, enemiesInWorld, player, boss);
 
@@ -106,7 +105,7 @@ public class AwesomeGame extends Game implements Observer {
         float playerY = playerPos.getY() * TILE_SIZE;
 
         batch.begin();
-        sprite.setPosition(playerX, playerY);
+        sprite.setPlayerPosOnMap(playerX, playerY);
         sprite.draw(batch);
         batch.end();*/
     }
@@ -122,7 +121,7 @@ public class AwesomeGame extends Game implements Observer {
 
         enemiesInWorld.clear();
 
-        enemiesInWorld.addAll(Tiles.populateWorldWithEnemies(world.getCurrent(), this));
+        enemiesInWorld.addAll(Tiles.populateWorldWithEnemies(world.getCurrentMap(), this));
 
         segment.setEnemiesInWorld(enemiesInWorld);
 

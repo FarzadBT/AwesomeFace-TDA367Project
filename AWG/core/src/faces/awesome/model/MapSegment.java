@@ -2,8 +2,6 @@ package faces.awesome.model;
 
 //import javafx.geometry.Pos;
 
-import faces.awesome.AwesomeGame;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,7 +149,7 @@ public class MapSegment {
 
 
     public boolean isSolid(int x, int y) {
-        return Tiles.isSolid(world.getCurrent(), x, y);
+        return Tiles.isSolid(world.getCurrentMap(), x, y);
     }
 
     public List<Character> getCharacterInWorld() {

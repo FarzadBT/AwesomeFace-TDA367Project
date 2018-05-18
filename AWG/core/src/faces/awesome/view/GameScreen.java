@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -15,11 +14,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import faces.awesome.AwesomeGame;
 import faces.awesome.controllers.GameCtrl;
-import faces.awesome.model.BossEnemy;
 import faces.awesome.model.Enemy;
 import faces.awesome.model.MapSegment;
 import faces.awesome.model.WorldMap;
-import faces.awesome.model.item.Item;
 
 import java.util.HashMap;
 import java.util.Observable;
@@ -159,7 +156,7 @@ public class GameScreen implements Screen, Observer {
         playerSprite.draw(sprBatch);
 
 
-        //bossSprite.setPosition((game.segment.boss.getPos().getX() % 32) * TILE_SIZE,(game.segment.boss.getPos().getY() % 16) * TILE_SIZE);
+        //bossSprite.setPlayerPosOnMap((game.segment.boss.getPos().getX() % 32) * TILE_SIZE,(game.segment.boss.getPos().getY() % 16) * TILE_SIZE);
         //bossSprite.draw(sprBatch);
         //bossSprite.setScale(2.0f);
 
@@ -186,7 +183,7 @@ public class GameScreen implements Screen, Observer {
 
     public void refetchMap () {
 
-        mapRenderer = new OrthogonalTiledMapRenderer(world.getCurrent());
+        mapRenderer = new OrthogonalTiledMapRenderer(world.getCurrentMap());
 
     }
 
