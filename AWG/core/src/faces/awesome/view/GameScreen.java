@@ -100,16 +100,16 @@ public class GameScreen implements Screen, Observer {
     // render-logic here
     public void update(float delta) {
 
-        MapSegment.getEnemiesInSegment().forEach(Enemy::move);
-        MapSegment.getEnemiesInSegment().forEach(enemy -> enemy.attack(game.player));
+        game.segment.getEnemiesInSegment().forEach(Enemy::move);
+        game.segment.getEnemiesInSegment().forEach(enemy -> enemy.attack(game.player));
 
         game.segment.boss.move();
         game.segment.boss.attack(game.player);
 
         //System.out.println(game.player.getHealth());
 
-        camera.position.x = ((world.getMapPosition().getX() * 32) + 16) * TILE_SIZE;
-        camera.position.y = ((world.getMapPosition().getY() * 16) + 8) * TILE_SIZE;
+        camera.position.x = ((game.segment.getMapPosition().getX() * 32) + 16) * TILE_SIZE;
+        camera.position.y = ((game.segment.getMapPosition().getY() * 16) + 8) * TILE_SIZE;
 
         game.HP = "HP:" + game.player.getHealth();
 
@@ -162,7 +162,7 @@ public class GameScreen implements Screen, Observer {
 
         //TODO när man går in i nya kartor dyker fienderna upp igen, de fattar inte att det är en ny karta
 
-        MapSegment.getEnemiesInSegment().forEach(enemy -> {
+        game.segment.getEnemiesInSegment().forEach(enemy -> {
             enemySprite.setPosition((enemy.getPos().getX() % 32) * TILE_SIZE,(enemy.getPos().getY() % 16) * TILE_SIZE);
             enemySprite.draw(sprBatch);
         });

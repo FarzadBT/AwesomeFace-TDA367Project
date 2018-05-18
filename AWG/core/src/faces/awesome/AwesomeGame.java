@@ -50,7 +50,7 @@ public class AwesomeGame extends Game implements Observer {
         int h = Gdx.graphics.getHeight();
 
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
-        player.addNewToInventory(new Sword());
+        player.addNewToInventory(new Sword(this));
         player.addNewToInventory(new Hammer());
         player.setSlot1(player.getInventory().getItem("Sword"));
         player.setSlot2(player.getInventory().getItem("Hammer"));

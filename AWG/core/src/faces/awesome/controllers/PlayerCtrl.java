@@ -29,16 +29,16 @@ public class PlayerCtrl {
 
             player.setFacing(facing);
 
-            world.checkSegmentBorder(player.getPos(), newPosition);
+            segment.checkSegmentBorder(player.getPos(), newPosition);
 
         }
 
 
-        Position worldPos = world.setNewMap(newPosition.getX(), newPosition.getY());
+        Position worldPos = segment.setNewMap(newPosition.getX(), newPosition.getY());
 
         if ( worldPos != null ) {
 
-            world.setPlayerPosOnMap(worldPos);
+            segment.setPlayerPosOnMap(worldPos);
 
             player.move(worldPos.getX()-player.getPos().getX(), worldPos.getY()-player.getPos().getY(), false, false);
 
