@@ -51,8 +51,9 @@ public class AwesomeGame extends Game implements Observer {
 
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
+        player = CharacterFactory.createPlayer(w/TILE_SIZE/2, h/TILE_SIZE/2);
 
-        player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
+        //player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
         player.addNewToInventory(new Sword());
         player.addNewToInventory(new Hammer());
         player.setSlot1(player.getInventory().getItem("Sword"));
@@ -67,7 +68,7 @@ public class AwesomeGame extends Game implements Observer {
 
         world.addObserver(this);
 
-
+        //Stores maps for later use
         MapStorage.AddMap("mainMap", (TiledMap) map);
         MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/maps/smallHouse.tmx"));
         MapStorage.AddMap("mediumHouse", new TmxMapLoader().load("core/assets/maps/mediumHouse.tmx"));
