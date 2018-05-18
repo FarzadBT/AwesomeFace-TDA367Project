@@ -1,13 +1,16 @@
-package faces.awesome.model;
+package faces.awesome.services;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import faces.awesome.model.Position;
+import faces.awesome.model.WorldPosition;
+
 import java.util.Observable;
 
 /*
  * Author: Philip Nilsson
  * Updated by: Therese Sturesson
  *
- * TODO skriva vad klassen gör
+ * A class that keeps track of which map that is current and sets a new map when needed.
  */
 
 public class WorldMap extends Observable {
@@ -43,7 +46,7 @@ public class WorldMap extends Observable {
             return null;
         }
 
-        setCurrentMap(MapStorage.LoadMap(worldPosition.getMap()));
+        setCurrentMap(MapStorage.loadMap(worldPosition.getMap()));
 
         setChanged();
 

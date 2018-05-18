@@ -14,9 +14,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import faces.awesome.AwesomeGame;
 import faces.awesome.controllers.GameCtrl;
+import faces.awesome.model.BossEnemy;
 import faces.awesome.model.Enemy;
-import faces.awesome.model.MapSegment;
-import faces.awesome.model.WorldMap;
+import faces.awesome.services.WorldMap;
 
 import java.util.HashMap;
 import java.util.Observable;
@@ -103,8 +103,8 @@ public class GameScreen implements Screen, Observer {
         game.segment.getEnemiesInSegment().forEach(Enemy::move);
         game.segment.getEnemiesInSegment().forEach(enemy -> enemy.attack(game.player));
 
-        game.segment.boss.move();
-        game.segment.boss.attack(game.player);
+        //game.segment.boss.move();
+        //game.segment.boss.attack(game.player);
 
         //System.out.println(game.player.getHealth());
 
@@ -160,11 +160,17 @@ public class GameScreen implements Screen, Observer {
         //bossSprite.draw(sprBatch);
         //bossSprite.setScale(2.0f);
 
-        //TODO när man går in i nya kartor dyker fienderna upp igen, de fattar inte att det är en ny karta
 
         game.segment.getEnemiesInSegment().forEach(enemy -> {
-            enemySprite.setPosition((enemy.getPos().getX() % 32) * TILE_SIZE,(enemy.getPos().getY() % 16) * TILE_SIZE);
-            enemySprite.draw(sprBatch);
+
+            if (enemy instanceof BossEnemy) {
+                bossSprite.setPosition((enemy.getPos().getX() % 32) * TILE_SIZE,(enemy.getPos().getY() % 16) * TILE_SIZE);
+                bossSprite.draw(sprBatch);
+
+            } else {
+                enemySprite.setPosition((enemy.getPos().getX() % 32) * TILE_SIZE, (enemy.getPos().getY() % 16) * TILE_SIZE);
+                enemySprite.draw(sprBatch);
+            }
         });
 
         slot1Sprite.setPosition(27, 20);

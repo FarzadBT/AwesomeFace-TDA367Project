@@ -1,4 +1,4 @@
-package faces.awesome.model;
+package faces.awesome.services;
 
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
@@ -7,10 +7,19 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import faces.awesome.AwesomeGame;
-
+import faces.awesome.model.BossEnemy;
+import faces.awesome.model.Enemy;
+import faces.awesome.model.Position;
+import faces.awesome.model.WorldPosition;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Author: Therese Sturesson
+ * Updated by:
+ *
+ * TODO skriva vad klassen gör
+ */
 
 public class Tiles {
 
@@ -80,12 +89,19 @@ public class Tiles {
 
                 Position recPos = getCenterOfRecPos(recObject.getRectangle());
 
-                Enemy enemy = new Enemy(recPos, game);
+                Enemy enemy;
+
+                if ( recObject.getName().equals("boss")) {
+
+                    enemy = new BossEnemy(recPos, game);
+
+                } else {
+
+                    enemy = new Enemy(recPos, game);
+
+                }
 
                 enemiesInWorld.add(enemy);
-
-                //if ( recObject.getName().equals("boss") ) { bossEnemy = new BossEnemy(recPos, game);}
-
 
             }
         }

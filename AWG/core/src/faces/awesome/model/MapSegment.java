@@ -1,5 +1,7 @@
 package faces.awesome.model;
 
+import faces.awesome.services.Tiles;
+import faces.awesome.services.WorldMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,29 +9,21 @@ import java.util.List;
  * Author: Philip Nilsson
  * Updated by: Therese Sturesson
  *
- * TODO skriva vad klassen gör
+ * This class represents a finite "chunk" of the world map. Holds a list of Characters and a list
+ * of enemiesInWorld. Whenever an enemiesInWorld attacks, target checking is handled by this class.
+ * It also hols the map position, checks the segments border and checks if a tile is occupied.
  */
-
-/* This class represents a finite "chunk" of the world map. It holds a list of positions in the
- * current segment, a PlayerCharacter, and a list of enemiesInWorld. Whenever an enemiesInWorld
- * attacks, target checking is handled by this class. The list of positions is updated in
- * accordance with changes in WorldPositions.
- */
-
 
 public class MapSegment {
 
     private WorldMap world;
-    public PlayerCharacter player;
+    private Position mapPosition;
 
+    public PlayerCharacter player;
     public BossEnemy boss;
 
     private List<Character> characterInWorld;
-
     private List<Enemy> enemiesInWorld;
-
-
-    private Position mapPosition;
 
 
     public MapSegment(WorldMap World, List<Enemy> enemiesInWorld, PlayerCharacter player, BossEnemy boss){
@@ -48,19 +42,19 @@ public class MapSegment {
     }
 
 
+    // Sets the list of enemies in the world
     public void setEnemiesInWorld (List<Enemy> enemiesInWorld) {
 
         this.enemiesInWorld = enemiesInWorld;
 
         characterInWorld.clear();
-
         characterInWorld.addAll(enemiesInWorld);
         characterInWorld.add(player);
 
     }
 
-    /* Compares the position of each enemiesInWorld in the world with the positions in the current segment. If they match,
-    * the enemiesInWorld is added to EnemiesInSegment */
+
+    // Gets the list of enemies
     public List<Enemy> getEnemiesInSegment(){
 
         int minX = mapPosition.getX() * 32;
@@ -79,7 +73,9 @@ public class MapSegment {
                 enemiesInSegment.add(e);
             }
         }
+
         return enemiesInSegment;
+
     }
 
     /**
@@ -92,17 +88,26 @@ public class MapSegment {
      * @return A list of the enemies that are inside the hitbox
      */
     public List<Enemy> getPlayerTargets(int x1, int y1, int x2, int y2) {
+
         List <Enemy> enemies = getEnemiesInSegment();
         List <Enemy> targets = new ArrayList<>();
+
         for (Enemy enemy : enemies) {
-            if(enemy.getPos().getX() >= x1 && enemy.getPos().getX() <= x2 && enemy.getPos().getY() <= y1 && enemy.getPos().getY() >= y2)
+
+            int x = enemy.getPos().getX();
+            int y = enemy.getPos().getY();
+
+            if(x >= x1 && x <= x2 && y <= y1 && y >= y2)
+
                 targets.add(enemy);
+
         }
 
         return targets;
     }
 
-    //Gets possible target positions for each enemiesInWorld. Called when enemiesInWorld attack.
+
+    //Gets possible target positions for the enemy. Called when the enemy attacks.
     public boolean getTargets(Enemy attacker){
         List<Position> targets = new ArrayList<>();
         Position origin = attacker.getPos();
@@ -130,7 +135,7 @@ public class MapSegment {
     }
 
 
-    //Checks if target position is equal to that of the player. If so; the enemiesInWorld is allowed to attack.
+    // Checks if the position in the list of targets matches the player and if so the enemy will attack.
     public boolean targetIsPlayer(List<Position> targets){
 
         for(Position p : targets){
@@ -144,6 +149,7 @@ public class MapSegment {
     }
 
 
+    // Checks if the position is occupied of other characters or not
     public boolean isOccupied ( Position position ) {
 
         for ( Character c : characterInWorld ) {
@@ -160,20 +166,19 @@ public class MapSegment {
     }
 
 
-    public boolean isSolid(int x, int y) {
-        return Tiles.isSolid(world.getCurrentMap(), x, y);
-    }
-
+    // Gets the list with characters
     public List<Character> getCharacterInWorld() {
         return characterInWorld;
     }
 
+
+    // Gets the list of enemies     TODO används inte, spara?
     public List<Enemy> getEnemiesInWorld() {
         return enemiesInWorld;
     }
 
 
-    //Checks the border for the segment         TODO flytta till Segment?
+    //Checks the border for the segment
     public void checkSegmentBorder (Position oldPos, Position newPos) {
         int xMin = this.mapPosition.getX() * 32;
         int yMin = this.mapPosition.getY() * 16;
@@ -199,6 +204,7 @@ public class MapSegment {
         return mapPosition;
     }
 
+
     //Sets the map position
     public void setMapPosition (int x, int y) {
         mapPosition.setX(x);
@@ -211,6 +217,13 @@ public class MapSegment {
     }
 
 
+    // Delegate the check if a tile is solid or not to the Tiles class
+    public boolean isSolid(int x, int y) {
+        return Tiles.isSolid(world.getCurrentMap(), x, y);
+    }
+
+
+    // Delegate the set of the new map and sets the map position
     public Position setNewMap(int x, int y) {
 
         Position pos = world.setNewMap(x, y);

@@ -1,6 +1,8 @@
 package faces.awesome.controllers;
 
 import faces.awesome.model.*;
+import faces.awesome.services.Tiles;
+import faces.awesome.services.WorldMap;
 
 public class PlayerCtrl {
 
@@ -15,7 +17,7 @@ public class PlayerCtrl {
         this.segment = segment;
     }
 
-    //TODO använda segment istället för world?
+    //TODO kolla om det går att använda segment istället för world
   
     public void tryMove(int dx, int dy, Facing facing) {
 
@@ -32,7 +34,6 @@ public class PlayerCtrl {
             segment.checkSegmentBorder(player.getPos(), newPosition);
 
         }
-
 
         Position worldPos = segment.setNewMap(newPosition.getX(), newPosition.getY());
 
@@ -58,6 +59,7 @@ public class PlayerCtrl {
     public void useItem2(){
         player.useSlot2();
     }
+
 }
 
 

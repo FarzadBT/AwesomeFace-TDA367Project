@@ -3,13 +3,15 @@ package faces.awesome;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import faces.awesome.controllers.PlayerCtrl;
 import faces.awesome.model.*;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
+import faces.awesome.services.MapStorage;
+import faces.awesome.services.Tiles;
+import faces.awesome.services.WorldMap;
 import faces.awesome.view.GameScreen;
 
 import java.util.ArrayList;
@@ -57,15 +59,15 @@ public class AwesomeGame extends Game implements Observer {
 
         boss = new BossEnemy(new Position(8, 10), this);
 
-        Map map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
+        TiledMap map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
 
         //Wraps the TileMap for easier access
-        world = new WorldMap((TiledMap) map);
+        world = new WorldMap(map);
 
         world.addObserver(this);
 
 
-        MapStorage.addMap("mainMap", (TiledMap) map);
+        MapStorage.addMap("mainMap", map);
         MapStorage.addMap("smallHouse", new TmxMapLoader().load("core/assets/maps/smallHouse.tmx"));
         MapStorage.addMap("mediumHouse", new TmxMapLoader().load("core/assets/maps/mediumHouse.tmx"));
         MapStorage.addMap("bigHouse", new TmxMapLoader().load("core/assets/maps/bigHouse.tmx"));
