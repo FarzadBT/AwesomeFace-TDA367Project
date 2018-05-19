@@ -20,18 +20,16 @@ public class MapSegment {
     private Position mapPosition;
 
     public PlayerCharacter player;
-    public BossEnemy boss;
 
     private List<Character> characterInWorld;
     private List<Enemy> enemiesInWorld;
 
 
-    public MapSegment(WorldMap World, List<Enemy> enemiesInWorld, PlayerCharacter player, BossEnemy boss){
+    public MapSegment(WorldMap World, List<Enemy> enemiesInWorld, PlayerCharacter player){
 
         this.player = player;
         this.enemiesInWorld = enemiesInWorld;
         this.world = World;
-        this.boss = boss;
 
         this.mapPosition = new Position(0, 0);
 
@@ -136,7 +134,7 @@ public class MapSegment {
 
 
     // Checks if the position in the list of targets matches the player and if so the enemy will attack.
-    public boolean targetIsPlayer(List<Position> targets){
+    private boolean targetIsPlayer(List<Position> targets){
 
         for(Position p : targets){
 
@@ -206,7 +204,7 @@ public class MapSegment {
 
 
     //Sets the map position
-    public void setMapPosition (int x, int y) {
+    private void setMapPosition (int x, int y) {
         mapPosition.setX(x);
         mapPosition.setY(y);
     }

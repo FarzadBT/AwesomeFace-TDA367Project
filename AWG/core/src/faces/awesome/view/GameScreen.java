@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -45,7 +46,8 @@ public class GameScreen implements Screen, Observer {
     private Sprite slot1Sprite;
     private Sprite slot2Sprite;
 
-
+    private BitmapFont HPfont;
+    private String HP;
 
     private HashMap<String, Texture> textures = new HashMap<>();
 
@@ -89,6 +91,9 @@ public class GameScreen implements Screen, Observer {
         gameController = new GameCtrl(game.playerCtrl, camera);
         Gdx.input.setInputProcessor(gameController);
 
+        HPfont = new BitmapFont();
+        HPfont.getData().setScale(2.0f);
+
     }
 
 
@@ -100,18 +105,15 @@ public class GameScreen implements Screen, Observer {
     // render-logic here
     public void update(float delta) {
 
-        game.segment.getEnemiesInSegment().forEach(Enemy::move);
+        game.segment.getEnemiesInSegment().forEach(Enemy::tryMove);
         game.segment.getEnemiesInSegment().forEach(enemy -> enemy.attack(game.player));
-
-        //game.segment.boss.move();
-        //game.segment.boss.attack(game.player);
 
         //System.out.println(game.player.getHealth());
 
         camera.position.x = ((game.segment.getMapPosition().getX() * 32) + 16) * TILE_SIZE;
         camera.position.y = ((game.segment.getMapPosition().getY() * 16) + 8) * TILE_SIZE;
 
-        game.HP = "HP:" + game.player.getHealth();
+        HP = "HP:" + game.player.getHealth();
 
         slot1Sprite.setTexture(textures.get(game.segment.player.getSlot1().getName()));
         slot2Sprite.setTexture(textures.get(game.segment.player.getSlot2().getName()));
@@ -181,8 +183,8 @@ public class GameScreen implements Screen, Observer {
         slot2Sprite.setScale(2.0f);
         slot2Sprite.draw(sprBatch);
 
-        game.HPfont.setColor(1.0f, 1.0f, 1.0f, 10.f);
-        game.HPfont.draw(sprBatch, game.HP, 25,500);
+        HPfont.setColor(1.0f, 1.0f, 1.0f, 10.f);
+        HPfont.draw(sprBatch, HP, 25,500);
 
         sprBatch.end();
     }

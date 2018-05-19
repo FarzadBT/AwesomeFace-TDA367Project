@@ -2,7 +2,12 @@ package faces.awesome.model;
 
 import faces.awesome.AwesomeGame;
 
-/* This class represents a boss enemy. Simply a stronger form of enemy. If this dies, the player "wins" the game.*/
+/*
+ * Author: Philip Nilsson
+ * Updated by: Therese Sturesson
+ *
+ * This class represents a boss enemy. Simply a stronger form of enemy. If this dies, the player "wins" the game.
+ */
 
 public class BossEnemy extends Enemy {
 
@@ -13,12 +18,37 @@ public class BossEnemy extends Enemy {
         name = "bossEnemy";
     }
 
-    public boolean checkDeath(){
-        if(this.getHealth() == 0){
-            return true;
+
+    //Overrides enemys move because this enemy are bigger and therefor you have the check two tiles instead of one
+    @Override
+    protected void move(boolean solid, boolean occupied, boolean withInBorder, Position newPosition) {
+
+        //Rör sig 1 gång på 30 gånger, TODO ska egentligen inte vara här, ta bort senare
+        int randInt = randomGenerator.nextInt(50);
+
+        if ( randInt > 1 ) {
+            return;
         }
 
-        return false;
+        solid = solid || game.segment.isSolid(newPosition.getX()+1, newPosition.getY());
+
+        if (!solid && !occupied && withInBorder) {
+
+            setPos(newPosition);
+
+        }
+
+    }
+
+
+    // If the boss dies, the player wins
+    @Override
+    public void death(){
+
+        if(this.getHealth() == 0){
+
+        }
+
     }
 
 }

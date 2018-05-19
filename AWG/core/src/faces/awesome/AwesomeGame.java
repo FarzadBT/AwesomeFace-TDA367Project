@@ -40,9 +40,6 @@ public class AwesomeGame extends Game implements Observer {
 
     public WorldMap world;
 
-    public int health;
-    public String HP;
-    public BitmapFont HPfont;
 
     @Override
     public void create() {
@@ -57,7 +54,7 @@ public class AwesomeGame extends Game implements Observer {
         player.setSlot1(player.getInventory().getItem("Sword"));
         player.setSlot2(player.getInventory().getItem("Hammer"));
 
-        boss = new BossEnemy(new Position(8, 10), this);
+        //boss = new BossEnemy(new Position(8, 10), this);
 
         TiledMap map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
 
@@ -73,18 +70,12 @@ public class AwesomeGame extends Game implements Observer {
         MapStorage.addMap("bigHouse", new TmxMapLoader().load("core/assets/maps/bigHouse.tmx"));
         MapStorage.addMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
 
-        segment = new MapSegment(world, enemiesInWorld, player, boss);
+        segment = new MapSegment(world, enemiesInWorld, player);
 
         update(null, null);
 
         playerCtrl = new PlayerCtrl(player, world, segment);
 
-        System.out.println(enemiesInWorld);
-
-
-        health = player.getMaxHealth();
-        HPfont = new BitmapFont();
-        HPfont.getData().setScale(2.0f);
 
         this.setScreen(new GameScreen(this, world));
     }
@@ -93,23 +84,7 @@ public class AwesomeGame extends Game implements Observer {
     public void render() {
 
         super.render();
-        /*// setup rendering logic for controllers
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        camera.update();
-        tiledMapRenderer.setView(camera);
-        tiledMapRenderer.render();
-
-        Position playerPos = player.getPos();
-        float playerX = playerPos.getX() * TILE_SIZE;
-        float playerY = playerPos.getY() * TILE_SIZE;
-
-        batch.begin();
-        sprite.setPlayerPosOnMap(playerX, playerY);
-        sprite.draw(batch);
-        batch.end();*/
     }
 
     @Override

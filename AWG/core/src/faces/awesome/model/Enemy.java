@@ -1,15 +1,21 @@
 package faces.awesome.model;
 
 import faces.awesome.AwesomeGame;
-
 import java.util.Random;
+
+/*
+ * Author: Therese Sturesson
+ * Updated by: Philip Nilsson
+ *
+ * TODO skriva vad klassen gör
+ */
 
 public class Enemy extends Character {
 
-    private Random randomGenerator = new Random();
+    protected Random randomGenerator = new Random();
 
     private MapSegment segment;
-    private AwesomeGame game;
+    protected AwesomeGame game;
 
 
     public Enemy(Position pos, AwesomeGame game){
@@ -19,7 +25,28 @@ public class Enemy extends Character {
     }
 
 
-    public void move() {
+    //Checks if the enemy can move or not
+    public void tryMove () {
+
+        Position randPosition = randomPosition();
+
+        Position newPosition = getPos().movePos(randPosition.getX(), randPosition.getY());
+
+
+        boolean solid = game.segment.isSolid(newPosition.getX(), newPosition.getY());
+
+        boolean occupied = game.segment.isOccupied(newPosition);
+
+        boolean withInBorder = checkWithInBorder(newPosition);
+
+
+        move(solid, occupied, withInBorder, newPosition);
+
+    }
+
+
+    //Moves the enemy
+    protected void move(boolean solid, boolean occupied, boolean withInBorder, Position newPosition) {
 
         //Rör sig 1 gång på 30 gånger, TODO ska egentligen inte vara här, ta bort senare
         int randInt = randomGenerator.nextInt(30);
@@ -27,17 +54,6 @@ public class Enemy extends Character {
         if ( randInt > 1 ) {
             return;
         }
-
-
-        Position randPosition = randomPosition();
-
-        Position newPosition = getPos().movePos(randPosition.getX(), randPosition.getY());
-
-        boolean solid = game.segment.isSolid(newPosition.getX(), newPosition.getY());
-
-        boolean occupied = game.segment.isOccupied(newPosition);
-
-        boolean withInBorder = checkWithInBorder(newPosition);
 
         if (!solid && !occupied && withInBorder) {
 
@@ -47,6 +63,8 @@ public class Enemy extends Character {
 
     }
 
+
+    //The enemy attacks if this method is called
     public void attack(Character ch) {
 
         boolean shouldAttack = game.segment.getTargets(this);
@@ -61,6 +79,7 @@ public class Enemy extends Character {
     }
 
 
+    //Checks if the enemy is within the segment border
     private boolean checkWithInBorder(Position position ) {
 
         int xMin = (this.getPos().getX() / 32) * 32;
@@ -77,6 +96,7 @@ public class Enemy extends Character {
     }
 
 
+    //Gives the enemy a random position to move to
     private Position randomPosition() {
 
         Position randPos = new Position(0,0);
@@ -111,6 +131,7 @@ public class Enemy extends Character {
     }
 
 
+    //If the enemy dies it will be remove from the list
     @Override
     public void death() {
 

@@ -1,17 +1,21 @@
 package faces.awesome.model;
 
-/**
- * Created by Mr Cornholio on 08/05/2018.
+/*
+ * Author: Farzad Besharati
+ * Updated by: Therese Sturesson
+ *
+ * TODO skriva vad klassen gör
  */
+
 public class GameObject {
-    // Use a vector to encapsulate playerCharacter coordinates?
-    // character position, perhaps this should be represented in a different way.
+
+    // A GameObject have a position
     protected Position pos;
 
-    //Character facing, north, east, west, south. Could potentially be used in the attack method
-    // to always swing in the direction that the character is facing.
+    //A GameObject have a facing
     protected Facing facing;
 
+    //A GameObject have a name
     protected String name;
 
     public GameObject(Position pos, String name) {
@@ -20,10 +24,12 @@ public class GameObject {
         this.name = name;
     }
 
+    //Get the facing of the GameObject
     public Facing getFacing() {
         return facing;
     }
 
+    //Set the facing of the GameObject
     public void setFacing(Facing facing) {
         this.facing = facing;
     }
@@ -38,7 +44,9 @@ public class GameObject {
         this.pos = pos;
     }
 
+    //Get the name of the GameObject
     public String getName() {
         return name;
     }
+
 }
