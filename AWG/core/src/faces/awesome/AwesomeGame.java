@@ -2,38 +2,37 @@ package faces.awesome;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import faces.awesome.controllers.EnemyCtrl;
 import faces.awesome.controllers.PlayerCtrl;
-import faces.awesome.model.*;
+import faces.awesome.model.Enemy;
+import faces.awesome.model.MapSegment;
+import faces.awesome.model.PlayerCharacter;
+import faces.awesome.model.Position;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
 import faces.awesome.services.MapStorage;
 import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
 import faces.awesome.view.GameScreen;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 public class AwesomeGame extends Game implements Observer {
+
     public static final int TILE_SIZE = 32;
     public static final int VIEW_PORT_WIDTH = 1024;
     public static final int VIEW_PORT_HEIGHT = 512;
 
-
     // TO-do: instead of having a a HasA depndency, let's just use dependency inject playerCharacter where we need it.
 
     public PlayerCharacter player;
-
     public PlayerCtrl playerCtrl;
 
+    public EnemyCtrl enemyCtrl;
+
     public MapSegment segment;
-
-
     public WorldMap world;
 
 
@@ -69,6 +68,8 @@ public class AwesomeGame extends Game implements Observer {
         update(null, null);
 
         playerCtrl = new PlayerCtrl(player, world, segment);
+
+        enemyCtrl = new EnemyCtrl(segment);
 
 
         this.setScreen(new GameScreen(this, world));

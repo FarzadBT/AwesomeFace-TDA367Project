@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import faces.awesome.AwesomeGame;
+import faces.awesome.controllers.EnemyCtrl;
 import faces.awesome.controllers.GameCtrl;
 import faces.awesome.model.BossEnemy;
 import faces.awesome.model.Enemy;
@@ -105,10 +106,10 @@ public class GameScreen implements Screen, Observer {
     // render-logic here
     public void update(float delta) {
 
-        game.segment.getEnemiesInSegment().forEach(Enemy::tryMove);
-        game.segment.getEnemiesInSegment().forEach(enemy -> enemy.attack(game.player));
+        game.segment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.tryMove(enemy));
 
-        //System.out.println(game.player.getHealth());
+        game.segment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.shouldAttack(enemy, game.player));
+
 
         camera.position.x = ((game.segment.getMapPosition().getX() * 32) + 16) * TILE_SIZE;
         camera.position.y = ((game.segment.getMapPosition().getY() * 16) + 8) * TILE_SIZE;
@@ -187,9 +188,10 @@ public class GameScreen implements Screen, Observer {
         HPfont.draw(sprBatch, HP, 25,500);
 
         sprBatch.end();
+        
     }
 
-    public void refetchMap () {
+    private void refetchMap () {
 
         mapRenderer = new OrthogonalTiledMapRenderer(world.getCurrentMap());
 

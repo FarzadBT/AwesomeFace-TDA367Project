@@ -1,7 +1,5 @@
 package faces.awesome.model;
 
-import faces.awesome.AwesomeGame;
-
 /*
  * Author: Philip Nilsson
  * Updated by: Therese Sturesson
@@ -11,8 +9,8 @@ import faces.awesome.AwesomeGame;
 
 public class BossEnemy extends Enemy {
 
-    public BossEnemy(Position pos, MapSegment segment) {
-        super(pos, segment);
+    public BossEnemy(Position pos) {
+        super(pos);
         baseDamage = 5;
         health = maxHealth*2;
         name = "bossEnemy";
@@ -21,7 +19,7 @@ public class BossEnemy extends Enemy {
 
     //Overrides enemys move because this enemy are bigger and therefor you have the check two tiles instead of one
     @Override
-    protected void move(boolean solid, boolean occupied, boolean withInBorder, Position newPosition) {
+    public void move(boolean solid, boolean occupied, boolean withInBorder, Position newPosition) {
 
         //Rör sig 1 gång på 30 gånger, TODO ska egentligen inte vara här, ta bort senare
         int randInt = randomGenerator.nextInt(50);
@@ -30,7 +28,8 @@ public class BossEnemy extends Enemy {
             return;
         }
 
-        solid = solid || segment.isSolid(newPosition.getX()+1, newPosition.getY());
+        //Flytta till enemy controller
+        //solid = solid || segment.isSolid(newPosition.getX()+1, newPosition.getY());
 
         if (!solid && !occupied && withInBorder) {
 

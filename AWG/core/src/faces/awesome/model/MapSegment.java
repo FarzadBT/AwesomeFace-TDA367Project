@@ -46,6 +46,8 @@ public class MapSegment {
 
     }
 
+
+    //Removes an enemy from the enemiesInWorld list
     public void removeEnemy (Enemy enemy) {
         enemiesInWorld.remove(enemy);
     }
@@ -105,7 +107,7 @@ public class MapSegment {
 
 
     //Gets possible target positions for the enemy. Called when the enemy attacks.
-    public boolean getTargets(Enemy attacker){
+    public boolean hasTargets(Enemy attacker){
         List<Position> targets = new ArrayList<>();
         Position origin = attacker.getPos();
 
@@ -208,6 +210,7 @@ public class MapSegment {
         mapPosition.setY(y);
     }
 
+
     //Sets the players position on the map
     public void setPlayerPosOnMap (Position playerPos) {
         this.mapPosition = new Position(playerPos.getX()/32, playerPos.getY()/16);
@@ -232,4 +235,5 @@ public class MapSegment {
         return pos;
 
     }
+
 }

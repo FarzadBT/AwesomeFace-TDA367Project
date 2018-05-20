@@ -91,11 +91,11 @@ public class Tiles {
 
                 if ( recObject.getName().equals("boss")) {
 
-                    enemy = new BossEnemy(recPos, segment);
+                    enemy = new BossEnemy(recPos);
 
                 } else {
 
-                    enemy = new Enemy(recPos, segment);
+                    enemy = new Enemy(recPos);
 
                 }
 

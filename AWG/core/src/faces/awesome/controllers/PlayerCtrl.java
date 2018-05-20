@@ -4,6 +4,13 @@ import faces.awesome.model.*;
 import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
 
+/*
+ * Author: Therese Sturesson
+ * Updated by: Philip Nilsson, Farzad Besharati
+ *
+ * TODO skriva vad klassen gör
+ */
+
 public class PlayerCtrl {
 
     private final WorldMap world;
