@@ -14,14 +14,14 @@ public class Enemy extends Character {
 
     protected Random randomGenerator = new Random();
 
-    private MapSegment segment;
+    protected MapSegment segment;
     protected AwesomeGame game;
 
 
-    public Enemy(Position pos, AwesomeGame game){
+    public Enemy(Position pos, MapSegment segment){
         super(pos, 2, 15, "enemy");
+        this.segment = segment;
         health = maxHealth;
-        this.game = game;
     }
 
 
@@ -33,9 +33,9 @@ public class Enemy extends Character {
         Position newPosition = getPos().movePos(randPosition.getX(), randPosition.getY());
 
 
-        boolean solid = game.segment.isSolid(newPosition.getX(), newPosition.getY());
+        boolean solid = segment.isSolid(newPosition.getX(), newPosition.getY());
 
-        boolean occupied = game.segment.isOccupied(newPosition);
+        boolean occupied = segment.isOccupied(newPosition);
 
         boolean withInBorder = checkWithInBorder(newPosition);
 
@@ -67,7 +67,7 @@ public class Enemy extends Character {
     //The enemy attacks if this method is called
     public void attack(Character ch) {
 
-        boolean shouldAttack = game.segment.getTargets(this);
+        boolean shouldAttack = segment.getTargets(this);
 
         if ( !shouldAttack ) {
 
@@ -135,8 +135,8 @@ public class Enemy extends Character {
     @Override
     public void death() {
 
-        game.enemiesInWorld.remove(this);
-        game.segment.getCharacterInWorld().remove(this);
+        segment.removeEnemy(this);
+        segment.getCharacterInWorld().remove(this);
 
     }
 

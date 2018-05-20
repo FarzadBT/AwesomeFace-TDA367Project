@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class Sword extends BaseItem {
 
-    private AwesomeGame game;
+    private MapSegment segment;
 
-    public Sword(AwesomeGame game) {
-        this.game = game;
+    public Sword(MapSegment segment) {
+        this.segment = segment;
         name = "Sword";
     }
 
@@ -32,13 +32,13 @@ public class Sword extends BaseItem {
         List<Enemy> enemies = new ArrayList<>();
         int x = pos.getX(), y = pos.getY();
         if (facing == Facing.SOUTH)
-            enemies = game.segment.getPlayerTargets(x-1, y-1, x+1, y-1);
+            enemies = segment.getPlayerTargets(x-1, y-1, x+1, y-1);
         else if(facing == Facing.NORTH)
-            enemies = game.segment.getPlayerTargets(x-1, y+1, x+1, y+1);
+            enemies = segment.getPlayerTargets(x-1, y+1, x+1, y+1);
         else if(facing == Facing.EAST)
-            enemies = game.segment.getPlayerTargets(x+1, y+1, x+1, y-1);
+            enemies = segment.getPlayerTargets(x+1, y+1, x+1, y-1);
         else if(facing == Facing.WEST)
-            enemies = game.segment.getPlayerTargets(x-1, y+1, x-1, y-1);
+            enemies = segment.getPlayerTargets(x-1, y+1, x-1, y-1);
 
         for (Enemy enemy : enemies) {
             enemy.decreaseHealth(5);

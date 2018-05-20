@@ -7,10 +7,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import faces.awesome.AwesomeGame;
-import faces.awesome.model.BossEnemy;
-import faces.awesome.model.Enemy;
-import faces.awesome.model.Position;
-import faces.awesome.model.WorldPosition;
+import faces.awesome.model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +75,7 @@ public class Tiles {
     }
 
 
-    public static List<Enemy> populateWorldWithEnemies (Map currentMap, AwesomeGame game) {
+    public static List<Enemy> populateWorldWithEnemies (Map currentMap, MapSegment segment) {
 
         List<Enemy> enemiesInWorld = new ArrayList<>();
 
@@ -93,11 +91,11 @@ public class Tiles {
 
                 if ( recObject.getName().equals("boss")) {
 
-                    enemy = new BossEnemy(recPos, game);
+                    enemy = new BossEnemy(recPos, segment);
 
                 } else {
 
-                    enemy = new Enemy(recPos, game);
+                    enemy = new Enemy(recPos, segment);
 
                 }
 

@@ -29,13 +29,9 @@ public class AwesomeGame extends Game implements Observer {
 
     public PlayerCharacter player;
 
-    public BossEnemy boss;
-
     public PlayerCtrl playerCtrl;
 
     public MapSegment segment;
-
-    public List<Enemy> enemiesInWorld = new ArrayList<>();
 
 
     public WorldMap world;
@@ -45,17 +41,6 @@ public class AwesomeGame extends Game implements Observer {
     public void create() {
         // setup model here.
 
-        int w = Gdx.graphics.getWidth();
-        int h = Gdx.graphics.getHeight();
-
-        player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
-        player.addNewToInventory(new Sword(this));
-        player.addNewToInventory(new Hammer());
-        player.setSlot1(player.getInventory().getItem("Sword"));
-        player.setSlot2(player.getInventory().getItem("Hammer"));
-
-        //boss = new BossEnemy(new Position(8, 10), this);
-
         TiledMap map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
 
         //Wraps the TileMap for easier access
@@ -63,6 +48,16 @@ public class AwesomeGame extends Game implements Observer {
 
         world.addObserver(this);
 
+        int w = Gdx.graphics.getWidth();
+        int h = Gdx.graphics.getHeight();
+        player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
+
+        segment = new MapSegment(world, player);
+
+        player.addNewToInventory(new Sword(segment));
+        player.addNewToInventory(new Hammer());
+        player.setSlot1(player.getInventory().getItem("Sword"));
+        player.setSlot2(player.getInventory().getItem("Hammer"));
 
         MapStorage.addMap("mainMap", map);
         MapStorage.addMap("smallHouse", new TmxMapLoader().load("core/assets/maps/smallHouse.tmx"));
@@ -70,7 +65,6 @@ public class AwesomeGame extends Game implements Observer {
         MapStorage.addMap("bigHouse", new TmxMapLoader().load("core/assets/maps/bigHouse.tmx"));
         MapStorage.addMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
 
-        segment = new MapSegment(world, enemiesInWorld, player);
 
         update(null, null);
 
@@ -96,11 +90,7 @@ public class AwesomeGame extends Game implements Observer {
     @Override
     public void update(Observable observable, Object o) {
 
-        enemiesInWorld.clear();
-
-        enemiesInWorld.addAll(Tiles.populateWorldWithEnemies(world.getCurrentMap(), this));
-
-        segment.setEnemiesInWorld(enemiesInWorld);
+        segment.setEnemiesInWorld(Tiles.populateWorldWithEnemies(world.getCurrentMap(), segment));
 
     }
 }

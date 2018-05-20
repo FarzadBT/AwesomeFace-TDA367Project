@@ -11,8 +11,8 @@ import faces.awesome.AwesomeGame;
 
 public class BossEnemy extends Enemy {
 
-    public BossEnemy(Position pos, AwesomeGame game) {
-        super(pos, game);
+    public BossEnemy(Position pos, MapSegment segment) {
+        super(pos, segment);
         baseDamage = 5;
         health = maxHealth*2;
         name = "bossEnemy";
@@ -30,7 +30,7 @@ public class BossEnemy extends Enemy {
             return;
         }
 
-        solid = solid || game.segment.isSolid(newPosition.getX()+1, newPosition.getY());
+        solid = solid || segment.isSolid(newPosition.getX()+1, newPosition.getY());
 
         if (!solid && !occupied && withInBorder) {
 

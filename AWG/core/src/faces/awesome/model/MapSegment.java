@@ -21,21 +21,16 @@ public class MapSegment {
 
     public PlayerCharacter player;
 
-    private List<Character> characterInWorld;
-    private List<Enemy> enemiesInWorld;
+    private List<Character> characterInWorld = new ArrayList<>();
+    private List<Enemy> enemiesInWorld = new ArrayList<>();
 
 
-    public MapSegment(WorldMap World, List<Enemy> enemiesInWorld, PlayerCharacter player){
+    public MapSegment(WorldMap World, PlayerCharacter player){
 
         this.player = player;
-        this.enemiesInWorld = enemiesInWorld;
         this.world = World;
 
         this.mapPosition = new Position(0, 0);
-
-        characterInWorld = new ArrayList<>();
-        characterInWorld.addAll(enemiesInWorld);
-        characterInWorld.add(player);
 
     }
 
@@ -49,6 +44,10 @@ public class MapSegment {
         characterInWorld.addAll(enemiesInWorld);
         characterInWorld.add(player);
 
+    }
+
+    public void removeEnemy (Enemy enemy) {
+        enemiesInWorld.remove(enemy);
     }
 
 
