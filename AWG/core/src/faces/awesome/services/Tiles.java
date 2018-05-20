@@ -6,9 +6,8 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import faces.awesome.AwesomeGame;
+import com.squareup.otto.Bus;
 import faces.awesome.model.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +74,7 @@ public class Tiles {
     }
 
 
-    public static List<Enemy> populateWorldWithEnemies (Map currentMap, MapSegment segment) {
+    public static List<Enemy> populateWorldWithEnemies (Map currentMap, Bus bus) {
 
         List<Enemy> enemiesInWorld = new ArrayList<>();
 
@@ -91,11 +90,11 @@ public class Tiles {
 
                 if ( recObject.getName().equals("boss")) {
 
-                    enemy = new BossEnemy(recPos);
+                    enemy = new BossEnemy(recPos, bus);
 
                 } else {
 
-                    enemy = new Enemy(recPos);
+                    enemy = new Enemy(recPos, bus);
 
                 }
 

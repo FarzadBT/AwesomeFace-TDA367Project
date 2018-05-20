@@ -13,17 +13,17 @@ import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.squareup.otto.Subscribe;
 import faces.awesome.AwesomeGame;
 import faces.awesome.controllers.GameCtrl;
+import faces.awesome.events.MapChangedEvent;
 import faces.awesome.model.BossEnemy;
 import faces.awesome.services.WorldMap;
 import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
 
 import static faces.awesome.AwesomeGame.TILE_SIZE;
 
-public class GameScreen implements Screen, Observer {
+public class GameScreen implements Screen {
 
     private final AwesomeGame game;
     private GameCtrl gameController;
@@ -58,7 +58,7 @@ public class GameScreen implements Screen, Observer {
         gamePort.apply();
 
         this.world = world;
-        this.world.addObserver(this);
+        game.bus.register(this);
         refetchMap();
 
         //tmp
@@ -220,8 +220,8 @@ public class GameScreen implements Screen, Observer {
     }
 
 
-    @Override
-    public void update(Observable observable, Object o) {
+    @Subscribe
+    public void mapchangedEvent(MapChangedEvent event) {
 
         refetchMap();
 

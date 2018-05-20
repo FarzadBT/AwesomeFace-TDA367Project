@@ -1,5 +1,8 @@
 package faces.awesome.model;
 
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
+import faces.awesome.events.EnemyDiedEvent;
 import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
 import java.util.ArrayList;
@@ -17,6 +20,7 @@ import java.util.List;
 public class MapSegment {
 
     private WorldMap world;
+    private Bus bus;
     private Position mapPosition;
 
     public PlayerCharacter player;
@@ -25,12 +29,15 @@ public class MapSegment {
     private List<Enemy> enemiesInWorld = new ArrayList<>();
 
 
-    public MapSegment(WorldMap World, PlayerCharacter player){
+    public MapSegment(WorldMap World, PlayerCharacter player, Bus bus){
 
         this.player = player;
         this.world = World;
+        this.bus = bus;
 
         this.mapPosition = new Position(0, 0);
+
+        this.bus.register(this);
 
     }
 
@@ -44,12 +51,6 @@ public class MapSegment {
         characterInWorld.addAll(enemiesInWorld);
         characterInWorld.add(player);
 
-    }
-
-
-    //Removes an enemy from the enemiesInWorld list
-    public void removeEnemy (Enemy enemy) {
-        enemiesInWorld.remove(enemy);
     }
 
 
@@ -233,6 +234,14 @@ public class MapSegment {
         }
 
         return pos;
+
+    }
+
+    @Subscribe
+    public void handleEnemyDiedEvent(EnemyDiedEvent event) {
+
+        enemiesInWorld.remove(event.getEnemy());
+        characterInWorld.remove(event.getEnemy());
 
     }
 

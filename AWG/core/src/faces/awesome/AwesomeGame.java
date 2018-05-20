@@ -4,9 +4,12 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
+import com.squareup.otto.ThreadEnforcer;
 import faces.awesome.controllers.EnemyCtrl;
 import faces.awesome.controllers.PlayerCtrl;
-import faces.awesome.model.Enemy;
+import faces.awesome.events.MapChangedEvent;
 import faces.awesome.model.MapSegment;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
@@ -16,10 +19,8 @@ import faces.awesome.services.MapStorage;
 import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
 import faces.awesome.view.GameScreen;
-import java.util.Observable;
-import java.util.Observer;
 
-public class AwesomeGame extends Game implements Observer {
+public class AwesomeGame extends Game {
 
     public static final int TILE_SIZE = 32;
     public static final int VIEW_PORT_WIDTH = 1024;
@@ -34,24 +35,27 @@ public class AwesomeGame extends Game implements Observer {
 
     public MapSegment segment;
     public WorldMap world;
+    public Bus bus;
 
 
     @Override
     public void create() {
         // setup model here.
 
+        bus = new Bus(ThreadEnforcer.ANY);
+        bus.register(this);
+
         TiledMap map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
 
         //Wraps the TileMap for easier access
-        world = new WorldMap(map);
+        world = new WorldMap(map, bus);
 
-        world.addObserver(this);
 
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
         player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
 
-        segment = new MapSegment(world, player);
+        segment = new MapSegment(world, player, bus);
 
         player.addNewToInventory(new Sword(segment));
         player.addNewToInventory(new Hammer());
@@ -64,8 +68,7 @@ public class AwesomeGame extends Game implements Observer {
         MapStorage.addMap("bigHouse", new TmxMapLoader().load("core/assets/maps/bigHouse.tmx"));
         MapStorage.addMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
 
-
-        update(null, null);
+        handleMapChangedEvent(null);
 
         playerCtrl = new PlayerCtrl(player, world, segment);
 
@@ -87,11 +90,11 @@ public class AwesomeGame extends Game implements Observer {
         //img.dispose();
     }
 
+    @Subscribe
+    public void handleMapChangedEvent(MapChangedEvent event) {
 
-    @Override
-    public void update(Observable observable, Object o) {
-
-        segment.setEnemiesInWorld(Tiles.populateWorldWithEnemies(world.getCurrentMap(), segment));
+        segment.setEnemiesInWorld(Tiles.populateWorldWithEnemies(world.getCurrentMap(), bus));
 
     }
+
 }

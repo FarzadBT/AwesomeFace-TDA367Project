@@ -1,5 +1,8 @@
 package faces.awesome.model;
 
+import com.squareup.otto.Bus;
+import faces.awesome.events.EnemyDiedEvent;
+
 import java.util.Random;
 
 /*
@@ -12,12 +15,14 @@ import java.util.Random;
 public class Enemy extends Character {
 
     protected Random randomGenerator = new Random();
+    private Bus bus;
 
     //protected MapSegment segment;
 
 
-    public Enemy(Position pos){
+    public Enemy(Position pos, Bus bus){
         super(pos, 2, 15, "enemy");
+        this.bus = bus;
         health = maxHealth;
     }
 
@@ -53,9 +58,12 @@ public class Enemy extends Character {
     @Override
     public void death() {
 
+        bus.post(new EnemyDiedEvent(this));
+
         //segment.removeEnemy(this);
         //segment.getCharacterInWorld().remove(this);
 
     }
+
 
 }

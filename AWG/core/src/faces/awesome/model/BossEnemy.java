@@ -7,10 +7,12 @@ package faces.awesome.model;
  * This class represents a boss enemy. Simply a stronger form of enemy. If this dies, the player "wins" the game.
  */
 
+import com.squareup.otto.Bus;
+
 public class BossEnemy extends Enemy {
 
-    public BossEnemy(Position pos) {
-        super(pos);
+    public BossEnemy(Position pos, Bus bus) {
+        super(pos, bus);
         baseDamage = 5;
         health = maxHealth*2;
         name = "bossEnemy";

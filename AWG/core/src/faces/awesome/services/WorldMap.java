@@ -1,10 +1,10 @@
 package faces.awesome.services;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.squareup.otto.Bus;
+import faces.awesome.events.MapChangedEvent;
 import faces.awesome.model.Position;
 import faces.awesome.model.WorldPosition;
-
-import java.util.Observable;
 
 /*
  * Author: Philip Nilsson
@@ -13,15 +13,17 @@ import java.util.Observable;
  * A class that keeps track of which map that is current and sets a new map when needed.
  */
 
-public class WorldMap extends Observable {
+public class WorldMap {
 
     //Current tilemap
     private TiledMap currentMap;
+    private Bus bus;
 
 
     //Constructor, takes a TiledMap
-    public WorldMap (TiledMap map){
+    public WorldMap(TiledMap map, Bus bus){
         this.currentMap = map;
+        this.bus = bus;
     }
 
 
@@ -48,9 +50,7 @@ public class WorldMap extends Observable {
 
         setCurrentMap(MapStorage.loadMap(worldPosition.getMap()));
 
-        setChanged();
-
-        notifyObservers();
+        bus.post(new MapChangedEvent());
 
         return new Position(worldPosition.getX(), worldPosition.getY());
 
