@@ -28,8 +28,6 @@ public class BossEnemy extends Enemy {
             return;
         }
 
-        //Flytta till enemy controller
-        //solid = solid || segment.isSolid(newPosition.getX()+1, newPosition.getY());
 
         if (!solid && !occupied && withInBorder) {
 

@@ -14,12 +14,9 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import faces.awesome.AwesomeGame;
-import faces.awesome.controllers.EnemyCtrl;
 import faces.awesome.controllers.GameCtrl;
 import faces.awesome.model.BossEnemy;
-import faces.awesome.model.Enemy;
 import faces.awesome.services.WorldMap;
-
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
@@ -188,7 +185,7 @@ public class GameScreen implements Screen, Observer {
         HPfont.draw(sprBatch, HP, 25,500);
 
         sprBatch.end();
-        
+
     }
 
     private void refetchMap () {
