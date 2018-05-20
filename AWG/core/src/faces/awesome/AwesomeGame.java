@@ -54,8 +54,8 @@ public class AwesomeGame extends Game implements Observer {
         player = CharacterFactory.createPlayer(w/TILE_SIZE/2, h/TILE_SIZE/2);
 
         //player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
-        player.addNewToInventory(new Sword());
-        player.addNewToInventory(new Hammer());
+        player.addNewToInventory(ItemFactory.CreateSword());
+        player.addNewToInventory(ItemFactory.CreateHammer());
         player.setSlot1(player.getInventory().getItem("Sword"));
         player.setSlot2(player.getInventory().getItem("Hammer"));
 

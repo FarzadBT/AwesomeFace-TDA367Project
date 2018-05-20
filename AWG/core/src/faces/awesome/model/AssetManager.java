@@ -6,7 +6,7 @@ import faces.awesome.model.item.Item;
 
 import java.util.HashMap;
 
-// Author: Amloudhi
+// Author: Philip Nilsson
 
 //This class is intended to manage game assets such as animations, textures and items.
 
@@ -21,7 +21,7 @@ public class AssetManager {
         Items = new HashMap<>();
         Animations = new HashMap<>();
     }
-
+    //Methods for adding new assets to maps as well as accessing already stored assets.
     public void addTexture(String name, Texture texture){
         Textures.put(name, texture);
     }
