@@ -2,12 +2,14 @@ package faces.awesome;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import faces.awesome.controllers.PlayerCtrl;
 import faces.awesome.model.*;
+import com.squareup.otto.Bus;
 import faces.awesome.model.Character;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
@@ -25,6 +27,7 @@ public class AwesomeGame extends Game implements Observer {
 
 
     // TO-do: instead of having a a HasA depndency, let's just use dependency inject playerCharacter where we need it.
+    public AssetManager assets;
 
     public PlayerCharacter player;
 
@@ -49,10 +52,11 @@ public class AwesomeGame extends Game implements Observer {
 
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
+        player = CharacterFactory.createPlayer(w/TILE_SIZE/2, h/TILE_SIZE/2);
 
-        player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
-        player.addNewToInventory(new Sword());
-        player.addNewToInventory(new Hammer());
+        //player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
+        player.addNewToInventory(ItemFactory.CreateSword());
+        player.addNewToInventory(ItemFactory.CreateHammer());
         player.setSlot1(player.getInventory().getItem("Sword"));
         player.setSlot2(player.getInventory().getItem("Hammer"));
 
@@ -65,12 +69,23 @@ public class AwesomeGame extends Game implements Observer {
 
         world.addObserver(this);
 
-
+        //Stores maps for later use
         MapStorage.AddMap("mainMap", (TiledMap) map);
         MapStorage.AddMap("smallHouse", new TmxMapLoader().load("core/assets/maps/smallHouse.tmx"));
         MapStorage.AddMap("mediumHouse", new TmxMapLoader().load("core/assets/maps/mediumHouse.tmx"));
         MapStorage.AddMap("bigHouse", new TmxMapLoader().load("core/assets/maps/bigHouse.tmx"));
         MapStorage.AddMap("cathedral", new TmxMapLoader().load("core/assets/maps/cathedral.tmx"));
+
+        //Instantiate asset manager
+        assets = new AssetManager();
+
+        //Creates textures from available files in core/assets/
+        assets.addTexture("enemy", new Texture("core/assets/enemy.png"));
+        assets.addTexture("Sword", new Texture("core/assets/sword.png"));
+        assets.addTexture("Hammer", new Texture("core/assets/sword.png"));
+        assets.addTexture("player", new Texture("core/assets/linkk.png"));
+        assets.addTexture("bossEnemy", new Texture("core/assets/giantenemycrab.png"));
+        assets.addTexture("blank", new Texture("core/assets/blank.png"));
 
         segment = new MapSegment(world, enemiesInWorld, player, boss);
 
@@ -78,7 +93,7 @@ public class AwesomeGame extends Game implements Observer {
 
         playerCtrl = new PlayerCtrl(player, world, segment);
 
-        System.out.println(enemiesInWorld);
+        //System.out.println(enemiesInWorld);
 
 
         health = player.getMaxHealth();
