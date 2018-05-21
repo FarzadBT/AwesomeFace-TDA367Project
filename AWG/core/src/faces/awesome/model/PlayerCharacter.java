@@ -1,5 +1,7 @@
 package faces.awesome.model;
 
+import com.squareup.otto.Bus;
+import faces.awesome.events.PlayerCharacterDiedEvent;
 import faces.awesome.model.item.Item;
 
 /*
@@ -14,10 +16,12 @@ public class PlayerCharacter extends Character {
 
     private Inventory inventory;
     private Item slot1, slot2;
-  
-    public PlayerCharacter(Position pos) {
+	private Bus bus;
+
+	public PlayerCharacter(Position pos, Bus bus) {
         super(pos, 5, 200, "playerCharacter");
-        inventory = new Inventory();
+		this.bus = bus;
+		inventory = new Inventory();
     }
 
     //Gets the items in slot 1 and 2
@@ -83,7 +87,7 @@ public class PlayerCharacter extends Character {
 	@Override
 	public void death() {
     	//Notifiera observern i switch screen och skicka med ett id
-
+		bus.post(new PlayerCharacterDiedEvent());
 
 	}
 }

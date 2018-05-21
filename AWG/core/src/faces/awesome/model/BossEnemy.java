@@ -8,6 +8,7 @@ package faces.awesome.model;
  */
 
 import com.squareup.otto.Bus;
+import faces.awesome.events.BossEnemyDiedEvent;
 
 public class BossEnemy extends Enemy {
 
@@ -44,9 +45,7 @@ public class BossEnemy extends Enemy {
     @Override
     public void death(){
 
-        if(this.getHealth() == 0){
-
-        }
+        bus.post(new BossEnemyDiedEvent());
 
     }
 

@@ -53,7 +53,7 @@ public class AwesomeGame extends Game {
 
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
-        player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2));
+        player = new PlayerCharacter(new Position(w / TILE_SIZE / 2, h / TILE_SIZE / 2), bus);
 
         segment = new MapSegment(world, player, bus);
 

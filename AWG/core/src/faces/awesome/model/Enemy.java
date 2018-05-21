@@ -15,7 +15,7 @@ import java.util.Random;
 public class Enemy extends Character {
 
     protected Random randomGenerator = new Random();
-    private Bus bus;
+    protected Bus bus;
 
     //protected MapSegment segment;
 
