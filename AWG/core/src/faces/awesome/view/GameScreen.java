@@ -49,8 +49,8 @@ public class GameScreen implements Screen, Observer {
     private Sprite slot2Sprite;
 
 
-
     private HashMap<String, Texture> textures = new HashMap<>();
+
 
     public GameScreen(final AwesomeGame game, WorldMap world) {
         this.game = game;
