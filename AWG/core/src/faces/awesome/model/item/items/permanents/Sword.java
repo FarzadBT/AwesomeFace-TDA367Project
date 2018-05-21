@@ -9,16 +9,14 @@ import faces.awesome.model.item.BaseItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Mr Cornholio on 14/05/2018.
  */
 public class Sword extends BaseItem {
 
-    private MapSegment segment;
-
-    public Sword(MapSegment segment) {
-        this.segment = segment;
+    public Sword() {
         name = "Sword";
     }
 
@@ -32,13 +30,13 @@ public class Sword extends BaseItem {
         List<Enemy> enemies = new ArrayList<>();
         int x = pos.getX(), y = pos.getY();
         if (facing == Facing.SOUTH)
-            enemies = segment.getPlayerTargets(x-1, y-1, x+1, y-1);
+            enemies = MapSegment.getPlayerTargets(x-1, y-1, x+1, y-1);
         else if(facing == Facing.NORTH)
-            enemies = segment.getPlayerTargets(x-1, y+1, x+1, y+1);
+            enemies = MapSegment.getPlayerTargets(x-1, y+1, x+1, y+1);
         else if(facing == Facing.EAST)
-            enemies = segment.getPlayerTargets(x+1, y+1, x+1, y-1);
+            enemies = MapSegment.getPlayerTargets(x+1, y+1, x+1, y-1);
         else if(facing == Facing.WEST)
-            enemies = segment.getPlayerTargets(x-1, y+1, x-1, y-1);
+            enemies = MapSegment.getPlayerTargets(x-1, y+1, x-1, y-1);
 
         for (Enemy enemy : enemies) {
             enemy.decreaseHealth(5);

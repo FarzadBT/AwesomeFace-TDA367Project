@@ -19,6 +19,9 @@ import faces.awesome.controllers.GameCtrl;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.model.BossEnemy;
 import faces.awesome.services.WorldMap;
+import faces.awesome.model.*;
+import faces.awesome.model.item.Item;
+
 import java.util.HashMap;
 
 import static faces.awesome.AwesomeGame.TILE_SIZE;
@@ -44,14 +47,13 @@ public class GameScreen implements Screen {
     private Sprite slot1Sprite;
     private Sprite slot2Sprite;
 
-    private BitmapFont HPfont;
-    private String HP;
 
+private BitmapFont HPfont;
+    private String HP;
     private HashMap<String, Texture> textures = new HashMap<>();
 
     public GameScreen(final AwesomeGame game, WorldMap world) {
         this.game = game;
-
         camera = new OrthographicCamera(AwesomeGame.VIEW_PORT_WIDTH, AwesomeGame.VIEW_PORT_HEIGHT);
         camera.setToOrtho(false);
         gamePort = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
@@ -64,24 +66,24 @@ public class GameScreen implements Screen {
         //tmp
         sprBatch = new SpriteBatch();
 
-        textures.put("playerCharacter", new Texture("core/assets/linkk.png"));
-        playerSprite = new Sprite(textures.get("playerCharacter"));
+        //textures.put("playerCharacter", new Texture("core/assets/linkk.png"));
+        playerSprite = new Sprite(game.assets.getTexture("player"));
 
         //enemies
-        textures.put("enemy", new Texture("core/assets/enemy.png"));
-        enemySprite = new Sprite(textures.get("enemy"));
+        //textures.put("enemy", new Texture("core/assets/enemy.png"));
+        enemySprite = new Sprite(game.assets.getTexture("enemy"));
 
-        textures.put("bossEnemy", new Texture("core/assets/giantenemycrab2.png"));
-        bossSprite = new Sprite(textures.get("bossEnemy"));
+        //textures.put("bossEnemy", new Texture("core/assets/giantenemycrab2.png"));
+        bossSprite = new Sprite(game.assets.getTexture("bossEnemy"));
 
 
-        textures.put("slot1", new Texture("core/assets/blank.png"));
-        slot1Sprite = new Sprite(textures.get("slot1"));
-        textures.put("slot2", new Texture("core/assets/blank.png"));
-        slot2Sprite = new Sprite(textures.get("slot2"));
+        //textures.put("slot1", new Texture("core/assets/blank.png"));
+        slot1Sprite = new Sprite(game.assets.getTexture("blank"));
+        //textures.put("slot2", new Texture("core/assets/blank.png"));
+        slot2Sprite = new Sprite(game.assets.getTexture("blank"));
 
-        textures.put("Sword", new Texture("core/assets/sword.png"));
-        textures.put("Hammer", new Texture("core/assets/sword.png"));
+        //textures.put("Sword", new Texture("core/assets/sword.png"));
+        //textures.put("Hammer", new Texture("core/assets/sword.png"));
 
 
         shapeRenderer = new ShapeRenderer();
@@ -113,8 +115,8 @@ public class GameScreen implements Screen {
 
         HP = "HP:" + game.player.getHealth();
 
-        slot1Sprite.setTexture(textures.get(game.segment.player.getSlot1().getName()));
-        slot2Sprite.setTexture(textures.get(game.segment.player.getSlot2().getName()));
+        slot1Sprite.setTexture(game.assets.getTexture(game.segment.player.getSlot1().getName()));
+        slot2Sprite.setTexture(game.assets.getTexture(game.segment.player.getSlot2().getName()));
 
 
         //shapeRenderer.setProjectionMatrix(camera.combined);
