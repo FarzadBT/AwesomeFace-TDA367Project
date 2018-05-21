@@ -1,5 +1,12 @@
 package faces.awesome.model;
 
+/*
+ * Author: Philip Nilsson
+ * Updated by: Therese Sturesson
+ *
+ * A class that represents the position with two ints, x and y.
+ */
+
 public class Position {
     private int x;
     private int y;
@@ -26,23 +33,27 @@ public class Position {
     }
 
 
-    //To set coordinates. Not immutable, For testing purposes only.
+    //Sets the x value
     public void setX(int x){
         this.x = x;
     }
 
+    //Sets the y value
     public void setY(int y){
         this.y = y;
     }
 
 
-    //Positions own toString method
+    //Positions own toString method     TODO används inte?
     @Override
     public String toString() {
         return "Position { x = " + x + ", y = " + y + " }";
     }
 
+
+    //Positions own equals method
     public boolean equals(Position other){
         return this.getX() == other.getX() && this.getY() == other.getY();
     }
+
 }

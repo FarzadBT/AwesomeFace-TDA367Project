@@ -13,7 +13,7 @@ public class Game {
     private PlayerCharacter player;
 
 public Game(){
-    player = CharacterFactory.createPlayer(10, 10);
+    //player = CharacterFactory.createPlayer(10, 10);
     player.addNewToInventory(ItemFactory.CreateSword());
     player.addNewToInventory(ItemFactory.CreateHammer());
     player.setSlot1(player.getInventory().getItem("Sword"));

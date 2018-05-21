@@ -13,18 +13,20 @@ import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.squareup.otto.Subscribe;
 import faces.awesome.AwesomeGame;
 import faces.awesome.controllers.GameCtrl;
+import faces.awesome.events.MapChangedEvent;
+import faces.awesome.model.BossEnemy;
+import faces.awesome.services.WorldMap;
 import faces.awesome.model.*;
 import faces.awesome.model.item.Item;
 
 import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
 
 import static faces.awesome.AwesomeGame.TILE_SIZE;
 
-public class GameScreen implements Screen, Observer {
+public class GameScreen implements Screen {
 
     private final AwesomeGame game;
     private GameCtrl gameController;
@@ -46,6 +48,8 @@ public class GameScreen implements Screen, Observer {
     private Sprite slot2Sprite;
 
 
+private BitmapFont HPfont;
+    private String HP;
     private HashMap<String, Texture> textures = new HashMap<>();
 
     public GameScreen(final AwesomeGame game, WorldMap world) {
@@ -56,7 +60,7 @@ public class GameScreen implements Screen, Observer {
         gamePort.apply();
 
         this.world = world;
-        this.world.addObserver(this);
+        game.bus.register(this);
         refetchMap();
 
         //tmp
@@ -87,6 +91,9 @@ public class GameScreen implements Screen, Observer {
         gameController = new GameCtrl(game.playerCtrl, camera);
         Gdx.input.setInputProcessor(gameController);
 
+        HPfont = new BitmapFont();
+        HPfont.getData().setScale(2.0f);
+
     }
 
 
@@ -98,18 +105,15 @@ public class GameScreen implements Screen, Observer {
     // render-logic here
     public void update(float delta) {
 
-        MapSegment.getEnemiesInSegment().forEach(Enemy::move);
-        MapSegment.getEnemiesInSegment().forEach(enemy -> enemy.attack(game.player));
+        game.segment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.tryMove(enemy));
 
-        game.segment.boss.move();
-        game.segment.boss.attack(game.player);
+        game.segment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.shouldAttack(enemy, game.player));
 
-        //System.out.println(game.player.getHealth());
 
-        camera.position.x = ((world.getMapPosition().getX() * 32) + 16) * TILE_SIZE;
-        camera.position.y = ((world.getMapPosition().getY() * 16) + 8) * TILE_SIZE;
+        camera.position.x = ((game.segment.getMapPosition().getX() * 32) + 16) * TILE_SIZE;
+        camera.position.y = ((game.segment.getMapPosition().getY() * 16) + 8) * TILE_SIZE;
 
-        game.HP = "HP:" + game.player.getHealth();
+        HP = "HP:" + game.player.getHealth();
 
         slot1Sprite.setTexture(game.assets.getTexture(game.segment.player.getSlot1().getName()));
         slot2Sprite.setTexture(game.assets.getTexture(game.segment.player.getSlot2().getName()));
@@ -154,15 +158,21 @@ public class GameScreen implements Screen, Observer {
         playerSprite.draw(sprBatch);
 
 
-        //bossSprite.setPosition((game.segment.boss.getPos().getX() % 32) * TILE_SIZE,(game.segment.boss.getPos().getY() % 16) * TILE_SIZE);
+        //bossSprite.setPlayerPosOnMap((game.segment.boss.getPos().getX() % 32) * TILE_SIZE,(game.segment.boss.getPos().getY() % 16) * TILE_SIZE);
         //bossSprite.draw(sprBatch);
         //bossSprite.setScale(2.0f);
 
-        //TODO när man går in i nya kartor dyker fienderna upp igen, de fattar inte att det är en ny karta
 
-        MapSegment.getEnemiesInSegment().forEach(enemy -> {
-            enemySprite.setPosition((enemy.getPos().getX() % 32) * TILE_SIZE,(enemy.getPos().getY() % 16) * TILE_SIZE);
-            enemySprite.draw(sprBatch);
+        game.segment.getEnemiesInSegment().forEach(enemy -> {
+
+            if (enemy instanceof BossEnemy) {
+                bossSprite.setPosition((enemy.getPos().getX() % 32) * TILE_SIZE,(enemy.getPos().getY() % 16) * TILE_SIZE);
+                bossSprite.draw(sprBatch);
+
+            } else {
+                enemySprite.setPosition((enemy.getPos().getX() % 32) * TILE_SIZE, (enemy.getPos().getY() % 16) * TILE_SIZE);
+                enemySprite.draw(sprBatch);
+            }
         });
 
         slot1Sprite.setPosition(27, 20);
@@ -173,15 +183,16 @@ public class GameScreen implements Screen, Observer {
         slot2Sprite.setScale(2.0f);
         slot2Sprite.draw(sprBatch);
 
-        game.HPfont.setColor(1.0f, 1.0f, 1.0f, 10.f);
-        game.HPfont.draw(sprBatch, game.HP, 25,500);
+        HPfont.setColor(1.0f, 1.0f, 1.0f, 10.f);
+        HPfont.draw(sprBatch, HP, 25,500);
 
         sprBatch.end();
+
     }
 
-    public void refetchMap () {
+    private void refetchMap () {
 
-        mapRenderer = new OrthogonalTiledMapRenderer(world.getCurrent());
+        mapRenderer = new OrthogonalTiledMapRenderer(world.getCurrentMap());
 
     }
 
@@ -211,8 +222,8 @@ public class GameScreen implements Screen, Observer {
     }
 
 
-    @Override
-    public void update(Observable observable, Object o) {
+    @Subscribe
+    public void mapchangedEvent(MapChangedEvent event) {
 
         refetchMap();
 

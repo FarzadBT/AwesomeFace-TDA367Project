@@ -1,6 +1,15 @@
 package faces.awesome.controllers;
 
 import faces.awesome.model.*;
+import faces.awesome.services.Tiles;
+import faces.awesome.services.WorldMap;
+
+/*
+ * Author: Therese Sturesson
+ * Updated by: Philip Nilsson, Farzad Besharati
+ *
+ * TODO skriva vad klassen gör
+ */
 
 public class PlayerCtrl {
 
@@ -15,13 +24,13 @@ public class PlayerCtrl {
         this.segment = segment;
     }
 
-    //TODO använda segment istället för world?
+    //TODO kolla om det går att använda segment istället för world
   
     public void tryMove(int dx, int dy, Facing facing) {
 
         Position newPosition = player.getPos().movePos(dx, dy);
 
-        boolean solid = Tiles.isSolid(world.getCurrent(), newPosition.getX(), newPosition.getY());
+        boolean solid = Tiles.isSolid(world.getCurrentMap(), newPosition.getX(), newPosition.getY());
 
         boolean occupied = segment.isOccupied(newPosition);
 
@@ -29,16 +38,15 @@ public class PlayerCtrl {
 
             player.setFacing(facing);
 
-            world.checkSegmentBorder(player.getPos(), newPosition);
+            segment.checkSegmentBorder(player.getPos(), newPosition);
 
         }
 
-
-        Position worldPos = world.setNewMap(newPosition.getX(), newPosition.getY());
+        Position worldPos = segment.setNewMap(newPosition.getX(), newPosition.getY());
 
         if ( worldPos != null ) {
 
-            world.setPosition(worldPos);
+            segment.setPlayerPosOnMap(worldPos);
 
             player.move(worldPos.getX()-player.getPos().getX(), worldPos.getY()-player.getPos().getY(), false, false);
 
@@ -58,6 +66,7 @@ public class PlayerCtrl {
     public void useItem2(){
         player.useSlot2();
     }
+
 }
 
 
