@@ -92,7 +92,7 @@ public class AwesomeGame extends Game implements Observer {
 
         playerCtrl = new PlayerCtrl(player, world, segment);
 
-        System.out.println(enemiesInWorld);
+        //System.out.println(enemiesInWorld);
 
 
         health = player.getMaxHealth();
