@@ -1,4 +1,4 @@
-package faces.awesome.model;
+package faces.awesome.services;
 
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
@@ -6,11 +6,17 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import faces.awesome.AwesomeGame;
-
+import com.squareup.otto.Bus;
+import faces.awesome.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Author: Therese Sturesson
+ * Updated by:
+ *
+ * TODO skriva vad klassen gör
+ */
 
 public class Tiles {
 
@@ -68,7 +74,7 @@ public class Tiles {
     }
 
 
-    public static List<Enemy> populateWorldWithEnemies (Map currentMap, AwesomeGame game) {
+    public static List<Enemy> populateWorldWithEnemies (Map currentMap, Bus bus) {
 
         List<Enemy> enemiesInWorld = new ArrayList<>();
 
@@ -80,12 +86,19 @@ public class Tiles {
 
                 Position recPos = getCenterOfRecPos(recObject.getRectangle());
 
-                Enemy enemy = new Enemy(recPos, game);
+                Enemy enemy;
+
+                if ( recObject.getName().equals("boss")) {
+
+                    enemy = new BossEnemy(recPos, bus);
+
+                } else {
+
+                    enemy = new Enemy(recPos, bus);
+
+                }
 
                 enemiesInWorld.add(enemy);
-
-                //if ( recObject.getName().equals("boss") ) { bossEnemy = new BossEnemy(recPos, game);}
-
 
             }
         }
