@@ -18,8 +18,8 @@ public class PlayerCharacter extends Character {
     private Item slot1, slot2;
 	private Bus bus;
 
-	public PlayerCharacter(Position pos, Bus bus) {
-        super(pos, 5, 200, "playerCharacter");
+	public PlayerCharacter(Position pos, Bus bus, String name) {
+        super(pos, 5, 200, name);
 		this.bus = bus;
 		inventory = new Inventory();
     }

@@ -12,8 +12,8 @@ import faces.awesome.events.BossEnemyDiedEvent;
 
 public class BossEnemy extends Enemy {
 
-    public BossEnemy(Position pos, Bus bus) {
-        super(pos, bus);
+    public BossEnemy(Position pos, Bus bus, String name) {
+        super(pos, bus, name);
         baseDamage = 5;
         health = maxHealth*2;
         name = "bossEnemy";

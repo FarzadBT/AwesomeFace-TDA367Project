@@ -1,5 +1,8 @@
 package faces.awesome.model;
 
+/**
+ * Created by Mr Cornholio on 08/05/2018.
+=======
 /*
  * Author: Farzad Besharati
  * Updated by: Therese Sturesson
@@ -24,7 +27,7 @@ public class GameObject {
         this.name = name;
     }
 
-    //Get the facing of the GameObject
+    //Get the facing of the GameObject, a gameobject doesn't necessarily have a facing though..
     public Facing getFacing() {
         return facing;
     }
@@ -34,12 +37,12 @@ public class GameObject {
         this.facing = facing;
     }
 
-    //Get the position of the GameObject
+    // Get the position of the GameObject
     public Position getPos () {
         return pos;
     }
 
-    //Set the position of the GameObject
+    // Set the position of the GameObject
     public void setPos (Position pos) {
         this.pos = pos;
     }

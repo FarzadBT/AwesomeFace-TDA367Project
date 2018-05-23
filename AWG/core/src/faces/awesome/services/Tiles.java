@@ -11,8 +11,8 @@ import faces.awesome.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * Author: Therese Sturesson
+/**
+ * @author Therese Sturesson
  * Updated by:
  *
  * TODO skriva vad klassen gör
@@ -90,11 +90,11 @@ public class Tiles {
 
                 if ( recObject.getName().equals("boss")) {
 
-                    enemy = new BossEnemy(recPos, bus);
+                    enemy = new BossEnemy(recPos, bus, "boss");
 
                 } else {
 
-                    enemy = new Enemy(recPos, bus);
+                    enemy = new Enemy(recPos, bus, "enemy");
 
                 }
 

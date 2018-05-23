@@ -17,7 +17,7 @@ public class PlayerCtrl {
     private final PlayerCharacter player;
     private final MapSegment segment;
 
-  
+
     public PlayerCtrl(PlayerCharacter player, WorldMap world, MapSegment segment) {
         this.player = player;
         this.world = world;
@@ -25,7 +25,7 @@ public class PlayerCtrl {
     }
 
     //TODO kolla om det går att använda segment istället för world
-  
+
     public void tryMove(int dx, int dy, Facing facing) {
 
         Position newPosition = player.getPos().movePos(dx, dy);
@@ -68,5 +68,3 @@ public class PlayerCtrl {
     }
 
 }
-
-

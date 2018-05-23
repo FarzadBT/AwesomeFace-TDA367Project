@@ -4,8 +4,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
-* Author: Philip Nilsson
+/**
+* @author Philip Nilsson
 * Updated by: Therese Sturesson
 *
 * A class used to store TiledMaps, easier to access.

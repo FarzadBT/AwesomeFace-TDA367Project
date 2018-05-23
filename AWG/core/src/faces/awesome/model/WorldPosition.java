@@ -5,6 +5,7 @@ package faces.awesome.model;
  * Updated by: Therese Sturesson
  *
  * TODO skriva vad klassen gör
+ * TODO: Se över om det är möjligt att använda Position istället för x och y
  */
 
 public class WorldPosition {

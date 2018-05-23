@@ -1,46 +1,61 @@
 package faces.awesome.controllers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import faces.awesome.model.Facing;
 
-public class GameCtrl implements InputProcessor {
+/**
+ * @author Linus Wallman
+ *
+ *
+ * TODO: Figure out a better solution for changing facing without having to call tryMove.
+ */
+
+public class GameScreenCtrl implements InputProcessor {
 
     PlayerCtrl playerCtrl;
-    OrthographicCamera camera;
-    int currentKey = 0;
 
-    public GameCtrl(PlayerCtrl playerCtrl, OrthographicCamera camera) {
+    public GameScreenCtrl(PlayerCtrl playerCtrl) {
         this.playerCtrl = playerCtrl;
-        this.camera = camera;
     }
 
     @Override
     public boolean keyDown(int keycode) {
-
         if(keycode == Input.Keys.LEFT) {
             playerCtrl.tryMove(-1, 0, Facing.WEST);
 
         }
 
         if(keycode == Input.Keys.RIGHT) {
-
             playerCtrl.tryMove(1, 0, Facing.EAST);
-
         }
 
         if(keycode == Input.Keys.UP) {
 
             playerCtrl.tryMove(0, 1, Facing.NORTH);
-
         }
 
-        if(keycode == Input.Keys.DOWN) {
-
+        if (keycode == Input.Keys.DOWN) {
             playerCtrl.tryMove(0, -1, Facing.SOUTH);
+        }
 
+        boolean isCtrlPressed = false;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
+            isCtrlPressed = true;
+        }
+
+        if (isCtrlPressed && keycode == Input.Keys.LEFT) {
+            playerCtrl.tryMove(0, 0, Facing.WEST);
+        } else if (isCtrlPressed && keycode == Input.Keys.RIGHT) {
+            playerCtrl.tryMove(0, 0, Facing.EAST);
+        } else if (isCtrlPressed && keycode == Input.Keys.UP) {
+            playerCtrl.tryMove(0, 0, Facing.NORTH);
+        } else if (isCtrlPressed && keycode == Input.Keys.DOWN) {
+            playerCtrl.tryMove(0, 0, Facing.SOUTH);
         }
 
         if(keycode == Input.Keys.A){
@@ -53,8 +68,6 @@ public class GameCtrl implements InputProcessor {
 
         return true;
     }
-
-
 
     //Methods we have to implement but do not use
     @Override
