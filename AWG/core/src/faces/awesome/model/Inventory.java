@@ -3,14 +3,15 @@ package faces.awesome.model;
 import faces.awesome.model.item.BaseConsumable;
 import faces.awesome.model.item.BaseInstant;
 import faces.awesome.model.item.Item;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-/**
- * Created by Mr Cornholio on 20/04/2018.
+/*
+ * Author: Farzad Besharati
+ * Updated by:
+ *
+ * TODO skriva vad klassen gör
  */
+
 public class Inventory {
     private HashMap<String, Item> inventory;
 

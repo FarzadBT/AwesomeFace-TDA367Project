@@ -1779,8 +1779,8 @@
  <tile id="365">
   <properties>
    <property name="walkInId" value="mainMap"/>
-   <property name="x" type="int" value="0"/>
-   <property name="y" type="int" value="0"/>
+   <property name="x" type="int" value="51"/>
+   <property name="y" type="int" value="18"/>
   </properties>
  </tile>
 </tileset>

@@ -1,12 +1,15 @@
 package faces.awesome.controllers;
 
 import faces.awesome.model.*;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import faces.awesome.model.*;
-import faces.awesome.model.PlayerCharacter;
-import faces.awesome.model.Position;
-import faces.awesome.model.WorldMap;
+import faces.awesome.services.Tiles;
+import faces.awesome.services.WorldMap;
+
+/*
+ * Author: Therese Sturesson
+ * Updated by: Philip Nilsson, Farzad Besharati
+ *
+ * TODO skriva vad klassen gör
+ */
 
 public class PlayerCtrl {
 
@@ -14,19 +17,20 @@ public class PlayerCtrl {
     private final PlayerCharacter player;
     private final MapSegment segment;
 
-  
+
     public PlayerCtrl(PlayerCharacter player, WorldMap world, MapSegment segment) {
         this.player = player;
         this.world = world;
         this.segment = segment;
     }
 
-    //TODO använda segment istället för world?
-  
+    //TODO kolla om det går att använda segment istället för world
+
     public void tryMove(int dx, int dy, Facing facing) {
+
         Position newPosition = player.getPos().movePos(dx, dy);
 
-        boolean solid = world.isSolid(newPosition.getX(), newPosition.getY());
+        boolean solid = Tiles.isSolid(world.getCurrentMap(), newPosition.getX(), newPosition.getY());
 
         boolean occupied = segment.isOccupied(newPosition);
 
@@ -34,16 +38,15 @@ public class PlayerCtrl {
 
             player.setFacing(facing);
 
-            world.checkSegmentBorder(player.getPos(), newPosition);
+            segment.checkSegmentBorder(player.getPos(), newPosition);
 
         }
 
-
-        Position worldPos = world.setNewMap(newPosition.getX(), newPosition.getY());
+        Position worldPos = segment.setNewMap(newPosition.getX(), newPosition.getY());
 
         if ( worldPos != null ) {
 
-            world.setPosition(worldPos);
+            segment.setPlayerPosOnMap(worldPos);
 
             player.move(worldPos.getX()-player.getPos().getX(), worldPos.getY()-player.getPos().getY(), false, false);
 
@@ -60,13 +63,8 @@ public class PlayerCtrl {
         player.useSlot1();
     }
 
-    public void useItem2() {
+    public void useItem2(){
         player.useSlot2();
     }
 
-    public void setFacing(Facing dir) {
-        player.setFacing(dir);
-    }
 }
-
-

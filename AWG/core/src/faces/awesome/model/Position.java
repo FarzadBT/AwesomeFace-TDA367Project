@@ -2,38 +2,50 @@ package faces.awesome.model;
 
 import java.util.Objects;
 
+/**
+ * @author Philip Nilsson
+ * Updated by: Therese Sturesson
+ *
+ * A class that represents the position with two ints, x and y.
+ *
+ * TODO:
+ * Look into why you can't just return a reference in {@link #movePos(int, int)}
+ */
+
+
 public class Position {
     private int x;
     private int y;
 
     //The constructor
-    public Position(int x, int y){
+    public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     //Move the position
-    public Position movePos (int deltaX, int deltaY) {
-        return new Position(this.x + deltaX, this.y + deltaY );
+    public Position movePos(int deltaX, int deltaY) {
+        return new Position(this.x + deltaX, this.y + deltaY);
     }
 
     //Get the x value
-    public int getX () {
+    public int getX() {
         return x;
     }
 
     //Get the y value
-    public int getY () {
+    public int getY() {
         return y;
     }
 
 
-    //To set coordinates. Not immutable, For testing purposes only.
-    public void setX(int x){
+    //Sets the x value
+    public void setX(int x) {
         this.x = x;
     }
 
-    public void setY(int y){
+    //Sets the y value
+    public void setY(int y) {
         this.y = y;
     }
 
@@ -63,9 +75,14 @@ public class Position {
         return Objects.hash(this.x, this.y);
     }
 
-    //Positions own toString method
+    public Position cpy() {
+        return new Position(x, y);
+    }
+
+    //TODO används inte?
     @Override
     public String toString() {
         return "Position { x = " + x + ", y = " + y + " }";
     }
 }
+

@@ -1,5 +1,13 @@
 package faces.awesome.controllers;
 
+/**
+ *
+ * @author Linus Wallman
+ *
+ *
+ */
+
+
 public class ScreenSwitcher {
 
     private static ScreenSwitchListener currentListener;
@@ -12,6 +20,10 @@ public class ScreenSwitcher {
     public static void changeScreen(ScreenType screen) {
         currentScreen = screen;
         notifyListener();
+    }
+
+    public static void setListener(ScreenSwitchListener listener) {
+        currentListener = listener;
     }
 
     private static void notifyListener() {

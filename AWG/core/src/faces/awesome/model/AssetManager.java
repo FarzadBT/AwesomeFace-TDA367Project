@@ -1,0 +1,63 @@
+package faces.awesome.model;
+
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import faces.awesome.model.item.Item;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
+// Author: Philip Nilsson
+// updated by: Linus Wallman - Changed static type from HashMap -> Map also updated some types.
+
+//This class is intended to manage game assets such as animations, textures and items.
+
+public class AssetManager {
+    //HashMaps containing data that is to be stored
+    private Map<String, TextureRegion> textures;
+    private Map<String, Item> items;
+    private Map<String, Animation<TextureRegion> > animations;
+    private Map<String, FileHandle> fileHandles;
+
+    public AssetManager(){
+        textures = new HashMap<>();
+        items = new HashMap<>();
+        animations = new HashMap<>();
+    }
+
+    //Methods for adding new assets to maps as well as accessing already stored assets.
+    public void addTexture(String name, TextureRegion texture){
+        textures.put(name, texture);
+    }
+
+    public TextureRegion getTexture(String name){
+        return textures.get(name);
+    }
+
+    public void addItem(String name, Item item){
+        items.put(name, item);
+    }
+
+    public Item getItem(String name){
+        return items.get(name);
+    }
+
+    public void addAnimation(String name, Animation<TextureRegion> anim){
+        animations.put(name, anim);
+    }
+
+    public Animation<TextureRegion> getAnimation(String name){
+        return animations.get(name);
+    }
+
+    public void addFileHandle(String name, FileHandle handle) {
+        fileHandles.put(name, handle);
+    }
+
+    public FileHandle getFileHandle(String name) {
+        return fileHandles.get(name);
+    }
+}
