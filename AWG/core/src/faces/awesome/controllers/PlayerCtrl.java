@@ -42,7 +42,7 @@ public class PlayerCtrl {
 
         }
 
-        Position worldPos = segment.setNewMap(newPosition.getX(), newPosition.getY());
+        Position worldPos = segment.setNewMap(newPosition);
 
         if ( worldPos != null ) {
 

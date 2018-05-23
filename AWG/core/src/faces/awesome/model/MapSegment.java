@@ -225,9 +225,9 @@ public class MapSegment {
 
 
     // Delegate the set of the new map and sets the map position
-    public Position setNewMap(int x, int y) {
+    public Position setNewMap(Position position) {
 
-        Position pos = world.setNewMap(x, y);
+        Position pos = world.setNewMap(position);
 
         if ( pos != null ) {
             setMapPosition(0,0);

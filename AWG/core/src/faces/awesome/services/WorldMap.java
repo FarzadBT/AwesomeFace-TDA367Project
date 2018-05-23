@@ -40,9 +40,9 @@ public class WorldMap {
 
 
     //Sets a new map    TODO kolla på worldposition
-    public Position setNewMap (int x, int y) {
+    public Position setNewMap (Position position) {
 
-        WorldPosition worldPosition = Tiles.getWorldPosition(currentMap, x, y);
+        WorldPosition worldPosition = Tiles.getWorldPosition(position, currentMap);
 
         if (worldPosition == null) {
             return null;
@@ -52,7 +52,7 @@ public class WorldMap {
 
         bus.post(new MapChangedEvent());
 
-        return new Position(worldPosition.getX(), worldPosition.getY());
+        return new Position(worldPosition.getPosition().getX(), worldPosition.getPosition().getY());
 
     }
 
