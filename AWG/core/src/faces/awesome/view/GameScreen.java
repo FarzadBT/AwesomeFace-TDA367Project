@@ -130,10 +130,18 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         MapSegment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.shouldAttack(enemy, game.player));
 
+        Vector3 cameraPos = camera.position.cpy();
 
-        camera.position.x = ((game.segment.getMapPosition().getX() * 32) + 16) * GDXWrapper.TILE_SIZE;
-        camera.position.y = ((game.segment.getMapPosition().getY() * 16) + 8) * GDXWrapper.TILE_SIZE;
+        int newX = (game.segment.getMapPosition().getX() * 32 + 16) * GDXWrapper.TILE_SIZE;
+        int newY = (game.segment.getMapPosition().getY() * 16 + 8) * GDXWrapper.TILE_SIZE;
 
+        Vector3 vec3 = new Vector3(newX, newY, 0);
+
+        camera.position.set(cameraPos.lerp(vec3, 0.1f));
+        /*
+        camera.position.x = (game.segment.getMapPosition().getX() * 32 + 16) * GDXWrapper.TILE_SIZE;
+        camera.position.y = (game.segment.getMapPosition().getY() * 16 + 8) * GDXWrapper.TILE_SIZE;
+*/
         HP = "HP:" + game.player.getHealth();
 
 
