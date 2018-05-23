@@ -5,10 +5,11 @@ import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
 
 /*
- * Author: Therese Sturesson
- * Updated by: Philip Nilsson, Farzad Besharati
+ * @author Therese Sturesson
+ * Updated by: Philip Nilsson
  *
- * TODO skriva vad klassen gör
+ * A controller layer between the view and the model. It does some checks before the player can
+ * move and delegates the use of items methods.
  */
 
 public class PlayerCtrl {
@@ -24,7 +25,6 @@ public class PlayerCtrl {
         this.segment = segment;
     }
 
-    //TODO kolla om det går att använda segment istället för world
 
     public void tryMove(int dx, int dy, Facing facing) {
 
@@ -34,7 +34,7 @@ public class PlayerCtrl {
 
         boolean occupied = segment.isOccupied(newPosition);
 
-        if (!solid && !occupied) {
+        if ( !solid && !occupied ) {
 
             player.setFacing(facing);
 
@@ -42,7 +42,7 @@ public class PlayerCtrl {
 
         }
 
-        Position worldPos = segment.setNewMap(newPosition.getX(), newPosition.getY());
+        Position worldPos = segment.setNewMap(newPosition);
 
         if ( worldPos != null ) {
 

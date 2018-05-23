@@ -43,14 +43,14 @@ public class Tiles {
 
 
 
-    public static WorldPosition getWorldPosition (Map tiledMap, int x, int y) {
+    public static WorldPosition getWorldPosition (Position position, Map tiledMap) {
 
         for (MapLayer layer :  tiledMap.getLayers()) {
 
             if (layer instanceof TiledMapTileLayer) {
 
                 TiledMapTileLayer tiledLayer = (TiledMapTileLayer) layer;
-                TiledMapTileLayer.Cell cell = tiledLayer.getCell(x, y);
+                TiledMapTileLayer.Cell cell = tiledLayer.getCell(position.getX(), position.getY());
 
                 if (cell != null && cell.getTile() != null) {
 
@@ -64,7 +64,7 @@ public class Tiles {
                         int newY = cell.getTile().getProperties().get("y", 0, null);
 
 
-                        return new WorldPosition(newX, newY, id);
+                        return new WorldPosition(new Position(newX, newY), id);
 
                     }
                 }
