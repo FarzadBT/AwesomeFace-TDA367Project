@@ -166,7 +166,7 @@ public class MapSegment {
     }
 
 
-    // Gets the list with characters
+    // Gets the list with characters    TODO används inte, spara?
     public List<Character> getCharacterInWorld() {
         return characterInWorld;
     }
@@ -213,7 +213,7 @@ public class MapSegment {
 
 
     //Sets the players position on the map
-    public void setPlayerPosOnMap (Position playerPos) {
+    public void setPlayerPosOnMap(Position playerPos) {
         this.mapPosition = new Position(playerPos.getX()/32, playerPos.getY()/16);
     }
 
@@ -237,6 +237,7 @@ public class MapSegment {
 
     }
 
+    //If an enemy have dies it gets removed from the lists
     @Subscribe
     public void handleEnemyDiedEvent(EnemyDiedEvent event) {
 
