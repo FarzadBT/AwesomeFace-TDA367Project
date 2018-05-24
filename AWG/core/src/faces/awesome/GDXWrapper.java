@@ -25,11 +25,9 @@ import faces.awesome.utils.AwesomeClock;
 import faces.awesome.view.GameScreen;
 
 /**
- *
  * @author Linus Wallman
  * Updated by:
  * TODO: Skriv vad klassen gör
- *
  */
 
 
@@ -37,9 +35,8 @@ public class GDXWrapper extends Game {
 
 
     /**
-     *
      * Flytta på dessa konstanter?
-     * */
+     */
 
     public static final int TILE_SIZE = 32;
     public static final int VIEW_PORT_WIDTH = 1024;
@@ -57,14 +54,14 @@ public class GDXWrapper extends Game {
     public WorldMap world;
     public Bus bus;
 
-    public static AwesomeClock AWG_TIME;
+    //public static AwesomeClock AWG_TIME;
 
 
     @Override
     public void create() {
         // setup model here.
 
-        AWG_TIME = new AwesomeClock();
+        //AWG_TIME = new AwesomeClock();
 
         bus = new Bus(ThreadEnforcer.ANY);
         bus.register(this);
@@ -80,7 +77,7 @@ public class GDXWrapper extends Game {
 
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
-        player = CharacterFactory.createPlayer(w/TILE_SIZE/2, h/TILE_SIZE/2, bus, "player");
+        player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player");
 
         player.addNewToInventory(ItemFactory.CreateSword());
         player.addNewToInventory(ItemFactory.CreateHammer());
