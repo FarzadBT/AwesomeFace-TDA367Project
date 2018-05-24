@@ -11,18 +11,20 @@ public class AwesomeTimer {
 
     private long startTicks;
     private boolean isStopped;
+    private AwesomeClock clock;
 
     public AwesomeTimer() {
+        clock = new AwesomeClock();
         restart();
     }
 
     public void restart() {
-        startTicks = GDXWrapper.AWG_TIME.getMillis();
+        startTicks = clock.getMillis();
         isStopped = false;
     }
 
     public long ticksElapsed() {
-        return GDXWrapper.AWG_TIME.getMillis() - startTicks;
+        return clock.getMillis() - startTicks;
     }
 
     public boolean isRunning() {

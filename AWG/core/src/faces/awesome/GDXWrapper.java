@@ -53,14 +53,14 @@ public class GDXWrapper extends Game {
     public WorldMap world;
     public Bus bus;
 
-    public static AwesomeClock AWG_TIME;
+    //public static AwesomeClock AWG_TIME;
 
 
     @Override
     public void create() {
         // setup model here.
 
-        AWG_TIME = new AwesomeClock();
+        //AWG_TIME = new AwesomeClock();
 
         bus = new Bus(ThreadEnforcer.ANY);
         bus.register(this);
