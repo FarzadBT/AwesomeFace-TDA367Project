@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import faces.awesome.GDXWrapper;
+import faces.awesome.model.AssetManager;
 import faces.awesome.model.Character;
 import faces.awesome.model.Facing;
 import faces.awesome.model.Position;
@@ -40,13 +41,13 @@ public class CharacterView extends GameObjectView {
             case STANDING: {
                 TextureRegion region;
                 if (gameObject.getFacing() == Facing.NORTH) {
-                    region = GDXWrapper.assets.getTexture(gameObject.getName() + "-north");
+                    region = AssetManager.getInstance().getTexture(gameObject.getName() + "-north");
                 } else if (gameObject.getFacing() == Facing.WEST) {
-                    region = GDXWrapper.assets.getTexture(gameObject.getName() + "-west");
+                    region = AssetManager.getInstance().getTexture(gameObject.getName() + "-west");
                 } else if (gameObject.getFacing() == Facing.SOUTH) {
-                    region = GDXWrapper.assets.getTexture(gameObject.getName() + "-south");
+                    region = AssetManager.getInstance().getTexture(gameObject.getName() + "-south");
                 } else if (gameObject.getFacing() == Facing.EAST) {
-                    region = GDXWrapper.assets.getTexture(gameObject.getName() + "-east");
+                    region = AssetManager.getInstance().getTexture(gameObject.getName() + "-east");
                 } else {
                     throw new NullPointerException();
                     // throw some exception perhaps. However, this case should never happen. It's just here to keep the interpreter from going insane
@@ -65,19 +66,19 @@ public class CharacterView extends GameObjectView {
                 int xPattern;
                 int yPattern;
                 if (gameObject.getFacing() == Facing.NORTH) {
-                    region = GDXWrapper.assets.getAnimation(gameObject.getName() + "-anim-north");
+                    region = AssetManager.getInstance().getAnimation(gameObject.getName() + "-anim-north");
                     xPattern = 0;
                     yPattern = 1;
                 } else if (gameObject.getFacing() == Facing.WEST) {
-                    region = GDXWrapper.assets.getAnimation(gameObject.getName() + "-anim-west");
+                    region = AssetManager.getInstance().getAnimation(gameObject.getName() + "-anim-west");
                     xPattern = -1;
                     yPattern = 0;
                 } else if (gameObject.getFacing() == Facing.SOUTH) {
-                    region = GDXWrapper.assets.getAnimation(gameObject.getName() + "-anim-south");
+                    region = AssetManager.getInstance().getAnimation(gameObject.getName() + "-anim-south");
                     xPattern = 0;
                     yPattern = -1;
                 } else if (gameObject.getFacing() == Facing.EAST) {
-                    region = GDXWrapper.assets.getAnimation(gameObject.getName() + "-anim-east");
+                    region = AssetManager.getInstance().getAnimation(gameObject.getName() + "-anim-east");
                     xPattern = 1;
                     yPattern = 0;
                 } else {

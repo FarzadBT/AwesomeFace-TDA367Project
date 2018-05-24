@@ -112,6 +112,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         HPfont = new BitmapFont();
         HPfont.getData().setScale(2.0f);
 
+
         Gdx.input.setInputProcessor(gameController);
     }
 

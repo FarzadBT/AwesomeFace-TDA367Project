@@ -42,7 +42,7 @@ public class GDXWrapper extends Game {
     public static final int VIEW_PORT_HEIGHT = 512;
 
     // antingen behåller vi denna som statisk, eller gör den till en singleton.
-    private AssetManager assets;
+    public AssetManager assets;
 
     public PlayerCharacter player;
     public PlayerCtrl playerCtrl;
