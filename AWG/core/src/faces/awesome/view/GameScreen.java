@@ -32,6 +32,7 @@ import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.controllers.ScreenSwitcher.ScreenType;
 
+import faces.awesome.model.objects.object.BombObject;
 import faces.awesome.services.WorldMap;
 import faces.awesome.model.*;
 import faces.awesome.model.item.Item;
@@ -55,7 +56,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     private MapRenderer mapRenderer;
     private ShapeRenderer shapeRenderer;
 
-    private List<GameObjectView > gameObjectViews;
+    private List<GameObjectView> gameObjectViews;
 
     private SpriteBatch sprBatch;
 
@@ -65,6 +66,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     private Sprite slot1Sprite;
     private Sprite slot2Sprite;
+
+    private Sprite bombObjectSprite;
 
     private BitmapFont HPfont;
     private String HP;
@@ -94,6 +97,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         //textures.put("bossEnemy", new Texture("core/assets/giantenemycrab2.png"));
         bossSprite = new Sprite(game.assets.getTexture("bossEnemy"));
+
+        bombObjectSprite = new Sprite(game.assets.getTexture("Bomb"));
 
 
         //textures.put("slot1", new Texture("core/assets/blank.png"));
@@ -192,7 +197,6 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
 
         MapSegment.getEnemiesInSegment().forEach(enemy -> {
-
             if (enemy instanceof BossEnemy) {
                 bossSprite.setPosition((enemy.getPos().getX() % 32) * GDXWrapper.TILE_SIZE,(enemy.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
                 bossSprite.draw(sprBatch);
@@ -200,6 +204,13 @@ public class GameScreen implements Screen, ScreenSwitchListener {
             } else {
                 enemySprite.setPosition((enemy.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (enemy.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
                 enemySprite.draw(sprBatch);
+            }
+        });
+
+        MapSegment.getObjectsInSegment().forEach(gameObject -> {
+            if (gameObject instanceof BombObject) {
+                bombObjectSprite.setPosition((gameObject.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (gameObject.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
+                bombObjectSprite.draw(sprBatch);
             }
         });
 

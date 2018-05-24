@@ -27,6 +27,7 @@ public class MapSegment {
 
     private List<Character> characterInWorld = new ArrayList<>();
     private static List<Enemy> enemiesInWorld = new ArrayList<>();
+    private static List<GameObject> objectsInWorld = new ArrayList<>();
 
 
     public MapSegment(WorldMap World, PlayerCharacter player, Bus bus){
@@ -73,9 +74,39 @@ public class MapSegment {
                 enemiesInSegment.add(e);
             }
         }
-
         return enemiesInSegment;
+    }
 
+    /**
+     * Get all the GameObjecst in the current MapSegment
+     * @return a list of GameObjects
+     */
+    public static List<GameObject> getObjectsInSegment() {
+        int minX = mapPosition.getX() * 32;
+        int maxX = (mapPosition.getX() + 1) * 32;
+        int minY = mapPosition.getY() * 16;
+        int maxY = (mapPosition.getY() + 1) * 16;
+
+        List<GameObject> objectsInSegment = new ArrayList<>();
+
+        for(GameObject o : objectsInWorld){
+
+            int enemyX = o.getPos().getX();
+            int enemyY = o.getPos().getY();
+
+            if (enemyX > minX && enemyX < maxX && enemyY > minY && enemyY < maxY) {
+                objectsInSegment.add(o);
+            }
+        }
+        return objectsInSegment;
+    }
+
+    public static void addToObjects(GameObject object) {
+        objectsInWorld.add(object);
+    }
+
+    public static void removeFromObjects(GameObject object) {
+        objectsInWorld.remove(object);
     }
 
     /**

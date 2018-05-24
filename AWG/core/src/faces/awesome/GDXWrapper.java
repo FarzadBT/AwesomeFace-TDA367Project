@@ -15,6 +15,7 @@ import faces.awesome.controllers.ScreenRepository;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.model.*;
 import com.squareup.otto.Bus;
+import faces.awesome.model.item.items.consumables.Bomb;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
 import faces.awesome.services.MapStorage;
@@ -83,21 +84,29 @@ public class GDXWrapper extends Game {
 
         player.addNewToInventory(ItemFactory.CreateSword());
         player.addNewToInventory(ItemFactory.CreateHammer());
+        player.addNewToInventory(new Bomb(10));
 
         segment = new MapSegment(world, player, bus);
 
         player.addNewToInventory(new Sword());
         player.addNewToInventory(new Hammer());
         player.setSlot1(player.getInventory().getItem("Sword"));
-        player.setSlot2(player.getInventory().getItem("Hammer"));
+        player.setSlot2(player.getInventory().getItem("Bomb"));
+
+
 
         //Creates textures from available files in core/assets/
         assets.addTexture("enemy", new TextureRegion(new Texture("core/assets/enemy.png")));
-        assets.addTexture("Sword", new TextureRegion(new Texture("core/assets/sword.png")));
-        assets.addTexture("Hammer", new TextureRegion(new Texture("core/assets/sword.png")));
         assets.addTexture("player", new TextureRegion(new Texture("core/assets/linkk.png")));
         assets.addTexture("bossEnemy", new TextureRegion(new Texture("core/assets/giantenemycrab.png")));
         assets.addTexture("blank", new TextureRegion(new Texture("core/assets/blank.png")));
+
+        //Permanent Items
+        assets.addTexture("Sword", new TextureRegion(new Texture("core/assets/sword.png")));
+        assets.addTexture("Hammer", new TextureRegion(new Texture("core/assets/sword.png")));
+
+        //Consumable Items
+        assets.addTexture("Bomb", new TextureRegion(new Texture("core/assets/bomb.png")));
 
         //assets.addFileHandle("mainUi", Gdx.files.internal("core/assets/shade/skin/uiskin.json"));
 
