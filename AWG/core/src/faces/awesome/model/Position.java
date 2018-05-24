@@ -14,6 +14,8 @@ import java.util.Objects;
 
 
 public class Position {
+
+    // The x and y value
     private int x;
     private int y;
 
@@ -49,6 +51,8 @@ public class Position {
         this.y = y;
     }
 
+
+    // Our own equals method
     @Override
     public boolean equals(Object o) {
         if (o == null) {
@@ -79,7 +83,7 @@ public class Position {
         return new Position(x, y);
     }
 
-    //TODO används inte?
+    //Our own toString method
     @Override
     public String toString() {
         return "Position { x = " + x + ", y = " + y + " }";

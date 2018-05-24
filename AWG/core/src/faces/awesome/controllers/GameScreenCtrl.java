@@ -6,15 +6,16 @@ import com.badlogic.gdx.InputProcessor;
 import faces.awesome.model.Facing;
 
 /**
- * @author Linus Wallman
+ * @author Therese Sturesson
+ * Updated by: Linus Wallman, Philip Nilsson
  *
- *
+ * A controller that takes in input from the keybord
  * TODO: Figure out a better solution for changing facing without having to call tryMove.
  */
 
 public class GameScreenCtrl implements InputProcessor {
 
-    PlayerCtrl playerCtrl;
+    private PlayerCtrl playerCtrl;
 
     public GameScreenCtrl(PlayerCtrl playerCtrl) {
         this.playerCtrl = playerCtrl;
@@ -67,7 +68,7 @@ public class GameScreenCtrl implements InputProcessor {
         return true;
     }
 
-    //Methods we have to implement but do not use
+    //Methods we have to implement but do not use (from the interface InputProcessor)
     @Override
     public boolean keyUp(int keycode) {
         return false;

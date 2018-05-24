@@ -8,12 +8,13 @@ import faces.awesome.model.item.Item;
  * Author: Philip Nilsson
  * Updated by: Therese Sturesson, Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * The class for the player character
  */
 
 
 public class PlayerCharacter extends Character {
 
+	// The variables in the class
     private Inventory inventory;
     private Item slot1, slot2;
 	private Bus bus;
@@ -90,4 +91,5 @@ public class PlayerCharacter extends Character {
 		bus.post(new PlayerCharacterDiedEvent());
 
 	}
+
 }

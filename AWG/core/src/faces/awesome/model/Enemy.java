@@ -3,8 +3,6 @@ package faces.awesome.model;
 import com.squareup.otto.Bus;
 import faces.awesome.utils.AwesomeTimer;
 
-import java.util.Random;
-
 /*
  * Author: Therese Sturesson
  * Updated by: Philip Nilsson
@@ -14,7 +12,6 @@ import java.util.Random;
 
 public class Enemy extends Character {
 
-    protected Random randomGenerator = new Random();
     protected Bus bus;
     private AwesomeTimer timerMove, timerAttack;
 
@@ -39,9 +36,7 @@ public class Enemy extends Character {
             }
 
             timerMove.restart();
-
         }
-
     }
 
 
@@ -55,10 +50,9 @@ public class Enemy extends Character {
         }
 
         timerAttack.restart();
-
     }
 
-
+    // The check for if this type of enemy dies happen in EnemyCtrl
     @Override
     public void death() {
     }

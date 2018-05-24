@@ -66,7 +66,6 @@ public abstract class Character extends GameObject {
 	//Abstract method for when a characters die
 	public abstract void death ();
 
-
 }
 
 

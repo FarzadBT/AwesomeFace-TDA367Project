@@ -17,12 +17,13 @@ import java.util.List;
 
 public class MapSegment {
 
+    //Varibles
     private WorldMap world;
     private Bus bus;
     private static Position mapPosition;
-
     public PlayerCharacter player;
 
+    // Two lists for enemies and characters
     private List<Character> characterInWorld = new ArrayList<>();
     private static List<Enemy> enemiesInWorld = new ArrayList<>();
 
@@ -236,6 +237,7 @@ public class MapSegment {
     }
 
 
+    // Removes a specific enemy from the list
     public void removeEnemyFromLists(Enemy enemy) {
 
         enemiesInWorld.remove(enemy);

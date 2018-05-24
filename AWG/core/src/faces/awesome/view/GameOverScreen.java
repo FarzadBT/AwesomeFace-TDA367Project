@@ -21,6 +21,8 @@ import faces.awesome.utils.AwesomeTimer;
 /**
  * @author Linus Wallman
  * Updated by: Therese Sturesson
+ *
+ * A screen for game over (when the player dies)
  */
 
 public class GameOverScreen implements Screen, ScreenSwitchListener {
@@ -44,7 +46,7 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
         timer =  new AwesomeTimer();
     }
 
-
+    // Rendering the screen
     @Override
     public void render(float delta) {
 
@@ -69,7 +71,7 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
 
     }
 
-
+    // Initialising the screen
     public void initialize() {
         Gdx.input.setInputProcessor(stage);
         ScreenSwitcher.setListener(this);
@@ -95,6 +97,7 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
         });
 
     }
+
 
     //Method we have to have but do not use
     @Override

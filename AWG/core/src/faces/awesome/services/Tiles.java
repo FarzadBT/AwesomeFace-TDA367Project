@@ -3,20 +3,21 @@ package faces.awesome.services;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.squareup.otto.Bus;
-import faces.awesome.model.*;
-
+import faces.awesome.model.BossEnemy;
+import faces.awesome.model.Enemy;
+import faces.awesome.model.Position;
+import faces.awesome.model.WorldPosition;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Therese Sturesson
  * Updated by:
- * <p>
+ *
  * TODO skriva vad klassen gör
  */
 

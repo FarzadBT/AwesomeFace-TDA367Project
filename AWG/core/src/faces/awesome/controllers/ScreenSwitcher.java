@@ -1,10 +1,10 @@
 package faces.awesome.controllers;
 
 /**
- *
  * @author Linus Wallman
  * Updated by: Therese Sturesson
  *
+ * TODO skriva vad klassen gör
  */
 
 

@@ -21,6 +21,7 @@ import faces.awesome.utils.AwesomeTimer;
 /**
  * @author Therese Sturesson
  *
+ * A screen for the credits of the maker of the game
  */
 
 public class CreditScreen implements Screen, ScreenSwitchListener {
@@ -44,7 +45,7 @@ public class CreditScreen implements Screen, ScreenSwitchListener {
         timer =  new AwesomeTimer();
     }
 
-
+    // Rendering the screen
     @Override
     public void render(float delta) {
 
@@ -69,10 +70,12 @@ public class CreditScreen implements Screen, ScreenSwitchListener {
 
     }
 
-
+    // Initialising the screen
     public void initialize() {
+
         Gdx.input.setInputProcessor(stage);
         ScreenSwitcher.setListener(this);
+
     }
 
     @Override

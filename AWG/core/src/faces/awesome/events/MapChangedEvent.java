@@ -1,4 +1,10 @@
 package faces.awesome.events;
 
-public class MapChangedEvent {
+/**
+* @author Therese Sturesson
+*
+* An event for when the map changes
+*/
+
+public class MapChangedEvent{
 }

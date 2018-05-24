@@ -38,9 +38,7 @@ public class BossEnemy extends Enemy {
             }
 
             timerMove.restart();
-
         }
-
     }
 
 
@@ -55,7 +53,6 @@ public class BossEnemy extends Enemy {
         }
 
         timerAttack.restart();
-
     }
 
 

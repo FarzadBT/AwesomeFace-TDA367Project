@@ -21,6 +21,7 @@ import faces.awesome.utils.AwesomeTimer;
 /**
  * @author Therese Sturesson
  *
+ * A screen for when the game is won (when the boss dies)
  */
 
 public class GameWonScreen implements Screen, ScreenSwitchListener {
@@ -35,7 +36,6 @@ public class GameWonScreen implements Screen, ScreenSwitchListener {
 
     private float fadeElapsed = 0.f;
 
-    //private boolean calledOnce = false;
 
     public GameWonScreen(GDXWrapper game) {
         stage = new Stage(new ScreenViewport());
@@ -45,7 +45,7 @@ public class GameWonScreen implements Screen, ScreenSwitchListener {
         timer =  new AwesomeTimer();
     }
 
-
+    // Rendering the screen
     @Override
     public void render(float delta) {
 
@@ -68,7 +68,7 @@ public class GameWonScreen implements Screen, ScreenSwitchListener {
 
     }
 
-
+    // Initialising the screen
     public void initialize() {
         Gdx.input.setInputProcessor(stage);
         ScreenSwitcher.setListener(this);
@@ -95,6 +95,8 @@ public class GameWonScreen implements Screen, ScreenSwitchListener {
 
     }
 
+
+    //Method we have to have but do not use
     @Override
     public void resize(int width, int height) {
 

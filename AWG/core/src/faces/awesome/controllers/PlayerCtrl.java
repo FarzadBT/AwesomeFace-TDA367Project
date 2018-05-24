@@ -4,7 +4,7 @@ import faces.awesome.model.*;
 import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
 
-/*
+/**
  * @author Therese Sturesson
  * Updated by: Philip Nilsson
  *
@@ -26,6 +26,7 @@ public class PlayerCtrl {
     }
 
 
+    // Checks if the playercharacter can move to the position the player wants
     public void tryMove(int dx, int dy, Facing facing) {
 
         Position newPosition = player.getPos().movePos(dx, dy);
@@ -56,13 +57,14 @@ public class PlayerCtrl {
 
         }
 
-
     }
 
+    // Delegates the use of item 1
     public void useItem1(){
         player.useSlot1();
     }
 
+    // Delegates the use of item 2
     public void useItem2(){
         player.useSlot2();
     }
