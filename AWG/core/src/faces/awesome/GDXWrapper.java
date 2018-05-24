@@ -11,17 +11,14 @@ import com.squareup.otto.Subscribe;
 import com.squareup.otto.ThreadEnforcer;
 import faces.awesome.controllers.EnemyCtrl;
 import faces.awesome.controllers.PlayerCtrl;
-import faces.awesome.controllers.ScreenRepository;
+import faces.awesome.view.ScreenRepository;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.model.*;
-import com.squareup.otto.Bus;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
 import faces.awesome.services.MapStorage;
 import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
-import faces.awesome.utils.AwesomeClock;
-import faces.awesome.view.GameScreen;
 
 /**
  * @author Linus Wallman

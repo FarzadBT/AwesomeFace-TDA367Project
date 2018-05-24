@@ -1,4 +1,4 @@
-package faces.awesome.controllers;
+package faces.awesome.view;
 
 import com.badlogic.gdx.Gdx;
 import faces.awesome.GDXWrapper;

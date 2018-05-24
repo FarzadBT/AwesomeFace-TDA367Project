@@ -11,30 +11,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapRenderer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.squareup.otto.Subscribe;
 import faces.awesome.GDXWrapper;
-import faces.awesome.AwesomeGame;
 import faces.awesome.controllers.*;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.model.BossEnemy;
 
-import faces.awesome.model.Enemy;
 import faces.awesome.model.MapSegment;
-import faces.awesome.model.PlayerCharacter;
-import faces.awesome.model.Position;
 import faces.awesome.controllers.ScreenSwitcher.ScreenType;
 
 import faces.awesome.services.WorldMap;
-import faces.awesome.model.*;
-import faces.awesome.model.item.Item;
 
 
 import java.util.HashMap;
