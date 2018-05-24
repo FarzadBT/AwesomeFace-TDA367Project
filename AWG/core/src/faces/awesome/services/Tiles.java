@@ -3,6 +3,7 @@ package faces.awesome.services;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
@@ -23,6 +24,8 @@ public class Tiles {
 
     public static boolean isSolid(Map tiledMap, int x, int y) {
         boolean tileIsSolid = false;
+
+        TiledMap tiledMap1 = WorldMap.
 
         for (MapLayer layer :  tiledMap.getLayers()) {
 

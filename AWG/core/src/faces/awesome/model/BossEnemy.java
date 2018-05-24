@@ -14,8 +14,8 @@ public class BossEnemy extends Enemy {
 
     public BossEnemy(Position pos, Bus bus, String name) {
         super(pos, bus, name);
-        baseDamage = 5;
-        health = maxHealth*2;
+        baseDamage = 1;
+        health = 2;
         name = "bossEnemy";
     }
 
