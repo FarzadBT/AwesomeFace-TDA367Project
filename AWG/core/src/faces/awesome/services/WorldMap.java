@@ -15,12 +15,12 @@ import faces.awesome.model.WorldPosition;
 
 public class WorldMap {
 
-    //Current tilemap
+    //Current tilemap and a bus
     private TiledMap currentMap;
     private Bus bus;
 
 
-    //Constructor, takes a TiledMap
+    //Constructor, takes a TiledMap and a bus
     public WorldMap(TiledMap map, Bus bus){
         this.currentMap = map;
         this.bus = bus;
@@ -28,21 +28,21 @@ public class WorldMap {
 
 
     //Returns the current map
-    public TiledMap getCurrentMap (){
+    public TiledMap getCurrentMap(){
         return currentMap;
     }
 
 
     //Sets the current map. For testing purposes only.
-    public void setCurrentMap (TiledMap currentMap) {
+    private void setCurrentMap(TiledMap currentMap) {
         this.currentMap = currentMap;
     }
 
 
-    //Sets a new map    TODO kolla på worldposition
-    public Position setNewMap (int x, int y) {
+    //Sets a new map
+    public Position setNewMap(Position position) {
 
-        WorldPosition worldPosition = Tiles.getWorldPosition(currentMap, x, y);
+        WorldPosition worldPosition = Tiles.getWorldPosition(position, currentMap);
 
         if (worldPosition == null) {
             return null;
@@ -52,7 +52,7 @@ public class WorldMap {
 
         bus.post(new MapChangedEvent());
 
-        return new Position(worldPosition.getX(), worldPosition.getY());
+        return new Position(worldPosition.getPosition().getX(), worldPosition.getPosition().getY());
 
     }
 

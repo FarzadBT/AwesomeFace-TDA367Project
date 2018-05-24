@@ -20,8 +20,8 @@ public class Enemy extends Character {
     //protected MapSegment segment;
 
 
-    public Enemy(Position pos, Bus bus){
-        super(pos, 2, 15, "enemy");
+    public Enemy(Position pos, Bus bus, String name){
+        super(pos, 2, 15, name);
         this.bus = bus;
         health = maxHealth;
     }

@@ -1,37 +1,29 @@
 package faces.awesome.model;
 
 /*
- * Author: Philip Nilsson
- * Updated by: Therese Sturesson
+ * @author Therese Sturesson
  *
- * TODO skriva vad klassen gör
+ * The class holds a position and string (for the map name).
  */
 
 public class WorldPosition {
 
-    //Varible for the x, y and map value
-    private int x;
-    private int y;
+    //Varible for the position and map name
+    private Position position;
     private String map;
 
-    public WorldPosition (int x, int y, String map) {
-        this.x = x;
-        this.y = y;
+    public WorldPosition(Position position, String map) {
+        this.position = position;
         this.map = map;
     }
 
     //Gets the x value
-    public int getX () {
-        return x;
-    }
-
-    //Gets the y value
-    public int getY () {
-        return y;
+    public Position getPosition() {
+        return position;
     }
 
     //Gets the name of the map
-    public String getMap () {
+    public String getMap() {
         return map;
     }
 
