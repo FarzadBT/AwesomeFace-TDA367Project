@@ -3,8 +3,6 @@ package faces.awesome.controllers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import faces.awesome.model.Facing;
 
 /**

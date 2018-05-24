@@ -22,7 +22,6 @@ public class CharacterView extends GameObjectView {
 
     public enum State {STANDING, RUNNING}
 
-    ;
     private State currentState = State.STANDING;
 
     private Position localPos;

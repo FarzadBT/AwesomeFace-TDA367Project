@@ -1,11 +1,8 @@
 package faces.awesome.view;
 
-import com.badlogic.gdx.Gdx;
 import faces.awesome.GDXWrapper;
 import faces.awesome.services.WorldMap;
-import faces.awesome.view.GameOverScreen;
-import faces.awesome.view.GameScreen;
-import faces.awesome.view.MainMenuScreen;
+
 
 /**
  * @author Linus Wallman
@@ -19,6 +16,7 @@ public class ScreenRepository {
     private static GameScreen gameScreen;
     private static GameOverScreen gameOverScreen;
     private static MainMenuScreen mainMenuScreen;
+
     /**
      * define more screens here, define other behavior as well.
      */
