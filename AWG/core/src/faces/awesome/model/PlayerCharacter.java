@@ -86,7 +86,7 @@ public class PlayerCharacter extends Character {
 	//If you (the player) dies you lost the game
 	@Override
 	public void death() {
-    	//Notifiera observern i switch screen och skicka med ett id
+
 		bus.post(new PlayerCharacterDiedEvent());
 
 	}

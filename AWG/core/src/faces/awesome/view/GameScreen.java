@@ -23,7 +23,9 @@ import com.squareup.otto.Subscribe;
 import faces.awesome.GDXWrapper;
 import faces.awesome.AwesomeGame;
 import faces.awesome.controllers.*;
+import faces.awesome.events.BossEnemyDiedEvent;
 import faces.awesome.events.MapChangedEvent;
+import faces.awesome.events.PlayerCharacterDiedEvent;
 import faces.awesome.model.BossEnemy;
 
 import faces.awesome.model.Enemy;
@@ -165,6 +167,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        System.out.println();
+
         mapRenderer.render();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -262,6 +266,20 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         refetchMap();
     }
 
+
+    @Subscribe
+    public void playerCharacterDievEvent(PlayerCharacterDiedEvent event){
+        onScreenChange(ScreenType.GameOverScreen);
+    }
+
+
+
+    @Subscribe
+    public void bossEnemyDiedEvent(BossEnemyDiedEvent event) {
+        onScreenChange(ScreenType.GameWonScreen);
+    }
+
+
     @Override
     public void onScreenChange(ScreenType screen) {
         switch (screen) {
@@ -270,6 +288,9 @@ public class GameScreen implements Screen, ScreenSwitchListener {
                 break;
             case GameOverScreen:
                 ScreenRepository.setGameOverScreen(game);
+                break;
+            case GameWonScreen:
+                ScreenRepository.setGameWonScreen(game);
                 break;
             default:
                 break;

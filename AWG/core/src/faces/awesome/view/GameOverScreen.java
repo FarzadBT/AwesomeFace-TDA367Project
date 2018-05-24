@@ -52,7 +52,6 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
     public void render(float delta) {
 
         // Pretty sure show is called first, then the render clears the screenframe.
-        //
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -82,26 +81,24 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
     @Override
     public void show() {
         System.out.println("called?");
-        if (timer.secondsElapsed() >= 5) {
 
-            Table table = new Table();
-            table.setFillParent(true);
-            stage.addActor(table);
-            table.setDebug(true);
 
-            Skin skin = new Skin(Gdx.files.internal("core/assets/shade/skin/uiskin.json"));
+        Table table = new Table();
+        table.setFillParent(true);
+        stage.addActor(table);
+        //table.setDebug(true);
 
-            TextButton mainMenu = new TextButton("Back To Main Menu", skin);
-            table.add(mainMenu).height(75f).width(250f).fillX().uniformX();
+        Skin skin = new Skin(Gdx.files.internal("core/assets/shade/skin/uiskin.json"));
 
-            mainMenu.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    ScreenRepository.setMainMenuScreen(gdxWrapper);
-                }
-            });
+        TextButton mainMenu = new TextButton("Back To Main Menu", skin);
+        table.add(mainMenu).height(75f).width(250f).fillX().uniformX();
 
-        }
+        mainMenu.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                ScreenRepository.setMainMenuScreen(gdxWrapper);
+            }
+        });
 
     }
 

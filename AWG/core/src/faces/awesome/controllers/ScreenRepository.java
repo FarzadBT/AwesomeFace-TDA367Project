@@ -1,14 +1,15 @@
 package faces.awesome.controllers;
 
-import com.badlogic.gdx.Gdx;
 import faces.awesome.GDXWrapper;
 import faces.awesome.services.WorldMap;
 import faces.awesome.view.GameOverScreen;
 import faces.awesome.view.GameScreen;
+import faces.awesome.view.GameWonScreen;
 import faces.awesome.view.MainMenuScreen;
 
 /**
  * @author Linus Wallman
+ * Updated by: Therese Sturesson
  * This class is a repository for all the screens in the game.
  * It can also be used for changing current screen.
  */
@@ -19,6 +20,7 @@ public class ScreenRepository {
     private static GameScreen gameScreen;
     private static GameOverScreen gameOverScreen;
     private static MainMenuScreen mainMenuScreen;
+    private static GameWonScreen gameWonScreen;
     /**
      * define more screens here, define other behavior as well.
      */
@@ -49,6 +51,16 @@ public class ScreenRepository {
         mainMenuScreen.initialize();
 
         g.setScreen(mainMenuScreen);
+    }
+
+
+    public static void setGameWonScreen(GDXWrapper g) {
+        if (gameWonScreen == null) {
+            gameWonScreen = new GameWonScreen(g);
+        }
+
+        gameWonScreen.initialize();
+        g.setScreen(gameWonScreen);
     }
 
 
