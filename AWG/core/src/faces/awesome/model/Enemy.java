@@ -16,7 +16,7 @@ public class Enemy extends Character {
 
     protected Random randomGenerator = new Random();
     protected Bus bus;
-    protected AwesomeTimer timerMove, timerAttack;
+    private AwesomeTimer timerMove, timerAttack;
 
     public Enemy(Position pos, Bus bus, String name){
         super(pos, 2, 15, name);

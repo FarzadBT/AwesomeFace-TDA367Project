@@ -24,25 +24,25 @@ import faces.awesome.utils.AwesomeTimer;
  *
  */
 
-public class GameWonScreen implements Screen, ScreenSwitchListener {
+public class CreditScreen implements Screen, ScreenSwitchListener {
 
     private Stage stage;
     private final GDXWrapper gdxWrapper;
 
-    private BitmapFont gameWonText;
+    private BitmapFont creditText;
     private SpriteBatch sprBatch;
 
     private AwesomeTimer timer;
 
     private float fadeElapsed = 0.f;
 
-    private boolean calledOnce = false;
+    //private boolean calledOnce = false;
 
-    public GameWonScreen(GDXWrapper game) {
+    public CreditScreen(GDXWrapper game) {
         stage = new Stage(new ScreenViewport());
         gdxWrapper = game;
         sprBatch = new SpriteBatch();
-        gameWonText = new BitmapFont();
+        creditText = new BitmapFont();
         timer =  new AwesomeTimer();
     }
 
@@ -56,15 +56,17 @@ public class GameWonScreen implements Screen, ScreenSwitchListener {
 
         float fade = 1.0f;
 
+        String str = "THANK YOU FOR PLAYING! \n This game was made by Therese, Linus, Philip and Farzad.";
+
         if (timer.secondsElapsed() >= 5) {
             fade = Interpolation.fade.apply(fadeElapsed / 1.0f);
             stage.draw();
         }
 
-        gameWonText.setColor(1f, 1f, 1f, fade);
-        gameWonText.getData().setScale(2.0f);
+        creditText.setColor(1f, 1f, 1f, fade);
+        creditText.getData().setScale(2.0f);
         sprBatch.begin();
-        gameWonText.draw(sprBatch, "GAME WON", stage.getWidth() / 2 - 100, stage.getHeight() / 2 + 100);
+        creditText.draw(sprBatch, str, stage.getWidth() / 2 - 100, stage.getHeight() / 2 + 100);
         sprBatch.end();
 
     }
@@ -96,6 +98,7 @@ public class GameWonScreen implements Screen, ScreenSwitchListener {
 
     }
 
+    //Methods we have to have but do not use
     @Override
     public void resize(int width, int height) {
 
@@ -125,5 +128,5 @@ public class GameWonScreen implements Screen, ScreenSwitchListener {
     public void onScreenChange(ScreenSwitcher.ScreenType screen) {
 
     }
-}
 
+}

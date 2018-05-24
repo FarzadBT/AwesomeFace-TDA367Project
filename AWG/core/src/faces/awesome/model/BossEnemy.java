@@ -9,14 +9,19 @@ package faces.awesome.model;
 
 import com.squareup.otto.Bus;
 import faces.awesome.events.BossEnemyDiedEvent;
+import faces.awesome.utils.AwesomeTimer;
 
 public class BossEnemy extends Enemy {
+
+    private AwesomeTimer timerMove, timerAttack;
 
     public BossEnemy(Position pos, Bus bus, String name) {
         super(pos, bus, name);
         baseDamage = 1;
         health = 2;
         name = "bossEnemy";
+        timerMove = new AwesomeTimer();
+        timerAttack = new AwesomeTimer();
     }
 
 
@@ -24,19 +29,32 @@ public class BossEnemy extends Enemy {
     @Override
     public void move(boolean solid, boolean occupied, boolean withInBorder, Position newPosition) {
 
-        //Rör sig 1 gång på 30 gånger, TODO ska egentligen inte vara här, ta bort senare
-        int randInt = randomGenerator.nextInt(50);
+        if ( timerMove.ticksElapsed() >= 5 ) {
 
-        if ( randInt > 1 ) {
-            return;
-        }
+            if (!solid && !occupied && withInBorder) {
 
+                setPos(newPosition);
 
-        if (!solid && !occupied && withInBorder) {
+            }
 
-            setPos(newPosition);
+            timerMove.restart();
 
         }
+
+    }
+
+
+    //The enemy attacks if this method is called
+    @Override
+    public void attack(Character ch) {
+
+        if ( timerAttack.secondsElapsed() >= 0.01 ) {
+
+            ch.decreaseHealth(baseDamage);
+
+        }
+
+        timerAttack.restart();
 
     }
 

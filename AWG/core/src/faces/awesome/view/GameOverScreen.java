@@ -37,7 +37,7 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
 
     private float fadeElapsed = 0.f;
 
-    private boolean calledOnce = false;
+    //private boolean calledOnce = false;
 
     public GameOverScreen(GDXWrapper game) {
         stage = new Stage(new ScreenViewport());
