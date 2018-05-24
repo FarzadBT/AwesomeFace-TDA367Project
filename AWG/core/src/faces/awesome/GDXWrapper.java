@@ -42,7 +42,7 @@ public class GDXWrapper extends Game {
     public static final int VIEW_PORT_HEIGHT = 512;
 
     // antingen behåller vi denna som statisk, eller gör den till en singleton.
-    public static AssetManager assets;
+    private AssetManager assets;
 
     public PlayerCharacter player;
     public PlayerCtrl playerCtrl;
@@ -66,7 +66,7 @@ public class GDXWrapper extends Game {
         bus.register(this);
 
         //Instantiate asset manager
-        assets = new AssetManager();
+        assets = AssetManager.getInstance();
 
         TiledMap map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
 
@@ -135,6 +135,10 @@ public class GDXWrapper extends Game {
 
     public AssetManager getAssets() {
         return assets;
+    }
+
+    public WorldMap getMap(){
+        return world;
     }
 
 
