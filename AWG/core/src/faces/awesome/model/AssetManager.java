@@ -1,12 +1,10 @@
 package faces.awesome.model;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import faces.awesome.model.item.Item;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 

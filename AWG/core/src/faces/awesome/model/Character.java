@@ -7,8 +7,6 @@ package faces.awesome.model;
  * TODO skriva vad klassen gör
  */
 
-import faces.awesome.view.GameObjectView;
-
 public abstract class Character extends GameObject {
 
 	//Based damage dealt with no weapon equipped
