@@ -4,7 +4,6 @@ package faces.awesome;
 
 //This class takes care of the instantiation of model-obbjects such as PlayerCharacter and items.
 
-import faces.awesome.model.CharacterFactory;
 import faces.awesome.model.ItemFactory;
 import faces.awesome.model.PlayerCharacter;
 

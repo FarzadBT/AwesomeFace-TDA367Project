@@ -1,4 +1,4 @@
-package faces.awesome.controllers;
+package faces.awesome.view;
 
 import faces.awesome.GDXWrapper;
 import faces.awesome.services.WorldMap;
@@ -6,6 +6,7 @@ import faces.awesome.view.GameOverScreen;
 import faces.awesome.view.GameScreen;
 import faces.awesome.view.GameWonScreen;
 import faces.awesome.view.MainMenuScreen;
+
 
 /**
  * @author Linus Wallman

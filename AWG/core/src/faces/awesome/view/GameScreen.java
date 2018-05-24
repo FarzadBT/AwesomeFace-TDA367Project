@@ -23,8 +23,12 @@ import faces.awesome.events.BossEnemyDiedEvent;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.events.PlayerCharacterDiedEvent;
 import faces.awesome.model.BossEnemy;
+
 import faces.awesome.model.MapSegment;
+import faces.awesome.controllers.ScreenSwitcher.ScreenType;
+
 import faces.awesome.services.WorldMap;
+
 
 import java.util.HashMap;
 
