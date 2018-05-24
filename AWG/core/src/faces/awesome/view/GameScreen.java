@@ -22,15 +22,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.squareup.otto.Subscribe;
 import faces.awesome.GDXWrapper;
 import faces.awesome.AwesomeGame;
-import faces.awesome.controllers.GameScreenCtrl;
+import faces.awesome.controllers.*;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.model.BossEnemy;
 
 import faces.awesome.model.Enemy;
 import faces.awesome.model.MapSegment;
-import faces.awesome.controllers.PlayerCtrl;
-import faces.awesome.controllers.ScreenSwitchListener;
-import faces.awesome.controllers.ScreenSwitcher;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.controllers.ScreenSwitcher.ScreenType;
@@ -268,6 +265,12 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     @Override
     public void onScreenChange(ScreenType screen) {
         switch (screen) {
+            case MainScreen:
+                ScreenRepository.setMainMenuScreen(game);
+                break;
+            case GameOverScreen:
+                ScreenRepository.setGameOverScreen(game);
+                break;
             default:
                 break;
             /* This is where we can go from another screen, none other yet defined. */

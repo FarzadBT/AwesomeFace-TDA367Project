@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import faces.awesome.model.GameObject;
 
 /**
- * Created by linus on 2018-05-22.
+ * @author Linus Wallman
  */
 public class ItemView extends GameObjectView {
 

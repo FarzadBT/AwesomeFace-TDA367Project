@@ -62,6 +62,7 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
 
         if (timer.secondsElapsed() >= 5) {
             fade = Interpolation.fade.apply(fadeElapsed / 1.0f);
+            stage.draw();
         }
 
         gameOverText.setColor(1f, 1f, 1f, fade);

@@ -27,6 +27,8 @@ public class CharacterView extends GameObjectView {
 
     private Position localPos;
 
+    AwesomeTimer timer = new AwesomeTimer();
+
     public CharacterView(Character c) {
         super(c);
         localPos = c.getPos().cpy();
@@ -108,19 +110,19 @@ public class CharacterView extends GameObjectView {
             return;
         }
 
-        AwesomeTimer t = new AwesomeTimer();
-        if (t.ticksElapsed() >= 31) {
+        if (timer.ticksElapsed() >= 31) {
+            Timer tt = new Timer();
+            tt.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    sprBatch.draw(region.getKeyFrame(stateTime), localPos.getX() + xPattern * 4, localPos.getY() * yPattern * 4);
+
+                    drawWalk(sprBatch, region, oldPos, destination, xPattern, yPattern, walkOffset + 4);
+                }
+            }, 31); // milliseconds
         }
 
-        Timer tt = new Timer();
-        tt.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                sprBatch.draw(region.getKeyFrame(stateTime), localPos.getX() + xPattern * 4, localPos.getY() * yPattern * 4);
-
-                drawWalk(sprBatch, region, oldPos, destination, xPattern, yPattern, walkOffset + 4);
-            }
-        }, 31); // milliseconds
+        drawWalk(sprBatch, region, oldPos, destination, xPattern, yPattern, walkOffset);
 
     }
 
