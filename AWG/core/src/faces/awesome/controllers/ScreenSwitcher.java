@@ -1,10 +1,10 @@
 package faces.awesome.controllers;
 
 /**
- *
  * @author Linus Wallman
+ * Updated by: Therese Sturesson
  *
- *
+ * TODO skriva vad klassen gör
  */
 
 
@@ -14,7 +14,7 @@ public class ScreenSwitcher {
     private static ScreenType currentScreen;
 
     public enum ScreenType {
-        GameScreen, MainScreen, SaveManagingScreen, GameOverScreen, SettingsScreen
+        GameScreen, MainScreen, GameOverScreen, GameWonScreen, CreditScreen
     }
 
     public static void changeScreen(ScreenType screen) {

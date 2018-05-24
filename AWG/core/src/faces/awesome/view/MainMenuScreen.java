@@ -25,7 +25,6 @@ public class MainMenuScreen implements Screen, ScreenSwitchListener {
     }
 
 
-
     @Override
     public void show() {
         Table table = new Table();
@@ -59,11 +58,14 @@ public class MainMenuScreen implements Screen, ScreenSwitchListener {
 
     }
 
+
+    // Initialising the screen
     public void initialize() {
         Gdx.input.setInputProcessor(stage);
         ScreenSwitcher.setListener(this);
     }
 
+    // Rendering the screen
     @Override
     public void render(float delta) {
 
@@ -73,21 +75,26 @@ public class MainMenuScreen implements Screen, ScreenSwitchListener {
         stage.draw();
     }
 
-    @Override
-    public void onScreenChange(ScreenType screen) {
 
-    }
-
+    //Method we have to have but do not use
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
 
     @Override
+    public void dispose() {
+        stage.dispose();
+    }
+
+    @Override
     public void pause() {
 
     }
+    @Override
+    public void onScreenChange(ScreenType screen) {
 
+    }
     @Override
     public void resume() {
 
@@ -98,8 +105,4 @@ public class MainMenuScreen implements Screen, ScreenSwitchListener {
 
     }
 
-    @Override
-    public void dispose() {
-        stage.dispose();
-    }
 }

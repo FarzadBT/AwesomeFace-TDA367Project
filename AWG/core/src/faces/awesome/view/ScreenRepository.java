@@ -3,9 +3,9 @@ package faces.awesome.view;
 import faces.awesome.GDXWrapper;
 import faces.awesome.services.WorldMap;
 
-
 /**
  * @author Linus Wallman
+ * Updated by: Therese Sturesson
  * This class is a repository for all the screens in the game.
  * It can also be used for changing current screen.
  */
@@ -16,7 +16,8 @@ public class ScreenRepository {
     private static GameScreen gameScreen;
     private static GameOverScreen gameOverScreen;
     private static MainMenuScreen mainMenuScreen;
-
+    private static GameWonScreen gameWonScreen;
+    private static CreditScreen creditScreen;
     /**
      * define more screens here, define other behavior as well.
      */
@@ -47,6 +48,25 @@ public class ScreenRepository {
         mainMenuScreen.initialize();
 
         g.setScreen(mainMenuScreen);
+    }
+
+
+    public static void setGameWonScreen(GDXWrapper g) {
+        if (gameWonScreen == null) {
+            gameWonScreen = new GameWonScreen(g);
+        }
+
+        gameWonScreen.initialize();
+        g.setScreen(gameWonScreen);
+    }
+
+    public static void setCreditScreen(GDXWrapper g) {
+        if (creditScreen == null) {
+            creditScreen = new CreditScreen(g);
+        }
+
+        creditScreen.initialize();
+        g.setScreen(creditScreen);
     }
 
 

@@ -20,9 +20,10 @@ import faces.awesome.utils.AwesomeTimer;
 
 /**
  * @author Linus Wallman
+ * Updated by: Therese Sturesson
  *
+ * A screen for game over (when the player dies)
  */
-
 
 public class GameOverScreen implements Screen, ScreenSwitchListener {
 
@@ -36,7 +37,6 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
 
     private float fadeElapsed = 0.f;
 
-    private boolean calledOnce = false;
 
     public GameOverScreen(GDXWrapper game) {
         stage = new Stage(new ScreenViewport());
@@ -46,12 +46,11 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
         timer =  new AwesomeTimer();
     }
 
-
+    // Rendering the screen
     @Override
     public void render(float delta) {
 
         // Pretty sure show is called first, then the render clears the screenframe.
-        //
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -59,7 +58,7 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
 
         float fade = 1.0f;
 
-        if (timer.secondsElapsed() >= 5) {
+        if (timer.secondsElapsed() >= 2) {
             fade = Interpolation.fade.apply(fadeElapsed / 1.0f);
             stage.draw();
         }
@@ -72,7 +71,7 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
 
     }
 
-
+    // Initialising the screen
     public void initialize() {
         Gdx.input.setInputProcessor(stage);
         ScreenSwitcher.setListener(this);
@@ -80,30 +79,27 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
 
     @Override
     public void show() {
-        System.out.println("called?");
-        if (timer.secondsElapsed() >= 5) {
 
-            Table table = new Table();
-            table.setFillParent(true);
-            stage.addActor(table);
-            table.setDebug(true);
+        Table table = new Table();
+        table.setFillParent(true);
+        stage.addActor(table);
 
-            Skin skin = new Skin(Gdx.files.internal("core/assets/shade/skin/uiskin.json"));
+        Skin skin = new Skin(Gdx.files.internal("core/assets/shade/skin/uiskin.json"));
 
-            TextButton mainMenu = new TextButton("Back To Main Menu", skin);
-            table.add(mainMenu).height(75f).width(250f).fillX().uniformX();
+        TextButton creditScreen = new TextButton("Continue", skin);
+        table.add(creditScreen).height(75f).width(250f).fillX().uniformX();
 
-            mainMenu.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    ScreenRepository.setMainMenuScreen(gdxWrapper);
-                }
-            });
-
-        }
+        creditScreen.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                ScreenRepository.setCreditScreen(gdxWrapper);
+            }
+        });
 
     }
 
+
+    //Method we have to have but do not use
     @Override
     public void resize(int width, int height) {
 

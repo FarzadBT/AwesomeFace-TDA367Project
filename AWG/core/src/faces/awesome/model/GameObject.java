@@ -1,9 +1,6 @@
 package faces.awesome.model;
 
 /**
- * Created by Mr Cornholio on 08/05/2018.
-=======
-/*
  * Author: Farzad Besharati
  * Updated by: Therese Sturesson
  *
@@ -38,12 +35,12 @@ public class GameObject {
     }
 
     // Get the position of the GameObject
-    public Position getPos () {
+    public Position getPos() {
         return pos;
     }
 
     // Set the position of the GameObject
-    public void setPos (Position pos) {
+    public void setPos(Position pos) {
         this.pos = pos;
     }
 

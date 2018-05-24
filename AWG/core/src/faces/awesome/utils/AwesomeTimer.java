@@ -2,7 +2,7 @@ package faces.awesome.utils;
 
 /**
  * @author Linus Wallman
- * Simple timer class.
+ * Simple timerMove class.
  */
 
 public class AwesomeTimer {

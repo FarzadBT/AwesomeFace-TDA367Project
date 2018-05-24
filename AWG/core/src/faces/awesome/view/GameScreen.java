@@ -18,15 +18,13 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.squareup.otto.Subscribe;
 import faces.awesome.GDXWrapper;
 import faces.awesome.controllers.*;
-import faces.awesome.events.MapChangedEvent;
-import faces.awesome.model.BossEnemy;
-
-import faces.awesome.model.MapSegment;
 import faces.awesome.controllers.ScreenSwitcher.ScreenType;
-
+import faces.awesome.events.BossEnemyDiedEvent;
+import faces.awesome.events.MapChangedEvent;
+import faces.awesome.events.PlayerCharacterDiedEvent;
+import faces.awesome.model.BossEnemy;
+import faces.awesome.model.MapSegment;
 import faces.awesome.services.WorldMap;
-
-
 import java.util.HashMap;
 
 
@@ -36,7 +34,6 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     private GameScreenCtrl gameController;
     private PlayerCtrl playerCtrl;
-
 
     private OrthographicCamera camera;
     private Viewport gamePort;
@@ -94,7 +91,6 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         //textures.put("Sword", new Texture("core/assets/sword.png"));
         //textures.put("Hammer", new Texture("core/assets/sword.png"));
 
-
         shapeRenderer = new ShapeRenderer();
 
         gameController = new GameScreenCtrl(playerCtrl);
@@ -113,6 +109,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     // render-logic here
     public void update(float delta) {
 
+        MapSegment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.checkDeath(enemy));
+
         MapSegment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.tryMove(enemy));
 
         MapSegment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.shouldAttack(enemy, game.player));
@@ -128,7 +126,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         /*
         camera.position.x = (game.segment.getMapPosition().getX() * 32 + 16) * GDXWrapper.TILE_SIZE;
         camera.position.y = (game.segment.getMapPosition().getY() * 16 + 8) * GDXWrapper.TILE_SIZE;
-*/
+        */
         HP = "HP:" + game.player.getHealth();
 
 
@@ -149,8 +147,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     @Override
     public void render(float delta) {
 
-        //System.out.println("x: " + game.playerCharacter.getPos().getX() + " y: " + game.playerCharacter.getPos().getY());
         update(delta);
+
         // RGB(0, 0, 0, 1) = black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -174,11 +172,6 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         playerSprite.setPosition((game.player.getPos().getX() % 32) * GDXWrapper.TILE_SIZE,(game.player.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
         playerSprite.draw(sprBatch);
-
-
-        //bossSprite.setPlayerPosOnMap((game.segment.boss.getPos().getX() % 32) * TILE_SIZE,(game.segment.boss.getPos().getY() % 16) * TILE_SIZE);
-        //bossSprite.draw(sprBatch);
-        //bossSprite.setScale(2.0f);
 
 
         MapSegment.getEnemiesInSegment().forEach(enemy -> {
@@ -226,6 +219,53 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         gamePort.update(width, height);
     }
 
+
+    @Override
+    public void dispose() {
+        sprBatch.dispose();
+    }
+
+
+    //When the map changes the event will happen and refetch the map
+    @Subscribe
+    public void mapchangedEvent(MapChangedEvent event) {
+        refetchMap();
+    }
+
+
+    //When the player dies this event will happen and changes the screen
+    @Subscribe
+    public void playerCharacterDievEvent(PlayerCharacterDiedEvent event){
+        onScreenChange(ScreenType.GameOverScreen);
+    }
+
+
+    //When the boss enemy dies this event will happen and changes the screen
+    @Subscribe
+    public void bossEnemyDiedEvent(BossEnemyDiedEvent event) {
+        onScreenChange(ScreenType.GameWonScreen);
+    }
+
+
+    @Override
+    public void onScreenChange(ScreenType screen) {
+        switch (screen) {
+            case MainScreen:
+                ScreenRepository.setMainMenuScreen(game);
+                break;
+            case GameOverScreen:
+                ScreenRepository.setGameOverScreen(game);
+                break;
+            case GameWonScreen:
+                ScreenRepository.setGameWonScreen(game);
+                break;
+            default:
+                break;
+            /* This is where we can go from another screen, none other yet defined. */
+        }
+    }
+
+    //Methods we must have but do not use
     @Override
     public void pause() {
 
@@ -241,29 +281,5 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     }
 
-    @Override
-    public void dispose() {
-        sprBatch.dispose();
-    }
 
-
-    @Subscribe
-    public void mapchangedEvent(MapChangedEvent event) {
-        refetchMap();
-    }
-
-    @Override
-    public void onScreenChange(ScreenType screen) {
-        switch (screen) {
-            case MainScreen:
-                ScreenRepository.setMainMenuScreen(game);
-                break;
-            case GameOverScreen:
-                ScreenRepository.setGameOverScreen(game);
-                break;
-            default:
-                break;
-            /* This is where we can go from another screen, none other yet defined. */
-        }
-    }
 }

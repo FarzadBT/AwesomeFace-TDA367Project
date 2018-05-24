@@ -4,16 +4,16 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import faces.awesome.model.item.Item;
-
 import java.util.HashMap;
 import java.util.Map;
 
 // Author: Philip Nilsson
-// updated by: Linus Wallman - Changed static type from HashMap -> Map also updated some types.
+// Updated by: Linus Wallman - Changed static type from HashMap -> Map also updated some types.
 
-//This class is intended to manage game assets such as animations, textures and items.
+// This class is intended to manage game assets such as animations, textures and items.
 
 public class AssetManager {
+
     //HashMaps containing data that is to be stored
     private Map<String, TextureRegion> textures;
     private Map<String, Item> items;
@@ -58,4 +58,5 @@ public class AssetManager {
     public FileHandle getFileHandle(String name) {
         return fileHandles.get(name);
     }
+
 }
