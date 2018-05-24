@@ -29,7 +29,7 @@ public class BossEnemy extends Enemy {
     @Override
     public void move(boolean solid, boolean occupied, boolean withInBorder, Position newPosition) {
 
-        if ( timerMove.ticksElapsed() >= 5 ) {
+        if ( timerMove.secondsElapsed() >= 0.5 ) {
 
             if (!solid && !occupied && withInBorder) {
 
@@ -48,7 +48,7 @@ public class BossEnemy extends Enemy {
     @Override
     public void attack(Character ch) {
 
-        if ( timerAttack.secondsElapsed() >= 0.01 ) {
+        if ( timerAttack.secondsElapsed() >= 0.1 ) {
 
             ch.decreaseHealth(baseDamage);
 

@@ -14,7 +14,7 @@ public class ScreenSwitcher {
     private static ScreenType currentScreen;
 
     public enum ScreenType {
-        GameScreen, MainScreen, SaveManagingScreen, GameOverScreen, SettingsScreen, GameWonScreen, CreditScreen
+        GameScreen, MainScreen, GameOverScreen, GameWonScreen, CreditScreen
     }
 
     public static void changeScreen(ScreenType screen) {

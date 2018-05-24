@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import faces.awesome.GDXWrapper;
-import faces.awesome.controllers.ScreenRepository;
 import faces.awesome.controllers.ScreenSwitchListener;
 import faces.awesome.controllers.ScreenSwitcher;
 import faces.awesome.utils.AwesomeTimer;
@@ -36,7 +35,6 @@ public class CreditScreen implements Screen, ScreenSwitchListener {
 
     private float fadeElapsed = 0.f;
 
-    //private boolean calledOnce = false;
 
     public CreditScreen(GDXWrapper game) {
         stage = new Stage(new ScreenViewport());
@@ -56,9 +54,9 @@ public class CreditScreen implements Screen, ScreenSwitchListener {
 
         float fade = 1.0f;
 
-        String str = "THANK YOU FOR PLAYING! \n This game was made by Therese, Linus, Philip and Farzad.";
+        String str = "THANK YOU FOR PLAYING! \n This game was made by Therese, \n Linus, Philip and Farzad.";
 
-        if (timer.secondsElapsed() >= 5) {
+        if (timer.secondsElapsed() >= 3) {
             fade = Interpolation.fade.apply(fadeElapsed / 1.0f);
             stage.draw();
         }

@@ -2,11 +2,6 @@ package faces.awesome.view;
 
 import faces.awesome.GDXWrapper;
 import faces.awesome.services.WorldMap;
-import faces.awesome.view.GameOverScreen;
-import faces.awesome.view.GameScreen;
-import faces.awesome.view.GameWonScreen;
-import faces.awesome.view.MainMenuScreen;
-
 
 /**
  * @author Linus Wallman
@@ -22,6 +17,7 @@ public class ScreenRepository {
     private static GameOverScreen gameOverScreen;
     private static MainMenuScreen mainMenuScreen;
     private static GameWonScreen gameWonScreen;
+    private static CreditScreen creditScreen;
     /**
      * define more screens here, define other behavior as well.
      */
@@ -62,6 +58,15 @@ public class ScreenRepository {
 
         gameWonScreen.initialize();
         g.setScreen(gameWonScreen);
+    }
+
+    public static void setCreditScreen(GDXWrapper g) {
+        if (creditScreen == null) {
+            creditScreen = new CreditScreen(g);
+        }
+
+        creditScreen.initialize();
+        g.setScreen(creditScreen);
     }
 
 

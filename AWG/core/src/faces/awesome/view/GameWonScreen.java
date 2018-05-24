@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import faces.awesome.GDXWrapper;
-import faces.awesome.controllers.ScreenRepository;
 import faces.awesome.controllers.ScreenSwitchListener;
 import faces.awesome.controllers.ScreenSwitcher;
 import faces.awesome.utils.AwesomeTimer;
@@ -36,7 +35,7 @@ public class GameWonScreen implements Screen, ScreenSwitchListener {
 
     private float fadeElapsed = 0.f;
 
-    private boolean calledOnce = false;
+    //private boolean calledOnce = false;
 
     public GameWonScreen(GDXWrapper game) {
         stage = new Stage(new ScreenViewport());
@@ -56,7 +55,7 @@ public class GameWonScreen implements Screen, ScreenSwitchListener {
 
         float fade = 1.0f;
 
-        if (timer.secondsElapsed() >= 5) {
+        if (timer.secondsElapsed() >= 2) {
             fade = Interpolation.fade.apply(fadeElapsed / 1.0f);
             stage.draw();
         }
@@ -84,13 +83,13 @@ public class GameWonScreen implements Screen, ScreenSwitchListener {
 
         Skin skin = new Skin(Gdx.files.internal("core/assets/shade/skin/uiskin.json"));
 
-        TextButton mainMenu = new TextButton("Back To Main Menu", skin);
-        table.add(mainMenu).height(75f).width(250f).fillX().uniformX();
+        TextButton creditScreen = new TextButton("Continue", skin);
+        table.add(creditScreen).height(75f).width(250f).fillX().uniformX();
 
-        mainMenu.addListener(new ChangeListener() {
+        creditScreen.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                ScreenRepository.setMainMenuScreen(gdxWrapper);
+                ScreenRepository.setCreditScreen(gdxWrapper);
             }
         });
 

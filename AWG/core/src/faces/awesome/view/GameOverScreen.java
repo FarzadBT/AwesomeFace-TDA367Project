@@ -20,9 +20,8 @@ import faces.awesome.utils.AwesomeTimer;
 
 /**
  * @author Linus Wallman
- *
+ * Updated by: Therese Sturesson
  */
-
 
 public class GameOverScreen implements Screen, ScreenSwitchListener {
 
@@ -36,7 +35,6 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
 
     private float fadeElapsed = 0.f;
 
-    //private boolean calledOnce = false;
 
     public GameOverScreen(GDXWrapper game) {
         stage = new Stage(new ScreenViewport());
@@ -58,7 +56,7 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
 
         float fade = 1.0f;
 
-        if (timer.secondsElapsed() >= 5) {
+        if (timer.secondsElapsed() >= 2) {
             fade = Interpolation.fade.apply(fadeElapsed / 1.0f);
             stage.draw();
         }
@@ -79,28 +77,26 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
 
     @Override
     public void show() {
-        System.out.println("called?");
-
 
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
-        //table.setDebug(true);
 
         Skin skin = new Skin(Gdx.files.internal("core/assets/shade/skin/uiskin.json"));
 
-        TextButton mainMenu = new TextButton("Back To Main Menu", skin);
-        table.add(mainMenu).height(75f).width(250f).fillX().uniformX();
+        TextButton creditScreen = new TextButton("Continue", skin);
+        table.add(creditScreen).height(75f).width(250f).fillX().uniformX();
 
-        mainMenu.addListener(new ChangeListener() {
+        creditScreen.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                ScreenRepository.setMainMenuScreen(gdxWrapper);
+                ScreenRepository.setCreditScreen(gdxWrapper);
             }
         });
 
     }
 
+    //Method we have to have but do not use
     @Override
     public void resize(int width, int height) {
 
