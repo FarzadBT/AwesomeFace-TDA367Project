@@ -24,11 +24,9 @@ import faces.awesome.utils.AwesomeClock;
 import faces.awesome.view.GameScreen;
 
 /**
- *
  * @author Linus Wallman
  * Updated by:
  * TODO: Skriv vad klassen gör
- *
  */
 
 
@@ -36,9 +34,8 @@ public class GDXWrapper extends Game {
 
 
     /**
-     *
      * Flytta på dessa konstanter?
-     * */
+     */
 
     public static final int TILE_SIZE = 32;
     public static final int VIEW_PORT_WIDTH = 1024;
@@ -79,7 +76,7 @@ public class GDXWrapper extends Game {
 
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
-        player = CharacterFactory.createPlayer(w/TILE_SIZE/2, h/TILE_SIZE/2, bus, "player");
+        player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player");
 
         player.addNewToInventory(ItemFactory.CreateSword());
         player.addNewToInventory(ItemFactory.CreateHammer());
