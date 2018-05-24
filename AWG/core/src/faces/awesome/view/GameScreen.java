@@ -110,6 +110,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     // render-logic here
     public void update(float delta) {
 
+        MapSegment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.checkDeath(enemy));
+
         MapSegment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.tryMove(enemy));
 
         MapSegment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.shouldAttack(enemy, game.player));

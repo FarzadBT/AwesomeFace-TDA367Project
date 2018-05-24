@@ -116,4 +116,13 @@ public class EnemyCtrl {
     }
 
 
+    public void checkDeath(Enemy enemy) {
+
+        if ( enemy.getHealth() == 0 ) {
+
+            segment.removeEnemyFromLists(enemy);
+
+        }
+
+    }
 }

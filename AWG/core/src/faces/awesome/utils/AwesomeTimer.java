@@ -4,7 +4,7 @@ import faces.awesome.GDXWrapper;
 
 /**
  * @author Linus Wallman
- * Simple timer class.
+ * Simple timerMove class.
  */
 
 public class AwesomeTimer {

@@ -25,8 +25,6 @@ public class Tiles {
     public static boolean isSolid(Map tiledMap, int x, int y) {
         boolean tileIsSolid = false;
 
-        TiledMap tiledMap1 = WorldMap.
-
         for (MapLayer layer :  tiledMap.getLayers()) {
 
             if (layer instanceof TiledMapTileLayer) {
