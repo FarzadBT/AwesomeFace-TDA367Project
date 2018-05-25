@@ -69,7 +69,7 @@ public class GDXWrapper extends Game {
 
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
-        player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player");
+        player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player", segment);
 
         player.addNewToInventory(ItemFactory.CreateSword());
         player.addNewToInventory(ItemFactory.CreateHammer());

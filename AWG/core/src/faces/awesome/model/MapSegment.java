@@ -17,12 +17,12 @@ public class MapSegment {
 
     //Varibles
     public WorldMap world;
-    private static Position mapPosition;
+    private Position mapPosition;
     public PlayerCharacter player;
 
     // Two lists for enemies and characters
     private List<Character> characterInWorld = new ArrayList<>();
-    private static List<Enemy> enemiesInWorld = new ArrayList<>();
+    private List<Enemy> enemiesInWorld = new ArrayList<>();
 
 
     public MapSegment(WorldMap world, PlayerCharacter player){
@@ -48,7 +48,7 @@ public class MapSegment {
 
 
     // Gets the list of enemies
-    public static List<Enemy> getEnemiesInSegment(){
+    public List<Enemy> getEnemiesInSegment(){
 
         int minX = mapPosition.getX() * 32;
         int maxX = (mapPosition.getX() + 1) * 32;
@@ -80,7 +80,7 @@ public class MapSegment {
      * @param y2 y-coord of bottom right corner
      * @return A list of the enemies that are inside the hitbox
      */
-    public static List<Enemy> getPlayerTargets(int x1, int y1, int x2, int y2) {
+    public List<Enemy> getPlayerTargets(int x1, int y1, int x2, int y2) {
 
         List <Enemy> enemies = getEnemiesInSegment();
         List <Enemy> targets = new ArrayList<>();

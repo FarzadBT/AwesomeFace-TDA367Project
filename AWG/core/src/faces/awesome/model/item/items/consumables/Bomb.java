@@ -1,6 +1,7 @@
 package faces.awesome.model.item.items.consumables;
 
 import faces.awesome.model.Facing;
+import faces.awesome.model.MapSegment;
 import faces.awesome.model.Position;
 import faces.awesome.model.item.BaseConsumable;
 import faces.awesome.model.objects.object.BombObject;
@@ -23,7 +24,7 @@ public class Bomb extends BaseConsumable {
      * @param facing
      */
     @Override
-    public void use(Position pos, Facing facing) {
+    public void use(Position pos, Facing facing, MapSegment segment) {
         if(quantity > 0) {
             decrement();
             createObject(pos, facing);

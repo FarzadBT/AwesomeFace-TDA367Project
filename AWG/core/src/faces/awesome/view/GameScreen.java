@@ -23,9 +23,7 @@ import faces.awesome.events.BossEnemyDiedEvent;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.events.PlayerCharacterDiedEvent;
 import faces.awesome.model.BossEnemy;
-import faces.awesome.model.MapSegment;
 import faces.awesome.services.WorldMap;
-
 import java.util.HashMap;
 
 
@@ -34,12 +32,11 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     private final GDXWrapper game;
 
     private GameScreenCtrl gameController;
-    //private PlayerCtrl playerCtrl;
 
     private OrthographicCamera camera;
     private Viewport gamePort;
 
-    private WorldMap world;
+    //private WorldMap world;
     private MapRenderer mapRenderer;
     private ShapeRenderer shapeRenderer;
 
@@ -58,7 +55,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     private String HP;
     private HashMap<String, Texture> textures = new HashMap<>();
 
-    public GameScreen(final GDXWrapper game, WorldMap world) {
+    public GameScreen(final GDXWrapper game) {
 
         this.game = game;
         camera = new OrthographicCamera(GDXWrapper.VIEW_PORT_WIDTH, GDXWrapper.VIEW_PORT_HEIGHT);
@@ -66,7 +63,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         gamePort = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         gamePort.apply();
 
-        this.world = world;
+        //this.world = world;
         game.bus.register(this);
         refetchMap();
 
@@ -110,11 +107,11 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     // render-logic here
     public void update(float delta) {
 
-        MapSegment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.checkDeath(enemy));
+        game.segment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.checkDeath(enemy));
 
-        MapSegment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.tryMove(enemy));
+        game.segment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.tryMove(enemy));
 
-        MapSegment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.shouldAttack(enemy, game.player));
+        game.segment.getEnemiesInSegment().forEach(enemy -> game.enemyCtrl.shouldAttack(enemy, game.player));
 
         Vector3 cameraPos = camera.position.cpy();
 
@@ -175,7 +172,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         playerSprite.draw(sprBatch);
 
 
-        MapSegment.getEnemiesInSegment().forEach(enemy -> {
+        game.segment.getEnemiesInSegment().forEach(enemy -> {
 
             if (enemy instanceof BossEnemy) {
                 bossSprite.setPosition((enemy.getPos().getX() % 32) * GDXWrapper.TILE_SIZE,(enemy.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
@@ -204,7 +201,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     private void refetchMap () {
 
-        mapRenderer = new OrthogonalTiledMapRenderer(world.getCurrentMap());
+        mapRenderer = new OrthogonalTiledMapRenderer(game.world.getCurrentMap());
 
     }
 
