@@ -18,7 +18,6 @@ import java.util.TimerTask;
  * @author Linus Wallman
  *
  * TODO skriva vad klassen gör
- * TODO kommentera metoderna
  */
 
 public class CharacterView extends GameObjectView {
