@@ -27,7 +27,7 @@ public class Bomb extends BaseConsumable {
     public void use(Position pos, Facing facing, MapSegment segment) {
         if(quantity > 0) {
             decrement();
-            createObject(pos, facing);
+            createObject(pos, facing, segment);
         }
     }
 
@@ -36,19 +36,19 @@ public class Bomb extends BaseConsumable {
      * @param pos
      * @param facing
      */
-    private void createObject(Position pos, Facing facing) {
+    private void createObject(Position pos, Facing facing, MapSegment segment) {
         switch (facing) {
             case NORTH:
-                bomb = new BombObject(pos.movePos(0, 1));
+                bomb = new BombObject(pos.movePos(0, 1), segment);
                 break;
             case SOUTH:
-                bomb = new BombObject(pos.movePos(0, -1));
+                bomb = new BombObject(pos.movePos(0, -1), segment);
                 break;
             case EAST:
-                bomb = new BombObject(pos.movePos(1, 0));
+                bomb = new BombObject(pos.movePos(1, 0), segment);
                 break;
             case WEST:
-                bomb = new BombObject(pos.movePos(-1, 0));
+                bomb = new BombObject(pos.movePos(-1, 0), segment);
                 break;
         }
     }

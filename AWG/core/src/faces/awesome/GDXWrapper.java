@@ -70,13 +70,14 @@ public class GDXWrapper extends Game {
 
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
+
+        segment = new MapSegment(this);
+
         player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player", segment);
 
         player.addNewToInventory(ItemFactory.CreateSword());
         player.addNewToInventory(ItemFactory.CreateHammer());
         player.addNewToInventory(new Bomb(10));
-
-        segment = new MapSegment(world, player);
 
         player.addNewToInventory(new Sword());
         player.addNewToInventory(new Hammer());

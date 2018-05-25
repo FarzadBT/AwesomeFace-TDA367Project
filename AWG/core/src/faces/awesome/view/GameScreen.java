@@ -134,8 +134,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
 
         // changed this, make sure it works.
-        slot1Sprite.setRegion(game.assets.getTexture(game.segment.player.getSlot1().getName()));
-        slot2Sprite.setRegion(game.assets.getTexture(game.segment.player.getSlot2().getName()));
+        slot1Sprite.setRegion(game.assets.getTexture(game.player.getSlot1().getName()));
+        slot2Sprite.setRegion(game.assets.getTexture(game.player.getSlot2().getName()));
 
 
         //shapeRenderer.setProjectionMatrix(camera.combined);

@@ -14,14 +14,17 @@ import java.util.TimerTask;
  */
 public class BombObject extends GameObject {
 
-    public BombObject(Position pos) {
+    private MapSegment segment;
+
+    public BombObject(Position pos, MapSegment segment) {
         super(pos, "Bomb");
 
+        this.segment = segment;
         countDown();
     }
 
     private void countDown() {
-        MapSegment.addToObjects(this);
+        segment.addToObjects(this);
 
         int x = pos.getX();
         int y = pos.getY();
@@ -30,7 +33,7 @@ public class BombObject extends GameObject {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                List<Enemy> targets = MapSegment.getPlayerTargets(x-2, y+2, x+2, y-2);
+                List<Enemy> targets = segment.getPlayerTargets(x-2, y+2, x+2, y-2);
                 for (Enemy enemy: targets) {
                     enemy.decreaseHealth(10);
                 }
@@ -40,6 +43,6 @@ public class BombObject extends GameObject {
     }
 
     private void removeObject() {
-        MapSegment.removeFromObjects(this);
+        segment.removeFromObjects(this);
     }
 }

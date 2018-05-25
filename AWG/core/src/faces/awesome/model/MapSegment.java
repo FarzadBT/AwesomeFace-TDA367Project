@@ -1,5 +1,6 @@
 package faces.awesome.model;
 
+import faces.awesome.GDXWrapper;
 import faces.awesome.services.WorldMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,8 @@ import java.util.List;
 public class MapSegment {
 
     //Varibles
-    public WorldMap world;
+    public GDXWrapper game;
     private Position mapPosition;
-    public PlayerCharacter player;
 
     // Two lists for enemies and characters
     private List<Character> characterInWorld = new ArrayList<>();
@@ -26,10 +26,9 @@ public class MapSegment {
     private List<GameObject> objectsInWorld = new ArrayList<>();
 
 
-    public MapSegment(WorldMap world, PlayerCharacter player){
+    public MapSegment(GDXWrapper game){
 
-        this.player = player;
-        this.world = world;
+        this.game = game;
 
         this.mapPosition = new Position(0, 0);
 
@@ -43,7 +42,7 @@ public class MapSegment {
 
         characterInWorld.clear();
         characterInWorld.addAll(enemiesInWorld);
-        characterInWorld.add(player);
+        characterInWorld.add(game.player);
 
     }
 
@@ -164,7 +163,7 @@ public class MapSegment {
 
         for(Position p : targets){
 
-            if(p.equals(player.getPos())){
+            if(p.equals(game.player.getPos())){
 
                 return true;
             }
@@ -243,14 +242,14 @@ public class MapSegment {
 
     // Delegate the check if a tile is solid or not to the Tiles class
     public boolean isSolid(int x, int y) {
-        return world.isSolid(x, y);
+        return game.world.isSolid(x, y);
     }
 
 
     // Delegate the set of the new map and sets the map position
     public Position setNewMap(Position position) {
 
-        Position pos = world.setNewMap(position);
+        Position pos = game.world.setNewMap(position);
 
         if ( pos != null ) {
             setMapPosition(0,0);
