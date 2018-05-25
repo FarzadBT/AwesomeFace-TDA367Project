@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,16 +16,22 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.squareup.otto.Subscribe;
 import faces.awesome.GDXWrapper;
-import faces.awesome.controllers.*;
+import faces.awesome.controllers.GameScreenCtrl;
+import faces.awesome.controllers.ScreenSwitchListener;
+import faces.awesome.controllers.ScreenSwitcher;
 import faces.awesome.controllers.ScreenSwitcher.ScreenType;
 import faces.awesome.events.BossEnemyDiedEvent;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.events.PlayerCharacterDiedEvent;
-import faces.awesome.model.BossEnemy;
+import faces.awesome.model.characters.BossEnemy;
 import faces.awesome.model.objects.object.BombObject;
-import faces.awesome.services.WorldMap;
-import java.util.HashMap;
 
+/*
+* @author Linus Wallman
+* Updated by: Therese Sturesson, Philip Nilsson, Farzad Besharati
+*
+* TODO skriva vad klassen gör
+*/
 
 public class GameScreen implements Screen, ScreenSwitchListener {
 
@@ -37,9 +42,9 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     private OrthographicCamera camera;
     private Viewport gamePort;
 
-    //private WorldMap world;
     private MapRenderer mapRenderer;
     private ShapeRenderer shapeRenderer;
+
 
     private List<GameObjectView> gameObjectViews;
 
@@ -56,7 +61,6 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     private BitmapFont HPfont;
     private String HP;
-    private HashMap<String, Texture> textures = new HashMap<>();
 
     public GameScreen(final GDXWrapper game) {
 
@@ -66,33 +70,26 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         gamePort = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         gamePort.apply();
 
-        //this.world = world;
         game.bus.register(this);
         refetchMap();
 
-
         sprBatch = new SpriteBatch();
 
-        //textures.put("playerCharacter", new Texture("core/assets/linkk.png"));
+        //Sprite for the player
         playerSprite = new Sprite(game.assets.getTexture("player"));
 
-        //enemies
-        //textures.put("enemy", new Texture("core/assets/enemy.png"));
+        //Sprite for the enemy
         enemySprite = new Sprite(game.assets.getTexture("enemy"));
 
-        //textures.put("bossEnemy", new Texture("core/assets/giantenemycrab2.png"));
+        //Sprite for the boss
         bossSprite = new Sprite(game.assets.getTexture("bossEnemy"));
 
+        //Sprite for the bomb
         bombObjectSprite = new Sprite(game.assets.getTexture("Bomb"));
 
-
-        //textures.put("slot1", new Texture("core/assets/blank.png"));
+        //Sprite for the item slot
         slot1Sprite = new Sprite(game.assets.getTexture("blank"));
-        //textures.put("slot2", new Texture("core/assets/blank.png"));
         slot2Sprite = new Sprite(game.assets.getTexture("blank"));
-
-        //textures.put("Sword", new Texture("core/assets/sword.png"));
-        //textures.put("Hammer", new Texture("core/assets/sword.png"));
 
         shapeRenderer = new ShapeRenderer();
 
@@ -100,7 +97,6 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         HPfont = new BitmapFont();
         HPfont.getData().setScale(2.0f);
-
 
         Gdx.input.setInputProcessor(gameController);
     }
@@ -127,19 +123,11 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         Vector3 vec3 = new Vector3(newX, newY, 0);
 
         camera.position.set(cameraPos.lerp(vec3, 0.1f));
-        /*
-        camera.position.x = (game.segment.getMapPosition().getX() * 32 + 16) * GDXWrapper.TILE_SIZE;
-        camera.position.y = (game.segment.getMapPosition().getY() * 16 + 8) * GDXWrapper.TILE_SIZE;
-        */
+
         HP = "HP:" + game.player.getHealth();
 
-
-        // changed this, make sure it works.
         slot1Sprite.setRegion(game.assets.getTexture(game.player.getSlot1().getName()));
         slot2Sprite.setRegion(game.assets.getTexture(game.player.getSlot2().getName()));
-
-
-        //shapeRenderer.setProjectionMatrix(camera.combined);
 
         camera.update();
 
@@ -274,7 +262,6 @@ public class GameScreen implements Screen, ScreenSwitchListener {
                 break;
             default:
                 break;
-            /* This is where we can go from another screen, none other yet defined. */
         }
     }
 

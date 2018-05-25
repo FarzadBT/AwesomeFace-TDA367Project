@@ -1,6 +1,6 @@
 package faces.awesome.model.item.items.permanents;
 
-import faces.awesome.model.Enemy;
+import faces.awesome.model.characters.Enemy;
 import faces.awesome.model.Facing;
 import faces.awesome.model.MapSegment;
 import faces.awesome.model.Position;
@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mr Cornholio on 14/05/2018.
+ * @author Farzad Besharati
+ *
+ * TODO skriva vad klassen gör
  */
 
 public class Sword extends BaseItem {
@@ -40,4 +42,5 @@ public class Sword extends BaseItem {
             enemy.decreaseHealth(5);
         }
     }
+
 }

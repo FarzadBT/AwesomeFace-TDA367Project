@@ -1,7 +1,10 @@
-package faces.awesome.model;
+package faces.awesome.model.characters;
 
 import com.squareup.otto.Bus;
 import faces.awesome.events.PlayerCharacterDiedEvent;
+import faces.awesome.model.Inventory;
+import faces.awesome.model.MapSegment;
+import faces.awesome.model.Position;
 import faces.awesome.model.item.Item;
 
 /*

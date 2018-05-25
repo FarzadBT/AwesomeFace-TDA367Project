@@ -6,8 +6,11 @@ import faces.awesome.model.Position;
 import faces.awesome.model.item.BaseItem;
 
 /**
- * Created by Mr Cornholio on 24/04/2018.
+ * @author Farzad Besharati
+ *
+ * TODO skriva vad klassen gör
  */
+
 public class Hammer extends BaseItem {
 
     public Hammer() {
@@ -18,4 +21,5 @@ public class Hammer extends BaseItem {
     public void use(Position pos, Facing facing, MapSegment segment) {
 
     }
+
 }

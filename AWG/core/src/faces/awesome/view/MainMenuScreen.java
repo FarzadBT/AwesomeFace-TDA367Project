@@ -14,6 +14,13 @@ import faces.awesome.controllers.ScreenSwitchListener;
 import faces.awesome.controllers.ScreenSwitcher;
 import faces.awesome.controllers.ScreenSwitcher.ScreenType;
 
+/*
+* @author: Linus Wallman
+* Updated by: Therese Sturesson
+*
+* A screen for the main menu
+*/
+
 public class MainMenuScreen implements Screen, ScreenSwitchListener {
 
     private Stage stage;
@@ -31,7 +38,6 @@ public class MainMenuScreen implements Screen, ScreenSwitchListener {
         table.setFillParent(true);
         stage.addActor(table);
 
-        //Skin skin = new Skin(GDXWrapper.assets.getFileHandle("mainUi"));
         Skin skin = new Skin(Gdx.files.internal("core/assets/shade/skin/uiskin.json"));
 
         TextButton newGame = new TextButton("New Game", skin);
@@ -54,7 +60,6 @@ public class MainMenuScreen implements Screen, ScreenSwitchListener {
                 System.exit(0);
             }
         });
-
 
     }
 

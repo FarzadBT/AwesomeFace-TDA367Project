@@ -1,12 +1,14 @@
 package faces.awesome.services;
 
 import faces.awesome.GDXWrapper;
-import faces.awesome.services.AssetManager;
 
-//@Author: Philip Nilsson
+/*
+* @author: Philip Nilsson
+*
+* This class is intended to serve as a wrapper for parts of the model that have to do with
+* LibGDX. Contains a GDXWrapper and provides access to the fields within.
+*/
 
-//This class is intended to serve as a wrapper for parts of the model that have to do with LibGDX.
-//Contains a GDXWrapper and provides access to the fields within.
 
 public class GdxWrapperService {
     private GDXWrapper gdxmodel;

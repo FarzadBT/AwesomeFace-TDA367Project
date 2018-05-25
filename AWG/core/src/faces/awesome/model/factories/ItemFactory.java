@@ -1,13 +1,14 @@
-package faces.awesome.model;
-
-//Author: Philip Nilsson
-
-//A simple class that handles the creation of items.
-
+package faces.awesome.model.factories;
 
 import faces.awesome.model.item.Item;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
+
+/*
+* @author Philip Nilsson
+*
+* A simple class that handles the creation of items.
+*/
 
 public class ItemFactory {
 

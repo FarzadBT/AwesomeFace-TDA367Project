@@ -7,9 +7,13 @@ import faces.awesome.model.item.BaseConsumable;
 import faces.awesome.model.objects.object.BombObject;
 
 /**
- * Created by Mr Cornholio on 20/04/2018.
+ * @author Farzad Besharati
+ *
+ * TODO skriva vad klassen gör
  */
+
 public class Bomb extends BaseConsumable {
+
     private BombObject bomb;
 
     public Bomb(int maxQuantity) {
@@ -52,4 +56,5 @@ public class Bomb extends BaseConsumable {
                 break;
         }
     }
+
 }

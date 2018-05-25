@@ -5,9 +5,13 @@ import faces.awesome.model.MapSegment;
 import faces.awesome.model.Position;
 
 /**
- * Created by Mr Cornholio on 20/04/2018.
+ * @author Farzad Besharati
+ *
+ * TODO skriva vad klassen gör
  */
+
 public interface Item {
+
     /**
      *
      * @return name of the item
@@ -18,6 +22,5 @@ public interface Item {
      * different effects depending on the item
      */
     void use(Position pos, Facing facing, MapSegment segment);
-
 
 }

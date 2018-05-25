@@ -8,7 +8,11 @@ import faces.awesome.model.GameObject;
 
 /**
  * @author Linus Wallman
+ *
+ * TODO vad gör klassen?
+ * TODO används inte? spara?
  */
+
 public class ItemView extends GameObjectView {
 
     public ItemView(GameObject o) {

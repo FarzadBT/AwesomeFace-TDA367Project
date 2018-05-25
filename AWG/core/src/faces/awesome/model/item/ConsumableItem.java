@@ -1,11 +1,11 @@
 package faces.awesome.model.item;
 
-import faces.awesome.model.Facing;
-import faces.awesome.model.Position;
-
 /**
- * Created by Mr Cornholio on 20/04/2018.
+ * @author Farzad Besharati
+ *
+ * TODO skriva vad klassen gör
  */
+
 public interface ConsumableItem extends Item {
 
     /**
@@ -53,4 +53,5 @@ public interface ConsumableItem extends Item {
      * @return the current max quantity
      */
     int getMax();
+
 }

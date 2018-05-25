@@ -5,9 +5,13 @@ import faces.awesome.model.MapSegment;
 import faces.awesome.model.Position;
 
 /**
- * Created by Mr Cornholio on 20/04/2018.
+ * @author Farzad Besharati
+ *
+ * TODO skriva vad klassen gör
  */
+
 public abstract class BaseItem implements Item {
+
     protected String name;
 
     public String getName() {
@@ -15,4 +19,5 @@ public abstract class BaseItem implements Item {
     }
 
     public abstract void use(Position pos, Facing facing, MapSegment segment);
+
 }
