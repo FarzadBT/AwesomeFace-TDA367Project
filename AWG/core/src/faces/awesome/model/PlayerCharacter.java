@@ -18,10 +18,12 @@ public class PlayerCharacter extends Character {
     private Inventory inventory;
     private Item slot1, slot2;
 	private Bus bus;
+	private MapSegment segment;
 
-	public PlayerCharacter(Position pos, Bus bus, String name) {
+	public PlayerCharacter(Position pos, Bus bus, String name, MapSegment segment) {
         super(pos, 5, 100, name);
 		this.bus = bus;
+		this.segment = segment;
 		inventory = new Inventory();
     }
 
@@ -45,11 +47,11 @@ public class PlayerCharacter extends Character {
 
 	//Uses the slot 1 and 2
 	public void useSlot1() {
-		slot1.use(pos, facing);
+		slot1.use(pos, facing, segment);
 	}
 
 	public void useSlot2() {
-		slot2.use(pos, facing);
+		slot2.use(pos, facing, segment);
 	}
 
 	//Gets the inventory för the player

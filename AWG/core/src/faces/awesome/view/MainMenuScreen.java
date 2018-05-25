@@ -44,7 +44,7 @@ public class MainMenuScreen implements Screen, ScreenSwitchListener {
         newGame.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                ScreenRepository.setGameScreen(gdxWrapper, gdxWrapper.world);
+                ScreenRepository.setGameScreen(gdxWrapper);
             }
         });
 

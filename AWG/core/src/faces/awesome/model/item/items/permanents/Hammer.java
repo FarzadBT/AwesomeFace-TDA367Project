@@ -1,6 +1,7 @@
 package faces.awesome.model.item.items.permanents;
 
 import faces.awesome.model.Facing;
+import faces.awesome.model.MapSegment;
 import faces.awesome.model.Position;
 import faces.awesome.model.item.BaseItem;
 
@@ -14,7 +15,7 @@ public class Hammer extends BaseItem {
     }
 
     @Override
-    public void use(Position pos, Facing facing) {
+    public void use(Position pos, Facing facing, MapSegment segment) {
 
     }
 }

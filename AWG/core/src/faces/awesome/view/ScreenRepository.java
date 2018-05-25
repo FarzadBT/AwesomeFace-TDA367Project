@@ -22,9 +22,9 @@ public class ScreenRepository {
      * define more screens here, define other behavior as well.
      */
 
-    public static void setGameScreen(GDXWrapper g, WorldMap map) {
+    public static void setGameScreen(GDXWrapper g) {
         if (gameScreen == null) {
-            gameScreen = new GameScreen(g, map);
+            gameScreen = new GameScreen(g);
         }
 
         gameScreen.initialize();

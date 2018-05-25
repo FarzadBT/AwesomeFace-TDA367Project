@@ -1,7 +1,6 @@
 package faces.awesome.model;
 
-import com.squareup.otto.Bus;
-import faces.awesome.services.Tiles;
+import faces.awesome.GDXWrapper;
 import faces.awesome.services.WorldMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,25 +17,20 @@ import java.util.List;
 public class MapSegment {
 
     //Varibles
-    private WorldMap world;
-    private Bus bus;
-    private static Position mapPosition;
-    public PlayerCharacter player;
+    public GDXWrapper game;
+    private Position mapPosition;
 
     // Two lists for enemies and characters
     private List<Character> characterInWorld = new ArrayList<>();
-    private static List<Enemy> enemiesInWorld = new ArrayList<>();
+    private List<Enemy> enemiesInWorld = new ArrayList<>();
+    private List<GameObject> objectsInWorld = new ArrayList<>();
 
 
-    public MapSegment(WorldMap World, PlayerCharacter player, Bus bus){
+    public MapSegment(GDXWrapper game){
 
-        this.player = player;
-        this.world = World;
-        this.bus = bus;
+        this.game = game;
 
         this.mapPosition = new Position(0, 0);
-
-        this.bus.register(this);
 
     }
 
@@ -48,13 +42,13 @@ public class MapSegment {
 
         characterInWorld.clear();
         characterInWorld.addAll(enemiesInWorld);
-        characterInWorld.add(player);
+        characterInWorld.add(game.player);
 
     }
 
 
     // Gets the list of enemies
-    public static List<Enemy> getEnemiesInSegment(){
+    public List<Enemy> getEnemiesInSegment() {
 
         int minX = mapPosition.getX() * 32;
         int maxX = (mapPosition.getX() + 1) * 32;
@@ -63,7 +57,7 @@ public class MapSegment {
 
         List<Enemy> enemiesInSegment = new ArrayList<>();
 
-        for(Enemy e : enemiesInWorld){
+        for (Enemy e : enemiesInWorld) {
 
             int enemyX = e.getPos().getX();
             int enemyY = e.getPos().getY();
@@ -72,9 +66,39 @@ public class MapSegment {
                 enemiesInSegment.add(e);
             }
         }
-
         return enemiesInSegment;
+    }
 
+    /**
+     * Get all the GameObjecst in the current MapSegment
+     * @return a list of GameObjects
+     */
+    public List<GameObject> getObjectsInSegment() {
+        int minX = mapPosition.getX() * 32;
+        int maxX = (mapPosition.getX() + 1) * 32;
+        int minY = mapPosition.getY() * 16;
+        int maxY = (mapPosition.getY() + 1) * 16;
+
+        List<GameObject> objectsInSegment = new ArrayList<>();
+
+        for(GameObject o : objectsInWorld){
+
+            int enemyX = o.getPos().getX();
+            int enemyY = o.getPos().getY();
+
+            if (enemyX > minX && enemyX < maxX && enemyY > minY && enemyY < maxY) {
+                objectsInSegment.add(o);
+            }
+        }
+        return objectsInSegment;
+    }
+
+    public void addToObjects(GameObject object) {
+        objectsInWorld.add(object);
+    }
+
+    public void removeFromObjects(GameObject object) {
+        objectsInWorld.remove(object);
     }
 
     /**
@@ -86,7 +110,7 @@ public class MapSegment {
      * @param y2 y-coord of bottom right corner
      * @return A list of the enemies that are inside the hitbox
      */
-    public static List<Enemy> getPlayerTargets(int x1, int y1, int x2, int y2) {
+    public List<Enemy> getPlayerTargets(int x1, int y1, int x2, int y2) {
 
         List <Enemy> enemies = getEnemiesInSegment();
         List <Enemy> targets = new ArrayList<>();
@@ -139,7 +163,7 @@ public class MapSegment {
 
         for(Position p : targets){
 
-            if(p.equals(player.getPos())){
+            if(p.equals(game.player.getPos())){
 
                 return true;
             }
@@ -206,8 +230,7 @@ public class MapSegment {
 
     //Sets the map position
     private void setMapPosition (int x, int y) {
-        mapPosition.setX(x);
-        mapPosition.setY(y);
+        mapPosition = new Position(x, y);
     }
 
 
@@ -219,14 +242,14 @@ public class MapSegment {
 
     // Delegate the check if a tile is solid or not to the Tiles class
     public boolean isSolid(int x, int y) {
-        return Tiles.isSolid(world.getCurrentMap(), x, y);
+        return game.world.isSolid(x, y);
     }
 
 
     // Delegate the set of the new map and sets the map position
     public Position setNewMap(Position position) {
 
-        Position pos = world.setNewMap(position);
+        Position pos = game.world.setNewMap(position);
 
         if ( pos != null ) {
             setMapPosition(0,0);
