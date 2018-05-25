@@ -3,13 +3,12 @@ package faces.awesome.model;
 import faces.awesome.GDXWrapper;
 import faces.awesome.model.characters.Character;
 import faces.awesome.model.characters.Enemy;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /*
  * Author: Philip Nilsson
- * Updated by: Therese Sturesson
+ * Updated by: Therese Sturesson, Farzad Besharati
  *
  * This class represents a finite "chunk" of the world map. Holds a list of Characters and a list
  * of enemiesInWorld. Whenever an enemiesInWorld attacks, target checking is handled by this class.
@@ -20,7 +19,7 @@ public class MapSegment {
 
     //Varibles
     private Position mapPosition;
-    public GDXWrapper gdxWrapper;
+    private GDXWrapper gdxWrapper;
 
     // Two lists for enemies and characters
     private List<Character> characterInWorld = new ArrayList<>();
@@ -191,13 +190,13 @@ public class MapSegment {
     }
 
 
-    // Gets the list with characters    TODO används inte, spara?
+    // Gets the list with characters
     public List<Character> getCharacterInWorld() {
         return characterInWorld;
     }
 
 
-    // Gets the list of enemies     TODO används inte, spara?
+    // Gets the list of enemies
     public List<Enemy> getEnemiesInWorld() {
         return enemiesInWorld;
     }
@@ -260,7 +259,6 @@ public class MapSegment {
         return pos;
 
     }
-
 
     // Removes a specific enemy from the list
     public void removeEnemyFromLists(Enemy enemy) {

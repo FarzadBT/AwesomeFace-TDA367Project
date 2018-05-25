@@ -65,4 +65,5 @@ public class Inventory {
             return (BaseConsumable) inventory.get(name);
         return null;
     }
+
 }
