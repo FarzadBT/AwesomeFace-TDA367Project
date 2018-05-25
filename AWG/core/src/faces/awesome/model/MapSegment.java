@@ -22,6 +22,7 @@ public class MapSegment {
     // Two lists for enemies and characters
     private List<Character> characterInWorld = new ArrayList<>();
     private List<Enemy> enemiesInWorld = new ArrayList<>();
+    private List<GameObject> objectsInWorld = new ArrayList<>();
 
 
     public MapSegment(GDXWrapper gdxWrapper){
@@ -46,7 +47,7 @@ public class MapSegment {
 
 
     // Gets the list of enemies
-    public List<Enemy> getEnemiesInSegment(){
+    public List<Enemy> getEnemiesInSegment() {
 
         int minX = mapPosition.getX() * 32;
         int maxX = (mapPosition.getX() + 1) * 32;
@@ -55,7 +56,7 @@ public class MapSegment {
 
         List<Enemy> enemiesInSegment = new ArrayList<>();
 
-        for(Enemy e : enemiesInWorld){
+        for (Enemy e : enemiesInWorld) {
 
             int enemyX = e.getPos().getX();
             int enemyY = e.getPos().getY();
@@ -64,9 +65,39 @@ public class MapSegment {
                 enemiesInSegment.add(e);
             }
         }
-
         return enemiesInSegment;
+    }
 
+    /**
+     * Get all the GameObjecst in the current MapSegment
+     * @return a list of GameObjects
+     */
+    public List<GameObject> getObjectsInSegment() {
+        int minX = mapPosition.getX() * 32;
+        int maxX = (mapPosition.getX() + 1) * 32;
+        int minY = mapPosition.getY() * 16;
+        int maxY = (mapPosition.getY() + 1) * 16;
+
+        List<GameObject> objectsInSegment = new ArrayList<>();
+
+        for(GameObject o : objectsInWorld){
+
+            int enemyX = o.getPos().getX();
+            int enemyY = o.getPos().getY();
+
+            if (enemyX > minX && enemyX < maxX && enemyY > minY && enemyY < maxY) {
+                objectsInSegment.add(o);
+            }
+        }
+        return objectsInSegment;
+    }
+
+    public void addToObjects(GameObject object) {
+        objectsInWorld.add(object);
+    }
+
+    public void removeFromObjects(GameObject object) {
+        objectsInWorld.remove(object);
     }
 
     /**
@@ -210,14 +241,14 @@ public class MapSegment {
 
     // Delegate the check if a tile is solid or not to the Tiles class
     public boolean isSolid(int x, int y) {
-        return gdxWrapper.world.isSolid(x, y);
+        return gdxWrapper.isSolid(x, y);
     }
 
 
     // Delegate the set of the new map and sets the map position
     public Position setNewMap(Position position) {
 
-        Position pos = gdxWrapper.world.setNewMap(position);
+        Position pos = gdxWrapper.setNewMap(position);
 
         if ( pos != null ) {
             setMapPosition(0,0);

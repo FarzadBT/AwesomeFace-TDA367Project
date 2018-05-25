@@ -9,6 +9,7 @@ import java.util.Map;
 
 // Author: Philip Nilsson
 // Updated by: Linus Wallman - Changed static type from HashMap -> Map also updated some types.
+// update by: Philip Nilsson - Class is now a singleton
 
 // This class is intended to manage game assets such as animations, textures and items.
 
@@ -20,10 +21,16 @@ public class AssetManager {
     private Map<String, Animation<TextureRegion> > animations;
     private Map<String, FileHandle> fileHandles;
 
-    public AssetManager(){
+    private AssetManager(){
         textures = new HashMap<>();
         items = new HashMap<>();
         animations = new HashMap<>();
+    }
+
+    private static AssetManager assets = new AssetManager();
+
+    public static AssetManager getInstance(){
+        return assets;
     }
 
     //Methods for adding new assets to maps as well as accessing already stored assets.

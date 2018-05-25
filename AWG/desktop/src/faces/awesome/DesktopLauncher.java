@@ -12,6 +12,5 @@ public class DesktopLauncher {
 		config.title = "AwesomeGame";
 		config.forceExit = false;
 		new LwjglApplication(new GDXWrapper(), config);
-		
 	}
 }

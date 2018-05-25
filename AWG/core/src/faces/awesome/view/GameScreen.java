@@ -23,6 +23,7 @@ import faces.awesome.events.BossEnemyDiedEvent;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.events.PlayerCharacterDiedEvent;
 import faces.awesome.model.BossEnemy;
+import faces.awesome.model.objects.object.BombObject;
 import faces.awesome.services.WorldMap;
 import java.util.HashMap;
 
@@ -40,7 +41,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     private MapRenderer mapRenderer;
     private ShapeRenderer shapeRenderer;
 
-    private List<GameObjectView > gameObjectViews;
+    private List<GameObjectView> gameObjectViews;
 
     private SpriteBatch sprBatch;
 
@@ -50,6 +51,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     private Sprite slot1Sprite;
     private Sprite slot2Sprite;
+
+    private Sprite bombObjectSprite;
 
     private BitmapFont HPfont;
     private String HP;
@@ -80,6 +83,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         //textures.put("bossEnemy", new Texture("core/assets/giantenemycrab2.png"));
         bossSprite = new Sprite(game.assets.getTexture("bossEnemy"));
 
+        bombObjectSprite = new Sprite(game.assets.getTexture("Bomb"));
+
 
         //textures.put("slot1", new Texture("core/assets/blank.png"));
         slot1Sprite = new Sprite(game.assets.getTexture("blank"));
@@ -95,6 +100,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         HPfont = new BitmapFont();
         HPfont.getData().setScale(2.0f);
+
 
         Gdx.input.setInputProcessor(gameController);
     }
@@ -181,6 +187,13 @@ public class GameScreen implements Screen, ScreenSwitchListener {
             } else {
                 enemySprite.setPosition((enemy.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (enemy.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
                 enemySprite.draw(sprBatch);
+            }
+        });
+
+        game.segment.getObjectsInSegment().forEach(gameObject -> {
+            if (gameObject instanceof BombObject) {
+                bombObjectSprite.setPosition((gameObject.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (gameObject.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
+                bombObjectSprite.draw(sprBatch);
             }
         });
 
