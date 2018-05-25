@@ -10,7 +10,6 @@ import faces.awesome.model.Facing;
  * Updated by: Linus Wallman, Philip Nilsson
  *
  * A controller that takes in input from the keybord
- * TODO: Figure out a better solution for changing facing without having to call tryMove.
  */
 
 public class GameScreenCtrl implements InputProcessor {
@@ -23,46 +22,58 @@ public class GameScreenCtrl implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+        boolean isCtrlPressed = Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)
+                || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT);
 
-        if(keycode == Input.Keys.LEFT) {
+        if(isCtrlPressed) {
+            switch (keycode) {
+                case Input.Keys.LEFT:
+                    playerCtrl.changeFacing(Facing.WEST);
+                    break;
+                case Input.Keys.RIGHT:
+                    playerCtrl.changeFacing(Facing.EAST);
+                    break;
+                case Input.Keys.UP:
+                    playerCtrl.changeFacing(Facing.NORTH);
+                    break;
+                case Input.Keys.DOWN:
+                    playerCtrl.changeFacing(Facing.SOUTH);
+                    break;
+            }
+        } else {
+            switch (keycode) {
+                case Input.Keys.LEFT:
+                    playerCtrl.tryMove(-1, 0, Facing.WEST);
+                    break;
+                case Input.Keys.RIGHT:
+                    playerCtrl.tryMove(1, 0, Facing.EAST);
+                    break;
+                case Input.Keys.UP:
+                    playerCtrl.tryMove(0, 1, Facing.NORTH);
+                    break;
+                case Input.Keys.DOWN:
+                    playerCtrl.tryMove(0, -1, Facing.SOUTH);
+                    break;
+            }
+        }
+
+            /*if(keycode == Input.Keys.LEFT) {
             playerCtrl.tryMove(-1, 0, Facing.WEST);
-
-        }
-
-        if(keycode == Input.Keys.RIGHT) {
+        } else if(keycode == Input.Keys.RIGHT) {
             playerCtrl.tryMove(1, 0, Facing.EAST);
-        }
-
-        if(keycode == Input.Keys.UP) {
+        } else if(keycode == Input.Keys.UP) {
             playerCtrl.tryMove(0, 1, Facing.NORTH);
-        }
-
-        if (keycode == Input.Keys.DOWN) {
+        } else if (keycode == Input.Keys.DOWN) {
             playerCtrl.tryMove(0, -1, Facing.SOUTH);
-        }
+        }*/
 
-        boolean isCtrlPressed = false;
-
-        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
-            isCtrlPressed = true;
-        }
-
-        if (isCtrlPressed && keycode == Input.Keys.LEFT) {
-            playerCtrl.tryMove(0, 0, Facing.WEST);
-        } else if (isCtrlPressed && keycode == Input.Keys.RIGHT) {
-            playerCtrl.tryMove(0, 0, Facing.EAST);
-        } else if (isCtrlPressed && keycode == Input.Keys.UP) {
-            playerCtrl.tryMove(0, 0, Facing.NORTH);
-        } else if (isCtrlPressed && keycode == Input.Keys.DOWN) {
-            playerCtrl.tryMove(0, 0, Facing.SOUTH);
-        }
-
-        if(keycode == Input.Keys.A){
-            playerCtrl.useItem1();
-        }
-
-        if(keycode == Input.Keys.S){
-            playerCtrl.useItem2();
+        switch (keycode) {
+            case Input.Keys.A:
+                playerCtrl.useItem1();
+                break;
+            case Input.Keys.S:
+                playerCtrl.useItem2();
+                break;
         }
 
         return true;
