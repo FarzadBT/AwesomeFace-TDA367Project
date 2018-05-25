@@ -139,6 +139,7 @@ public class GDXWrapper extends Game {
     public Position setNewMap(Position position){
 
         return world.setNewMap(position);
+
     }
 
 

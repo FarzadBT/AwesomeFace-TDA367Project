@@ -1,7 +1,6 @@
 package faces.awesome.model;
 
 import faces.awesome.GDXWrapper;
-import faces.awesome.services.WorldMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -242,14 +241,14 @@ public class MapSegment {
 
     // Delegate the check if a tile is solid or not to the Tiles class
     public boolean isSolid(int x, int y) {
-        return game.world.isSolid(x, y);
+        return game.isSolid(x, y);
     }
 
 
     // Delegate the set of the new map and sets the map position
     public Position setNewMap(Position position) {
 
-        Position pos = game.world.setNewMap(position);
+        Position pos = game.setNewMap(position);
 
         if ( pos != null ) {
             setMapPosition(0,0);
