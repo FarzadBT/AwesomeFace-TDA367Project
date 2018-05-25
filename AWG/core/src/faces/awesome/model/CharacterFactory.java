@@ -8,8 +8,8 @@ import com.squareup.otto.Bus;
 public class CharacterFactory {
 
     //Creates a new PlayerCharacter at the specified coordinates.
-    public static PlayerCharacter createPlayer(int x, int y, Bus bus, String name){
-        return new PlayerCharacter(new Position(x, y), bus, name);
+    public static PlayerCharacter createPlayer(int x, int y, Bus bus, String name, MapSegment segment){
+        return new PlayerCharacter(new Position(x, y), bus, name, segment);
     }
 
 

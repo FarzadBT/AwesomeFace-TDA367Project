@@ -8,19 +8,22 @@ import faces.awesome.model.item.Item;
  * Author: Philip Nilsson
  * Updated by: Therese Sturesson, Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * The class for the player character
  */
 
 
 public class PlayerCharacter extends Character {
 
+	// The variables in the class
     private Inventory inventory;
     private Item slot1, slot2;
 	private Bus bus;
+	private MapSegment segment;
 
-	public PlayerCharacter(Position pos, Bus bus, String name) {
-        super(pos, 5, 200, name);
+	public PlayerCharacter(Position pos, Bus bus, String name, MapSegment segment) {
+        super(pos, 5, 100, name);
 		this.bus = bus;
+		this.segment = segment;
 		inventory = new Inventory();
     }
 
@@ -44,11 +47,11 @@ public class PlayerCharacter extends Character {
 
 	//Uses the slot 1 and 2
 	public void useSlot1() {
-		slot1.use(pos, facing);
+		slot1.use(pos, facing, segment);
 	}
 
 	public void useSlot2() {
-		slot2.use(pos, facing);
+		slot2.use(pos, facing, segment);
 	}
 
 	//Gets the inventory för the player
@@ -86,8 +89,9 @@ public class PlayerCharacter extends Character {
 	//If you (the player) dies you lost the game
 	@Override
 	public void death() {
-    	//Notifiera observern i switch screen och skicka med ett id
+
 		bus.post(new PlayerCharacterDiedEvent());
 
 	}
+
 }

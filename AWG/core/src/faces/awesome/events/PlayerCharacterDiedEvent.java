@@ -1,4 +1,10 @@
 package faces.awesome.events;
 
-public class PlayerCharacterDiedEvent {
+/**
+ * @author Therese Sturesson
+ *
+ * An event for when the playercharacter dies
+ */
+
+public class PlayerCharacterDiedEvent{
 }

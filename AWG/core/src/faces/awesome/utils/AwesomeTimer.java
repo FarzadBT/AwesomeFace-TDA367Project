@@ -1,10 +1,8 @@
 package faces.awesome.utils;
-import faces.awesome.AwesomeGame;
-import faces.awesome.GDXWrapper;
 
 /**
  * @author Linus Wallman
- * Simple timer class.
+ * Simple timerMove class.
  */
 
 public class AwesomeTimer {

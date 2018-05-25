@@ -7,7 +7,6 @@ import faces.awesome.model.Position;
  * Created by Mr Cornholio on 20/04/2018.
  */
 public interface ConsumableItem extends Item {
-    void use(Position pos, Facing facing);
 
     /**
      * Increase the quantity by 1

@@ -1,6 +1,7 @@
 package faces.awesome.model.item;
 
 import faces.awesome.model.Facing;
+import faces.awesome.model.MapSegment;
 import faces.awesome.model.Position;
 
 /**
@@ -16,7 +17,7 @@ public interface Item {
     /**
      * different effects depending on the item
      */
-    void use(Position pos, Facing facing);
+    void use(Position pos, Facing facing, MapSegment segment);
 
 
 }

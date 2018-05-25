@@ -1,6 +1,7 @@
 package faces.awesome.model.item;
 
 import faces.awesome.model.Facing;
+import faces.awesome.model.MapSegment;
 import faces.awesome.model.Position;
 
 /**
@@ -13,5 +14,5 @@ public abstract class BaseItem implements Item {
         return name;
     }
 
-    public abstract void use(Position pos, Facing facing);
+    public abstract void use(Position pos, Facing facing, MapSegment segment);
 }

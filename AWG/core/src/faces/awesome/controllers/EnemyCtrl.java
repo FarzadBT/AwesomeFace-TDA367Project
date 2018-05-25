@@ -2,7 +2,6 @@ package faces.awesome.controllers;
 
 import faces.awesome.model.*;
 import faces.awesome.model.Character;
-
 import java.util.Random;
 
 /*
@@ -116,4 +115,14 @@ public class EnemyCtrl {
     }
 
 
+    // Checks if the enemy have died
+    public void checkDeath(Enemy enemy) {
+
+        if ( enemy.getHealth() == 0 ) {
+
+            segment.removeEnemyFromLists(enemy);
+
+        }
+
+    }
 }

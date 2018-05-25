@@ -1,6 +1,7 @@
 package faces.awesome.model.item.items.instants;
 
 import faces.awesome.model.Facing;
+import faces.awesome.model.MapSegment;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.model.item.BaseInstant;
@@ -20,7 +21,7 @@ public class SingleHeart extends BaseInstant {
 
     // Is not really used
     @Override
-    public void use(Position pos, Facing facing) {
+    public void use(Position pos, Facing facing, MapSegment segment) {
 
     }
 }

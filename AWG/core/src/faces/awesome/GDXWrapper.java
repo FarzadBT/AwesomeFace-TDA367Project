@@ -11,18 +11,15 @@ import com.squareup.otto.Subscribe;
 import com.squareup.otto.ThreadEnforcer;
 import faces.awesome.controllers.EnemyCtrl;
 import faces.awesome.controllers.PlayerCtrl;
-import faces.awesome.controllers.ScreenRepository;
+import faces.awesome.view.ScreenRepository;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.model.*;
-import com.squareup.otto.Bus;
 import faces.awesome.model.item.items.consumables.Bomb;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
 import faces.awesome.services.MapStorage;
 import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
-import faces.awesome.utils.AwesomeClock;
-import faces.awesome.view.GameScreen;
 
 /**
  * @author Linus Wallman
@@ -53,15 +50,11 @@ public class GDXWrapper extends Game {
     public MapSegment segment;
     public WorldMap world;
     public Bus bus;
-
-    //public static AwesomeClock AWG_TIME;
-
+    public GDXWrapper gdxWrapper;
 
     @Override
     public void create() {
         // setup model here.
-
-        //AWG_TIME = new AwesomeClock();
 
         bus = new Bus(ThreadEnforcer.ANY);
         bus.register(this);
@@ -77,13 +70,13 @@ public class GDXWrapper extends Game {
 
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
-        player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player");
+        player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player", segment);
 
         player.addNewToInventory(ItemFactory.CreateSword());
         player.addNewToInventory(ItemFactory.CreateHammer());
         player.addNewToInventory(new Bomb(10));
 
-        segment = new MapSegment(world, player, bus);
+        segment = new MapSegment(world, player);
 
         player.addNewToInventory(new Sword());
         player.addNewToInventory(new Hammer());
@@ -134,6 +127,19 @@ public class GDXWrapper extends Game {
 
         //img.dispose();
     }
+
+    public boolean isSolid(int x, int y) {
+
+        return Tiles.isSolid(world.getCurrentMap(), x, y);
+
+    }
+
+
+    public Position setNewMap(Position position){
+
+        return world.setNewMap(position);
+    }
+
 
     @Subscribe
     public void handleMapChangedEvent(MapChangedEvent event) {
