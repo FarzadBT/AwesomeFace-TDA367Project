@@ -7,7 +7,7 @@ import faces.awesome.model.Position;
 /**
  * @author Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * An abstract base class for permanent items,
  */
 
 public abstract class BaseItem implements Item {

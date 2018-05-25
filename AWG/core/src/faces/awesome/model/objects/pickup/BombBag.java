@@ -7,10 +7,11 @@ import faces.awesome.model.item.items.consumables.Bomb;
 /**
  * @author Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * When picked up, will either add a Bomb item to the players inventory or increase
+ * max capacity of that Bomb item
  */
 
-public class BombBag extends PickupItem {
+public class BombBag extends BasePickup {
 
     public BombBag(Position pos) {
         super(pos, "bombBag");

@@ -4,23 +4,24 @@ package faces.awesome.model;
  * Author: Farzad Besharati
  * Updated by: Therese Sturesson
  *
- * TODO skriva vad klassen gör
+ * GameObjects are interactable things in the world. They could be a placed bomb,
+ * a Character walking around or a rock that can be broken
  */
 
 public class GameObject {
 
-    // A GameObject have a position
+    // A GameObject has a position
     protected Position pos;
 
-    //A GameObject have a facing
+    //A GameObject has a facing
     protected Facing facing;
 
-    //A GameObject have a name
+    //A GameObject has a name
     protected String name;
 
     public GameObject(Position pos, String name) {
         this.pos = pos;
-        this.facing = Facing.SOUTH;
+        this.facing = Facing.NONE;
         this.name = name;
     }
 

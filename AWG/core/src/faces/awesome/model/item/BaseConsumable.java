@@ -3,7 +3,8 @@ package faces.awesome.model.item;
 /**
  * @author Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * An abstract class for consumable items
+ * Also implements logical methods from ConsumableItem interface
  */
 
 public abstract class BaseConsumable implements ConsumableItem {

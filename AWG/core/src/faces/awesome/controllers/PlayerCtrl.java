@@ -26,6 +26,14 @@ public class PlayerCtrl {
         this.segment = segment;
     }
 
+    /**
+     * Change player's facing
+     * @param facing facing to change to
+     */
+    public void changeFacing(Facing facing) {
+        player.setFacing(facing);
+    }
+
 
     // Checks if the playercharacter can move to the position the player wants
     public void tryMove(int dx, int dy, Facing facing) {

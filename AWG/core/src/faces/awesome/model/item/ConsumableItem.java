@@ -3,7 +3,8 @@ package faces.awesome.model.item;
 /**
  * @author Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * A more advanced Item interface, has all the attributes for a consumable
+ * item (an item that has a quantity)
  */
 
 public interface ConsumableItem extends Item {
