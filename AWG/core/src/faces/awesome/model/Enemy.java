@@ -55,6 +55,7 @@ public class Enemy extends Character {
     // The check for if this type of enemy dies happen in EnemyCtrl
     @Override
     public void death() {
+
     }
 
 

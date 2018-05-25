@@ -121,7 +121,7 @@ public class EnemyCtrl {
         if ( enemy.getHealth() == 0 ) {
 
             segment.removeEnemyFromLists(enemy);
-
+            enemy.death();
         }
 
     }
