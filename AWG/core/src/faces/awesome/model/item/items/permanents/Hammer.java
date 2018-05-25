@@ -1,9 +1,9 @@
 package faces.awesome.model.item.items.permanents;
 
-import faces.awesome.model.Enemy;
 import faces.awesome.model.Facing;
 import faces.awesome.model.MapSegment;
 import faces.awesome.model.Position;
+import faces.awesome.model.characters.Enemy;
 import faces.awesome.model.item.BaseItem;
 
 import java.util.ArrayList;
