@@ -16,8 +16,8 @@ import java.util.List;
 public class MapSegment {
 
     //Varibles
-    public GDXWrapper game;
     private Position mapPosition;
+    public GDXWrapper gdxWrapper;
 
     // Two lists for enemies and characters
     private List<Character> characterInWorld = new ArrayList<>();
@@ -25,9 +25,9 @@ public class MapSegment {
     private List<GameObject> objectsInWorld = new ArrayList<>();
 
 
-    public MapSegment(GDXWrapper game){
+    public MapSegment(GDXWrapper gdxWrapper){
 
-        this.game = game;
+        this.gdxWrapper = gdxWrapper;
 
         this.mapPosition = new Position(0, 0);
 
@@ -41,7 +41,7 @@ public class MapSegment {
 
         characterInWorld.clear();
         characterInWorld.addAll(enemiesInWorld);
-        characterInWorld.add(game.player);
+        characterInWorld.add(gdxWrapper.player);
 
     }
 
@@ -162,7 +162,7 @@ public class MapSegment {
 
         for(Position p : targets){
 
-            if(p.equals(game.player.getPos())){
+            if(p.equals(gdxWrapper.player.getPos())){
 
                 return true;
             }
@@ -241,14 +241,14 @@ public class MapSegment {
 
     // Delegate the check if a tile is solid or not to the Tiles class
     public boolean isSolid(int x, int y) {
-        return game.isSolid(x, y);
+        return gdxWrapper.isSolid(x, y);
     }
 
 
     // Delegate the set of the new map and sets the map position
     public Position setNewMap(Position position) {
 
-        Position pos = game.setNewMap(position);
+        Position pos = gdxWrapper.setNewMap(position);
 
         if ( pos != null ) {
             setMapPosition(0,0);

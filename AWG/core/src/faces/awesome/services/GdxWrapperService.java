@@ -1,7 +1,7 @@
 package faces.awesome.services;
 
 import faces.awesome.GDXWrapper;
-import faces.awesome.model.AssetManager;
+import faces.awesome.services.AssetManager;
 
 //@Author: Philip Nilsson
 

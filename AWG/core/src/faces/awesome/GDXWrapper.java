@@ -12,6 +12,7 @@ import com.squareup.otto.ThreadEnforcer;
 import faces.awesome.controllers.EnemyCtrl;
 import faces.awesome.controllers.PlayerCtrl;
 import faces.awesome.utils.AwesomeClock;
+import faces.awesome.services.AssetManager;
 import faces.awesome.view.ScreenRepository;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.model.*;
@@ -71,6 +72,7 @@ public class GDXWrapper extends Game {
         //Wraps the TileMap for easier access
         world = new WorldMap(map, bus);
 
+        segment = new MapSegment(this);
 
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
@@ -81,6 +83,7 @@ public class GDXWrapper extends Game {
 
         player.addNewToInventory(ItemFactory.CreateSword());
         player.addNewToInventory(ItemFactory.CreateHammer());
+
         player.addNewToInventory(new Bomb(10));
 
         player.addNewToInventory(new Sword());
