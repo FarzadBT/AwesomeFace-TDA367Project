@@ -35,7 +35,7 @@ public class BombObject extends GameObject {
             public void run() {
                 List<Enemy> targets = segment.getPlayerTargets(x-2, y+2, x+2, y-2);
                 for (Enemy enemy: targets) {
-                    enemy.decreaseHealth(10);
+                    enemy.decreaseHealth(15);
                 }
                 removeObject();
             }

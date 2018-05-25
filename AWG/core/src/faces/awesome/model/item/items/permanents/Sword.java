@@ -37,7 +37,7 @@ public class Sword extends BaseItem {
             enemies = segment.getPlayerTargets(x-1, y+1, x-1, y-1);
 
         for (Enemy enemy : enemies) {
-            enemy.decreaseHealth(5);
+            enemy.decreaseHealth(10);
         }
     }
 }
