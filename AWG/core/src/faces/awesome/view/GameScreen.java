@@ -149,14 +149,14 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(0, 0, 0, 1);
-        shapeRenderer.rect(24, 10, 25, 40);
-        shapeRenderer.rect(50, 10, 25, 40);
+        shapeRenderer.rect(24, 10, 35, 45);
+        shapeRenderer.rect(60, 10, 35, 45);
         shapeRenderer.end();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(1,1,1,1);
-        shapeRenderer.rect(24,10,25,40);
-        shapeRenderer.rect(50, 10, 25, 40);
+        shapeRenderer.rect(24,10,35,45);
+        shapeRenderer.rect(60, 10, 35, 45);
         shapeRenderer.end();
 
 
@@ -185,11 +185,11 @@ public class GameScreen implements Screen, ScreenSwitchListener {
             }
         });
 
-        slot1Sprite.setPosition(27, 20);
+        slot1Sprite.setPosition(32, 20);
         slot1Sprite.setScale(2.0f);
         slot1Sprite.draw(sprBatch);
 
-        slot2Sprite.setPosition(53, 20);
+        slot2Sprite.setPosition(70, 20);
         slot2Sprite.setScale(2.0f);
         slot2Sprite.draw(sprBatch);
 
