@@ -1,9 +1,9 @@
 import com.squareup.otto.Bus;
 import faces.awesome.GDXWrapper;
-import faces.awesome.model.Enemy;
 import faces.awesome.model.MapSegment;
-import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
+import faces.awesome.model.characters.Enemy;
+import faces.awesome.model.characters.PlayerCharacter;
 import faces.awesome.model.item.items.consumables.Bomb;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
