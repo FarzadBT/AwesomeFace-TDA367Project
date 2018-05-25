@@ -56,11 +56,4 @@ public class WorldMap {
 
     }
 
-    public boolean isSolid(int x, int y) {
-
-        return Tiles.isSolid(getCurrentMap(), x, y);
-
-    }
-
-
 }

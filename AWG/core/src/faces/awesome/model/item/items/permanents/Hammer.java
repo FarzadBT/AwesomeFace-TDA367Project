@@ -10,8 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mr Cornholio on 24/04/2018.
+ * @author Farzad Besharati
+ *
+ * A Hammer permanent item, when used it will deal damage to enemies in front of you
  */
+
 public class Hammer extends BaseItem {
 
     public Hammer() {
@@ -28,4 +31,5 @@ public class Hammer extends BaseItem {
             enemy.decreaseHealth(10);
         }
     }
+
 }

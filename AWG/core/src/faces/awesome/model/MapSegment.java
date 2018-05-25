@@ -1,13 +1,14 @@
 package faces.awesome.model;
 
 import faces.awesome.GDXWrapper;
-import faces.awesome.services.WorldMap;
+import faces.awesome.model.characters.Character;
+import faces.awesome.model.characters.Enemy;
 import java.util.ArrayList;
 import java.util.List;
 
 /*
  * Author: Philip Nilsson
- * Updated by: Therese Sturesson
+ * Updated by: Therese Sturesson, Farzad Besharati
  *
  * This class represents a finite "chunk" of the world map. Holds a list of Characters and a list
  * of enemiesInWorld. Whenever an enemiesInWorld attacks, target checking is handled by this class.
@@ -17,8 +18,8 @@ import java.util.List;
 public class MapSegment {
 
     //Varibles
-    public GDXWrapper game;
     private Position mapPosition;
+    private GDXWrapper gdxWrapper;
 
     // Two lists for enemies and characters
     private List<Character> characterInWorld = new ArrayList<>();
@@ -26,9 +27,9 @@ public class MapSegment {
     private List<GameObject> objectsInWorld = new ArrayList<>();
 
 
-    public MapSegment(GDXWrapper game){
+    public MapSegment(GDXWrapper gdxWrapper){
 
-        this.game = game;
+        this.gdxWrapper = gdxWrapper;
 
         this.mapPosition = new Position(0, 0);
 
@@ -42,7 +43,7 @@ public class MapSegment {
 
         characterInWorld.clear();
         characterInWorld.addAll(enemiesInWorld);
-        characterInWorld.add(game.player);
+        characterInWorld.add(gdxWrapper.player);
 
     }
 
@@ -195,7 +196,7 @@ public class MapSegment {
 
         for(Position p : targets){
 
-            if(p.equals(game.player.getPos())){
+            if(p.equals(gdxWrapper.player.getPos())){
 
                 return true;
             }
@@ -221,13 +222,13 @@ public class MapSegment {
     }
 
 
-    // Gets the list with characters    TODO används inte, spara?
+    // Gets the list with characters
     public List<Character> getCharacterInWorld() {
         return characterInWorld;
     }
 
 
-    // Gets the list of enemies     TODO används inte, spara?
+    // Gets the list of enemies
     public List<Enemy> getEnemiesInWorld() {
         return enemiesInWorld;
     }
@@ -274,14 +275,14 @@ public class MapSegment {
 
     // Delegate the check if a tile is solid or not to the Tiles class
     public boolean isSolid(int x, int y) {
-        return game.world.isSolid(x, y);
+        return gdxWrapper.isSolid(x, y);
     }
 
 
     // Delegate the set of the new map and sets the map position
     public Position setNewMap(Position position) {
 
-        Position pos = game.world.setNewMap(position);
+        Position pos = gdxWrapper.setNewMap(position);
 
         if ( pos != null ) {
             setMapPosition(0,0);
@@ -290,7 +291,6 @@ public class MapSegment {
         return pos;
 
     }
-
 
     // Removes a specific enemy from the list
     public void removeEnemyFromLists(Enemy enemy) {

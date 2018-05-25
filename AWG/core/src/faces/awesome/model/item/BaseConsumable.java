@@ -1,15 +1,16 @@
 package faces.awesome.model.item;
 
-import faces.awesome.model.Facing;
-import faces.awesome.model.Position;
-
 /**
- * Created by Mr Cornholio on 20/04/2018.
+ * @author Farzad Besharati
+ *
+ * An abstract class for consumable items
+ * Also implements logical methods from ConsumableItem interface
  */
+
 public abstract class BaseConsumable implements ConsumableItem {
+
     protected String name;
     protected int quantity = 1, maxQuantity;
-
 
     @Override
     public String getName() {
@@ -68,4 +69,5 @@ public abstract class BaseConsumable implements ConsumableItem {
     public int getMax() {
         return maxQuantity;
     }
+
 }

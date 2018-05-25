@@ -1,5 +1,6 @@
 package faces.awesome.model;
 
+import faces.awesome.model.characters.PlayerCharacter;
 import faces.awesome.model.item.BaseConsumable;
 import faces.awesome.model.item.Item;
 import java.util.HashMap;
@@ -61,4 +62,5 @@ public class Inventory {
             return (BaseConsumable) inventory.get(name);
         return null;
     }
+
 }

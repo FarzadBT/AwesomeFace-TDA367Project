@@ -2,6 +2,7 @@ package faces.awesome.utils;
 
 /**
  * @author Linus Wallman
+ *
  * Simple clock class.
  * Usually used together with the Timer class to prevent an "event" from occuring too often.
 */

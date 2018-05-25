@@ -6,7 +6,7 @@ package faces.awesome.model;
  *
  * This class defines an enum for which direction you are facing.
  *
- * short note: The INVALIDFACING value in the enum is in place to replace usage of null in facings.
+ * Short note: The INVALIDFACING value in the enum is in place to replace usage of null in facings.
  */
 
 public enum Facing {

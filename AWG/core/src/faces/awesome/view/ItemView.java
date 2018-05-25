@@ -3,11 +3,16 @@ package faces.awesome.view;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import faces.awesome.GDXWrapper;
+import faces.awesome.services.AssetManager;
 import faces.awesome.model.GameObject;
 
 /**
  * @author Linus Wallman
+ *
+ * TODO vad gör klassen?
+ * TODO används inte? spara?
  */
+
 public class ItemView extends GameObjectView {
 
     public ItemView(GameObject o) {
@@ -16,7 +21,7 @@ public class ItemView extends GameObjectView {
 
     @Override
     public void draw(SpriteBatch sprBatch) {
-        TextureRegion region = GDXWrapper.assets.getTexture(gameObject.getName());
+        TextureRegion region = AssetManager.getInstance().getTexture(gameObject.getName());
         sprBatch.draw(region, gameObject.getPos().getY() * GDXWrapper.TILE_SIZE, gameObject.getPos().getY() * GDXWrapper.TILE_SIZE);
     }
 }

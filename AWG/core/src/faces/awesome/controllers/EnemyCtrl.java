@@ -1,7 +1,10 @@
 package faces.awesome.controllers;
 
 import faces.awesome.model.*;
-import faces.awesome.model.Character;
+import faces.awesome.model.characters.Character;
+import faces.awesome.model.characters.BossEnemy;
+import faces.awesome.model.characters.Enemy;
+
 import java.util.Random;
 
 /*
@@ -121,7 +124,7 @@ public class EnemyCtrl {
         if ( enemy.getHealth() == 0 ) {
 
             segment.removeEnemyFromLists(enemy);
-
+            enemy.death();
         }
 
     }

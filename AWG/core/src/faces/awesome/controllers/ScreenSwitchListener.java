@@ -4,6 +4,8 @@ import faces.awesome.controllers.ScreenSwitcher.ScreenType;
 
 /**
  * @author Linus Wallman
+ *
+ * An interface for the listener
  */
 
 public interface ScreenSwitchListener {

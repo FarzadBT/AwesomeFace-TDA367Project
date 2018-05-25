@@ -1,4 +1,9 @@
-package faces.awesome.model;
+package faces.awesome.model.characters;
+
+import com.squareup.otto.Bus;
+import faces.awesome.events.BossEnemyDiedEvent;
+import faces.awesome.model.Position;
+import faces.awesome.utils.AwesomeTimer;
 
 /*
  * Author: Philip Nilsson
@@ -6,10 +11,6 @@ package faces.awesome.model;
  *
  * This class represents a boss enemy. Simply a stronger form of enemy. If this dies, the player "wins" the game.
  */
-
-import com.squareup.otto.Bus;
-import faces.awesome.events.BossEnemyDiedEvent;
-import faces.awesome.utils.AwesomeTimer;
 
 public class BossEnemy extends Enemy {
 
