@@ -41,7 +41,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     private MapRenderer mapRenderer;
     private ShapeRenderer shapeRenderer;
 
-    private List<GameObjectView > gameObjectViews;
+    private List<GameObjectView> gameObjectViews;
 
     private SpriteBatch sprBatch;
 
@@ -100,6 +100,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         HPfont = new BitmapFont();
         HPfont.getData().setScale(2.0f);
+
 
         Gdx.input.setInputProcessor(gameController);
     }

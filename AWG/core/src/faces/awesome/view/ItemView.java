@@ -3,6 +3,7 @@ package faces.awesome.view;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import faces.awesome.GDXWrapper;
+import faces.awesome.model.AssetManager;
 import faces.awesome.model.GameObject;
 
 /**
@@ -16,7 +17,7 @@ public class ItemView extends GameObjectView {
 
     @Override
     public void draw(SpriteBatch sprBatch) {
-        TextureRegion region = GDXWrapper.assets.getTexture(gameObject.getName());
+        TextureRegion region = AssetManager.getInstance().getTexture(gameObject.getName());
         sprBatch.draw(region, gameObject.getPos().getY() * GDXWrapper.TILE_SIZE, gameObject.getPos().getY() * GDXWrapper.TILE_SIZE);
     }
 }

@@ -11,12 +11,14 @@ import com.squareup.otto.Subscribe;
 import com.squareup.otto.ThreadEnforcer;
 import faces.awesome.controllers.EnemyCtrl;
 import faces.awesome.controllers.PlayerCtrl;
+import faces.awesome.utils.AwesomeClock;
 import faces.awesome.view.ScreenRepository;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.model.*;
 import faces.awesome.model.item.items.consumables.Bomb;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
+import faces.awesome.services.GdxWrapperService;
 import faces.awesome.services.MapStorage;
 import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
@@ -39,8 +41,8 @@ public class GDXWrapper extends Game {
     public static final int VIEW_PORT_WIDTH = 1024;
     public static final int VIEW_PORT_HEIGHT = 512;
 
-    // antingen behåller vi denna som statisk, eller gör den till en singleton.
-    public static AssetManager assets;
+
+    public AssetManager assets;
 
     public PlayerCharacter player;
     public PlayerCtrl playerCtrl;
@@ -50,7 +52,9 @@ public class GDXWrapper extends Game {
     public MapSegment segment;
     public WorldMap world;
     public Bus bus;
-    public GDXWrapper gdxWrapper;
+
+    public static AwesomeClock AWG_TIME;
+    private AwesomeGame AWG;
 
     @Override
     public void create() {
@@ -60,7 +64,7 @@ public class GDXWrapper extends Game {
         bus.register(this);
 
         //Instantiate asset manager
-        assets = new AssetManager();
+        assets = AssetManager.getInstance();
 
         TiledMap map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
 
@@ -86,10 +90,12 @@ public class GDXWrapper extends Game {
 
 
 
+        AWG = new AwesomeGame(new GdxWrapperService(this), segment, player);
+
         //Creates textures from available files in core/assets/
         assets.addTexture("enemy", new TextureRegion(new Texture("core/assets/enemy.png")));
         assets.addTexture("player", new TextureRegion(new Texture("core/assets/linkk.png")));
-        assets.addTexture("bossEnemy", new TextureRegion(new Texture("core/assets/giantenemycrab.png")));
+        assets.addTexture("bossEnemy", new TextureRegion(new Texture("core/assets/giantenemycrab2.png")));
         assets.addTexture("blank", new TextureRegion(new Texture("core/assets/blank.png")));
 
         //Permanent Items
@@ -152,6 +158,10 @@ public class GDXWrapper extends Game {
 
     public AssetManager getAssets() {
         return assets;
+    }
+
+    public WorldMap getMap(){
+        return world;
     }
 
 
