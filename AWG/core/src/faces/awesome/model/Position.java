@@ -14,6 +14,8 @@ import java.util.Objects;
 
 
 public class Position {
+
+    // The x and y value
     private int x;
     private int y;
 
@@ -38,17 +40,7 @@ public class Position {
         return y;
     }
 
-
-    //Sets the x value
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    //Sets the y value
-    public void setY(int y) {
-        this.y = y;
-    }
-
+    // Our own equals method
     @Override
     public boolean equals(Object o) {
         if (o == null) {
@@ -75,11 +67,7 @@ public class Position {
         return Objects.hash(this.x, this.y);
     }
 
-    public Position cpy() {
-        return new Position(x, y);
-    }
-
-    //TODO används inte?
+    //Our own toString method
     @Override
     public String toString() {
         return "Position { x = " + x + ", y = " + y + " }";

@@ -1,4 +1,6 @@
-import faces.awesome.AwesomeGame;
+package java;
+
+import faces.awesome.GDXWrapper;
 import faces.awesome.model.Enemy;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
@@ -15,8 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Created by Mr Cornholio on 24/04/2018.
  */
+
 public class ItemTests {
-    AwesomeGame awesomeGame = new AwesomeGame();
+    GDXWrapper wrapper = new GDXWrapper();
     PlayerCharacter playerCharacter;
     BombPickupSmall bombSmall;
     BombBag bombBag;
@@ -29,7 +32,6 @@ public class ItemTests {
 
     @BeforeEach
     public void init() {
-        playerCharacter = awesomeGame.player;
 
         bombSmall = new BombPickupSmall(new Position(0,0));
         bombBag = new BombBag(new Position(0,0));
@@ -41,9 +43,6 @@ public class ItemTests {
 
         singleHeart = new SingleHeart();
 
-        e1 = new Enemy(new Position(1, 1), game);
-        e2 = new Enemy(new Position(1, 0), game);
-        e3 = new Enemy(new Position(9, 9), game);
     }
 
 

@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import faces.awesome.GDXWrapper;
-import faces.awesome.controllers.ScreenRepository;
 import faces.awesome.controllers.ScreenSwitchListener;
 import faces.awesome.controllers.ScreenSwitcher;
 import faces.awesome.controllers.ScreenSwitcher.ScreenType;
@@ -24,7 +23,6 @@ public class MainMenuScreen implements Screen, ScreenSwitchListener {
         stage = new Stage();
         gdxWrapper = game;
     }
-
 
 
     @Override
@@ -46,7 +44,7 @@ public class MainMenuScreen implements Screen, ScreenSwitchListener {
         newGame.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                ScreenRepository.setGameScreen(gdxWrapper, gdxWrapper.world);
+                ScreenRepository.setGameScreen(gdxWrapper);
             }
         });
 
@@ -60,11 +58,14 @@ public class MainMenuScreen implements Screen, ScreenSwitchListener {
 
     }
 
+
+    // Initialising the screen
     public void initialize() {
         Gdx.input.setInputProcessor(stage);
         ScreenSwitcher.setListener(this);
     }
 
+    // Rendering the screen
     @Override
     public void render(float delta) {
 
@@ -74,21 +75,26 @@ public class MainMenuScreen implements Screen, ScreenSwitchListener {
         stage.draw();
     }
 
-    @Override
-    public void onScreenChange(ScreenType screen) {
 
-    }
-
+    //Method we have to have but do not use
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
 
     @Override
+    public void dispose() {
+        stage.dispose();
+    }
+
+    @Override
     public void pause() {
 
     }
+    @Override
+    public void onScreenChange(ScreenType screen) {
 
+    }
     @Override
     public void resume() {
 
@@ -99,8 +105,4 @@ public class MainMenuScreen implements Screen, ScreenSwitchListener {
 
     }
 
-    @Override
-    public void dispose() {
-        stage.dispose();
-    }
 }

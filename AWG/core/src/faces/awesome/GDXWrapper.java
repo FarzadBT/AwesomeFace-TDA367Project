@@ -11,18 +11,17 @@ import com.squareup.otto.Subscribe;
 import com.squareup.otto.ThreadEnforcer;
 import faces.awesome.controllers.EnemyCtrl;
 import faces.awesome.controllers.PlayerCtrl;
-import faces.awesome.controllers.ScreenRepository;
+import faces.awesome.utils.AwesomeClock;
+import faces.awesome.view.ScreenRepository;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.model.*;
-import com.squareup.otto.Bus;
+import faces.awesome.model.item.items.consumables.Bomb;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
 import faces.awesome.services.GdxWrapperService;
 import faces.awesome.services.MapStorage;
 import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
-import faces.awesome.utils.AwesomeClock;
-import faces.awesome.view.GameScreen;
 
 /**
  * @author Linus Wallman
@@ -61,8 +60,6 @@ public class GDXWrapper extends Game {
     public void create() {
         // setup model here.
 
-        AWG_TIME = new AwesomeClock();
-
         bus = new Bus(ThreadEnforcer.ANY);
         bus.register(this);
 
@@ -77,27 +74,36 @@ public class GDXWrapper extends Game {
 
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
-        player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player");
+
+        segment = new MapSegment(this);
+
+        player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player", segment);
 
         player.addNewToInventory(ItemFactory.CreateSword());
         player.addNewToInventory(ItemFactory.CreateHammer());
-
-        segment = new MapSegment(world, player, bus);
+        player.addNewToInventory(new Bomb(10));
 
         player.addNewToInventory(new Sword());
         player.addNewToInventory(new Hammer());
         player.setSlot1(player.getInventory().getItem("Sword"));
-        player.setSlot2(player.getInventory().getItem("Hammer"));
+        player.setSlot2(player.getInventory().getItem("Bomb"));
+
+
 
         AWG = new AwesomeGame(new GdxWrapperService(this), segment, player);
 
         //Creates textures from available files in core/assets/
         assets.addTexture("enemy", new TextureRegion(new Texture("core/assets/enemy.png")));
-        assets.addTexture("Sword", new TextureRegion(new Texture("core/assets/sword.png")));
-        assets.addTexture("Hammer", new TextureRegion(new Texture("core/assets/sword.png")));
         assets.addTexture("player", new TextureRegion(new Texture("core/assets/linkk.png")));
         assets.addTexture("bossEnemy", new TextureRegion(new Texture("core/assets/giantenemycrab2.png")));
         assets.addTexture("blank", new TextureRegion(new Texture("core/assets/blank.png")));
+
+        //Permanent Items
+        assets.addTexture("Sword", new TextureRegion(new Texture("core/assets/sword.png")));
+        assets.addTexture("Hammer", new TextureRegion(new Texture("core/assets/sword.png")));
+
+        //Consumable Items
+        assets.addTexture("Bomb", new TextureRegion(new Texture("core/assets/bomb.png")));
 
         //assets.addFileHandle("mainUi", Gdx.files.internal("core/assets/shade/skin/uiskin.json"));
 
@@ -128,6 +134,20 @@ public class GDXWrapper extends Game {
 
         //img.dispose();
     }
+
+    public boolean isSolid(int x, int y) {
+
+        return Tiles.isSolid(world.getCurrentMap(), x, y);
+
+    }
+
+
+    public Position setNewMap(Position position){
+
+        return world.setNewMap(position);
+
+    }
+
 
     @Subscribe
     public void handleMapChangedEvent(MapChangedEvent event) {

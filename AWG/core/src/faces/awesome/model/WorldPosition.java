@@ -1,6 +1,6 @@
 package faces.awesome.model;
 
-/*
+/**
  * @author Therese Sturesson
  *
  * The class holds a position and string (for the map name).
@@ -17,7 +17,7 @@ public class WorldPosition {
         this.map = map;
     }
 
-    //Gets the x value
+    //Gets the position
     public Position getPosition() {
         return position;
     }
