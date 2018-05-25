@@ -7,9 +7,6 @@ import java.util.Objects;
  * Updated by: Therese Sturesson
  *
  * A class that represents the position with two ints, x and y.
- *
- * TODO:
- * Look into why you can't just return a reference in {@link #movePos(int, int)}
  */
 
 
