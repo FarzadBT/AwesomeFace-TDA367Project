@@ -7,7 +7,8 @@ import faces.awesome.model.Position;
 /**
  * @author Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * A base pickup item, when pickup items are picked up they are meant to have a direct
+ * effect on the player
  */
 public abstract class BasePickup extends GameObject {
 

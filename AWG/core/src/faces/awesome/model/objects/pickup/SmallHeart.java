@@ -1,11 +1,12 @@
 package faces.awesome.model.objects.pickup;
 
-import faces.awesome.model.GameObject;
 import faces.awesome.model.Position;
 import faces.awesome.model.characters.PlayerCharacter;
 
 /**
- * Created by Mr Cornholio on 25/05/2018.
+ * @author Farzad Besharati
+ *
+ * When picked up will restore the players health by a small amount
  */
 public class SmallHeart extends BasePickup {
 
