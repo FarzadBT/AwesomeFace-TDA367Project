@@ -30,7 +30,7 @@ public class CharacterView extends GameObjectView {
 
     public CharacterView(Character c) {
         super(c);
-        localPos = c.getPos().cpy();
+        localPos = c.getPos();
     }
 
     @Override
@@ -96,7 +96,7 @@ public class CharacterView extends GameObjectView {
 
     private void drawWalk(SpriteBatch sprBatch, Animation<TextureRegion> region, Position oldPos, Position destination, int xPattern, int yPattern, int walkOffset) {
         if (hasReachedDestination(oldPos, destination)) {
-            localPos = gameObject.getPos().cpy();
+            localPos = gameObject.getPos();
             currentState = State.STANDING;
             return;
         }

@@ -25,6 +25,7 @@ import faces.awesome.events.PlayerCharacterDiedEvent;
 import faces.awesome.model.BossEnemy;
 import faces.awesome.model.MapSegment;
 import faces.awesome.services.WorldMap;
+
 import java.util.HashMap;
 
 
@@ -33,7 +34,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     private final GDXWrapper game;
 
     private GameScreenCtrl gameController;
-    private PlayerCtrl playerCtrl;
+    //private PlayerCtrl playerCtrl;
 
     private OrthographicCamera camera;
     private Viewport gamePort;
@@ -93,7 +94,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         shapeRenderer = new ShapeRenderer();
 
-        gameController = new GameScreenCtrl(playerCtrl);
+        gameController = new GameScreenCtrl(game.playerCtrl);
 
         HPfont = new BitmapFont();
         HPfont.getData().setScale(2.0f);
@@ -208,8 +209,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     }
 
     public void initialize() {
-        playerCtrl = new PlayerCtrl(game.player, game.world, game.segment);
-        gameController = new GameScreenCtrl(playerCtrl);
+        gameController = new GameScreenCtrl(game.playerCtrl);
         Gdx.input.setInputProcessor(gameController);
         ScreenSwitcher.setListener(this);
     }
@@ -258,6 +258,9 @@ public class GameScreen implements Screen, ScreenSwitchListener {
                 break;
             case GameWonScreen:
                 ScreenRepository.setGameWonScreen(game);
+                break;
+            case CreditScreen:
+                ScreenRepository.setCreditScreen(game);
                 break;
             default:
                 break;

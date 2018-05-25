@@ -1,7 +1,5 @@
 package faces.awesome.model;
 
-import com.squareup.otto.Bus;
-import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +16,7 @@ import java.util.List;
 public class MapSegment {
 
     //Varibles
-    private WorldMap world;
-    private Bus bus;
+    public WorldMap world;
     private static Position mapPosition;
     public PlayerCharacter player;
 
@@ -28,15 +25,12 @@ public class MapSegment {
     private static List<Enemy> enemiesInWorld = new ArrayList<>();
 
 
-    public MapSegment(WorldMap World, PlayerCharacter player, Bus bus){
+    public MapSegment(WorldMap world, PlayerCharacter player){
 
         this.player = player;
-        this.world = World;
-        this.bus = bus;
+        this.world = world;
 
         this.mapPosition = new Position(0, 0);
-
-        this.bus.register(this);
 
     }
 
@@ -206,8 +200,7 @@ public class MapSegment {
 
     //Sets the map position
     private void setMapPosition (int x, int y) {
-        mapPosition.setX(x);
-        mapPosition.setY(y);
+        mapPosition = new Position(x, y);
     }
 
 
@@ -219,7 +212,7 @@ public class MapSegment {
 
     // Delegate the check if a tile is solid or not to the Tiles class
     public boolean isSolid(int x, int y) {
-        return Tiles.isSolid(world.getCurrentMap(), x, y);
+        return world.isSolid(x, y);
     }
 
 

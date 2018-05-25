@@ -49,6 +49,7 @@ public class GDXWrapper extends Game {
     public MapSegment segment;
     public WorldMap world;
     public Bus bus;
+    public GDXWrapper gdxWrapper;
 
     @Override
     public void create() {
@@ -73,7 +74,7 @@ public class GDXWrapper extends Game {
         player.addNewToInventory(ItemFactory.CreateSword());
         player.addNewToInventory(ItemFactory.CreateHammer());
 
-        segment = new MapSegment(world, player, bus);
+        segment = new MapSegment(world, player);
 
         player.addNewToInventory(new Sword());
         player.addNewToInventory(new Hammer());
@@ -117,6 +118,19 @@ public class GDXWrapper extends Game {
 
         //img.dispose();
     }
+
+    public boolean isSolid(int x, int y) {
+
+        return Tiles.isSolid(world.getCurrentMap(), x, y);
+
+    }
+
+
+    public Position setNewMap(Position position){
+
+        return world.setNewMap(position);
+    }
+
 
     @Subscribe
     public void handleMapChangedEvent(MapChangedEvent event) {
