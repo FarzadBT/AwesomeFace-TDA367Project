@@ -12,7 +12,7 @@ import java.util.TimerTask;
 /**
  * @author Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * A Bomb GameObject, when created will start "ticking down" until it explodes, dealing damage in a radius.
  */
 
 public class BombObject extends GameObject {

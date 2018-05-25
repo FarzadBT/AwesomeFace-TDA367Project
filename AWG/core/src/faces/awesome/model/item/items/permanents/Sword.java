@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * A Sword permanent item, when used it will deal damage to enemies in front of you
  */
 
 public class Sword extends BaseItem {

@@ -2,7 +2,6 @@ package faces.awesome.model;
 
 import faces.awesome.model.characters.PlayerCharacter;
 import faces.awesome.model.item.BaseConsumable;
-import faces.awesome.model.item.BaseInstant;
 import faces.awesome.model.item.Item;
 import java.util.HashMap;
 
@@ -21,9 +20,7 @@ public class Inventory {
     }
 
     public void addNewToInventory(Item item, PlayerCharacter player) {
-        if(item instanceof BaseInstant)
-            ((BaseInstant)item).use(player);
-        else if(!isInInventory(item.getName()))
+        if(!isInInventory(item.getName()))
             inventory.put(item.getName(), item);
     }
 

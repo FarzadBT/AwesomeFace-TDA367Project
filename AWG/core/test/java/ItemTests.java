@@ -5,7 +5,6 @@ import faces.awesome.model.Enemy;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.model.item.items.consumables.Bomb;
-import faces.awesome.model.item.items.instants.SingleHeart;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
 import faces.awesome.model.objects.pickup.BombBag;

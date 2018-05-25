@@ -9,7 +9,7 @@ import faces.awesome.model.objects.object.BombObject;
 /**
  * @author Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * A consumable Bomb Item, when used, places a BombObject in front of you
  */
 
 public class Bomb extends BaseConsumable {
@@ -36,7 +36,7 @@ public class Bomb extends BaseConsumable {
     }
 
     /**
-     * help method, creates a GameObject when you use a bomb
+     * helper method, creates a GameObject when you use a bomb
      * @param pos
      * @param facing
      */

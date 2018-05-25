@@ -7,7 +7,7 @@ import faces.awesome.model.Position;
 /**
  * @author Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * An interface used for creating items, has all basic attributes of an item
  */
 
 public interface Item {
@@ -20,6 +20,10 @@ public interface Item {
 
     /**
      * different effects depending on the item
+     *
+     * @param pos origin position of the player using the item
+     * @param facing facing of the player using the itme
+     * @param segment the current MapSegment that the player is in
      */
     void use(Position pos, Facing facing, MapSegment segment);
 

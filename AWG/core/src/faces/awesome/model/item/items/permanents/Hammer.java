@@ -8,7 +8,7 @@ import faces.awesome.model.item.BaseItem;
 /**
  * @author Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * A Hammer permanent item, when used it will deal damage to enemies in front of you
  */
 
 public class Hammer extends BaseItem {
