@@ -66,6 +66,7 @@ public class GDXWrapper extends Game {
         //Wraps the TileMap for easier access
         world = new WorldMap(map, bus);
 
+        segment = new MapSegment(this);
 
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
@@ -73,8 +74,6 @@ public class GDXWrapper extends Game {
 
         player.addNewToInventory(ItemFactory.CreateSword());
         player.addNewToInventory(ItemFactory.CreateHammer());
-
-        segment = new MapSegment(world, player);
 
         player.addNewToInventory(new Sword());
         player.addNewToInventory(new Hammer());
