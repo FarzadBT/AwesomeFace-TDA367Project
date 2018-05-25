@@ -10,7 +10,7 @@ import faces.awesome.model.item.items.consumables.Bomb;
  * TODO skriva vad klassen gör
  */
 
-public class BombBag extends PickupItem {
+public class BombBag extends BasePickup {
 
     public BombBag(Position pos) {
         super(pos, "bombBag");

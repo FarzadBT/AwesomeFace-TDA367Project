@@ -9,6 +9,9 @@ import faces.awesome.model.Position;
  *
  * TODO skriva vad klassen gör
  */
+public abstract class BasePickup extends GameObject {
+
+    public BasePickup(Position pos, String name) {
 
 public abstract class PickupItem extends GameObject {
 

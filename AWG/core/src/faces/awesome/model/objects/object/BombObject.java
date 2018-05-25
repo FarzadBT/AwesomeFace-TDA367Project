@@ -36,9 +36,9 @@ public class BombObject extends GameObject {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                List<Enemy> targets = segment.getPlayerTargets(x-2, y+2, x+2, y-2);
+                List<Enemy> targets = segment.getPlayerTargets(pos, 2, 2, facing);
                 for (Enemy enemy: targets) {
-                    enemy.decreaseHealth(10);
+                    enemy.decreaseHealth(15);
                 }
                 removeObject();
             }

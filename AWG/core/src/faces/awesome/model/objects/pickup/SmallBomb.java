@@ -10,10 +10,10 @@ import faces.awesome.model.Position;
  * TODO skriva vad klassen gör
  */
 
-public class BombPickupSmall extends GameObject {
+public class SmallBomb extends BasePickup {
 
-    public BombPickupSmall(Position pos) {
-        super(pos, "bombPickupSmall");
+    public SmallBomb(Position pos) {
+        super(pos, "smallBomb");
     }
 
     public void onPickup(PlayerCharacter playerCharacter) {
