@@ -4,7 +4,10 @@ package faces.awesome.view;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.squareup.otto.Subscribe;
 import faces.awesome.GDXWrapper;
+import faces.awesome.events.CharacterMovedEvent;
+import faces.awesome.model.PlayerCharacter;
 import faces.awesome.services.AssetManager;
 import faces.awesome.model.Character;
 import faces.awesome.model.Facing;
@@ -31,7 +34,8 @@ public class CharacterView extends GameObjectView {
 
     public CharacterView(Character c) {
         super(c);
-        localPos = c.getPos();
+        localPos = new Position(c.getPos().getX(), c.getPos().getY());
+        ( (PlayerCharacter) c).bus.register(this);
     }
 
     @Override
@@ -52,7 +56,8 @@ public class CharacterView extends GameObjectView {
                     // throw some exception perhaps. However, this case should never happen. It's just here to keep the interpreter from going insane
                     //region = null;
                 }
-                sprBatch.draw(region, gameObject.getPos().getX() * GDXWrapper.TILE_SIZE, gameObject.getPos().getY() * GDXWrapper.TILE_SIZE);
+
+                sprBatch.draw(region, (gameObject.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (gameObject.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
                 break;
             }
 
@@ -110,12 +115,14 @@ public class CharacterView extends GameObjectView {
             return;
         }
 
+        // (game.player.getPos().getX() % 32) * GDXWrapper.TILE_SIZE
+
         if (timer.ticksElapsed() >= 31) {
             Timer tt = new Timer();
             tt.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    sprBatch.draw(region.getKeyFrame(stateTime), localPos.getX() + xPattern * 4, localPos.getY() * yPattern * 4);
+                    sprBatch.draw(region.getKeyFrame(stateTime), ((localPos.getX() + xPattern * 4) % 32) * GDXWrapper.TILE_SIZE, ((localPos.getY() + xPattern * 4) % 16) * GDXWrapper.TILE_SIZE);
 
                     drawWalk(sprBatch, region, oldPos, destination, xPattern, yPattern, walkOffset + 4);
                 }
@@ -128,5 +135,18 @@ public class CharacterView extends GameObjectView {
 
     private boolean hasReachedDestination(Position oldPos, Position destination) {
         return oldPos.equals(destination);
+    }
+
+    public State getCurrentState() {
+        return currentState;
+    }
+
+    public void setState(State state) {
+        currentState = state;
+    }
+
+    @Subscribe
+    public void handleCharacterMoveEvent(CharacterMovedEvent event) {
+        setState(State.RUNNING);
     }
 }

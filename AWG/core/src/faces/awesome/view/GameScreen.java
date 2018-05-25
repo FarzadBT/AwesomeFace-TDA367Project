@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.squareup.otto.Subscribe;
@@ -23,9 +22,12 @@ import faces.awesome.events.BossEnemyDiedEvent;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.events.PlayerCharacterDiedEvent;
 import faces.awesome.model.BossEnemy;
+import faces.awesome.model.Character;
 import faces.awesome.model.objects.object.BombObject;
-import faces.awesome.services.WorldMap;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class GameScreen implements Screen, ScreenSwitchListener {
@@ -101,6 +103,10 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         HPfont = new BitmapFont();
         HPfont.getData().setScale(2.0f);
 
+        gameObjectViews = new ArrayList<>();
+
+        gameObjectViews.add(new CharacterView(game.player));
+
 
         Gdx.input.setInputProcessor(gameController);
     }
@@ -150,7 +156,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     @Override
     public void render(float delta) {
-
+        CharacterView c = (CharacterView) gameObjectViews.get(0);
+        System.out.println(c.getCurrentState());
         update(delta);
 
         // RGB(0, 0, 0, 1) = black
@@ -174,9 +181,10 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         sprBatch.begin();
 
-        playerSprite.setPosition((game.player.getPos().getX() % 32) * GDXWrapper.TILE_SIZE,(game.player.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
-        playerSprite.draw(sprBatch);
+        //playerSprite.setPosition((game.player.getPos().getX() % 32) * GDXWrapper.TILE_SIZE,(game.player.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
+        //playerSprite.draw(sprBatch);
 
+        gameObjectViews.forEach(gameObject -> gameObject.draw(sprBatch));
 
         game.segment.getEnemiesInSegment().forEach(enemy -> {
 

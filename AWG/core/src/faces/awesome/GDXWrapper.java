@@ -3,9 +3,12 @@ package faces.awesome;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.utils.Array;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import com.squareup.otto.ThreadEnforcer;
@@ -108,6 +111,20 @@ public class GDXWrapper extends Game {
         //Consumable Items
         assets.addTexture("Bomb", new TextureRegion(new Texture("core/assets/bomb.png")));
 
+        //Animations
+        assets.addAnimation(player.getName() + "-anim-south", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 0,16, 16, 16)));
+        assets.addAnimation(player.getName() + "-anim-west", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 16,16, 16, 16)));
+        assets.addAnimation(player.getName() + "-anim-north", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 72,16, 16, 16)));
+        assets.addAnimation(player.getName() + "-anim-east", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 48,16, 16, 16)));
+
+        assets.addTexture(player.getName() + "-south", new TextureRegion(new Texture("core/assets/anims/link-sprites1.png"), 180, 0, 32,32));
+        assets.addTexture(player.getName() + "-north", new TextureRegion(new Texture("core/assets/anims/link-sprites1.png"), 72, 0, 32, 32));
+        TextureRegion eastRegion = new TextureRegion(new Texture("core/assets/anims/link-sprites1.png"), 252, 0, 32, 32);
+        assets.addTexture(player.getName() + "-east", eastRegion);
+        TextureRegion westRegion = new TextureRegion(eastRegion);
+        westRegion.flip(true, false);
+        assets.addTexture(player.getName() + "-west", westRegion);
+
         //assets.addFileHandle("mainUi", Gdx.files.internal("core/assets/shade/skin/uiskin.json"));
 
         MapStorage.addMap("mainMap", map);
@@ -165,6 +182,18 @@ public class GDXWrapper extends Game {
 
     public WorldMap getMap(){
         return world;
+    }
+
+    private Array<TextureRegion> setupRunningFrames(TextureRegion region, int x, int y, int width, int height) {
+        Array<TextureRegion> frames = new Array<>();
+        int j = 0;
+        for (int i = 1; i < 8; i++) {
+            j = ((j + 1) % 2) + 1;
+            TextureRegion tr = new TextureRegion(region, (j * x), y , width, height);
+            frames.add(tr);
+        }
+
+        return frames;
     }
 
 
