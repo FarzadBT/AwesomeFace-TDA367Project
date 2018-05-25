@@ -4,7 +4,8 @@ package faces.awesome.model;
  * Author: Farzad Besharati
  * Updated by: Therese Sturesson
  *
- * TODO skriva vad klassen gör
+ * GameObjects are interactable things in the world. They could be a placed bomb,
+ * a Character walking around or a rock that can be broken
  */
 
 public class GameObject {

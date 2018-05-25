@@ -11,9 +11,7 @@ import faces.awesome.model.Position;
  */
 public abstract class BasePickup extends GameObject {
 
-    public BasePickup(Position pos, String name) {
-        super(pos, name);
-    }
+    public BasePickup(Position pos, String name) {super(pos, name);}
 
     public abstract void onPickup(PlayerCharacter playerCharacter);
 

@@ -7,7 +7,8 @@ import faces.awesome.model.Position;
 /**
  * @author Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * When picked up will increase the quantity of bombs in the players inventory
+ * by a small amount
  */
 
 public class SmallBomb extends BasePickup {
