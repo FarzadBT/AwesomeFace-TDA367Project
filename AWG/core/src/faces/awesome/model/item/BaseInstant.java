@@ -1,13 +1,15 @@
 package faces.awesome.model.item;
 
-import faces.awesome.model.Facing;
-import faces.awesome.model.PlayerCharacter;
-import faces.awesome.model.Position;
+import faces.awesome.model.characters.PlayerCharacter;
 
 /**
- * Created by Mr Cornholio on 20/04/2018.
+ * @author Farzad Besharati
+ *
+ * TODO skriva vad klassen gör
  */
+
 public abstract class BaseInstant implements Item{
+
     protected String name;
 
     public String getName() {
@@ -15,4 +17,5 @@ public abstract class BaseInstant implements Item{
     }
 
     public abstract void use(PlayerCharacter player);
+
 }

@@ -1,6 +1,6 @@
 package faces.awesome.model.objects.object;
 
-import faces.awesome.model.Enemy;
+import faces.awesome.model.characters.Enemy;
 import faces.awesome.model.GameObject;
 import faces.awesome.model.MapSegment;
 import faces.awesome.model.Position;
@@ -10,8 +10,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by Mr Cornholio on 08/05/2018.
+ * @author Farzad Besharati
+ *
+ * TODO skriva vad klassen gör
  */
+
 public class BombObject extends GameObject {
 
     private MapSegment segment;
@@ -45,4 +48,5 @@ public class BombObject extends GameObject {
     private void removeObject() {
         segment.removeFromObjects(this);
     }
+
 }

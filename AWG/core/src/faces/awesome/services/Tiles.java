@@ -7,23 +7,23 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.squareup.otto.Bus;
-import faces.awesome.model.BossEnemy;
-import faces.awesome.model.Enemy;
+import faces.awesome.model.characters.BossEnemy;
+import faces.awesome.model.characters.Enemy;
 import faces.awesome.model.Position;
 import faces.awesome.model.WorldPosition;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/*
  * @author Therese Sturesson
  * Updated by:
  *
- * TODO skriva vad klassen gör
+ * A help class for different kind of things, mostly for the map
  */
 
 public class Tiles {
 
-
+    //Checks if a tile is solid or not, if not you can walk on it
     public static boolean isSolid(Map tiledMap, int x, int y) {
         boolean tileIsSolid = false;
 
@@ -45,6 +45,7 @@ public class Tiles {
     }
 
 
+    // Gets the worldposition
     public static WorldPosition getWorldPosition(Position position, Map tiledMap) {
 
         for (MapLayer layer : tiledMap.getLayers()) {
@@ -76,6 +77,7 @@ public class Tiles {
     }
 
 
+    //Populates a map when the map changes
     public static List<Enemy> populateWorldWithEnemies(Map currentMap, Bus bus) {
 
         List<Enemy> enemiesInWorld = new ArrayList<>();
@@ -109,9 +111,9 @@ public class Tiles {
 
     }
 
+    //Gets the center of a rectangles position
     private static Position getCenterOfRecPos(Rectangle rectangle) {
         return new Position((int) ((rectangle.x + (rectangle.width / 2)) / 32), (int) ((rectangle.y + (rectangle.height / 2)) / 32));
     }
-
 
 }

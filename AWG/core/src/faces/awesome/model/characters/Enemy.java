@@ -1,6 +1,7 @@
-package faces.awesome.model;
+package faces.awesome.model.characters;
 
 import com.squareup.otto.Bus;
+import faces.awesome.model.Position;
 import faces.awesome.utils.AwesomeTimer;
 
 /*
@@ -56,6 +57,5 @@ public class Enemy extends Character {
     @Override
     public void death() {
     }
-
 
 }

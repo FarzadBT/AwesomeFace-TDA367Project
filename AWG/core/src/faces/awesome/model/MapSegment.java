@@ -1,6 +1,9 @@
 package faces.awesome.model;
 
 import faces.awesome.GDXWrapper;
+import faces.awesome.model.characters.Character;
+import faces.awesome.model.characters.Enemy;
+
 import java.util.ArrayList;
 import java.util.List;
 

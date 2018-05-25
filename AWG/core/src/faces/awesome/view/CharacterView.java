@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import faces.awesome.GDXWrapper;
 import faces.awesome.services.AssetManager;
-import faces.awesome.model.Character;
+import faces.awesome.model.characters.Character;
 import faces.awesome.model.Facing;
 import faces.awesome.model.Position;
 import faces.awesome.utils.AwesomeTimer;
@@ -17,6 +17,8 @@ import java.util.TimerTask;
 /**
  * @author Linus Wallman
  *
+ * TODO skriva vad klassen gör
+ * TODO kommentera metoderna
  */
 
 public class CharacterView extends GameObjectView {

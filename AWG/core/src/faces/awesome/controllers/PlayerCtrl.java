@@ -1,6 +1,7 @@
 package faces.awesome.controllers;
 
 import faces.awesome.model.*;
+import faces.awesome.model.characters.PlayerCharacter;
 import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
 

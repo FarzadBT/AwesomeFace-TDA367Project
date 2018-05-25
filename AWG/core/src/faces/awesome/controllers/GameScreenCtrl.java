@@ -23,6 +23,7 @@ public class GameScreenCtrl implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+
         if(keycode == Input.Keys.LEFT) {
             playerCtrl.tryMove(-1, 0, Facing.WEST);
 
@@ -33,7 +34,6 @@ public class GameScreenCtrl implements InputProcessor {
         }
 
         if(keycode == Input.Keys.UP) {
-
             playerCtrl.tryMove(0, 1, Facing.NORTH);
         }
 

@@ -3,6 +3,12 @@ package faces.awesome.view;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import faces.awesome.model.GameObject;
 
+/*
+* @author: Linus Wallman
+*
+* TODO vad gör klassen
+* TODO draw metoden används inte?
+*/
 
 public abstract class GameObjectView {
 

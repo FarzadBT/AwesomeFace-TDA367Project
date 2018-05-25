@@ -2,14 +2,18 @@ package faces.awesome.model.item.items.instants;
 
 import faces.awesome.model.Facing;
 import faces.awesome.model.MapSegment;
-import faces.awesome.model.PlayerCharacter;
+import faces.awesome.model.characters.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.model.item.BaseInstant;
 
 /**
- * Created by Mr Cornholio on 24/04/2018.
+ * @author Farzad Besharati
+ *
+ * TODO skriva vad klassen gör
  */
+
 public class SingleHeart extends BaseInstant {
+
     public SingleHeart() {
         this.name = "Single Heart";
     }
@@ -24,4 +28,5 @@ public class SingleHeart extends BaseInstant {
     public void use(Position pos, Facing facing, MapSegment segment) {
 
     }
+
 }

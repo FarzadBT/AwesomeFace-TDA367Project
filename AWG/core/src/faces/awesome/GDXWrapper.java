@@ -11,7 +11,9 @@ import com.squareup.otto.Subscribe;
 import com.squareup.otto.ThreadEnforcer;
 import faces.awesome.controllers.EnemyCtrl;
 import faces.awesome.controllers.PlayerCtrl;
-import faces.awesome.utils.AwesomeClock;
+import faces.awesome.model.characters.PlayerCharacter;
+import faces.awesome.model.factories.CharacterFactory;
+import faces.awesome.model.factories.ItemFactory;
 import faces.awesome.services.AssetManager;
 import faces.awesome.view.ScreenRepository;
 import faces.awesome.events.MapChangedEvent;
@@ -26,18 +28,14 @@ import faces.awesome.services.WorldMap;
 
 /**
  * @author Linus Wallman
- * Updated by:
+ * Updated by: Therese Sturesson, Philip Nilsson, Farzad Besharati
+ *
  * TODO: Skriv vad klassen gör
  */
 
-
 public class GDXWrapper extends Game {
 
-
-    /**
-     * Flytta på dessa konstanter?
-     */
-
+    //TODO Flytta på dessa konstanter?
     public static final int TILE_SIZE = 32;
     public static final int VIEW_PORT_WIDTH = 1024;
     public static final int VIEW_PORT_HEIGHT = 512;
@@ -47,19 +45,19 @@ public class GDXWrapper extends Game {
 
     public PlayerCharacter player;
     public PlayerCtrl playerCtrl;
-
     public EnemyCtrl enemyCtrl;
 
     public MapSegment segment;
     public WorldMap world;
     public Bus bus;
 
-    public static AwesomeClock AWG_TIME;
     private AwesomeGame AWG;
 
     @Override
     public void create() {
-        // setup model here.
+
+        int w = Gdx.graphics.getWidth();
+        int h = Gdx.graphics.getHeight();
 
         bus = new Bus(ThreadEnforcer.ANY);
         bus.register(this);
@@ -67,32 +65,31 @@ public class GDXWrapper extends Game {
         //Instantiate asset manager
         assets = AssetManager.getInstance();
 
+        //Sets the first map
         TiledMap map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
 
         //Wraps the TileMap for easier access
         world = new WorldMap(map, bus);
 
+        //Creates the segment
         segment = new MapSegment(this);
 
-        int w = Gdx.graphics.getWidth();
-        int h = Gdx.graphics.getHeight();
-
-        segment = new MapSegment(this);
-
+        //Creates a player though the factory
         player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player", segment);
 
+        //Adds itemns to the inventory
         player.addNewToInventory(ItemFactory.CreateSword());
         player.addNewToInventory(ItemFactory.CreateHammer());
 
         player.addNewToInventory(new Bomb(10));
-
         player.addNewToInventory(new Sword());
         player.addNewToInventory(new Hammer());
+
+        //Sets which items on which slots
         player.setSlot1(player.getInventory().getItem("Sword"));
         player.setSlot2(player.getInventory().getItem("Bomb"));
 
-
-
+        //Creates an awesomegame for the wrapper service
         AWG = new AwesomeGame(new GdxWrapperService(this), segment, player);
 
         //Creates textures from available files in core/assets/
@@ -108,8 +105,7 @@ public class GDXWrapper extends Game {
         //Consumable Items
         assets.addTexture("Bomb", new TextureRegion(new Texture("core/assets/bomb.png")));
 
-        //assets.addFileHandle("mainUi", Gdx.files.internal("core/assets/shade/skin/uiskin.json"));
-
+        //Adds all the maps to the map storage
         MapStorage.addMap("mainMap", map);
         MapStorage.addMap("smallHouse", new TmxMapLoader().load("core/assets/maps/smallHouse.tmx"));
         MapStorage.addMap("mediumHouse", new TmxMapLoader().load("core/assets/maps/mediumHouse.tmx"));
@@ -118,11 +114,15 @@ public class GDXWrapper extends Game {
 
         handleMapChangedEvent(null);
 
+        //Creates a player ccontroller
         playerCtrl = new PlayerCtrl(player, world, segment);
 
+        //Creates an enemy controller
         enemyCtrl = new EnemyCtrl(segment);
 
+        //Sets the first screen to main meny screen
         ScreenRepository.setMainMenuScreen(this);
+
     }
 
     @Override
@@ -132,26 +132,21 @@ public class GDXWrapper extends Game {
 
     }
 
-    @Override
-    public void dispose() {
-
-        //img.dispose();
-    }
-
+    //A method for delegation to the tiles
     public boolean isSolid(int x, int y) {
 
         return Tiles.isSolid(world.getCurrentMap(), x, y);
 
     }
 
-
+    //A method for delegation to the world
     public Position setNewMap(Position position){
 
         return world.setNewMap(position);
 
     }
 
-
+    //If the map changes this event will happen
     @Subscribe
     public void handleMapChangedEvent(MapChangedEvent event) {
 
@@ -159,6 +154,7 @@ public class GDXWrapper extends Game {
 
     }
 
+    //Methods for the asset manager
     public AssetManager getAssets() {
         return assets;
     }
@@ -167,5 +163,10 @@ public class GDXWrapper extends Game {
         return world;
     }
 
+
+    @Override
+    public void dispose() {
+
+    }
 
 }
