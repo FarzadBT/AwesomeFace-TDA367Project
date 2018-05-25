@@ -84,7 +84,6 @@ public class PlayerCharacter extends Character {
 			setPos(pos.movePos(dx, dy));
 
 		}
-
 	}
 
 	//If you (the player) dies you lost the game
