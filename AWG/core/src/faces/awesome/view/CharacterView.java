@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import faces.awesome.GDXWrapper;
-import faces.awesome.model.AssetManager;
+import faces.awesome.services.AssetManager;
 import faces.awesome.model.Character;
 import faces.awesome.model.Facing;
 import faces.awesome.model.Position;
