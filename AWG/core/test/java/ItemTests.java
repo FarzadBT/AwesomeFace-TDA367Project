@@ -71,39 +71,28 @@ public class ItemTests {
 
         bomb.use(playerCharacter.getPos(), playerCharacter.getFacing(), segment);
         assertTrue(bomb.getQuantity() == 19);
-        bombSmall.onPickup(playerCharacter);
+        smallBomb.onPickup(playerCharacter);
         assertTrue(bomb.getQuantity() == 20);
     }
 
     @Test
     public void testAddPermanent() {
-        playerCharacter.addNewToInventory(hammer);
-        assertTrue(playerCharacter.getInventory().isInInventory(hammer.getName()));
+        playerCharacter.addNewToInventory(sword);
+        assertTrue(playerCharacter.getInventory().isInInventory(sword.getName()));
 
         assertTrue(playerCharacter.getInventory().getSize() == 1);
-        playerCharacter.addNewToInventory(hammer);
+        playerCharacter.addNewToInventory(sword);
         assertTrue(playerCharacter.getInventory().getSize() == 1);
     }
 
     @Test
     public void testPickup() {
-        playerCharacter.addNewToInventory(singleHeart);
-        assertTrue(!playerCharacter.getInventory().isInInventory(singleHeart.getName()));
-        assertTrue(playerCharacter.getInventory().getSize() == 0);
-        assertTrue(playerCharacter.getHealth() == 15);
+        smallHeart.onPickup(playerCharacter);
+        assertTrue(playerCharacter.getHealth() == 100);
 
         playerCharacter.decreaseHealth(5);
-        assertTrue(playerCharacter.getHealth() == 10);
-        playerCharacter.addNewToInventory(singleHeart);
-        assertTrue(playerCharacter.getHealth() == 11);
-    }
-
-    @Test
-    public void testSword() {
-        playerCharacter.addNewToInventory(sword);
-        assertTrue(playerCharacter.getInventory().isInInventory(sword.getName()));
-
-        playerCharacter.addNewToInventory(sword);
-        assertTrue(playerCharacter.getInventory().getSize() == 1);
+        assertTrue(playerCharacter.getHealth() == 95);
+        smallHeart.onPickup(playerCharacter);
+        assertTrue(playerCharacter.getHealth() == 100);
     }
 }

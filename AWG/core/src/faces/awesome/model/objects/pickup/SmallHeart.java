@@ -15,6 +15,6 @@ public class SmallHeart extends BasePickup {
 
     @Override
     public void onPickup(PlayerCharacter playerCharacter) {
-        playerCharacter.increaseHealth(1);
+        playerCharacter.increaseHealth(5);
     }
 }
