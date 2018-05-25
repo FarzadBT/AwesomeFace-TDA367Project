@@ -36,9 +36,9 @@ public class PlayerCtrl {
 
         boolean occupied = segment.isOccupied(newPosition);
 
-        if ( !solid && !occupied ) {
+        player.setFacing(facing);
 
-            player.setFacing(facing);
+        if ( !solid && !occupied ) {
 
             segment.checkSegmentBorder(player.getPos(), newPosition);
 
