@@ -55,7 +55,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     private MapRenderer mapRenderer;
     private ShapeRenderer shapeRenderer;
 
-    private List<GameObjectView > gameObjectViews;
+    private List<GameObjectView> gameObjectViews;
 
     private SpriteBatch sprBatch;
 
