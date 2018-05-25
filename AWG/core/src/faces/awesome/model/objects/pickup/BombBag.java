@@ -8,7 +8,7 @@ import faces.awesome.model.item.items.consumables.Bomb;
 /**
  * Created by Mr Cornholio on 14/05/2018.
  */
-public class BombBag extends PickupItem {
+public class BombBag extends BasePickup {
 
     public BombBag(Position pos) {
         super(pos, "bombBag");

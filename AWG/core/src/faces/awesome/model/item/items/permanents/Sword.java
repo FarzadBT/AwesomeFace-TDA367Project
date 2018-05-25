@@ -26,15 +26,7 @@ public class Sword extends BaseItem {
     @Override
     public void use(Position pos, Facing facing, MapSegment segment) {
         List<Enemy> enemies = new ArrayList<>();
-        int x = pos.getX(), y = pos.getY();
-        if (facing == Facing.SOUTH)
-            enemies = segment.getPlayerTargets(x-1, y-1, x+1, y-1);
-        else if(facing == Facing.NORTH)
-            enemies = segment.getPlayerTargets(x-1, y+1, x+1, y+1);
-        else if(facing == Facing.EAST)
-            enemies = segment.getPlayerTargets(x+1, y+1, x+1, y-1);
-        else if(facing == Facing.WEST)
-            enemies = segment.getPlayerTargets(x-1, y+1, x-1, y-1);
+        enemies = segment.getPlayerTargets(pos, 1, 1, facing);
 
         for (Enemy enemy : enemies) {
             enemy.decreaseHealth(10);

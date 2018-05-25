@@ -5,10 +5,11 @@ import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 
 /**
- * Created by Mr Cornholio on 14/05/2018.
+ * Created by Mr Cornholio on 25/05/2018.
  */
-public abstract class PickupItem extends GameObject {
-    public PickupItem(Position pos, String name) {
+public abstract class BasePickup extends GameObject {
+
+    public BasePickup(Position pos, String name) {
         super(pos, name);
     }
 

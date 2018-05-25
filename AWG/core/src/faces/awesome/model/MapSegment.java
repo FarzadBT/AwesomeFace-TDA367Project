@@ -104,13 +104,45 @@ public class MapSegment {
     /**
      * By using getEnemiesInSegment() we check which of the enemies in the current segment that are inside of a hitbox
      * that goes from top-left to bottom-right
-     * @param x1 x-coord of top left corner
-     * @param y1 y-coord of top left corner
-     * @param x2 x-coord of bottom right corner
-     * @param y2 y-coord of bottom right corner
+     * @param pos the origin position of the attack
+     * @param width width of the attack
+     * @param range range of the attack, is not used if the facing is NONE
+     * @param facing which direction the attack is made towards
      * @return A list of the enemies that are inside the hitbox
      */
-    public List<Enemy> getPlayerTargets(int x1, int y1, int x2, int y2) {
+    public List<Enemy> getPlayerTargets(/*int x1, int y1, int x2, int y2*/Position pos, int width, int range, Facing facing) {
+        int x1, x2, y1, y2;
+
+        if (facing == Facing.SOUTH) {
+            x1 = pos.getX() - width;
+            x2 = pos.getX() + width;
+            y1 = pos.getY() - 1;
+            y2 = pos.getY() - range;
+        }
+        else if(facing == Facing.NORTH) {
+            x1 = pos.getX() - width;
+            x2 = pos.getX() + width;
+            y1 = pos.getY() + 1;
+            y2 = pos.getY() + range;
+        }
+        else if(facing == Facing.EAST) {
+            x1 = pos.getX() + 1;
+            x2 = pos.getX() + range;
+            y1 = pos.getY() + width;
+            y2 = pos.getY() - width;
+        }
+        else if(facing == Facing.WEST) {
+            x1 = pos.getX() - 1;
+            x2 = pos.getX() - range;
+            y1 = pos.getY() + 1;
+            y2 = pos.getY() - width;
+        }
+        else { //facing == Facing.NONE or INVALIDFACING
+            x1 = pos.getX() - width;
+            x2 = pos.getX() + width;
+            y1 = pos.getY() + width;
+            y2 = pos.getY() - width;
+        }
 
         List <Enemy> enemies = getEnemiesInSegment();
         List <Enemy> targets = new ArrayList<>();

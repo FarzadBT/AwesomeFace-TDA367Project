@@ -1,7 +1,7 @@
-package java;
-
+import com.squareup.otto.Bus;
 import faces.awesome.GDXWrapper;
 import faces.awesome.model.Enemy;
+import faces.awesome.model.MapSegment;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.model.item.items.consumables.Bomb;
@@ -9,7 +9,8 @@ import faces.awesome.model.item.items.instants.SingleHeart;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
 import faces.awesome.model.objects.pickup.BombBag;
-import faces.awesome.model.objects.pickup.BombPickupSmall;
+import faces.awesome.model.objects.pickup.SmallBomb;
+import faces.awesome.model.objects.pickup.SmallHeart;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,22 +19,35 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Created by Mr Cornholio on 24/04/2018.
  */
 
+
 public class ItemTests {
-    GDXWrapper wrapper = new GDXWrapper();
+    GDXWrapper game = new GDXWrapper();
+
+
+    Bus bus;
+    MapSegment segment;
     PlayerCharacter playerCharacter;
-    BombPickupSmall bombSmall;
-    BombBag bombBag;
+
     Enemy e1, e2, e3;
+
     Bomb bomb;
     Sword sword;
-    Hammer hammer;
-    SingleHeart singleHeart;
 
+    Hammer hammer;
+
+    SmallHeart smallHeart;
+    SmallBomb smallBomb;
+    BombBag bombBag;
 
     @BeforeEach
     public void init() {
+        segment = new MapSegment(game);
+        bus = new Bus();
 
-        bombSmall = new BombPickupSmall(new Position(0,0));
+        playerCharacter = new PlayerCharacter(new Position(1,1), bus, "player", segment);
+
+        smallHeart = new SmallHeart(new Position(0,0));
+        smallBomb = new SmallBomb(new Position(0,0));
         bombBag = new BombBag(new Position(0,0));
 
         bomb = new Bomb(1);
@@ -41,7 +55,6 @@ public class ItemTests {
         hammer = new Hammer();
         sword = new Sword();
 
-        singleHeart = new SingleHeart();
 
     }
 
@@ -56,7 +69,7 @@ public class ItemTests {
         bombBag.onPickup(playerCharacter);
         assertTrue(bomb.getMax() == 20);
 
-        bomb.use(playerCharacter.getPos(), playerCharacter.getFacing());
+        bomb.use(playerCharacter.getPos(), playerCharacter.getFacing(), segment);
         assertTrue(bomb.getQuantity() == 19);
         bombSmall.onPickup(playerCharacter);
         assertTrue(bomb.getQuantity() == 20);
@@ -73,7 +86,7 @@ public class ItemTests {
     }
 
     @Test
-    public void testInstant() {
+    public void testPickup() {
         playerCharacter.addNewToInventory(singleHeart);
         assertTrue(!playerCharacter.getInventory().isInInventory(singleHeart.getName()));
         assertTrue(playerCharacter.getInventory().getSize() == 0);

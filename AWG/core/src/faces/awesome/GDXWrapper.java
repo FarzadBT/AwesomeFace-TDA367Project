@@ -79,8 +79,6 @@ public class GDXWrapper extends Game {
         player.addNewToInventory(ItemFactory.CreateHammer());
         player.addNewToInventory(new Bomb(10));
 
-        player.addNewToInventory(new Sword());
-        player.addNewToInventory(new Hammer());
         player.setSlot1(player.getInventory().getItem("Sword"));
         player.setSlot2(player.getInventory().getItem("Bomb"));
 
