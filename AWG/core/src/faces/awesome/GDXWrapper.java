@@ -21,7 +21,6 @@ import faces.awesome.model.*;
 import faces.awesome.model.item.items.consumables.Bomb;
 import faces.awesome.model.item.items.permanents.Hammer;
 import faces.awesome.model.item.items.permanents.Sword;
-import faces.awesome.services.GdxWrapperService;
 import faces.awesome.services.MapStorage;
 import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
@@ -51,7 +50,6 @@ public class GDXWrapper extends Game {
 
     private TiledMap map;
 
-    private AwesomeGame AWG;
 
     @Override
     public void create() {
@@ -66,7 +64,6 @@ public class GDXWrapper extends Game {
 
         reInitModel();
 
-        AWG = new AwesomeGame(new GdxWrapperService(this), segment, player);
 
         //Creates textures from available files in core/assets/
         assets.addTexture("enemy", new TextureRegion(new Texture("core/assets/enemy.png")));

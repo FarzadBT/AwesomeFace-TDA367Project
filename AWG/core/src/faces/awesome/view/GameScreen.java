@@ -33,7 +33,7 @@ import faces.awesome.model.objects.pickup.SmallHeart;
 * @author Linus Wallman
 * Updated by: Therese Sturesson, Philip Nilsson, Farzad Besharati
 *
-* TODO skriva vad klassen gör
+* This is the main rendering class. It handles the actual rendering of game objects in the world.
 */
 
 public class GameScreen implements Screen, ScreenSwitchListener {
