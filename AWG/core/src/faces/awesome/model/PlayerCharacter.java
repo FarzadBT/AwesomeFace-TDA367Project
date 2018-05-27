@@ -1,7 +1,6 @@
 package faces.awesome.model;
 
 import com.squareup.otto.Bus;
-import faces.awesome.events.CharacterMovedEvent;
 import faces.awesome.events.PlayerCharacterDiedEvent;
 import faces.awesome.model.item.Item;
 
@@ -80,7 +79,7 @@ public class PlayerCharacter extends Character {
 	public void move(int dx, int dy, boolean solid, boolean occupied ) {
 
 		if (!solid && !occupied) {
-			bus.post(new CharacterMovedEvent(pos));
+
 			setPos(pos.movePos(dx, dy));
 
 		}

@@ -1,12 +1,9 @@
 package faces.awesome.view;
 
-
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.squareup.otto.Subscribe;
 import faces.awesome.GDXWrapper;
-import faces.awesome.events.CharacterMovedEvent;
 import faces.awesome.model.PlayerCharacter;
 import faces.awesome.services.AssetManager;
 import faces.awesome.model.Character;
@@ -125,10 +122,5 @@ public class CharacterView extends GameObjectView {
     private void setState(State state) {
         currentState = state;
     }
-/*
-    @Subscribe
-    public void handleCharacterMoveEvent(CharacterMovedEvent event) {
-        setState(State.RUNNING);
 
-    }*/
 }
