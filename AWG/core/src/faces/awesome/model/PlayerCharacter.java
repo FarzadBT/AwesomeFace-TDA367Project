@@ -80,7 +80,7 @@ public class PlayerCharacter extends Character {
 	public void move(int dx, int dy, boolean solid, boolean occupied ) {
 
 		if (!solid && !occupied) {
-			bus.post(new CharacterMovedEvent());
+			bus.post(new CharacterMovedEvent(pos));
 			setPos(pos.movePos(dx, dy));
 
 		}

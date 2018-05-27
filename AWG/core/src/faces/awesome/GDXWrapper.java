@@ -29,8 +29,8 @@ import faces.awesome.services.WorldMap;
 
 /**
  * @author Linus Wallman
- * Updated by:
- * TODO: Skriv vad klassen gör
+ *         Updated by:
+ *         TODO: Skriv vad klassen gör
  */
 
 
@@ -44,6 +44,8 @@ public class GDXWrapper extends Game {
     public static final int TILE_SIZE = 32;
     public static final int VIEW_PORT_WIDTH = 1024;
     public static final int VIEW_PORT_HEIGHT = 512;
+
+    private TiledMap map;
 
 
     public AssetManager assets;
@@ -70,31 +72,7 @@ public class GDXWrapper extends Game {
         //Instantiate asset manager
         assets = AssetManager.getInstance();
 
-        TiledMap map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
-
-        //Wraps the TileMap for easier access
-        world = new WorldMap(map, bus);
-
-        segment = new MapSegment(this);
-
-        int w = Gdx.graphics.getWidth();
-        int h = Gdx.graphics.getHeight();
-
-        segment = new MapSegment(this);
-
-        player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player", segment);
-
-        player.addNewToInventory(ItemFactory.CreateSword());
-        player.addNewToInventory(ItemFactory.CreateHammer());
-
-        player.addNewToInventory(new Bomb(10));
-
-        player.addNewToInventory(new Sword());
-        player.addNewToInventory(new Hammer());
-        player.setSlot1(player.getInventory().getItem("Sword"));
-        player.setSlot2(player.getInventory().getItem("Bomb"));
-
-
+        reInit();
 
         AWG = new AwesomeGame(new GdxWrapperService(this), segment, player);
 
@@ -112,12 +90,12 @@ public class GDXWrapper extends Game {
         assets.addTexture("Bomb", new TextureRegion(new Texture("core/assets/bomb.png")));
 
         //Animations
-        assets.addAnimation(player.getName() + "-anim-south", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 0,16, 16, 16)));
-        assets.addAnimation(player.getName() + "-anim-west", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 16,16, 16, 16)));
-        assets.addAnimation(player.getName() + "-anim-north", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 72,16, 16, 16)));
-        assets.addAnimation(player.getName() + "-anim-east", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 48,16, 16, 16)));
+        assets.addAnimation(player.getName() + "-anim-south", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 0, 16, 16, 16)));
+        assets.addAnimation(player.getName() + "-anim-west", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 16, 16, 16, 16)));
+        assets.addAnimation(player.getName() + "-anim-north", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 72, 16, 16, 16)));
+        assets.addAnimation(player.getName() + "-anim-east", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 48, 16, 16, 16)));
 
-        assets.addTexture(player.getName() + "-south", new TextureRegion(new Texture("core/assets/anims/link-sprites1.png"), 180, 0, 32,32));
+        assets.addTexture(player.getName() + "-south", new TextureRegion(new Texture("core/assets/anims/link-sprites1.png"), 180, 0, 32, 32));
         assets.addTexture(player.getName() + "-north", new TextureRegion(new Texture("core/assets/anims/link-sprites1.png"), 72, 0, 32, 32));
         TextureRegion eastRegion = new TextureRegion(new Texture("core/assets/anims/link-sprites1.png"), 252, 0, 32, 32);
         assets.addTexture(player.getName() + "-east", eastRegion);
@@ -142,6 +120,28 @@ public class GDXWrapper extends Game {
         ScreenRepository.setMainMenuScreen(this);
     }
 
+    public void reInit() {
+        int w = Gdx.graphics.getWidth();
+        int h = Gdx.graphics.getHeight();
+
+        player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player", segment);
+
+        map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
+
+        world = new WorldMap(map, bus);
+        segment = new MapSegment(this);
+
+        player.addNewToInventory(ItemFactory.CreateSword());
+        player.addNewToInventory(ItemFactory.CreateHammer());
+
+        player.addNewToInventory(new Bomb(10));
+
+        player.addNewToInventory(new Sword());
+        player.addNewToInventory(new Hammer());
+        player.setSlot1(player.getInventory().getItem("Sword"));
+        player.setSlot2(player.getInventory().getItem("Bomb"));
+    }
+
     @Override
     public void render() {
 
@@ -162,7 +162,7 @@ public class GDXWrapper extends Game {
     }
 
 
-    public Position setNewMap(Position position){
+    public Position setNewMap(Position position) {
 
         return world.setNewMap(position);
 
@@ -180,7 +180,7 @@ public class GDXWrapper extends Game {
         return assets;
     }
 
-    public WorldMap getMap(){
+    public WorldMap getMap() {
         return world;
     }
 
@@ -189,7 +189,7 @@ public class GDXWrapper extends Game {
         int j = 0;
         for (int i = 1; i < 8; i++) {
             j = ((j + 1) % 2) + 1;
-            TextureRegion tr = new TextureRegion(region, (j * x), y , width, height);
+            TextureRegion tr = new TextureRegion(region, (j * x), y, width, height);
             frames.add(tr);
         }
 

@@ -62,9 +62,9 @@ public class CharacterView extends GameObjectView {
             }
 
             case RUNNING: {
-                if (!(localPos.equals(gameObject.getPos()))) {
+                /*if (!(localPos.equals(gameObject.getPos()))) {
                     return;
-                }
+                }*/
 
                 Animation<TextureRegion> region;
                 int xPattern;
@@ -101,8 +101,8 @@ public class CharacterView extends GameObjectView {
     }
 
     private void drawWalk(SpriteBatch sprBatch, Animation<TextureRegion> region, Position oldPos, Position destination, int xPattern, int yPattern, int walkOffset) {
-        if (hasReachedDestination(oldPos, destination)) {
-            localPos = gameObject.getPos();
+       // if (hasReachedDestination(oldPos, destination)) {
+        if (walkOffset >= GDXWrapper.TILE_SIZE) {
             currentState = State.STANDING;
             return;
         }
@@ -118,6 +118,7 @@ public class CharacterView extends GameObjectView {
         // (game.player.getPos().getX() % 32) * GDXWrapper.TILE_SIZE
 
         if (timer.ticksElapsed() >= 31) {
+            stateTime += 0.025f;
             Timer tt = new Timer();
             tt.schedule(new TimerTask() {
                 @Override
@@ -148,5 +149,6 @@ public class CharacterView extends GameObjectView {
     @Subscribe
     public void handleCharacterMoveEvent(CharacterMovedEvent event) {
         setState(State.RUNNING);
+
     }
 }
