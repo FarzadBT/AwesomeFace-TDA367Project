@@ -24,7 +24,7 @@ public class PlayerCharacter extends Character {
 	private MapSegment segment;
 
 	public PlayerCharacter(Position pos, Bus bus, String name, MapSegment segment) {
-        super(pos, 5, 100, name);
+        super(pos, 5, 50, name);
 		this.bus = bus;
 		this.segment = segment;
 		inventory = new Inventory();
