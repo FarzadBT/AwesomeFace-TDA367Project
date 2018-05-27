@@ -51,10 +51,10 @@ public class DropTable {
         }
 
         Random rand = new Random();
-        //if (rand.nextInt(3) == 0) {
+        if (rand.nextInt(3) == 0) {
             roll = dropTable.get(rand.nextInt(dropTable.size())).create();
             roll.setPos(pos);
             segment.addToPickup(roll);
-        //}
+        }
     }
 }
