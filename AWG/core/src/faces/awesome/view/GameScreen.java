@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.squareup.otto.Subscribe;
@@ -24,11 +23,16 @@ import faces.awesome.controllers.ScreenSwitcher.ScreenType;
 import faces.awesome.events.BossEnemyDiedEvent;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.events.PlayerCharacterDiedEvent;
+
+import faces.awesome.model.objects.object.BombObject;
+
+import java.util.ArrayList;
+import java.util.List;
 import faces.awesome.model.GameObject;
 import faces.awesome.model.characters.BossEnemy;
-import faces.awesome.model.objects.object.BombObject;
 import faces.awesome.model.objects.pickup.SmallBomb;
 import faces.awesome.model.objects.pickup.SmallHeart;
+
 
 /*
 * @author Linus Wallman
@@ -110,7 +114,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         HPfont = new BitmapFont();
         HPfont.getData().setScale(2.0f);
 
-        Gdx.input.setInputProcessor(gameController);
+        gameObjectViews = new ArrayList<>();
+
     }
 
     @Override
@@ -150,6 +155,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     @Override
     public void render(float delta) {
+        CharacterView c = (CharacterView) gameObjectViews.get(0);
 
         update(delta);
 
@@ -161,6 +167,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         sprBatch.begin();
 
+        gameObjectViews.forEach(g -> g.draw(sprBatch));
+
         game.segment.getObjectsInSegment().forEach(gameObject -> {
             if (gameObject instanceof BombObject) {
 
@@ -169,7 +177,6 @@ public class GameScreen implements Screen, ScreenSwitchListener {
             }
         });
 
-        renderGameObject(game.player, playerSprite);
 
         game.segment.getEnemiesInSegment().forEach(enemy -> {
 
@@ -246,6 +253,12 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         gameController = new GameScreenCtrl(playerController);
         Gdx.input.setInputProcessor(gameController);
         ScreenSwitcher.setListener(this);
+
+        if (gameObjectViews.size() > 0) {
+            gameObjectViews.remove(0);
+        }
+
+        gameObjectViews.add(new CharacterView(game.player));
     }
 
 

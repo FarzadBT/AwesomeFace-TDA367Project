@@ -1,23 +1,18 @@
 package faces.awesome.view;
 
-
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import faces.awesome.GDXWrapper;
-import faces.awesome.services.AssetManager;
 import faces.awesome.model.characters.Character;
+import faces.awesome.services.AssetManager;
 import faces.awesome.model.Facing;
 import faces.awesome.model.Position;
 import faces.awesome.utils.AwesomeTimer;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  * @author Linus Wallman
- *
- * Defines specific behavior for rendering character sprites.
+ * NOTE to teacher: We started working on animations, but couldn't finish it in time due to issues with libgdx (couldn't solve that problem in time)
  */
 
 public class CharacterView extends GameObjectView {
@@ -28,15 +23,16 @@ public class CharacterView extends GameObjectView {
 
     private Position localPos;
 
-    AwesomeTimer timer = new AwesomeTimer();
+    private AwesomeTimer timer = new AwesomeTimer();
 
     public CharacterView(Character c) {
         super(c);
-        localPos = c.getPos();
+        localPos = new Position(c.getPos().getX(), c.getPos().getY());
     }
 
     @Override
     public void draw(SpriteBatch sprBatch) {
+        System.out.println(gameObject.getFacing());
         switch (currentState) {
             case STANDING: {
                 TextureRegion region;
@@ -50,10 +46,9 @@ public class CharacterView extends GameObjectView {
                     region = AssetManager.getInstance().getTexture(gameObject.getName() + "-east");
                 } else {
                     throw new NullPointerException();
-                    // throw some exception perhaps. However, this case should never happen. It's just here to keep the interpreter from going insane
-                    //region = null;
                 }
-                sprBatch.draw(region, gameObject.getPos().getX() * GDXWrapper.TILE_SIZE, gameObject.getPos().getY() * GDXWrapper.TILE_SIZE);
+
+                sprBatch.draw(region, (gameObject.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (gameObject.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
                 break;
             }
 
@@ -88,6 +83,7 @@ public class CharacterView extends GameObjectView {
                 }
 
                 drawWalk(sprBatch, region, localPos, gameObject.getPos(), xPattern, yPattern, 4);
+
                 break;
             }
 
@@ -97,8 +93,7 @@ public class CharacterView extends GameObjectView {
     }
 
     private void drawWalk(SpriteBatch sprBatch, Animation<TextureRegion> region, Position oldPos, Position destination, int xPattern, int yPattern, int walkOffset) {
-        if (hasReachedDestination(oldPos, destination)) {
-            localPos = gameObject.getPos();
+        if (walkOffset >= GDXWrapper.TILE_SIZE) {
             currentState = State.STANDING;
             return;
         }
@@ -107,27 +102,24 @@ public class CharacterView extends GameObjectView {
             currentState = State.RUNNING;
         }
 
-        if (walkOffset > GDXWrapper.TILE_SIZE) {
-            return;
-        }
+        timer.restart();
+        stateTime += 0.025f;
 
-        if (timer.ticksElapsed() >= 31) {
-            Timer tt = new Timer();
-            tt.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    sprBatch.draw(region.getKeyFrame(stateTime), localPos.getX() + xPattern * 4, localPos.getY() * yPattern * 4);
 
-                    drawWalk(sprBatch, region, oldPos, destination, xPattern, yPattern, walkOffset + 4);
-                }
-            }, 31); // milliseconds
-        }
-
-        drawWalk(sprBatch, region, oldPos, destination, xPattern, yPattern, walkOffset);
-
+        sprBatch.draw(region.getKeyFrame(stateTime), ((localPos.getX() + walkOffset * 4) % 32) * GDXWrapper.TILE_SIZE, ((localPos.getY() + xPattern * 4) % 16) * GDXWrapper.TILE_SIZE);
+        drawWalk(sprBatch, region, oldPos, destination, xPattern, yPattern, walkOffset + 4);
     }
 
     private boolean hasReachedDestination(Position oldPos, Position destination) {
         return oldPos.equals(destination);
     }
+
+    public State getCurrentState() {
+        return currentState;
+    }
+
+    private void setState(State state) {
+        currentState = state;
+    }
+
 }

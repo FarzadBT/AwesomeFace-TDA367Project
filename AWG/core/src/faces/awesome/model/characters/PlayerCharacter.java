@@ -20,7 +20,7 @@ public class PlayerCharacter extends Character {
 	// The variables in the class
     private Inventory inventory;
     private Item slot1, slot2;
-	private Bus bus;
+	public Bus bus;
 	private MapSegment segment;
 
 	public PlayerCharacter(Position pos, Bus bus, String name, MapSegment segment) {
@@ -86,7 +86,6 @@ public class PlayerCharacter extends Character {
 			setPos(pos.movePos(dx, dy));
 
 		}
-
 	}
 
 	//If you (the player) dies you lost the game
