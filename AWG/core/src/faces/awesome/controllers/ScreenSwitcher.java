@@ -18,7 +18,7 @@ public class ScreenSwitcher {
         GameScreen, MainScreen, GameOverScreen, GameWonScreen, CreditScreen
     }
 
-    //TODO används inte
+
     public static void changeScreen(ScreenType screen) {
         currentScreen = screen;
         notifyListener();
