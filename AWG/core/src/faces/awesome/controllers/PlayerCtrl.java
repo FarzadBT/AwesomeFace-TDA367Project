@@ -66,6 +66,14 @@ public class PlayerCtrl {
 
         }
 
+        segment.getPickupsInSegment().forEach(pickup -> {
+            if (pickup.getPos().getX() == player.getPos().getX() &&
+                    pickup.getPos().getY() == player.getPos().getY()) {
+                pickup.onPickup(player);
+                segment.removeFromPickups(pickup);
+            }
+        });
+
     }
 
     // Delegates the use of item 1
