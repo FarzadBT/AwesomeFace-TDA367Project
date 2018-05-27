@@ -36,12 +36,6 @@ public class EnemyCtrl {
 
         boolean solid = segment.isSolid(newPosition.getX(), newPosition.getY());
 
-        if (enemy instanceof BossEnemy) {
-
-            solid = solid || segment.isSolid(newPosition.getX()+1, newPosition.getY());
-
-        }
-
         boolean occupied = segment.isOccupied(newPosition);
 
         boolean withInBorder = checkWithInBorder(newPosition, enemy);

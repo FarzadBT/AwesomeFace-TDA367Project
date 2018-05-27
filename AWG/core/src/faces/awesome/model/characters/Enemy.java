@@ -20,7 +20,7 @@ public class Enemy extends Character {
     private DropTable dropTable;
 
     public Enemy(Position pos, Bus bus, String name){
-        super(pos, 2, 20, name);
+        super(pos, 2, 15, name);
         this.bus = bus;
         health = maxHealth;
         timerMove = new AwesomeTimer();
