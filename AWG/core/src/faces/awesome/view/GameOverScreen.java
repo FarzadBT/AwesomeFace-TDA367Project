@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import faces.awesome.GDXWrapper;
+import faces.awesome.controllers.GameOverScreenCtrl;
 import faces.awesome.controllers.ScreenSwitchListener;
 import faces.awesome.controllers.ScreenSwitcher;
 import faces.awesome.utils.AwesomeTimer;
@@ -29,6 +30,7 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
 
     private Stage stage;
     private final GDXWrapper gdxWrapper;
+    private GameOverScreenCtrl controller;
 
     private BitmapFont gameOverText;
     private SpriteBatch sprBatch;
@@ -73,7 +75,8 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
 
     // Initialising the screen
     public void initialize() {
-        Gdx.input.setInputProcessor(stage);
+        controller = new GameOverScreenCtrl(gdxWrapper);
+        Gdx.input.setInputProcessor(controller);
         ScreenSwitcher.setListener(this);
     }
 
@@ -86,16 +89,8 @@ public class GameOverScreen implements Screen, ScreenSwitchListener {
 
         Skin skin = new Skin(Gdx.files.internal("core/assets/shade/skin/uiskin.json"));
 
-        TextButton creditScreen = new TextButton("Continue", skin);
+        TextButton creditScreen = new TextButton("Press any key to continue", skin);
         table.add(creditScreen).height(75f).width(250f).fillX().uniformX();
-
-        creditScreen.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                ScreenRepository.setCreditScreen(gdxWrapper);
-            }
-        });
-
     }
 
 

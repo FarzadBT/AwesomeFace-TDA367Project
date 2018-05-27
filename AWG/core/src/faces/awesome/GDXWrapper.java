@@ -30,12 +30,10 @@ import faces.awesome.services.WorldMap;
  * @author Linus Wallman
  * Updated by: Therese Sturesson, Philip Nilsson, Farzad Besharati
  *
- * TODO: Skriv vad klassen gör
+ * GDXWrapper is a class that wraps LibGDX and sets an entry point. Model is initialized here and first screen is setup.
  */
 
 public class GDXWrapper extends Game {
-
-    //TODO Flytta på dessa konstanter?
     public static final int TILE_SIZE = 32;
     public static final int VIEW_PORT_WIDTH = 1024;
     public static final int VIEW_PORT_HEIGHT = 512;

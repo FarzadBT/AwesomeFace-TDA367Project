@@ -6,14 +6,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import faces.awesome.GDXWrapper;
+import faces.awesome.controllers.CreditScreenCtrl;
 import faces.awesome.controllers.ScreenSwitchListener;
 import faces.awesome.controllers.ScreenSwitcher;
 import faces.awesome.utils.AwesomeTimer;
@@ -28,6 +27,7 @@ public class CreditScreen implements Screen, ScreenSwitchListener {
 
     private Stage stage;
     private final GDXWrapper gdxWrapper;
+    private CreditScreenCtrl controller;
 
     private BitmapFont creditText;
     private SpriteBatch sprBatch;
@@ -72,8 +72,8 @@ public class CreditScreen implements Screen, ScreenSwitchListener {
 
     // Initialising the screen
     public void initialize() {
-
-        Gdx.input.setInputProcessor(stage);
+        controller = new CreditScreenCtrl(gdxWrapper);
+        Gdx.input.setInputProcessor(controller);
         ScreenSwitcher.setListener(this);
 
     }
@@ -87,16 +87,16 @@ public class CreditScreen implements Screen, ScreenSwitchListener {
 
         Skin skin = new Skin(Gdx.files.internal("core/assets/shade/skin/uiskin.json"));
 
-        TextButton mainMenu = new TextButton("Back To Main Menu", skin);
+        TextButton mainMenu = new TextButton("Press any key to continue", skin);
         table.add(mainMenu).height(75f).width(250f).fillX().uniformX();
 
-        mainMenu.addListener(new ChangeListener() {
+/*        mainMenu.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 ScreenRepository.setMainMenuScreen(gdxWrapper);
             }
         });
-
+*/
     }
 
     //Methods we have to have but do not use

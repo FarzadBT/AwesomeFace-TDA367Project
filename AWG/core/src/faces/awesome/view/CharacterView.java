@@ -17,7 +17,7 @@ import java.util.TimerTask;
 /**
  * @author Linus Wallman
  *
- * TODO skriva vad klassen gör
+ * Defines specific behavior for rendering character sprites.
  */
 
 public class CharacterView extends GameObjectView {

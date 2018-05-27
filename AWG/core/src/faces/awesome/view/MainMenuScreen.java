@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -13,6 +14,7 @@ import faces.awesome.GDXWrapper;
 import faces.awesome.controllers.ScreenSwitchListener;
 import faces.awesome.controllers.ScreenSwitcher;
 import faces.awesome.controllers.ScreenSwitcher.ScreenType;
+import faces.awesome.utils.navigator.TreeNavigator;
 
 /*
 * @author: Linus Wallman
@@ -25,8 +27,11 @@ public class MainMenuScreen implements Screen, ScreenSwitchListener {
 
     private Stage stage;
     private final GDXWrapper gdxWrapper;
+    private TreeNavigator<Button> navigator;
+
 
     public MainMenuScreen(GDXWrapper game) {
+        this.navigator = new TreeNavigator<>(0);
         stage = new Stage();
         gdxWrapper = game;
     }

@@ -9,7 +9,7 @@ import faces.awesome.model.GameObject;
 /**
  * @author Linus Wallman
  *
- * TODO vad gör klassen?
+ * Defines specific behavior for rendering item sprites.
  */
 
 public class ItemView extends GameObjectView {
