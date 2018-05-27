@@ -24,6 +24,7 @@ import faces.awesome.controllers.ScreenSwitcher.ScreenType;
 import faces.awesome.events.BossEnemyDiedEvent;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.events.PlayerCharacterDiedEvent;
+import faces.awesome.model.GameObject;
 import faces.awesome.model.characters.BossEnemy;
 import faces.awesome.model.objects.object.BombObject;
 import faces.awesome.model.objects.pickup.SmallBomb;
@@ -158,6 +159,45 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         mapRenderer.render();
 
+        sprBatch.begin();
+
+        game.segment.getObjectsInSegment().forEach(gameObject -> {
+            if (gameObject instanceof BombObject) {
+
+                renderGameObject(gameObject, bombObjectSprite);
+
+            }
+        });
+
+        renderGameObject(game.player, playerSprite);
+
+        game.segment.getEnemiesInSegment().forEach(enemy -> {
+
+            if (enemy instanceof BossEnemy) {
+
+                renderGameObject(enemy, bossSprite);
+
+            } else {
+
+                renderGameObject(enemy, enemySprite);
+            }
+        });
+
+
+        game.segment.getPickupsInSegment().forEach(pickup -> {
+            if (pickup instanceof SmallBomb) {
+
+                renderGameObject(pickup, smallBombPickupSprite);
+
+            } else if (pickup instanceof SmallHeart) {
+
+                renderGameObject(pickup, smallHeartPickupSprite);
+
+            }
+        });
+
+        sprBatch.end();
+
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(0, 0, 0, 1);
         shapeRenderer.rect(25, 10, 50, 50);
@@ -170,41 +210,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         shapeRenderer.rect(75, 10, 50, 50);
         shapeRenderer.end();
 
-
         sprBatch.begin();
-
-        playerSprite.setPosition((game.player.getPos().getX() % 32) * GDXWrapper.TILE_SIZE,(game.player.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
-        playerSprite.draw(sprBatch);
-
-
-        game.segment.getEnemiesInSegment().forEach(enemy -> {
-
-            if (enemy instanceof BossEnemy) {
-                bossSprite.setPosition((enemy.getPos().getX() % 32) * GDXWrapper.TILE_SIZE,(enemy.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
-                bossSprite.draw(sprBatch);
-
-            } else {
-                enemySprite.setPosition((enemy.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (enemy.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
-                enemySprite.draw(sprBatch);
-            }
-        });
-
-        game.segment.getObjectsInSegment().forEach(gameObject -> {
-            if (gameObject instanceof BombObject) {
-                bombObjectSprite.setPosition((gameObject.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (gameObject.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
-                bombObjectSprite.draw(sprBatch);
-            }
-        });
-
-        game.segment.getPickupsInSegment().forEach(pickup -> {
-            if (pickup instanceof SmallBomb) {
-                smallBombPickupSprite.setPosition((pickup.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (pickup.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
-                smallBombPickupSprite.draw(sprBatch);
-            } else if (pickup instanceof SmallHeart) {
-                smallHeartPickupSprite.setPosition((pickup.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (pickup.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
-                smallHeartPickupSprite.draw(sprBatch);
-            }
-        });
 
         slot1Sprite.setPosition(40, 25);
         slot1Sprite.setScale(2.0f);
@@ -222,6 +228,13 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     }
 
+    private void renderGameObject(GameObject object, Sprite sprite) {
+
+        sprite.setPosition((object.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (object.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
+        sprite.draw(sprBatch);
+
+    }
+
     private void refetchMap () {
 
         mapRenderer = new OrthogonalTiledMapRenderer(game.world.getCurrentMap());
@@ -234,6 +247,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         Gdx.input.setInputProcessor(gameController);
         ScreenSwitcher.setListener(this);
     }
+
 
     @Override
     public void resize(int width, int height) {

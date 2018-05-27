@@ -68,7 +68,7 @@ public class GDXWrapper extends Game {
         //Creates textures from available files in core/assets/
         assets.addTexture("enemy", new TextureRegion(new Texture("core/assets/enemy.png")));
         assets.addTexture("player", new TextureRegion(new Texture("core/assets/linkk.png")));
-        assets.addTexture("bossEnemy", new TextureRegion(new Texture("core/assets/giantenemycrab2.png")));
+        assets.addTexture("bossEnemy", new TextureRegion(new Texture("core/assets/boss.png")));
         assets.addTexture("blank", new TextureRegion(new Texture("core/assets/blank.png")));
 
         //Permanent Items
