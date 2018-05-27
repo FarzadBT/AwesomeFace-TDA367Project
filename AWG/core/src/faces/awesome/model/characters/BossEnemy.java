@@ -2,6 +2,7 @@ package faces.awesome.model.characters;
 
 import com.squareup.otto.Bus;
 import faces.awesome.events.BossEnemyDiedEvent;
+import faces.awesome.model.MapSegment;
 import faces.awesome.model.Position;
 import faces.awesome.utils.AwesomeTimer;
 
@@ -65,4 +66,8 @@ public class BossEnemy extends Enemy {
 
     }
 
+    @Override
+    public void dropPickup(MapSegment segment) {
+
+    }
 }

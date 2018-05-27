@@ -25,6 +25,8 @@ import faces.awesome.events.MapChangedEvent;
 import faces.awesome.events.PlayerCharacterDiedEvent;
 import faces.awesome.model.characters.BossEnemy;
 import faces.awesome.model.objects.object.BombObject;
+import faces.awesome.model.objects.pickup.SmallBomb;
+import faces.awesome.model.objects.pickup.SmallHeart;
 
 /*
 * @author Linus Wallman
@@ -59,6 +61,9 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     private Sprite bombObjectSprite;
 
+    private Sprite smallBombPickupSprite;
+    private Sprite smallHeartPickupSprite;
+
     private BitmapFont HPfont;
     private String HP;
 
@@ -84,8 +89,12 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         //Sprite for the boss
         bossSprite = new Sprite(game.assets.getTexture("bossEnemy"));
 
-        //Sprite for the bomb
+        //Sprite for some misc. GameObjects
         bombObjectSprite = new Sprite(game.assets.getTexture("Bomb"));
+
+        //Sprite for some misc. Pickups
+        smallBombPickupSprite = new Sprite(game.assets.getTexture("smallBomb"));
+        smallHeartPickupSprite = new Sprite(game.assets.getTexture("smallHeart"));
 
         //Sprite for the item slot
         slot1Sprite = new Sprite(game.assets.getTexture("blank"));
@@ -182,6 +191,16 @@ public class GameScreen implements Screen, ScreenSwitchListener {
             if (gameObject instanceof BombObject) {
                 bombObjectSprite.setPosition((gameObject.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (gameObject.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
                 bombObjectSprite.draw(sprBatch);
+            }
+        });
+
+        game.segment.getPickupsInSegment().forEach(pickup -> {
+            if (pickup instanceof SmallBomb) {
+                smallBombPickupSprite.setPosition((pickup.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (pickup.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
+                smallBombPickupSprite.draw(sprBatch);
+            } else if (pickup instanceof SmallHeart) {
+                smallHeartPickupSprite.setPosition((pickup.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (pickup.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
+                smallHeartPickupSprite.draw(sprBatch);
             }
         });
 

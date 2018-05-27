@@ -3,6 +3,8 @@ package faces.awesome.model;
 import faces.awesome.GDXWrapper;
 import faces.awesome.model.characters.Character;
 import faces.awesome.model.characters.Enemy;
+import faces.awesome.model.objects.pickup.BasePickup;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class MapSegment {
     private List<Character> characterInWorld = new ArrayList<>();
     private List<Enemy> enemiesInWorld = new ArrayList<>();
     private List<GameObject> objectsInWorld = new ArrayList<>();
+    private List<BasePickup> pickupsInWorld = new ArrayList<>();
 
 
     public MapSegment(GDXWrapper gdxWrapper){
@@ -47,8 +50,33 @@ public class MapSegment {
 
     }
 
+    // Removes a specific enemy from the list
+    public void removeEnemyFromLists(Enemy enemy) {
 
-    // Gets the list of enemies
+        enemiesInWorld.remove(enemy);
+        characterInWorld.remove(enemy);
+
+    }
+
+    public void addToObjects(GameObject object) {
+        objectsInWorld.add(object);
+    }
+
+    public void removeFromObjects(GameObject object) {
+        objectsInWorld.remove(object);
+    }
+
+    public void addToPickup(BasePickup pickup) { pickupsInWorld.add(pickup); }
+
+    public void removeFromPickups(BasePickup pickup) { pickupsInWorld.remove(pickup); }
+
+
+    //TODO: Could the following three methods be condenses into one by using generics?
+
+    /**
+     * Get all the enemies in the current MapSegment
+     * @return a list of enemies
+     */
     public List<Enemy> getEnemiesInSegment() {
 
         int minX = mapPosition.getX() * 32;
@@ -84,23 +112,41 @@ public class MapSegment {
 
         for(GameObject o : objectsInWorld){
 
-            int enemyX = o.getPos().getX();
-            int enemyY = o.getPos().getY();
+            int objectX = o.getPos().getX();
+            int objectY = o.getPos().getY();
 
-            if (enemyX > minX && enemyX < maxX && enemyY > minY && enemyY < maxY) {
+            if (objectX > minX && objectX < maxX && objectY > minY && objectY < maxY) {
                 objectsInSegment.add(o);
             }
         }
         return objectsInSegment;
     }
 
-    public void addToObjects(GameObject object) {
-        objectsInWorld.add(object);
+    /**
+     * Get all the Pickups in the current MapSegment
+     * @return a list of Pickups
+     */
+    public List<BasePickup> getPickupsInSegment() {
+        int minX = mapPosition.getX() * 32;
+        int maxX = (mapPosition.getX() + 1) * 32;
+        int minY = mapPosition.getY() * 16;
+        int maxY = (mapPosition.getY() + 1) * 16;
+
+        List<BasePickup> pickupsInSegment = new ArrayList<>();
+
+        for(BasePickup p : pickupsInWorld){
+
+            int pickupX = p.getPos().getX();
+            int pickupY = p.getPos().getY();
+
+            if (pickupX > minX && pickupX < maxX && pickupY > minY && pickupY < maxY) {
+                pickupsInSegment.add(p);
+            }
+        }
+        return pickupsInSegment;
     }
 
-    public void removeFromObjects(GameObject object) {
-        objectsInWorld.remove(object);
-    }
+
 
     /**
      * By using getEnemiesInSegment() we check which of the enemies in the current segment that are inside of a hitbox
@@ -292,12 +338,6 @@ public class MapSegment {
 
     }
 
-    // Removes a specific enemy from the list
-    public void removeEnemyFromLists(Enemy enemy) {
 
-        enemiesInWorld.remove(enemy);
-        characterInWorld.remove(enemy);
-
-    }
 
 }
