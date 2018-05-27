@@ -9,19 +9,19 @@ import faces.awesome.view.ScreenRepository;
 /**
  * @author Linus Wallman
  */
-public class GameOverScreenCtrl implements InputProcessor {
+public class CreditScreenCtrl implements InputProcessor {
 
-    private final GDXWrapper gdxWrapper;
+    private final GDXWrapper g;
 
-    public GameOverScreenCtrl(GDXWrapper g) {
-        this.gdxWrapper = g;
+    public CreditScreenCtrl(GDXWrapper g) {
+        this.g = g;
     }
 
     @Override
     public boolean keyDown(int keycode) {
 
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-            ScreenRepository.setCreditScreen(gdxWrapper);
+            ScreenRepository.setMainMenuScreen(g);
         }
 
         return false;
