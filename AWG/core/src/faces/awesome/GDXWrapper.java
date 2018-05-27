@@ -101,6 +101,10 @@ public class GDXWrapper extends Game {
         //Consumable Items
         assets.addTexture("Bomb", new TextureRegion(new Texture("core/assets/bomb.png")));
 
+        //Pickups
+        assets.addTexture("smallBomb", new TextureRegion(new Texture("core/assets/smallBomb.png")));
+        assets.addTexture("smallHeart", new TextureRegion(new Texture("core/assets/smallHeart.png")));
+
         //Adds all the maps to the map storage
         MapStorage.addMap("mainMap", map);
         MapStorage.addMap("smallHouse", new TmxMapLoader().load("core/assets/maps/smallHouse.tmx"));

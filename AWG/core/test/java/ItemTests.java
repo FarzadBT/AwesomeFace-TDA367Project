@@ -1,5 +1,6 @@
 import com.squareup.otto.Bus;
 import faces.awesome.GDXWrapper;
+import faces.awesome.model.DropTable;
 import faces.awesome.model.MapSegment;
 import faces.awesome.model.Position;
 import faces.awesome.model.characters.Enemy;
@@ -37,6 +38,8 @@ public class ItemTests {
     SmallHeart smallHeart;
     SmallBomb smallBomb;
     BombBag bombBag;
+
+    DropTable table = new DropTable();
 
     @BeforeEach
     public void init() {
@@ -85,7 +88,7 @@ public class ItemTests {
     }
 
     @Test
-    public void testPickup() {
+    public void testPickupOnPlayer() {
         smallHeart.onPickup(playerCharacter);
         assertTrue(playerCharacter.getHealth() == 100);
 
@@ -93,5 +96,12 @@ public class ItemTests {
         assertTrue(playerCharacter.getHealth() == 95);
         smallHeart.onPickup(playerCharacter);
         assertTrue(playerCharacter.getHealth() == 100);
+    }
+
+    @Test
+    public void testPickupsInSegment() throws IllegalAccessException, InstantiationException {
+        assertTrue(segment.getPickupsInSegment().isEmpty());
+        table.roll(new Position(1,1 ), segment);
+        assertTrue(!segment.getPickupsInSegment().isEmpty());
     }
 }

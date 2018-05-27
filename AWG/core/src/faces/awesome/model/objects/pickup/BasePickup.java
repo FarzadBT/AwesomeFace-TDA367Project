@@ -3,6 +3,9 @@ package faces.awesome.model.objects.pickup;
 import faces.awesome.model.GameObject;
 import faces.awesome.model.characters.PlayerCharacter;
 import faces.awesome.model.Position;
+import javafx.geometry.Pos;
+
+import java.lang.reflect.Constructor;
 
 /**
  * @author Farzad Besharati
