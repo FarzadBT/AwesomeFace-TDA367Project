@@ -3,6 +3,11 @@ package faces.awesome.view;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import faces.awesome.model.GameObject;
 
+/*
+* @author: Linus Wallman
+*
+* GameObjectView is a class which is used for rendering GameObjects in the world.
+*/
 
 public abstract class GameObjectView {
 

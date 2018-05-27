@@ -14,3 +14,6 @@ t0kenz/Zeno   - Linus Wallman
 Amloudhi      - Philip Nilsson
 
 FarzadBT      - Farzad Besharati
+
+### A small note
+We'd like note that we've had some strange things happening while committing to this repository. Thus, running GitInspector on the master branch will not reflect the acutal code contribution of each member.

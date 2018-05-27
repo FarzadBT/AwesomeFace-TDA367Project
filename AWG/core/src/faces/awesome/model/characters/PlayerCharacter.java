@@ -1,7 +1,10 @@
-package faces.awesome.model;
+package faces.awesome.model.characters;
 
 import com.squareup.otto.Bus;
 import faces.awesome.events.PlayerCharacterDiedEvent;
+import faces.awesome.model.Inventory;
+import faces.awesome.model.MapSegment;
+import faces.awesome.model.Position;
 import faces.awesome.model.item.Item;
 
 /*
@@ -21,7 +24,7 @@ public class PlayerCharacter extends Character {
 	private MapSegment segment;
 
 	public PlayerCharacter(Position pos, Bus bus, String name, MapSegment segment) {
-        super(pos, 5, 100, name);
+        super(pos, 5, 50, name);
 		this.bus = bus;
 		this.segment = segment;
 		inventory = new Inventory();

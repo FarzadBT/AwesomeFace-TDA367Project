@@ -1,17 +1,18 @@
 package faces.awesome.services;
 
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import faces.awesome.model.item.Item;
 import java.util.HashMap;
 import java.util.Map;
 
-// Author: Philip Nilsson
-// Updated by: Linus Wallman - Changed static type from HashMap -> Map also updated some types.
-// update by: Philip Nilsson - Class is now a singleton
-
-// This class is intended to manage game assets such as animations, textures and items.
+/*
+* Author: Philip Nilsson
+* Updated by: Linus Wallman - Changed static type from HashMap -> Map also updated some types.
+* Update by: Philip Nilsson - Class is now a singleton
+*
+* This class is intended to manage game assets such as animations, textures and items.
+*/
 
 public class AssetManager {
 
@@ -19,7 +20,6 @@ public class AssetManager {
     private Map<String, TextureRegion> textures;
     private Map<String, Item> items;
     private Map<String, Animation<TextureRegion> > animations;
-    private Map<String, FileHandle> fileHandles;
 
     private AssetManager(){
         textures = new HashMap<>();
@@ -56,14 +56,6 @@ public class AssetManager {
 
     public Animation<TextureRegion> getAnimation(String name){
         return animations.get(name);
-    }
-
-    public void addFileHandle(String name, FileHandle handle) {
-        fileHandles.put(name, handle);
-    }
-
-    public FileHandle getFileHandle(String name) {
-        return fileHandles.get(name);
     }
 
 }

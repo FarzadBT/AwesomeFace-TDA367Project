@@ -1,9 +1,15 @@
-package faces.awesome.model;
-
-//Author: Philip Nilsson
-//A simple class that handles the creation of characters.
+package faces.awesome.model.factories;
 
 import com.squareup.otto.Bus;
+import faces.awesome.model.MapSegment;
+import faces.awesome.model.characters.PlayerCharacter;
+import faces.awesome.model.Position;
+
+/*
+* @author Philip Nilsson
+*
+* A simple class that handles the creation of characters.
+*/
 
 public class CharacterFactory {
 

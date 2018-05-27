@@ -1,12 +1,16 @@
 package faces.awesome.model;
 
 import faces.awesome.GDXWrapper;
+import faces.awesome.model.characters.Character;
+import faces.awesome.model.characters.Enemy;
+import faces.awesome.model.objects.pickup.BasePickup;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /*
  * Author: Philip Nilsson
- * Updated by: Therese Sturesson
+ * Updated by: Therese Sturesson, Farzad Besharati
  *
  * This class represents a finite "chunk" of the world map. Holds a list of Characters and a list
  * of enemiesInWorld. Whenever an enemiesInWorld attacks, target checking is handled by this class.
@@ -17,12 +21,13 @@ public class MapSegment {
 
     //Varibles
     private Position mapPosition;
-    public GDXWrapper gdxWrapper;
+    private GDXWrapper gdxWrapper;
 
-    // Two lists for enemies and characters
+    // Lists for enemies, characters, objects and pickups
     private List<Character> characterInWorld = new ArrayList<>();
     private List<Enemy> enemiesInWorld = new ArrayList<>();
     private List<GameObject> objectsInWorld = new ArrayList<>();
+    private List<BasePickup> pickupsInWorld = new ArrayList<>();
 
 
     public MapSegment(GDXWrapper gdxWrapper){
@@ -45,8 +50,32 @@ public class MapSegment {
 
     }
 
+    // Removes a specific enemy from the list
+    public void removeEnemyFromLists(Enemy enemy) {
 
-    // Gets the list of enemies
+        enemiesInWorld.remove(enemy);
+        characterInWorld.remove(enemy);
+
+    }
+
+    public void addToObjects(GameObject object) {
+        objectsInWorld.add(object);
+    }
+
+    public void removeFromObjects(GameObject object) {
+        objectsInWorld.remove(object);
+    }
+
+    public void addToPickup(BasePickup pickup) { pickupsInWorld.add(pickup); }
+
+    public void removeFromPickups(BasePickup pickup) { pickupsInWorld.remove(pickup); }
+
+
+    //TODO in the future: Could the following three methods be condenses into one by using generics?
+    /**
+     * Get all the enemies in the current MapSegment
+     * @return a list of enemies
+     */
     public List<Enemy> getEnemiesInSegment() {
 
         int minX = mapPosition.getX() * 32;
@@ -82,34 +111,82 @@ public class MapSegment {
 
         for(GameObject o : objectsInWorld){
 
-            int enemyX = o.getPos().getX();
-            int enemyY = o.getPos().getY();
+            int objectX = o.getPos().getX();
+            int objectY = o.getPos().getY();
 
-            if (enemyX > minX && enemyX < maxX && enemyY > minY && enemyY < maxY) {
+            if (objectX > minX && objectX < maxX && objectY > minY && objectY < maxY) {
                 objectsInSegment.add(o);
             }
         }
         return objectsInSegment;
     }
 
-    public void addToObjects(GameObject object) {
-        objectsInWorld.add(object);
-    }
+    /**
+     * Get all the Pickups in the current MapSegment
+     * @return a list of Pickups
+     */
+    public List<BasePickup> getPickupsInSegment() {
+        int minX = mapPosition.getX() * 32;
+        int maxX = (mapPosition.getX() + 1) * 32;
+        int minY = mapPosition.getY() * 16;
+        int maxY = (mapPosition.getY() + 1) * 16;
 
-    public void removeFromObjects(GameObject object) {
-        objectsInWorld.remove(object);
+        List<BasePickup> pickupsInSegment = new ArrayList<>();
+
+        for(BasePickup p : pickupsInWorld){
+
+            int pickupX = p.getPos().getX();
+            int pickupY = p.getPos().getY();
+
+            if (pickupX > minX && pickupX < maxX && pickupY > minY && pickupY < maxY) {
+                pickupsInSegment.add(p);
+            }
+        }
+        return pickupsInSegment;
     }
 
     /**
      * By using getEnemiesInSegment() we check which of the enemies in the current segment that are inside of a hitbox
      * that goes from top-left to bottom-right
-     * @param x1 x-coord of top left corner
-     * @param y1 y-coord of top left corner
-     * @param x2 x-coord of bottom right corner
-     * @param y2 y-coord of bottom right corner
+     * @param pos the origin position of the attack
+     * @param width width of the attack
+     * @param range range of the attack, is not used if the facing is NONE
+     * @param facing which direction the attack is made towards
      * @return A list of the enemies that are inside the hitbox
      */
-    public List<Enemy> getPlayerTargets(int x1, int y1, int x2, int y2) {
+    public List<Enemy> getPlayerTargets(/*int x1, int y1, int x2, int y2*/Position pos, int width, int range, Facing facing) {
+        int x1, x2, y1, y2;
+
+        if (facing == Facing.SOUTH) {
+            x1 = pos.getX() - width;
+            x2 = pos.getX() + width;
+            y1 = pos.getY() - 1;
+            y2 = pos.getY() - range;
+        }
+        else if(facing == Facing.NORTH) {
+            x1 = pos.getX() - width;
+            x2 = pos.getX() + width;
+            y1 = pos.getY() + 1;
+            y2 = pos.getY() + range;
+        }
+        else if(facing == Facing.EAST) {
+            x1 = pos.getX() + 1;
+            x2 = pos.getX() + range;
+            y1 = pos.getY() + width;
+            y2 = pos.getY() - width;
+        }
+        else if(facing == Facing.WEST) {
+            x1 = pos.getX() - 1;
+            x2 = pos.getX() - range;
+            y1 = pos.getY() + 1;
+            y2 = pos.getY() - width;
+        }
+        else { //facing == Facing.NONE or INVALIDFACING
+            x1 = pos.getX() - width;
+            x2 = pos.getX() + width;
+            y1 = pos.getY() + width;
+            y2 = pos.getY() - width;
+        }
 
         List <Enemy> enemies = getEnemiesInSegment();
         List <Enemy> targets = new ArrayList<>();
@@ -188,13 +265,13 @@ public class MapSegment {
     }
 
 
-    // Gets the list with characters    TODO används inte, spara?
+    // Gets the list with characters
     public List<Character> getCharacterInWorld() {
         return characterInWorld;
     }
 
 
-    // Gets the list of enemies     TODO används inte, spara?
+    // Gets the list of enemies
     public List<Enemy> getEnemiesInWorld() {
         return enemiesInWorld;
     }
@@ -259,12 +336,5 @@ public class MapSegment {
     }
 
 
-    // Removes a specific enemy from the list
-    public void removeEnemyFromLists(Enemy enemy) {
-
-        enemiesInWorld.remove(enemy);
-        characterInWorld.remove(enemy);
-
-    }
 
 }

@@ -1,6 +1,7 @@
 package faces.awesome.controllers;
 
 import faces.awesome.model.*;
+import faces.awesome.model.characters.PlayerCharacter;
 import faces.awesome.services.Tiles;
 import faces.awesome.services.WorldMap;
 
@@ -25,6 +26,14 @@ public class PlayerCtrl {
         this.segment = segment;
     }
 
+    /**
+     * Change player's facing
+     * @param facing facing to change to
+     */
+    public void changeFacing(Facing facing) {
+        player.setFacing(facing);
+    }
+
 
     // Checks if the playercharacter can move to the position the player wants
     public void tryMove(int dx, int dy, Facing facing) {
@@ -35,9 +44,9 @@ public class PlayerCtrl {
 
         boolean occupied = segment.isOccupied(newPosition);
 
-        if ( !solid && !occupied ) {
+        player.setFacing(facing);
 
-            player.setFacing(facing);
+        if ( !solid && !occupied ) {
 
             segment.checkSegmentBorder(player.getPos(), newPosition);
 
@@ -56,6 +65,14 @@ public class PlayerCtrl {
             player.move(dx, dy, solid, occupied);
 
         }
+
+        segment.getPickupsInSegment().forEach(pickup -> {
+            if (pickup.getPos().getX() == player.getPos().getX() &&
+                    pickup.getPos().getY() == player.getPos().getY()) {
+                pickup.onPickup(player);
+                segment.removeFromPickups(pickup);
+            }
+        });
 
     }
 

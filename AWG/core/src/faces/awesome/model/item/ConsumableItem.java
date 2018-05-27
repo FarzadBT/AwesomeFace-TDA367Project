@@ -1,11 +1,12 @@
 package faces.awesome.model.item;
 
-import faces.awesome.model.Facing;
-import faces.awesome.model.Position;
-
 /**
- * Created by Mr Cornholio on 20/04/2018.
+ * @author Farzad Besharati
+ *
+ * A more advanced Item interface, has all the attributes for a consumable
+ * item (an item that has a quantity)
  */
+
 public interface ConsumableItem extends Item {
 
     /**
@@ -53,4 +54,5 @@ public interface ConsumableItem extends Item {
      * @return the current max quantity
      */
     int getMax();
+
 }

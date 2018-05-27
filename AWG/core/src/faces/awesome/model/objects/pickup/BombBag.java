@@ -1,14 +1,17 @@
 package faces.awesome.model.objects.pickup;
 
-import faces.awesome.model.GameObject;
-import faces.awesome.model.PlayerCharacter;
+import faces.awesome.model.characters.PlayerCharacter;
 import faces.awesome.model.Position;
 import faces.awesome.model.item.items.consumables.Bomb;
 
 /**
- * Created by Mr Cornholio on 14/05/2018.
+ * @author Farzad Besharati
+ *
+ * When picked up, will either add a Bomb item to the players inventory or increase
+ * max capacity of that Bomb item
  */
-public class BombBag extends PickupItem {
+
+public class BombBag extends BasePickup {
 
     public BombBag(Position pos) {
         super(pos, "bombBag");
@@ -23,4 +26,5 @@ public class BombBag extends PickupItem {
         else
             playerCharacter.addNewToInventory(new Bomb(10));
     }
+
 }

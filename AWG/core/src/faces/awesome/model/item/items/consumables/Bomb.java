@@ -7,9 +7,13 @@ import faces.awesome.model.item.BaseConsumable;
 import faces.awesome.model.objects.object.BombObject;
 
 /**
- * Created by Mr Cornholio on 20/04/2018.
+ * @author Farzad Besharati
+ *
+ * A consumable Bomb Item, when used, places a BombObject in front of you
  */
+
 public class Bomb extends BaseConsumable {
+
     private BombObject bomb;
 
     public Bomb(int maxQuantity) {
@@ -32,7 +36,7 @@ public class Bomb extends BaseConsumable {
     }
 
     /**
-     * help method, creates a GameObject when you use a bomb
+     * helper method, creates a GameObject when you use a bomb
      * @param pos
      * @param facing
      */
@@ -52,4 +56,5 @@ public class Bomb extends BaseConsumable {
                 break;
         }
     }
+
 }

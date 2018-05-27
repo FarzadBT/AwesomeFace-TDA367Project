@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,32 +15,45 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.squareup.otto.Subscribe;
 import faces.awesome.GDXWrapper;
-import faces.awesome.controllers.*;
+import faces.awesome.controllers.GameScreenCtrl;
+import faces.awesome.controllers.PlayerCtrl;
+import faces.awesome.controllers.ScreenSwitchListener;
+import faces.awesome.controllers.ScreenSwitcher;
 import faces.awesome.controllers.ScreenSwitcher.ScreenType;
 import faces.awesome.events.BossEnemyDiedEvent;
 import faces.awesome.events.MapChangedEvent;
 import faces.awesome.events.PlayerCharacterDiedEvent;
-import faces.awesome.model.BossEnemy;
-import faces.awesome.model.Character;
+
 import faces.awesome.model.objects.object.BombObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import faces.awesome.model.GameObject;
+import faces.awesome.model.characters.BossEnemy;
+import faces.awesome.model.objects.pickup.SmallBomb;
+import faces.awesome.model.objects.pickup.SmallHeart;
 
+
+/*
+* @author Linus Wallman
+* Updated by: Therese Sturesson, Philip Nilsson, Farzad Besharati
+*
+* This is the main rendering class. It handles the actual rendering of game objects in the world.
+*/
 
 public class GameScreen implements Screen, ScreenSwitchListener {
 
     private final GDXWrapper game;
 
     private GameScreenCtrl gameController;
+    private PlayerCtrl playerController;
 
     private OrthographicCamera camera;
     private Viewport gamePort;
 
-    //private WorldMap world;
     private MapRenderer mapRenderer;
     private ShapeRenderer shapeRenderer;
+
 
     private List<GameObjectView> gameObjectViews;
 
@@ -56,45 +68,44 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     private Sprite bombObjectSprite;
 
+    private Sprite smallBombPickupSprite;
+    private Sprite smallHeartPickupSprite;
+
     private BitmapFont HPfont;
     private String HP;
-    private HashMap<String, Texture> textures = new HashMap<>();
 
-    public GameScreen(final GDXWrapper game) {
+    public GameScreen(final GDXWrapper g) {
 
-        this.game = game;
+        this.game = g;
         camera = new OrthographicCamera(GDXWrapper.VIEW_PORT_WIDTH, GDXWrapper.VIEW_PORT_HEIGHT);
         camera.setToOrtho(false);
         gamePort = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         gamePort.apply();
 
-        //this.world = world;
         game.bus.register(this);
         refetchMap();
 
-
         sprBatch = new SpriteBatch();
 
-        //textures.put("playerCharacter", new Texture("core/assets/linkk.png"));
+        //Sprite for the player
         playerSprite = new Sprite(game.assets.getTexture("player"));
 
-        //enemies
-        //textures.put("enemy", new Texture("core/assets/enemy.png"));
+        //Sprite for the enemy
         enemySprite = new Sprite(game.assets.getTexture("enemy"));
 
-        //textures.put("bossEnemy", new Texture("core/assets/giantenemycrab2.png"));
+        //Sprite for the boss
         bossSprite = new Sprite(game.assets.getTexture("bossEnemy"));
 
+        //Sprite for some misc. GameObjects
         bombObjectSprite = new Sprite(game.assets.getTexture("Bomb"));
 
+        //Sprite for some misc. Pickups
+        smallBombPickupSprite = new Sprite(game.assets.getTexture("smallBomb"));
+        smallHeartPickupSprite = new Sprite(game.assets.getTexture("smallHeart"));
 
-        //textures.put("slot1", new Texture("core/assets/blank.png"));
+        //Sprite for the item slot
         slot1Sprite = new Sprite(game.assets.getTexture("blank"));
-        //textures.put("slot2", new Texture("core/assets/blank.png"));
         slot2Sprite = new Sprite(game.assets.getTexture("blank"));
-
-        //textures.put("Sword", new Texture("core/assets/sword.png"));
-        //textures.put("Hammer", new Texture("core/assets/sword.png"));
 
         shapeRenderer = new ShapeRenderer();
 
@@ -105,10 +116,6 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         gameObjectViews = new ArrayList<>();
 
-        gameObjectViews.add(new CharacterView(game.player));
-
-
-        Gdx.input.setInputProcessor(gameController);
     }
 
     @Override
@@ -133,19 +140,11 @@ public class GameScreen implements Screen, ScreenSwitchListener {
         Vector3 vec3 = new Vector3(newX, newY, 0);
 
         camera.position.set(cameraPos.lerp(vec3, 0.1f));
-        /*
-        camera.position.x = (game.segment.getMapPosition().getX() * 32 + 16) * GDXWrapper.TILE_SIZE;
-        camera.position.y = (game.segment.getMapPosition().getY() * 16 + 8) * GDXWrapper.TILE_SIZE;
-        */
+
         HP = "HP:" + game.player.getHealth();
 
-
-        // changed this, make sure it works.
         slot1Sprite.setRegion(game.assets.getTexture(game.player.getSlot1().getName()));
         slot2Sprite.setRegion(game.assets.getTexture(game.player.getSlot2().getName()));
-
-
-        //shapeRenderer.setProjectionMatrix(camera.combined);
 
         camera.update();
 
@@ -157,6 +156,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     @Override
     public void render(float delta) {
         CharacterView c = (CharacterView) gameObjectViews.get(0);
+
         update(delta);
 
         // RGB(0, 0, 0, 1) = black
@@ -165,57 +165,80 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         mapRenderer.render();
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(0, 0, 0, 1);
-        shapeRenderer.rect(24, 10, 25, 40);
-        shapeRenderer.rect(50, 10, 25, 40);
-        shapeRenderer.end();
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(1,1,1,1);
-        shapeRenderer.rect(24,10,25,40);
-        shapeRenderer.rect(50, 10, 25, 40);
-        shapeRenderer.end();
-
-
         sprBatch.begin();
 
-        //playerSprite.setPosition((game.player.getPos().getX() % 32) * GDXWrapper.TILE_SIZE,(game.player.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
-        //playerSprite.draw(sprBatch);
+        gameObjectViews.forEach(g -> g.draw(sprBatch));
 
-        gameObjectViews.forEach(gameObject -> gameObject.draw(sprBatch));
+        game.segment.getObjectsInSegment().forEach(gameObject -> {
+            if (gameObject instanceof BombObject) {
+
+                renderGameObject(gameObject, bombObjectSprite);
+
+            }
+        });
+
 
         game.segment.getEnemiesInSegment().forEach(enemy -> {
 
             if (enemy instanceof BossEnemy) {
-                bossSprite.setPosition((enemy.getPos().getX() % 32) * GDXWrapper.TILE_SIZE,(enemy.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
-                bossSprite.draw(sprBatch);
+
+                renderGameObject(enemy, bossSprite);
 
             } else {
-                enemySprite.setPosition((enemy.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (enemy.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
-                enemySprite.draw(sprBatch);
+
+                renderGameObject(enemy, enemySprite);
             }
         });
 
-        game.segment.getObjectsInSegment().forEach(gameObject -> {
-            if (gameObject instanceof BombObject) {
-                bombObjectSprite.setPosition((gameObject.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (gameObject.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
-                bombObjectSprite.draw(sprBatch);
+
+        game.segment.getPickupsInSegment().forEach(pickup -> {
+            if (pickup instanceof SmallBomb) {
+
+                renderGameObject(pickup, smallBombPickupSprite);
+
+            } else if (pickup instanceof SmallHeart) {
+
+                renderGameObject(pickup, smallHeartPickupSprite);
+
             }
         });
 
-        slot1Sprite.setPosition(27, 20);
+        sprBatch.end();
+
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(0, 0, 0, 1);
+        shapeRenderer.rect(25, 10, 50, 50);
+        shapeRenderer.rect(75, 10, 50, 50);
+        shapeRenderer.end();
+
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(1,1,1,1);
+        shapeRenderer.rect(25,10,50,50);
+        shapeRenderer.rect(75, 10, 50, 50);
+        shapeRenderer.end();
+
+        sprBatch.begin();
+
+        slot1Sprite.setPosition(40, 25);
         slot1Sprite.setScale(2.0f);
         slot1Sprite.draw(sprBatch);
 
-        slot2Sprite.setPosition(53, 20);
+        slot2Sprite.setPosition(92, 25);
         slot2Sprite.setScale(2.0f);
         slot2Sprite.draw(sprBatch);
 
         HPfont.setColor(1.0f, 1.0f, 1.0f, 10.f);
         HPfont.draw(sprBatch, HP, 25,500);
 
+
         sprBatch.end();
+
+    }
+
+    private void renderGameObject(GameObject object, Sprite sprite) {
+
+        sprite.setPosition((object.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (object.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
+        sprite.draw(sprBatch);
 
     }
 
@@ -226,10 +249,18 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     }
 
     public void initialize() {
-        gameController = new GameScreenCtrl(game.playerCtrl);
+        playerController = new PlayerCtrl(game.player, game.getMap(), game.segment);
+        gameController = new GameScreenCtrl(playerController);
         Gdx.input.setInputProcessor(gameController);
         ScreenSwitcher.setListener(this);
+
+        if (gameObjectViews.size() > 0) {
+            gameObjectViews.remove(0);
+        }
+
+        gameObjectViews.add(new CharacterView(game.player));
     }
+
 
     @Override
     public void resize(int width, int height) {
@@ -281,7 +312,6 @@ public class GameScreen implements Screen, ScreenSwitchListener {
                 break;
             default:
                 break;
-            /* This is where we can go from another screen, none other yet defined. */
         }
     }
 

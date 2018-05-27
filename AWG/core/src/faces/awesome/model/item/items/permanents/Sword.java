@@ -1,6 +1,6 @@
 package faces.awesome.model.item.items.permanents;
 
-import faces.awesome.model.Enemy;
+import faces.awesome.model.characters.Enemy;
 import faces.awesome.model.Facing;
 import faces.awesome.model.MapSegment;
 import faces.awesome.model.Position;
@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mr Cornholio on 14/05/2018.
+ * @author Farzad Besharati
+ *
+ * A Sword permanent item, when used it will deal damage to enemies in front of you
  */
 
 public class Sword extends BaseItem {
@@ -26,18 +28,11 @@ public class Sword extends BaseItem {
     @Override
     public void use(Position pos, Facing facing, MapSegment segment) {
         List<Enemy> enemies = new ArrayList<>();
-        int x = pos.getX(), y = pos.getY();
-        if (facing == Facing.SOUTH)
-            enemies = segment.getPlayerTargets(x-1, y-1, x+1, y-1);
-        else if(facing == Facing.NORTH)
-            enemies = segment.getPlayerTargets(x-1, y+1, x+1, y+1);
-        else if(facing == Facing.EAST)
-            enemies = segment.getPlayerTargets(x+1, y+1, x+1, y-1);
-        else if(facing == Facing.WEST)
-            enemies = segment.getPlayerTargets(x-1, y+1, x-1, y-1);
+        enemies = segment.getPlayerTargets(pos, 1, 1, facing);
 
         for (Enemy enemy : enemies) {
-            enemy.decreaseHealth(5);
+            enemy.decreaseHealth(10);
         }
     }
+
 }

@@ -1,7 +1,10 @@
 package faces.awesome.controllers;
 
 import faces.awesome.model.*;
-import faces.awesome.model.Character;
+import faces.awesome.model.characters.Character;
+import faces.awesome.model.characters.BossEnemy;
+import faces.awesome.model.characters.Enemy;
+
 import java.util.Random;
 
 /*
@@ -32,12 +35,6 @@ public class EnemyCtrl {
 
 
         boolean solid = segment.isSolid(newPosition.getX(), newPosition.getY());
-
-        if (enemy instanceof BossEnemy) {
-
-            solid = solid || segment.isSolid(newPosition.getX()+1, newPosition.getY());
-
-        }
 
         boolean occupied = segment.isOccupied(newPosition);
 
@@ -121,7 +118,7 @@ public class EnemyCtrl {
         if ( enemy.getHealth() == 0 ) {
 
             segment.removeEnemyFromLists(enemy);
-
+            enemy.dropPickup(segment);
         }
 
     }

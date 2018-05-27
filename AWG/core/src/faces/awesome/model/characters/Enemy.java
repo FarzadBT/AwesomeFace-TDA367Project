@@ -1,6 +1,9 @@
-package faces.awesome.model;
+package faces.awesome.model.characters;
 
 import com.squareup.otto.Bus;
+import faces.awesome.model.DropTable;
+import faces.awesome.model.MapSegment;
+import faces.awesome.model.Position;
 import faces.awesome.utils.AwesomeTimer;
 
 /*
@@ -14,6 +17,7 @@ public class Enemy extends Character {
 
     protected Bus bus;
     private AwesomeTimer timerMove, timerAttack;
+    private DropTable dropTable;
 
     public Enemy(Position pos, Bus bus, String name){
         super(pos, 2, 15, name);
@@ -21,6 +25,7 @@ public class Enemy extends Character {
         health = maxHealth;
         timerMove = new AwesomeTimer();
         timerAttack = new AwesomeTimer();
+        dropTable = new DropTable();
     }
 
 
@@ -55,7 +60,14 @@ public class Enemy extends Character {
     // The check for if this type of enemy dies happen in EnemyCtrl
     @Override
     public void death() {
+
     }
 
+    /**
+     * @param segment
+     */
+    public void dropPickup(MapSegment segment) {
+        dropTable.roll(pos, segment);
+    }
 
 }

@@ -1,10 +1,13 @@
-package faces.awesome.model;
+package faces.awesome.model.characters;
+
+import faces.awesome.model.GameObject;
+import faces.awesome.model.Position;
 
 /*
  * Author: Philip Nilsson
  * Updated by: Therese Sturesson, Farzad Besharati
  *
- * TODO skriva vad klassen gör
+ * An abstract class for all characters
  */
 
 public abstract class Character extends GameObject {
@@ -29,10 +32,6 @@ public abstract class Character extends GameObject {
 		return health;
 	}
 
-	//Sets the health on the character		TODO används inte, spara?
-	public void setHealth(int health) {
-		this.health = health;
-	}
 
 	//Increases the health on the character
 	public void increaseHealth(int n) {
@@ -53,15 +52,11 @@ public abstract class Character extends GameObject {
 		}
 	}
 
-	//Gets the max health of the character	TODO används inte, spara?
+	//Gets the max health of the character
 	public int getMaxHealth() {
 		return maxHealth;
 	}
 
-	//Sets the max health of the character	TODO används inte, spara?
-	public void setMaxHealth(int maxHealth) {
-		this.maxHealth = maxHealth;
-	}
 
 	//Abstract method for when a characters die
 	public abstract void death ();

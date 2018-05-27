@@ -8,7 +8,10 @@ import faces.awesome.model.GameObject;
 
 /**
  * @author Linus Wallman
+ *
+ * Defines specific behavior for rendering item sprites.
  */
+
 public class ItemView extends GameObjectView {
 
     public ItemView(GameObject o) {

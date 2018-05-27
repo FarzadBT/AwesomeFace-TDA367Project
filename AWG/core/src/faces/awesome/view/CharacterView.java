@@ -4,9 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import faces.awesome.GDXWrapper;
-import faces.awesome.model.PlayerCharacter;
+import faces.awesome.model.characters.Character;
 import faces.awesome.services.AssetManager;
-import faces.awesome.model.Character;
 import faces.awesome.model.Facing;
 import faces.awesome.model.Position;
 import faces.awesome.utils.AwesomeTimer;
@@ -29,11 +28,11 @@ public class CharacterView extends GameObjectView {
     public CharacterView(Character c) {
         super(c);
         localPos = new Position(c.getPos().getX(), c.getPos().getY());
-        ( (PlayerCharacter) c).bus.register(this);
     }
 
     @Override
     public void draw(SpriteBatch sprBatch) {
+        System.out.println(gameObject.getFacing());
         switch (currentState) {
             case STANDING: {
                 TextureRegion region;
@@ -109,7 +108,7 @@ public class CharacterView extends GameObjectView {
 
         sprBatch.draw(region.getKeyFrame(stateTime), ((localPos.getX() + walkOffset * 4) % 32) * GDXWrapper.TILE_SIZE, ((localPos.getY() + xPattern * 4) % 16) * GDXWrapper.TILE_SIZE);
         drawWalk(sprBatch, region, oldPos, destination, xPattern, yPattern, walkOffset + 4);
-        }
+    }
 
     private boolean hasReachedDestination(Position oldPos, Position destination) {
         return oldPos.equals(destination);
