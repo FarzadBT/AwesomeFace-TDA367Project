@@ -55,7 +55,7 @@ public class CreditScreen implements Screen, ScreenSwitchListener {
 
         float fade = 1.0f;
 
-        String str = "THANK YOU FOR PLAYING! \n This game was made by Therese, \n Linus, Philip and Farzad.";
+        String str = "THANK YOU FOR PLAYING! \nThis game was made by Therese, \nLinus, Philip and Farzad.";
 
         if (timer.secondsElapsed() >= 3) {
             fade = Interpolation.fade.apply(fadeElapsed / 1.0f);
@@ -65,7 +65,7 @@ public class CreditScreen implements Screen, ScreenSwitchListener {
         creditText.setColor(1f, 1f, 1f, fade);
         creditText.getData().setScale(2.0f);
         sprBatch.begin();
-        creditText.draw(sprBatch, str, stage.getWidth() / 2 - 100, stage.getHeight() / 2 + 100);
+        creditText.draw(sprBatch, str, stage.getWidth() / 2 - 180, stage.getHeight() / 2 + 150);
         sprBatch.end();
 
     }
