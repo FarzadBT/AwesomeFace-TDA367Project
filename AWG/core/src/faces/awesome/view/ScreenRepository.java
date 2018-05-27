@@ -26,6 +26,7 @@ public class ScreenRepository {
             gameScreen = new GameScreen(g);
         }
 
+        g.reInitModel();
         gameScreen.initialize();
         g.setScreen(gameScreen);
     }
