@@ -4,7 +4,6 @@ import faces.awesome.model.characters.Enemy;
 import faces.awesome.model.GameObject;
 import faces.awesome.model.MapSegment;
 import faces.awesome.model.Position;
-
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;

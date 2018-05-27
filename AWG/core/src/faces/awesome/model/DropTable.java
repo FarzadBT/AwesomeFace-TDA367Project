@@ -1,12 +1,9 @@
 package faces.awesome.model;
 
-import faces.awesome.model.Position;
 import faces.awesome.model.factories.PickupFactory;
-import faces.awesome.model.factories.PickupFactoryCreator;
 import faces.awesome.model.objects.pickup.BasePickup;
 import faces.awesome.model.objects.pickup.SmallBomb;
 import faces.awesome.model.objects.pickup.SmallHeart;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -17,6 +14,7 @@ import java.util.Random;
  * The droptable is a list of pickups that can appear in the world after the 'roll' method is called
  * usually after an enemy dies
  */
+
 public class DropTable {
     private List<PickupFactory> dropTable;
     private BasePickup roll;

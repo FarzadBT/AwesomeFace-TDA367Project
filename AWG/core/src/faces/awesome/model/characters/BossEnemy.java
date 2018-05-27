@@ -19,8 +19,8 @@ public class BossEnemy extends Enemy {
 
     public BossEnemy(Position pos, Bus bus, String name) {
         super(pos, bus, name);
-        baseDamage = 1;
-        health = 2;
+        baseDamage = 5;
+        health = 50;
         name = "bossEnemy";
         timerMove = new AwesomeTimer();
         timerAttack = new AwesomeTimer();
@@ -70,4 +70,5 @@ public class BossEnemy extends Enemy {
     public void dropPickup(MapSegment segment) {
 
     }
+
 }

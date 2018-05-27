@@ -57,16 +57,6 @@ public class GameScreenCtrl implements InputProcessor {
             }
         }
 
-            /*if(keycode == Input.Keys.LEFT) {
-            playerCtrl.tryMove(-1, 0, Facing.WEST);
-        } else if(keycode == Input.Keys.RIGHT) {
-            playerCtrl.tryMove(1, 0, Facing.EAST);
-        } else if(keycode == Input.Keys.UP) {
-            playerCtrl.tryMove(0, 1, Facing.NORTH);
-        } else if (keycode == Input.Keys.DOWN) {
-            playerCtrl.tryMove(0, -1, Facing.SOUTH);
-        }*/
-
         switch (keycode) {
             case Input.Keys.A:
                 playerCtrl.useItem1();
