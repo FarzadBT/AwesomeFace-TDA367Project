@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.squareup.otto.Subscribe;
 import faces.awesome.GDXWrapper;
 import faces.awesome.controllers.GameScreenCtrl;
+import faces.awesome.controllers.PlayerCtrl;
 import faces.awesome.controllers.ScreenSwitchListener;
 import faces.awesome.controllers.ScreenSwitcher;
 import faces.awesome.controllers.ScreenSwitcher.ScreenType;
@@ -40,6 +41,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     private final GDXWrapper game;
 
     private GameScreenCtrl gameController;
+    private PlayerCtrl playerController;
 
     private OrthographicCamera camera;
     private Viewport gamePort;
@@ -227,7 +229,8 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     }
 
     public void initialize() {
-        gameController = new GameScreenCtrl(game.playerCtrl);
+        playerController = new PlayerCtrl(game.player, game.getMap(), game.segment);
+        gameController = new GameScreenCtrl(playerController);
         Gdx.input.setInputProcessor(gameController);
         ScreenSwitcher.setListener(this);
     }

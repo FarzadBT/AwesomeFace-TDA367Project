@@ -49,13 +49,14 @@ public class GDXWrapper extends Game {
     public WorldMap world;
     public Bus bus;
 
+    private TiledMap map;
+
     private AwesomeGame AWG;
 
     @Override
     public void create() {
 
-        int w = Gdx.graphics.getWidth();
-        int h = Gdx.graphics.getHeight();
+        map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
 
         bus = new Bus(ThreadEnforcer.ANY);
         bus.register(this);
@@ -63,29 +64,8 @@ public class GDXWrapper extends Game {
         //Instantiate asset manager
         assets = AssetManager.getInstance();
 
-        //Sets the first map
-        TiledMap map = new TmxMapLoader().load("core/assets/maps/theMap.tmx");
+        reInitModel();
 
-        //Wraps the TileMap for easier access
-        world = new WorldMap(map, bus);
-
-        //Creates the segment
-        segment = new MapSegment(this);
-
-        //Creates a player though the factory
-        player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player", segment);
-
-        //Adds itemns to the inventory
-        player.addNewToInventory(ItemFactory.CreateSword());
-        player.addNewToInventory(ItemFactory.CreateHammer());
-
-        player.addNewToInventory(new Bomb(10));
-
-        //Sets which items on which slots
-        player.setSlot1(player.getInventory().getItem("Sword"));
-        player.setSlot2(player.getInventory().getItem("Bomb"));
-
-        //Creates an awesomegame for the wrapper service
         AWG = new AwesomeGame(new GdxWrapperService(this), segment, player);
 
         //Creates textures from available files in core/assets/
@@ -114,20 +94,45 @@ public class GDXWrapper extends Game {
 
         handleMapChangedEvent(null);
 
-        //Creates a player ccontroller
-        playerCtrl = new PlayerCtrl(player, world, segment);
+
+        //Sets the first screen to main menu screen
+        ScreenRepository.setMainMenuScreen(this);
+
+    }
+
+    public void reInitModel() {
+
+        int w = Gdx.graphics.getWidth();
+        int h = Gdx.graphics.getHeight();
+
+        world = new WorldMap(map, bus);
+        segment = new MapSegment(this);
+        player = CharacterFactory.createPlayer(w / TILE_SIZE / 2, h / TILE_SIZE / 2, bus, "player", segment);
+
+        //Adds itemns to the inventory
+        player.addNewToInventory(ItemFactory.CreateSword());
+        player.addNewToInventory(ItemFactory.CreateHammer());
+
+        player.addNewToInventory(new Bomb(10));
+
+        //Sets which items on which slots
+        player.setSlot1(player.getInventory().getItem("Sword"));
+        player.setSlot2(player.getInventory().getItem("Bomb"));
+
+        //Creates an awesomegame for the wrapper service
+
+        //playerCtrl = new PlayerCtrl(player, world, segment);
 
         //Creates an enemy controller
         enemyCtrl = new EnemyCtrl(segment);
 
-        //Sets the first screen to main meny screen
-        ScreenRepository.setMainMenuScreen(this);
+        segment.setEnemiesInWorld(Tiles.populateWorldWithEnemies(world.getCurrentMap(), bus));
+
 
     }
 
     @Override
     public void render() {
-
         super.render();
 
     }
