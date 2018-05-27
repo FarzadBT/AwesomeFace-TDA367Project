@@ -67,9 +67,9 @@ public class GameScreen implements Screen, ScreenSwitchListener {
     private BitmapFont HPfont;
     private String HP;
 
-    public GameScreen(final GDXWrapper game) {
+    public GameScreen(final GDXWrapper g) {
 
-        this.game = game;
+        this.game = g;
         camera = new OrthographicCamera(GDXWrapper.VIEW_PORT_WIDTH, GDXWrapper.VIEW_PORT_HEIGHT);
         camera.setToOrtho(false);
         gamePort = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
@@ -214,6 +214,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
         HPfont.setColor(1.0f, 1.0f, 1.0f, 10.f);
         HPfont.draw(sprBatch, HP, 25,500);
+
 
         sprBatch.end();
 
