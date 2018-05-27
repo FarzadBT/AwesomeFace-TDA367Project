@@ -1,8 +1,7 @@
 package faces.awesome.model.objects.pickup;
 
-import faces.awesome.model.GameObject;
-import faces.awesome.model.characters.PlayerCharacter;
 import faces.awesome.model.Position;
+import faces.awesome.model.characters.PlayerCharacter;
 
 /**
  * @author Farzad Besharati

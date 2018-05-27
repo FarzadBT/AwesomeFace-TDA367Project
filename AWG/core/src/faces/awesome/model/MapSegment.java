@@ -23,7 +23,7 @@ public class MapSegment {
     private Position mapPosition;
     private GDXWrapper gdxWrapper;
 
-    // Two lists for enemies and characters
+    // Lists for enemies, characters, objects and pickups
     private List<Character> characterInWorld = new ArrayList<>();
     private List<Enemy> enemiesInWorld = new ArrayList<>();
     private List<GameObject> objectsInWorld = new ArrayList<>();
@@ -71,8 +71,7 @@ public class MapSegment {
     public void removeFromPickups(BasePickup pickup) { pickupsInWorld.remove(pickup); }
 
 
-    //TODO: Could the following three methods be condenses into one by using generics?
-
+    //TODO in the future: Could the following three methods be condenses into one by using generics?
     /**
      * Get all the enemies in the current MapSegment
      * @return a list of enemies
@@ -145,8 +144,6 @@ public class MapSegment {
         }
         return pickupsInSegment;
     }
-
-
 
     /**
      * By using getEnemiesInSegment() we check which of the enemies in the current segment that are inside of a hitbox
