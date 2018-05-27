@@ -90,14 +90,21 @@ public class GDXWrapper extends Game {
         assets.addTexture("Bomb", new TextureRegion(new Texture("core/assets/bomb.png")));
 
         //Animations
-        assets.addAnimation(player.getName() + "-anim-south", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 0, 16, 16, 16)));
-        assets.addAnimation(player.getName() + "-anim-west", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 16, 16, 16, 16)));
-        assets.addAnimation(player.getName() + "-anim-north", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 72, 16, 16, 16)));
-        assets.addAnimation(player.getName() + "-anim-east", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites1.png")), 48, 16, 16, 16)));
+        assets.addAnimation(player.getName() + "-anim-south", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites11.png")), 180, 0, 32, 32)));
 
-        assets.addTexture(player.getName() + "-south", new TextureRegion(new Texture("core/assets/anims/link-sprites1.png"), 180, 0, 32, 32));
-        assets.addTexture(player.getName() + "-north", new TextureRegion(new Texture("core/assets/anims/link-sprites1.png"), 72, 0, 32, 32));
-        TextureRegion eastRegion = new TextureRegion(new Texture("core/assets/anims/link-sprites1.png"), 252, 0, 32, 32);
+
+        Array<TextureRegion> frames = setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites11.png")), 252, 0, 32, 32);
+        flipRegions(frames);
+
+        assets.addAnimation(player.getName() + "-anim-west", new Animation<>(0.025f, frames));
+        assets.addAnimation(player.getName() + "-anim-north", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites11.png")), 76, 0, 32, 32)));
+        assets.addAnimation(player.getName() + "-anim-east", new Animation<>(0.025f, setupRunningFrames(new TextureRegion(new Texture("core/assets/anims/link-sprites11.png")), 252, 0, 32, 32)));
+
+
+
+        assets.addTexture(player.getName() + "-south", new TextureRegion(new Texture("core/assets/anims/link-sprites11.png"), 180, 0, 32, 32));
+        assets.addTexture(player.getName() + "-north", new TextureRegion(new Texture("core/assets/anims/link-sprites11.png"), 72, 0, 32, 32));
+        TextureRegion eastRegion = new TextureRegion(new Texture("core/assets/anims/link-sprites11.png"), 252, 0, 32, 32);
         assets.addTexture(player.getName() + "-east", eastRegion);
         TextureRegion westRegion = new TextureRegion(eastRegion);
         westRegion.flip(true, false);
@@ -188,12 +195,18 @@ public class GDXWrapper extends Game {
         Array<TextureRegion> frames = new Array<>();
         int j = 0;
         for (int i = 1; i < 8; i++) {
-            j = ((j + 1) % 2) + 1;
-            TextureRegion tr = new TextureRegion(region, (j * x), y, width, height);
+            j = ((j + 1) % 2) * 36 ;
+            TextureRegion tr = new TextureRegion(region, (j + x) + 4, y, width, height);
             frames.add(tr);
         }
 
         return frames;
+    }
+
+    private void flipRegions(Array<TextureRegion> regions) {
+        for(TextureRegion region : regions) {
+            region.flip(true, false);
+        }
     }
 
 

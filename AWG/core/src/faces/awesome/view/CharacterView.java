@@ -14,12 +14,9 @@ import faces.awesome.model.Facing;
 import faces.awesome.model.Position;
 import faces.awesome.utils.AwesomeTimer;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  * @author Linus Wallman
- *
+ * NOTE to teacher: We started working on animations, but couldn't finish it in time due to issues with libgdx (couldn't solve that problem in time)
  */
 
 public class CharacterView extends GameObjectView {
@@ -30,7 +27,7 @@ public class CharacterView extends GameObjectView {
 
     private Position localPos;
 
-    AwesomeTimer timer = new AwesomeTimer();
+    private AwesomeTimer timer = new AwesomeTimer();
 
     public CharacterView(Character c) {
         super(c);
@@ -53,8 +50,6 @@ public class CharacterView extends GameObjectView {
                     region = AssetManager.getInstance().getTexture(gameObject.getName() + "-east");
                 } else {
                     throw new NullPointerException();
-                    // throw some exception perhaps. However, this case should never happen. It's just here to keep the interpreter from going insane
-                    //region = null;
                 }
 
                 sprBatch.draw(region, (gameObject.getPos().getX() % 32) * GDXWrapper.TILE_SIZE, (gameObject.getPos().getY() % 16) * GDXWrapper.TILE_SIZE);
@@ -62,9 +57,9 @@ public class CharacterView extends GameObjectView {
             }
 
             case RUNNING: {
-                /*if (!(localPos.equals(gameObject.getPos()))) {
+                if (!(localPos.equals(gameObject.getPos()))) {
                     return;
-                }*/
+                }
 
                 Animation<TextureRegion> region;
                 int xPattern;
@@ -92,6 +87,7 @@ public class CharacterView extends GameObjectView {
                 }
 
                 drawWalk(sprBatch, region, localPos, gameObject.getPos(), xPattern, yPattern, 4);
+
                 break;
             }
 
@@ -101,30 +97,22 @@ public class CharacterView extends GameObjectView {
     }
 
     private void drawWalk(SpriteBatch sprBatch, Animation<TextureRegion> region, Position oldPos, Position destination, int xPattern, int yPattern, int walkOffset) {
-        // if (hasReachedDestination(oldPos, destination)) {
-        boolean notExecuted = true;
-        while (notExecuted) {
-            if (walkOffset >= GDXWrapper.TILE_SIZE) {
-                currentState = State.STANDING;
-                System.out.println("test1");
-                return;
-            }
-
-            if (currentState != State.RUNNING) {
-                currentState = State.RUNNING;
-                System.out.println("test2");
-            }
-
-            if (timer.ticksElapsed() >= 60) {
-                System.out.println("test3");
-                timer.restart();
-                notExecuted = false;
-                stateTime += 0.025f;
-                sprBatch.draw(region.getKeyFrame(stateTime), ((localPos.getX() + xPattern * 4) % 32) * GDXWrapper.TILE_SIZE, ((localPos.getY() + xPattern * 4) % 16) * GDXWrapper.TILE_SIZE);
-                drawWalk(sprBatch, region, oldPos, destination, xPattern, yPattern, walkOffset + 4);
-            }
+        if (walkOffset >= GDXWrapper.TILE_SIZE) {
+            currentState = State.STANDING;
+            return;
         }
-    }
+
+        if (currentState != State.RUNNING) {
+            currentState = State.RUNNING;
+        }
+
+        timer.restart();
+        stateTime += 0.025f;
+
+
+        sprBatch.draw(region.getKeyFrame(stateTime), ((localPos.getX() + walkOffset * 4) % 32) * GDXWrapper.TILE_SIZE, ((localPos.getY() + xPattern * 4) % 16) * GDXWrapper.TILE_SIZE);
+        drawWalk(sprBatch, region, oldPos, destination, xPattern, yPattern, walkOffset + 4);
+        }
 
     private boolean hasReachedDestination(Position oldPos, Position destination) {
         return oldPos.equals(destination);
@@ -134,13 +122,13 @@ public class CharacterView extends GameObjectView {
         return currentState;
     }
 
-    public void setState(State state) {
+    private void setState(State state) {
         currentState = state;
     }
-
+/*
     @Subscribe
     public void handleCharacterMoveEvent(CharacterMovedEvent event) {
         setState(State.RUNNING);
 
-    }
+    }*/
 }

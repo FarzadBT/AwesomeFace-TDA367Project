@@ -156,9 +156,7 @@ public class GameScreen implements Screen, ScreenSwitchListener {
 
     @Override
     public void render(float delta) {
-        System.out.println(gameObjectViews.size());
         CharacterView c = (CharacterView) gameObjectViews.get(0);
-        System.out.println(c.getCurrentState());
         update(delta);
 
         // RGB(0, 0, 0, 1) = black
