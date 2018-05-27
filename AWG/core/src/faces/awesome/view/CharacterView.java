@@ -101,37 +101,29 @@ public class CharacterView extends GameObjectView {
     }
 
     private void drawWalk(SpriteBatch sprBatch, Animation<TextureRegion> region, Position oldPos, Position destination, int xPattern, int yPattern, int walkOffset) {
-       // if (hasReachedDestination(oldPos, destination)) {
-        if (walkOffset >= GDXWrapper.TILE_SIZE) {
-            currentState = State.STANDING;
-            return;
+        // if (hasReachedDestination(oldPos, destination)) {
+        boolean notExecuted = true;
+        while (notExecuted) {
+            if (walkOffset >= GDXWrapper.TILE_SIZE) {
+                currentState = State.STANDING;
+                System.out.println("test1");
+                return;
+            }
+
+            if (currentState != State.RUNNING) {
+                currentState = State.RUNNING;
+                System.out.println("test2");
+            }
+
+            if (timer.ticksElapsed() >= 60) {
+                System.out.println("test3");
+                timer.restart();
+                notExecuted = false;
+                stateTime += 0.025f;
+                sprBatch.draw(region.getKeyFrame(stateTime), ((localPos.getX() + xPattern * 4) % 32) * GDXWrapper.TILE_SIZE, ((localPos.getY() + xPattern * 4) % 16) * GDXWrapper.TILE_SIZE);
+                drawWalk(sprBatch, region, oldPos, destination, xPattern, yPattern, walkOffset + 4);
+            }
         }
-
-        if (currentState != State.RUNNING) {
-            currentState = State.RUNNING;
-        }
-
-        if (walkOffset > GDXWrapper.TILE_SIZE) {
-            return;
-        }
-
-        // (game.player.getPos().getX() % 32) * GDXWrapper.TILE_SIZE
-
-        if (timer.ticksElapsed() >= 31) {
-            stateTime += 0.025f;
-            Timer tt = new Timer();
-            tt.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    sprBatch.draw(region.getKeyFrame(stateTime), ((localPos.getX() + xPattern * 4) % 32) * GDXWrapper.TILE_SIZE, ((localPos.getY() + xPattern * 4) % 16) * GDXWrapper.TILE_SIZE);
-
-                    drawWalk(sprBatch, region, oldPos, destination, xPattern, yPattern, walkOffset + 4);
-                }
-            }, 31); // milliseconds
-        }
-
-        drawWalk(sprBatch, region, oldPos, destination, xPattern, yPattern, walkOffset);
-
     }
 
     private boolean hasReachedDestination(Position oldPos, Position destination) {
